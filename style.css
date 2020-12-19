@@ -1,0 +1,52 @@
+/* * {
+    border: darkgrey 0.5px groove;
+} */
+
+body {
+    background: peachpuff;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.block {
+    min-width: 49%;
+    border: darkorchid solid 1px;
+    display: inline-block;
+}
+
+.title {
+    padding-left: 20px;
+}
+
+li {
+    min-height: 1.35em;
+    vertical-align: middle;
+    display: flex;
+    align-items: center;
+    margin: 1px 0;
+    padding: 1px 0;
+    border: darkgrey 0.5px groove;
+    margin-right: 10px;
+}
+
+#morning li {
+    list-style: none;
+}
+
+.button {
+    box-sizing: content-box;
+    margin-right: 10px;
+    border: 1px solid black;
+    height: 1em;
+    width: 1em;
+    display: inline-block;
+}
+
+.button:hover {
+    background-color: dodgerblue ;
+}
+
+.button:active {
+    background-color: violet;
+    top: 1px;
+}
