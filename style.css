@@ -20,6 +20,10 @@ body {
     margin: 18.72px 0;
 }
 
+input.title-i {
+    margin-left: 20px;
+}
+
 li {
     min-height: 1.35em;
     vertical-align: middle;

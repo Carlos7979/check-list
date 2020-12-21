@@ -104,6 +104,7 @@ function  main() {
                 allowInitialData ? heading.innerHTML = initialTitles[i] : heading.innerHTML = `Título ${i+1}`
                     const input = document.createElement("input");
                     input.setAttribute("id", `input-${i + 1}-t`);
+                    input.setAttribute("class", 'title-i');
                     input.setAttribute("maxlength", '60');
                     input.setAttribute("type", 'hidden');
                 title.appendChild(input);
@@ -165,12 +166,4 @@ function  main() {
         block.appendChild(list);
         document.body.appendChild(block);
   }
-  // for (let i = 1; i < 5; i++) {
-  //   const list = document.getElementById(`list-${i}`);
-  //   check(list);
-  // };
-  // for (let i = 1; i < 2; i++) {
-  //   const description = document.getElementById(`li-${i}`);
-  //   descriptionInputControls(description);
-  // };
 }
