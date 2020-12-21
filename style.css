@@ -12,41 +12,65 @@ body {
     min-width: 49%;
     border: darkorchid solid 1px;
     display: inline-block;
+    /* padding-bottom: 1.35em; */
 }
 
 .title {
     padding-left: 20px;
+    margin: 18.72px 0;
 }
 
 li {
     min-height: 1.35em;
     vertical-align: middle;
-    display: flex;
+    display: flex; /* this attribute hides list-style*/
     align-items: center;
     margin: 1px 0;
     padding: 1px 0;
-    border: darkgrey 0.5px groove;
     margin-right: 10px;
+    border: darkgrey 0.5px groove;
+    border-radius: 5px;
 }
 
-#morning li {
-    list-style: none;
+li:hover, .title:hover {
+    cursor: url('data:image/x-icon;base64,AAACAAEAICAQAAAAAADoAgAAFgAAACgAAAAgAAAAQAAAAAEABAAAAAAAAAIAAAAAAAAAAAAAEAAAAAAAAAAAAAAAhYWFAPqv6ADgm4sASkpKAJ/l7QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACIAAAAAAAAAAAAAAAAAAAEiIAAAAAAAAAAAAAAAAAAxEiIAAAAAAAAAAAAAAAADMxEgAAAAAAAAAAAAAAAAMzMxAAAAAAAAAAAAAAAAAzMzMAAAAAAAAAAAAAAAADMzMwAAAAAAAAAAAAAAAAMzMzAAAAAAAAAAAAAAAAAzMzMAAAAAAAAAAAAAAAADMzMwAAAAAAAAAAAAAAAABTMzAAAAAAAAAAAAAAAAAFVTMAAAAAAAAAAAAAAAAABFVQAAAAAAAAAAAAAAAAAARAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///////////////////////////////////////////////////////////////////////////////////////P////h////wP///4H///8D///+B////A////gf///wP///4H///+D////B////w////8///////////////w=='), auto;
+    background-color: lightcoral;
+    font-weight: bold;
 }
 
-.button {
+input {
+    /* max-height: 0.5em; */
+    overflow: visible;
+}
+
+/* .description {
+    border: darkgrey 0.5px groove;
+    min-height: 1.35em;
+    vertical-align: middle;
+} */
+
+.check {
     box-sizing: content-box;
     margin-right: 10px;
     border: 1px solid black;
     height: 1em;
     width: 1em;
     display: inline-block;
+    border-radius: 5px;
+    margin-left: 1px;
 }
 
-.button:hover {
-    background-color: dodgerblue ;
+/* .button-edit {
+    width: 4rem;
+} */
+
+.check:hover {
+    background-color: brown;
+    cursor: default;
 }
 
-.button:active {
-    background-color: violet;
+.check:active {
+    /* background-color: violet; */
     top: 1px;
+    cursor: default;
 }
