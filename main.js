@@ -1,10 +1,9 @@
 function  main() {
   let blocksNumber;
-  let allowInitialData = true;
+  let allowInitialData = false;
   const initialDescriptions = [
     [ {
       name: 'Carlos',
-      blocksNum: 4
     }],
     [ 'Inicio del día',
       'Baño',
@@ -92,8 +91,16 @@ function  main() {
     });
   };
   
-  allowInitialData && (initialDescriptions.length -1) ? blocksNumber = initialDescriptions.length : blocksNumber = 4;
-  function blockConstructor(n) {
+  function saveData(dataSet) {
+    localStorage.setItem('key', JSON.stringify(dataSet));
+  };
+  function deleteData(name) {
+    localStorage.removeItem('key');
+  };
+
+  function blockConstructor(blocksNumber = 4, allowInitialData, dataToInsert = initialDescriptions) {
+    let n;
+    allowInitialData ? n = dataToInsert.length - 1 : n = blocksNumber;
     const blocksContainer = document.getElementById('blocks-container');
     for(let i = 0; i < n; i++) {
       const block = document.createElement("DIV");
@@ -107,7 +114,7 @@ function  main() {
                       heading.setAttribute("id", `h3-${i+1}`);
                       heading.setAttribute("class", 'title');
                   title.appendChild(heading);
-                  allowInitialData ? heading.innerHTML = initialDescriptions[i + 1][0] : heading.innerHTML = `Título ${i+1}`
+                  allowInitialData ? heading.innerHTML = dataToInsert[i + 1][0] : heading.innerHTML = `Título ${i+1}`
                       const input = document.createElement("input");
                       input.setAttribute("id", `input-${i + 1}-t`);
                       input.setAttribute("class", 'title-i');
@@ -144,8 +151,8 @@ function  main() {
                             description.setAttribute("id", `description-${j+1 +i*9}`);
                             description.setAttribute("class", 'description');
                         li.appendChild(description);
-                        if(allowInitialData && (initialDescriptions[i + 1].length > j + 1)) {
-                          description.innerHTML = initialDescriptions[i + 1][j + 1];
+                        if(allowInitialData && (dataToInsert[i + 1].length > j + 1)) {
+                          description.innerHTML = dataToInsert[i + 1][j + 1];
                         }
                             const input = document.createElement("input");
                             input.setAttribute("id", `input-${j+1 +i*9}`);
@@ -171,7 +178,14 @@ function  main() {
                   check(list);
           block.appendChild(list);
           blocksContainer.appendChild(block);
+          // if(allowInitialData) saveData(dataToInsert);
+          // deleteData('key');
     }
   };
-  blockConstructor(blocksNumber);
+  let dataSet;
+  const storagedData = JSON.parse(localStorage.getItem('key'));
+    if(storagedData){
+      allowInitialData = true;
+    }
+  blockConstructor(blocksNumber, allowInitialData = true, dataSet);
 }
