@@ -1,18 +1,33 @@
-/* * {
-    border: darkgrey 0.5px groove;
-} */
+* {
+    /* border: darkgrey 0.5px groove;
+    padding: 2px; */
+    margin: 0;
+    box-sizing: content-box;
+}
 
 body {
     background: peachpuff;
-    display: flex;
+    /* display: flex; */
     flex-wrap: wrap;
 }
 
+#blocks-container {
+    /* display: flexbox; */
+    /* border: chocolate 2px solid; */
+    width: 100%;
+    padding: 0 0;
+    box-sizing: content-box;
+    margin: 2px;
+}
+
 .block {
-    min-width: 49%;
+    min-width: 39rem;
     border: darkorchid solid 1px;
     display: inline-block;
     /* padding-bottom: 1.35em; */
+    margin: 0 0;
+    max-height: 20rem;
+    min-height: 20rem;
 }
 
 .title {
@@ -24,7 +39,13 @@ input.title-i {
     margin-left: 20px;
 }
 
+ol {
+    margin: 0 0;
+    max-height: 20rem;
+}
+
 li {
+    box-sizing: content-box;
     min-height: 1.35em;
     vertical-align: middle;
     display: flex; /* this attribute hides list-style*/
@@ -34,6 +55,7 @@ li {
     margin-right: 10px;
     border: darkgrey 0.5px groove;
     border-radius: 5px;
+    box-sizing: content-box;
 }
 
 li:hover, .title:hover {
@@ -42,10 +64,10 @@ li:hover, .title:hover {
     font-weight: bold;
 }
 
-input {
-    /* max-height: 0.5em; */
+/* input {
+    max-height: 0.6rem;
     overflow: visible;
-}
+} */
 
 /* .description {
     border: darkgrey 0.5px groove;

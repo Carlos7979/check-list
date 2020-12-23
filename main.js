@@ -88,7 +88,7 @@ function  main() {
       }
     });
   };
-  // const body1 = getElementsByTagName('BODY');
+  const blocksContainer = document.getElementById('blocks-container');
   for(let i = 0; i < 4; i++) {
     const block = document.createElement("DIV");
         block.setAttribute("id", `block-${i+1}`);
@@ -164,6 +164,6 @@ function  main() {
                 list.appendChild(ol);
                 check(list);
         block.appendChild(list);
-        document.body.appendChild(block);
+        blocksContainer.appendChild(block);
   }
 }
