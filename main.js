@@ -1,7 +1,12 @@
 function  main() {
   let allowInitialData = true;
   const initialDescripcions = [
-    [ 'Baño',
+    [ {
+      name: 'Carlos',
+      blocksNum: 4
+    }],
+    [ 'Inicio del día',
+      'Baño',
       'Computadora',
       'Peso',
       'Desayuno',
@@ -10,13 +15,15 @@ function  main() {
       'Retención',
       'Mecanografía',
       'Inglés' ],
-    [ 'Resúmenes',
+    [ 'Actividades',
+      'Resúmenes',
       'Codecademy',
       'Alterna',
       'Abuelo',
       'Actividades de repaso (AR)',
       'UCV' ],
-    [ 'Lectura',
+    [ 'Valentina',
+      'Lectura',
       'Matemáticas',
       'Inglés',
       'Programación',
@@ -25,7 +32,8 @@ function  main() {
       'Liceo',
       'Vocabulario y ortografía',
       'AR, cultura general e historia' ],
-    [ 'Morral: agua, papel, paraguas, bolsa paquita',
+    [ 'Final del día',
+      'Morral: agua, papel, paraguas, bolsita de plástico',
       'Bañarme',
       'Desayuno: armar agua y harina',
       'Cena y preparar almuerzo',
@@ -36,12 +44,6 @@ function  main() {
       'Armar ropa' ]
   ];
 
-  const initialTitles = [
-    [ 'Inicio del día' ],
-    [ 'Actividades' ],
-    [ 'Valentina' ],
-    [ 'Final del día' ]
-  ];
   function check(element) {
     element.addEventListener('click',  (event) => {
       const target = event.target;
@@ -101,7 +103,7 @@ function  main() {
                     heading.setAttribute("id", `h3-${i+1}`);
                     heading.setAttribute("class", 'title');
                 title.appendChild(heading);
-                allowInitialData ? heading.innerHTML = initialTitles[i] : heading.innerHTML = `Título ${i+1}`
+                allowInitialData ? heading.innerHTML = initialDescripcions[i + 1][0] : heading.innerHTML = `Título ${i+1}`
                     const input = document.createElement("input");
                     input.setAttribute("id", `input-${i + 1}-t`);
                     input.setAttribute("class", 'title-i');
@@ -138,8 +140,8 @@ function  main() {
                           description.setAttribute("id", `description-${j+1 +i*9}`);
                           description.setAttribute("class", 'description');
                       li.appendChild(description);
-                      if(allowInitialData && (initialDescripcions[i].length > j)) {
-                        description.innerHTML = initialDescripcions[i][j];
+                      if(allowInitialData && (initialDescripcions[i + 1].length > j + 1)) {
+                        description.innerHTML = initialDescripcions[i + 1][j + 1];
                       }
                           const input = document.createElement("input");
                           input.setAttribute("id", `input-${j+1 +i*9}`);
