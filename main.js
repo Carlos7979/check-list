@@ -1,11 +1,13 @@
 function  main() {
   let blocksNumber;
+  let descriptionsNumber;
   let allowInitialData = false;
   let editControlsActive = [];
   const initialDescriptions = [
-    [ {
+    {
       name: 'Carlos',
-    }],
+      descriptionsInBlock: 9
+    },
     [ 'Inicio del día',
       'Baño',
       'Computadora',
@@ -111,7 +113,7 @@ function  main() {
   function editControlActiveDetector(element) {
     element.addEventListener('click', event => {
       const target = event.target;
-      if (target.className === 'block') {
+      if (target.className === 'block' || target.tagName === 'OL') {
         desactiveControls(element);
       }
     })
@@ -123,10 +125,12 @@ function  main() {
   function deleteData(name) {
     localStorage.removeItem('key');
   };
-
-  function blockConstructor(blocksNumber = 4, allowInitialData, dataToInsert = initialDescriptions, isEditControlActive) {
+  
+  function blockConstructor(blocksNumber = 4, allowInitialData, dataToInsert = initialDescriptions, descriptionsNumber) {
     let n;
+    let m;
     allowInitialData ? n = dataToInsert.length - 1 : n = blocksNumber;
+    allowInitialData ? m = dataToInsert[0].descriptionsInBlock : m = descriptionsNumber;
     const blocksContainer = document.getElementById('blocks-container');
     for(let i = 0; i < n; i++) {
       const block = document.createElement("DIV");
@@ -166,7 +170,7 @@ function  main() {
                   list.setAttribute("class", 'list');
                       const ol = document.createElement("ol");  
                       ol.setAttribute("id", `ol-${i+1}`);
-                      for(let j = 0; j < 9; j++) {
+                      for(let j = 0; j < m; j++) {
                         const li = document.createElement("li");
                         li.setAttribute("id", `li-${j+1 +i*9}`);
                             const check = document.createElement("DIV");
@@ -214,5 +218,5 @@ function  main() {
     if(storagedData){
       allowInitialData = true;
     }
-  blockConstructor(blocksNumber = 5, allowInitialData = true, dataSet);
+  blockConstructor(blocksNumber = 5, allowInitialData = true, dataSet, descriptionsNumber = 12);
 }
