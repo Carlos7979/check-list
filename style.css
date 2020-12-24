@@ -6,7 +6,7 @@
 }
 
 body {
-    background: peachpuff;
+    /* background: peachpuff; */
     /* display: flex; */
     flex-wrap: wrap;
 }
@@ -23,6 +23,7 @@ body {
 .block {
     min-width: 39rem;
     border: darkorchid solid 1px;
+    background: peachpuff;
     display: inline-block;
     /* padding-bottom: 1.35em; */
     margin: 0 0;

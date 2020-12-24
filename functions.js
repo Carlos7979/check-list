@@ -126,31 +126,31 @@ function blockConstructor(blocksNumber = 4, allowInitialData, dataToInsert = ini
                         ol.setAttribute("id", `ol-${i+1}`);
                         for(let j = 0; j < m; j++) {
                         const li = document.createElement("li");
-                        li.setAttribute("id", `li-${j+1 +i*9}`);
+                        li.setAttribute("id", `li-${j+1 +i*m}`);
                             const check = document.createElement("DIV");
-                            check.setAttribute("id", `check-${j+1 +i*9}`);
+                            check.setAttribute("id", `check-${j+1 +i*m}`);
                             check.setAttribute("class", 'check');
                         li.appendChild(check);
                             const description = document.createElement("DIV");
-                            description.setAttribute("id", `description-${j+1 +i*9}`);
+                            description.setAttribute("id", `description-${j+1 +i*m}`);
                             description.setAttribute("class", 'description');
                         li.appendChild(description);
                         if(allowInitialData && (dataToInsert[i + 1].length > j + 1)) {
                             description.innerHTML = dataToInsert[i + 1][j + 1];
                         }
                             const input = document.createElement("input");
-                            input.setAttribute("id", `input-${j+1 +i*9}`);
+                            input.setAttribute("id", `input-${j+1 +i*m}`);
                             input.setAttribute("maxlength", '60');
                             input.setAttribute("type", 'hidden');
                         li.appendChild(input);
                             const buttonInsert = document.createElement("button");
-                            buttonInsert.setAttribute("id", `insert-${j+1 +i*9}`);
+                            buttonInsert.setAttribute("id", `insert-${j+1 +i*m}`);
                             buttonInsert.setAttribute("class", 'button-edit');
                             buttonInsert.setAttribute("hidden", 'hidden');
                             buttonInsert.innerHTML = 'insertar';
                         li.appendChild(buttonInsert);
                             const buttonDelete = document.createElement("button");
-                            buttonDelete.setAttribute("id", `delete-${j+1 +i*9}`);
+                            buttonDelete.setAttribute("id", `delete-${j+1 +i*m}`);
                             buttonDelete.setAttribute("class", 'button-delete');
                             buttonDelete.setAttribute("hidden", 'hidden');
                             buttonDelete.innerHTML = 'borrar';
