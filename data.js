@@ -1,3 +1,5 @@
+let editControlsActive = [];
+
 const initialDescriptions = [
     {
       name: 'Carlos',

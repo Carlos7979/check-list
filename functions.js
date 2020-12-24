@@ -1,6 +1,3 @@
-let editControlsActive = [];
-  //initialDescriptions called from data.js
-
 function check(element) {
     element.addEventListener('click',  (event) => {
       const target = event.target;
@@ -55,6 +52,7 @@ function descriptionInputControls(element) {
           buttonInsert.removeAttribute('hidden');
           buttonDelete.removeAttribute('hidden');
           editControlsActive = [description, buttonInsert, buttonDelete, input];
+          input.focus();
         } else {
           buttonInsert.setAttribute(typeInput, typeInput);
           buttonDelete.setAttribute(typeInput, typeInput);
