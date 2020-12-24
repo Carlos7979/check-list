@@ -8,5 +8,5 @@ function  main() {
     if(storagedData){
       allowInitialData = true;
     }
-  blockConstructor(blocksNumber = 5, allowInitialData = true, dataSet, descriptionsNumber = 12);
+  blockConstructor(blocksNumber = 5, allowInitialData, dataSet, descriptionsNumber = 12);
 }

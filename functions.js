@@ -35,7 +35,7 @@ function descriptionInputControls(element) {
         let buttonInsert = document.getElementById(`insert-${identifier}`);
         let buttonDelete = document.getElementById(`delete-${identifier}`);
         if(target.classList.contains('title')) {
-          description = document.getElementById(`h3-${identifier}`);
+          description = document.getElementById(`description-${identifier}-t`);
           input = document.getElementById(`input-${identifier}-t`);
           buttonInsert = document.getElementById(`insert-${identifier}-t`);
           buttonDelete = document.getElementById(`delete-${identifier}-t`);
@@ -79,6 +79,36 @@ function saveData(dataSet) {
 function deleteData(name) {
     localStorage.removeItem('key');
 };
+
+function insert(element) {
+    const id = element.getAttribute('id');
+    const identifier = id.split('-')[1];
+    const isTitle = id.split('-')[2];
+    let inputId = `input-${identifier}`;
+    let description = document.getElementById(`description-${identifier}`);
+    if(isTitle) {
+        inputId += `-${isTitle}`;
+        description = document.getElementById(`description-${identifier}-t`);
+    }
+    input = document.getElementById(inputId);
+    description.innerHTML = input.value;
+    desactiveControls(input);
+}
+
+function deleteDescription(element) {
+    const id = element.getAttribute('id');
+    const identifier = id.split('-')[1];
+    const isTitle = id.split('-')[2];
+    let inputId = `input-${identifier}`;
+    let description = document.getElementById(`description-${identifier}`);
+    if(isTitle) {
+        inputId += `-${isTitle}`;
+        description = document.getElementById(`description-${identifier}-t`);
+    }
+    input = document.getElementById(inputId);
+    isTitle ? description.innerHTML = `Título ${identifier}` : description.innerHTML = '';
+    desactiveControls(input);
+}
   
 function blockConstructor(blocksNumber = 4, allowInitialData, dataToInsert = initialDescriptions, descriptionsNumber) {
     let n;
@@ -95,7 +125,7 @@ function blockConstructor(blocksNumber = 4, allowInitialData, dataToInsert = ini
                     title.setAttribute("id", `title-${i+1}`);
                     title.setAttribute("class", 'title');
                         const heading = document.createElement("h3");  
-                        heading.setAttribute("id", `h3-${i+1}`);
+                        heading.setAttribute("id", `description-${i+1}-t`);
                         heading.setAttribute("class", 'title');
                     title.appendChild(heading);
                     allowInitialData ? heading.innerHTML = dataToInsert[i + 1][0] : heading.innerHTML = `Título ${i+1}`
@@ -104,18 +134,27 @@ function blockConstructor(blocksNumber = 4, allowInitialData, dataToInsert = ini
                         input.setAttribute("class", 'title-i');
                         input.setAttribute("maxlength", '60');
                         input.setAttribute("type", 'hidden');
+                        input.addEventListener("keyup", (event) => {
+                            if (event.keyCode === 13) insert(input);
+                        });
                     title.appendChild(input);
                         const buttonInsert = document.createElement("button");
                         buttonInsert.setAttribute("id", `insert-${i + 1}-t`);
                         buttonInsert.setAttribute("class", 'button-edit');
                         buttonInsert.setAttribute("hidden", 'hidden');
                         buttonInsert.innerHTML = 'insertar';
+                        buttonInsert.addEventListener('click', () => {
+                            insert(buttonInsert);
+                        });
                     title.appendChild(buttonInsert);
                         const buttonDelete = document.createElement("button");
                         buttonDelete.setAttribute("id", `delete-${i + 1}-t`);
                         buttonDelete.setAttribute("class", 'button-delete');
                         buttonDelete.setAttribute("hidden", 'hidden');
                         buttonDelete.innerHTML = 'borrar';
+                        buttonDelete.addEventListener('click', () => {
+                            deleteDescription(buttonDelete);
+                        });
                     title.appendChild(buttonDelete);
             block.appendChild(title);
             descriptionInputControls(title);
@@ -142,18 +181,27 @@ function blockConstructor(blocksNumber = 4, allowInitialData, dataToInsert = ini
                             input.setAttribute("id", `input-${j+1 +i*m}`);
                             input.setAttribute("maxlength", '60');
                             input.setAttribute("type", 'hidden');
+                            input.addEventListener("keyup", (event) => {
+                                if (event.keyCode === 13) insert(input);
+                            });
                         li.appendChild(input);
                             const buttonInsert = document.createElement("button");
                             buttonInsert.setAttribute("id", `insert-${j+1 +i*m}`);
                             buttonInsert.setAttribute("class", 'button-edit');
                             buttonInsert.setAttribute("hidden", 'hidden');
                             buttonInsert.innerHTML = 'insertar';
+                            buttonInsert.addEventListener('click', () => {
+                                insert(buttonInsert);
+                            });
                         li.appendChild(buttonInsert);
                             const buttonDelete = document.createElement("button");
                             buttonDelete.setAttribute("id", `delete-${j+1 +i*m}`);
                             buttonDelete.setAttribute("class", 'button-delete');
                             buttonDelete.setAttribute("hidden", 'hidden');
                             buttonDelete.innerHTML = 'borrar';
+                            buttonDelete.addEventListener('click', () => {
+                                deleteDescription(buttonDelete);
+                            });
                         li.appendChild(buttonDelete);
                         descriptionInputControls(li);
                         ol.appendChild(li);

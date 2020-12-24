@@ -11,6 +11,34 @@ body {
     flex-wrap: wrap;
 }
 
+header {
+    margin-top: 10px;
+    padding: 10px;
+    min-width: 39rem;
+    border: darkorchid solid 1px;
+    border-radius: 5px;
+    background-color: cornflowerblue;
+}
+
+h2 {
+    display: inline-block;
+    position: relative;
+    bottom: 10px;
+}
+
+#user-name {
+    margin-top: 10px;
+}
+
+#name-h {
+    margin-left: 50px;
+}
+
+#user-name, #name-h {
+    border: groove 1px gray;
+}
+
+
 #blocks-container {
     /* display: flexbox; */
     /* border: chocolate 2px solid; */
