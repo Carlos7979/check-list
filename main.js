@@ -1,6 +1,7 @@
 function  main() {
   let blocksNumber;
   let allowInitialData = false;
+  let editControlsActive = [];
   const initialDescriptions = [
     [ {
       name: 'Carlos',
@@ -54,6 +55,19 @@ function  main() {
       }
     });
   };
+
+  function desactiveControls(element) {
+    if(editControlsActive.length) {
+      if(editControlsActive[0].getAttribute('id') !== element.getAttribute('id')){
+        editControlsActive[0].removeAttribute('hidden');
+        editControlsActive[1].setAttribute('hidden', 'hidden');
+        editControlsActive[2].setAttribute('hidden', 'hidden');
+        editControlsActive[3].setAttribute('type', 'hidden');
+        editControlsActive = [];
+      }
+    }
+  };
+
   function descriptionInputControls(element) {
     element.addEventListener('click',  (event) => {
       const target = event.target;
@@ -69,7 +83,9 @@ function  main() {
           input = document.getElementById(`input-${identifier}-t`);
           buttonInsert = document.getElementById(`insert-${identifier}-t`);
           buttonDelete = document.getElementById(`delete-${identifier}-t`);
-        }
+        };
+
+        desactiveControls(description);
         
         let typeInput;
         input.getAttribute('type') === 'hidden' ? typeInput = 'text' : typeInput = 'hidden';
@@ -82,6 +98,7 @@ function  main() {
           description.setAttribute('hidden', 'hidden');
           buttonInsert.removeAttribute('hidden');
           buttonDelete.removeAttribute('hidden');
+          editControlsActive = [description, buttonInsert, buttonDelete, input];
         } else {
           buttonInsert.setAttribute(typeInput, typeInput);
           buttonDelete.setAttribute(typeInput, typeInput);
@@ -90,6 +107,15 @@ function  main() {
       }
     });
   };
+
+  function editControlActiveDetector(element) {
+    element.addEventListener('click', event => {
+      const target = event.target;
+      if (target.className === 'block') {
+        desactiveControls(element);
+      }
+    })
+  }
   
   function saveData(dataSet) {
     localStorage.setItem('key', JSON.stringify(dataSet));
@@ -98,7 +124,7 @@ function  main() {
     localStorage.removeItem('key');
   };
 
-  function blockConstructor(blocksNumber = 4, allowInitialData, dataToInsert = initialDescriptions) {
+  function blockConstructor(blocksNumber = 4, allowInitialData, dataToInsert = initialDescriptions, isEditControlActive) {
     let n;
     allowInitialData ? n = dataToInsert.length - 1 : n = blocksNumber;
     const blocksContainer = document.getElementById('blocks-container');
@@ -177,6 +203,7 @@ function  main() {
                   list.appendChild(ol);
                   check(list);
           block.appendChild(list);
+          editControlActiveDetector(block);
           blocksContainer.appendChild(block);
           // if(allowInitialData) saveData(dataToInsert);
           // deleteData('key');
@@ -187,5 +214,5 @@ function  main() {
     if(storagedData){
       allowInitialData = true;
     }
-  blockConstructor(blocksNumber, allowInitialData = true, dataSet);
+  blockConstructor(blocksNumber = 5, allowInitialData = true, dataSet);
 }
