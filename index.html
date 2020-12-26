@@ -13,17 +13,18 @@
     </script>
 </head>
 <body>
-    <header>
+    <header id="header">
         <div class="header-block">
             <div id="header-title">
                 <img src="dialog-apply.svg" alt="Check">
                 <h2>Agenda del día</h2>
             </div>
             <div id="user-name">
-                <h3 id="name-h"><span title="Cambiar de agenda" id="welcome">Bienvenidos</span></h3>
-                <button class="header-button">Nueva agenda</button>
+                <h3 id="name-h"><span id="welcome">Bienvenidos</span></h3>
+                <button id="new-schedule" class="header-button">Nueva agenda</button>
                 <span class="header-text">o</span>
-                <button class="header-button">Iniciar plantilla</button>
+                <button id="init-template" class="header-button">Iniciar plantilla</button>
+                
                 <!-- <label for="agendas">What's for lunch?</label> -->
                 <!-- <select id="agenda-selector" name="agendas">
                     <option value="pizza">Pizza</option>
@@ -34,7 +35,22 @@
                 </select> -->
             </div>
         </div>
-        <div class="header-block"></div>
+        <div id="test" class="header-block">
+            <div id="header-inputs-1" class="header-inputs" hidden='hidden'>
+                <input type="text" id="name" class="header-input">
+                <label for="name" class="header-label">introduce un nombre</label>
+            </div>
+            <div id="header-inputs-2" hidden='hidden'>
+                <div class="header-inputs">
+                    <input type="number" id="blocks-number" class="header-input" value="4" min="1" max="10">
+                    <label for="blocks-number" class="header-label">número de módulos</label>
+                </div>
+                <div class="header-inputs">
+                    <input type="number" id="descriptions-number" class="header-input" value="10" min="1" max="30">
+                    <label for="descriptions-number" class="header-label">número de elementos</label>
+                </div>
+            </div>
+        </div>
     </header>
     <div id="blocks-container"></div>
 </body>
