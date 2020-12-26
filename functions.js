@@ -11,13 +11,12 @@ function check(element) {
 
 function desactiveControls(element) {
     if(editControlsActive.length) {
-      if(editControlsActive[0].getAttribute('id') !== element.getAttribute('id')){
+        if(element && (element.id === editControlsActive[3].id)) return;
         editControlsActive[0].removeAttribute('hidden');
         editControlsActive[1].setAttribute('hidden', 'hidden');
         editControlsActive[2].setAttribute('hidden', 'hidden');
         editControlsActive[3].setAttribute('type', 'hidden');
         editControlsActive = [];
-      }
     }
 };
 
@@ -37,15 +36,13 @@ function descriptionInputControls(element) {
           buttonInsert = document.getElementById(`insert-${identifier}-t`);
           buttonDelete = document.getElementById(`delete-${identifier}-t`);
         };
-
-        desactiveControls(description);
-        
+        desactiveControls(input);
         let typeInput;
         input.getAttribute('type') === 'hidden' ? typeInput = 'text' : typeInput = 'hidden';
         input.setAttribute('type', typeInput);
         if(description.innerText.trim()) {
           buttonInsert.innerText = "editar";
-          input.setAttribute('value', description.innerText.trim());
+          input.value = description.innerText.trim();
         };
         if(typeInput === 'text') {
           description.setAttribute('hidden', 'hidden');
@@ -54,8 +51,8 @@ function descriptionInputControls(element) {
           editControlsActive = [description, buttonInsert, buttonDelete, input];
           input.focus();
         } else {
-          buttonInsert.setAttribute(typeInput, typeInput);
-          buttonDelete.setAttribute(typeInput, typeInput);
+          buttonInsert.setAttribute('hidden', 'hidden');
+          buttonDelete.setAttribute('hidden', 'hidden');
           description.removeAttribute('hidden');
         };
       }
@@ -66,17 +63,28 @@ function editControlActiveDetector(element) {
     element.addEventListener('click', event => {
       const target = event.target;
       if (target.className === 'block' || target.tagName === 'OL') {
-        desactiveControls(element);
+        desactiveControls();
       }
     })
 }
   
-function saveData(dataSet) {
-    localStorage.setItem('key', JSON.stringify(dataSet));
+function saveData(key, dataSet) {
+    localStorage.setItem(key, JSON.stringify(dataSet));
 };
-function deleteData(name) {
-    localStorage.removeItem('key');
+
+function getData(key) {
+    JSON.parse(localStorage.getItem(key))
+}
+
+function deleteData(key) {
+    localStorage.removeItem(key);
 };
+
+function storageKeys(key) {
+    // const users = getData(key);
+    // users.list[]
+    //TODO
+}
 
 function insert(element) {
     const id = element.getAttribute('id');
@@ -90,7 +98,7 @@ function insert(element) {
     }
     input = document.getElementById(inputId);
     description.innerHTML = input.value;
-    desactiveControls(input);
+    desactiveControls();
 }
 
 function deleteDescription(element) {
@@ -104,11 +112,13 @@ function deleteDescription(element) {
         description = document.getElementById(`description-${identifier}-t`);
     }
     input = document.getElementById(inputId);
+    // input.value = ''; // la acción de este comando antes de "desactiveControls()" queda desactivada por dicha función, pero al colocarlo después si funciona
     isTitle ? description.innerHTML = `Título ${identifier}` : description.innerHTML = '';
-    desactiveControls(input);
+    desactiveControls();
+    input.value = ''; // aquí se se limpia el campo de entrada luego de activar el botón de borrar
 }
   
-function blockConstructor(blocksNumber = 4, allowInitialData, dataToInsert = initialDescriptions, descriptionsNumber) {
+function blockConstructor(blocksNumber = 4, allowInitialData, dataToInsert = initialDescriptions, descriptionsNumber = 9) {
     let n;
     let m;
     allowInitialData ? n = dataToInsert.length - 1 : n = blocksNumber;

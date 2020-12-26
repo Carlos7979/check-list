@@ -1,23 +1,28 @@
 * {
-    /* border: darkgrey 0.5px groove;
-    padding: 2px; */
+    /* border: darkgrey 0.5px groove; */
+    /* padding: 2px; */
     margin: 0;
-    box-sizing: content-box;
 }
 
-body {
-    /* background: peachpuff; */
-    /* display: flex; */
-    flex-wrap: wrap;
-}
+/* body {
+
+} */
 
 header {
-    margin-top: 10px;
-    padding: 10px;
-    min-width: 39rem;
+    margin: 2px;
+    padding: 0;
+    /* max-width: 79rem; */
+    width: max-content;
     border: darkorchid solid 1px;
     border-radius: 5px;
     background-color: cornflowerblue;
+}
+
+.header-block {
+    min-width: 39rem;
+    /* border: red solid 1px; */
+    display: inline-block;
+    /* margin: 0; */
 }
 
 h2 {
@@ -26,25 +31,33 @@ h2 {
     bottom: 10px;
 }
 
-#user-name {
-    margin-top: 10px;
-}
-
 #name-h {
-    margin-left: 50px;
+    margin: 10px 0 10px 50px;
+    width: min-content;
+    display: inline-block;
 }
 
-#user-name, #name-h {
+/* #user-name, #name-h {
     border: groove 1px gray;
+} */
+
+.header-text {
+    font-weight: bold;
+    font-size: large;
 }
 
+.header-button {
+    /* background-color: cornflowerblue; */
+    font-size: medium;
+    font-weight: bold;
+    color: black;
+}
 
 #blocks-container {
     /* display: flexbox; */
     /* border: chocolate 2px solid; */
-    width: 100%;
-    padding: 0 0;
-    box-sizing: content-box;
+    /* width: 100%; */
+    padding: 0;
     margin: 2px;
 }
 
@@ -54,7 +67,7 @@ h2 {
     background: peachpuff;
     display: inline-block;
     /* padding-bottom: 1.35em; */
-    margin: 0 0;
+    /* margin: 0; */
     /* max-height: 20rem; */
     min-height: 20rem;
 }
@@ -67,7 +80,9 @@ h2 {
 }
 
 h3.title {
-    margin: 0;
+    /* margin: 0; */
+    margin-left: 2px;
+    padding-left: 1px;
 }
 
 input.title-i {
@@ -75,12 +90,12 @@ input.title-i {
 }
 
 ol {
-    margin: 0 0 15px 0;
+    /* margin: 0 0 15px 0; */
     /* height: 20rem; */
+    margin-bottom: 15px;
 }
 
 li {
-    box-sizing: content-box;
     height: 1.35em;
     vertical-align: middle;
     display: flex; /*this attribute hides list-style */
@@ -90,7 +105,6 @@ li {
     margin-right: 10px;
     border: darkgrey 0.5px groove;
     border-radius: 5px;
-    box-sizing: content-box;
 }
 
 li:hover, .title:hover {
@@ -114,7 +128,6 @@ li:hover, .title:hover {
 } */
 
 .check {
-    box-sizing: content-box;
     margin-right: 10px;
     border: 1px solid black;
     height: 1em;

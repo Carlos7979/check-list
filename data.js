@@ -1,4 +1,21 @@
+// let isLocalStorageEmpty = true;
 let editControlsActive = [];
+// const users = {
+//   activeUser: '',
+//   list: []
+// };
+
+// class Block {
+//   constructor(name, number){
+//     this.blockTitle = name;
+//     this.blockId = `${name}-${number}`;
+//     this.descriptions = [];
+//   }
+
+//   setDescription(text) {
+//     this.descriptions.push(text)
+//   }
+// };
 
 const initialDescriptions = [
     {

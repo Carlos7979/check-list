@@ -4,7 +4,8 @@ function  main() {
   let allowInitialData = false;
 
   let dataSet;
-  const storagedData = JSON.parse(localStorage.getItem('key'));
+  
+  const storagedData = getData('agenda');
     if(storagedData){
       allowInitialData = true;
     }

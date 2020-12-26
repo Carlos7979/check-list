@@ -14,13 +14,27 @@
 </head>
 <body>
     <header>
-        <div id="header-title">
-            <img src="dialog-apply.svg" alt="Check">
-            <h2>Agenda del día</h2>
+        <div class="header-block">
+            <div id="header-title">
+                <img src="dialog-apply.svg" alt="Check">
+                <h2>Agenda del día</h2>
+            </div>
+            <div id="user-name">
+                <h3 id="name-h"><span title="Cambiar de agenda" id="welcome">Bienvenidos</span></h3>
+                <button class="header-button">Nueva agenda</button>
+                <span class="header-text">o</span>
+                <button class="header-button">Iniciar plantilla</button>
+                <!-- <label for="agendas">What's for lunch?</label> -->
+                <!-- <select id="agenda-selector" name="agendas">
+                    <option value="pizza">Pizza</option>
+                    <option value="curry">Curry</option>
+                    <option value="salad">Salad</option>
+                    <option value="ramen">Ramen</option>
+                    <option value="tacos">Tacos</option>
+                </select> -->
+            </div>
         </div>
-        <div id="user-name">
-            <h3 id="name-h"><span title="Cambiar de agenda">Bienvenido</span></h3>
-        </div>
+        <div class="header-block"></div>
     </header>
     <div id="blocks-container"></div>
 </body>
