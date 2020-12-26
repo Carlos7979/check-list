@@ -15,5 +15,9 @@ function  main() {
   newSchedule(document.getElementById('init-template'));
   editHeaderControlActiveDetector(document.getElementsByTagName('header')[0]);
   
+  inputHeaderActiveDetector(document.getElementById('name'));
+  inputHeaderActiveDetector(document.getElementById('blocks-number'));
+  inputHeaderActiveDetector(document.getElementById('descriptions-number'));
+
   blockConstructor(blocksNumber = 5, allowInitialData, dataSet, descriptionsNumber = 12);
 }

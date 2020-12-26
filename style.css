@@ -94,7 +94,6 @@ h2 {
     /* max-height: 20rem; */
     min-height: 20rem;
     vertical-align: top; /* Corrige el desfase vertical de bloques inline-block */
-
 }
 
 .title {

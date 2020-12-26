@@ -18,23 +18,33 @@ function newSchedule(element) {
       })
 };
 
+function desactiveControlsHeader(target) {
+    if (target.tagName === 'DIV' || target.id === 'header') {
+      const buttonInitTemplate = document.getElementById('init-template');
+      buttonInitTemplate.removeAttribute('disabled');
+      buttonInitTemplate.removeAttribute('style');
+      const buttonNewSchedule = document.getElementById('new-schedule');
+      buttonNewSchedule.removeAttribute('disabled');
+      buttonNewSchedule.removeAttribute('style');
+      document.getElementById('header-inputs-1').setAttribute('hidden', 'hidden');
+      document.getElementById('header-inputs-2').setAttribute('hidden', 'hidden');
+      document.getElementById('name').value = '';
+      document.getElementById('blocks-number').value = '4';
+      document.getElementById('descriptions-number').value = '10';
+    }
+}
+
 function editHeaderControlActiveDetector(element) {
     element.addEventListener('click', event => {
       const target = event.target;
-      if (target.tagName === 'DIV' || target.id === 'header') {
-        const buttonInitTemplate = document.getElementById('init-template');
-        buttonInitTemplate.removeAttribute('disabled');
-        buttonInitTemplate.removeAttribute('style');
-        const buttonNewSchedule = document.getElementById('new-schedule');
-        buttonNewSchedule.removeAttribute('disabled');
-        buttonNewSchedule.removeAttribute('style');
-        document.getElementById('header-inputs-1').setAttribute('hidden', 'hidden');
-        document.getElementById('header-inputs-2').setAttribute('hidden', 'hidden');
-        document.getElementById('name').value = '';
-        document.getElementById('blocks-number').value = '4';
-        document.getElementById('descriptions-number').value = '10';
-      }
-    })
+      desactiveControlsHeader(target);
+    });
+}
+
+function inputHeaderActiveDetector(element) {
+    element.addEventListener("keyup", (event) => {
+        if (event.keyCode === 27) desactiveControlsHeader({id: 'header'});
+    });
 }
 
 function check(element) {
@@ -183,6 +193,7 @@ function blockConstructor(blocksNumber = 4, allowInitialData, dataToInsert = ini
                         input.setAttribute("type", 'hidden');
                         input.addEventListener("keyup", (event) => {
                             if (event.keyCode === 13) insert(input);
+                            if (event.keyCode === 27) desactiveControls();
                         });
                     title.appendChild(input);
                         const buttonInsert = document.createElement("button");
@@ -230,6 +241,7 @@ function blockConstructor(blocksNumber = 4, allowInitialData, dataToInsert = ini
                             input.setAttribute("type", 'hidden');
                             input.addEventListener("keyup", (event) => {
                                 if (event.keyCode === 13) insert(input);
+                                if (event.keyCode === 27) desactiveControls();
                             });
                         li.appendChild(input);
                             const buttonInsert = document.createElement("button");
