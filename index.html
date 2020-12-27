@@ -18,6 +18,14 @@
             <div id="header-title">
                 <img src="dialog-apply.svg" alt="Check">
                 <h2>Agenda del día</h2>
+                <!-- <label for="agendas">What's for lunch?</label> -->
+                <!-- <select id="agenda-selector" name="agendas">
+                    <option value="pizza">Inicio</option>
+                    <option value="curry">Nombremuylargo</option>
+                    <option value="salad">Salad</option>
+                    <option value="ramen">Ramen</option>
+                    <option value="tacos">Tacos</option>
+                </select> -->
             </div>
             <div id="user-name">
                 <h3 id="name-h"><span id="welcome">Bienvenidos</span></h3>
@@ -26,19 +34,29 @@
                 <button id="init-template" class="header-button">Iniciar plantilla</button>
                 
                 <!-- <label for="agendas">What's for lunch?</label> -->
-                <!-- <select id="agenda-selector" name="agendas">
-                    <option value="pizza">Pizza</option>
-                    <option value="curry">Curry</option>
+                <!-- <select id="agenda-selector" name="agendas" class="tipo-1">
+                    <option value="pizza">Inicio</option>
+                    <option value="curry">Nombremuylargo</option>
                     <option value="salad">Salad</option>
                     <option value="ramen">Ramen</option>
                     <option value="tacos">Tacos</option>
                 </select> -->
             </div>
+            <div>
+                <!-- <label for="agendas">What's for lunch?</label> -->
+                <select id="agenda-selector" name="agendas" class="tipo-3" hidden>
+                    <option value="pizza">Inicio</option>
+                    <option value="curry">Nombremuylargo</option>
+                    <option value="salad">Salad</option>
+                    <option value="ramen">Ramen</option>
+                    <option value="tacos">Tacos</option>
+                </select>
+            </div>
         </div>
         <div class="header-block">
             <div class="header-subblock">
                 <div id="header-inputs-1" class="header-inputs" hidden='hidden'>
-                    <input type="text" id="name" class="header-input" required>
+                    <input type="text" id="name" class="header-input" maxlength="14" required>
                     <label for="name" class="header-label">introduce un nombre</label>
                 </div>
                 <div id="header-inputs-2" hidden='hidden'>
@@ -53,7 +71,15 @@
                 </div>
             </div>
             <div id="header-subblock-2" class="header-subblock">
-                <button id="button-create" class="header-button" hidden='hidden'>Crear</button>
+                <button id="button-create" class="header-button">Crear</button>
+                <!-- <label for="agendas">What's for lunch?</label> -->
+                <!-- <select id="agenda-selector" name="agendas" class="tipo-2">
+                    <option value="pizza">Inicio</option>
+                    <option value="curry">Nombremuylargo</option>
+                    <option value="salad">Salad</option>
+                    <option value="ramen">Ramen</option>
+                    <option value="tacos">Tacos</option>
+                </select> -->
             </div>
         </div>
     </header>

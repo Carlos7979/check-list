@@ -19,6 +19,20 @@ header {
     letter-spacing: -1em; /* Corrige el espaciado por defecto ocasionado por el inline-block */
 }
 
+select.tipo-2 {
+    position: relative;
+    left: 0px;
+}
+
+select.tipo-3 {
+    margin-left: 50px;
+    margin-bottom: 6px;
+}
+
+#button-create {
+    visibility: hidden;
+}
+
 .header-block {
     min-width: 39rem;
     /* border: red solid 1px; */

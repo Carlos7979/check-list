@@ -1,7 +1,7 @@
 function newSchedule(element) {
     element.addEventListener('click', event => {
         document.getElementById('header-inputs-1').removeAttribute('hidden');
-        document.getElementById('button-create').removeAttribute('hidden');
+        document.getElementById('button-create').setAttribute('style', "visibility: visible;");
         document.getElementById('name').focus();
         if(element.id === 'new-schedule') {
             const buttonInitTemplate = document.getElementById('init-template');
@@ -31,7 +31,7 @@ function desactiveControlsHeader(target) {
       buttonNewSchedule.removeAttribute('style');
       document.getElementById('header-inputs-1').setAttribute('hidden', 'hidden');
       document.getElementById('header-inputs-2').setAttribute('hidden', 'hidden');
-      document.getElementById('button-create').setAttribute('hidden', 'hidden');
+      document.getElementById('button-create').setAttribute('style', "visibility: hidden;");
       document.getElementById('name').value = '';
       document.getElementById('blocks-number').value = '4';
       document.getElementById('descriptions-number').value = '10';
@@ -56,6 +56,8 @@ function create(element) {
         const inputName = document.getElementById('name');
         const inputBlocksNumber = document.getElementById('blocks-number');
         const inputDescriptionsNumber = document.getElementById('descriptions-number');
+        const selector = document.getElementById('agenda-selector');
+        const userNameBlock = document.getElementById('user-name');
         if(!inputName.value.trim()) {
             alert('Debes introducir un nombre');
             return
@@ -65,6 +67,10 @@ function create(element) {
         console.log(initialDescriptions[0].name);
         if(allowInitialData) blockConstructor(allowInitialData, dataSet)
         else blockConstructor(allowInitialData, dataSet, inputBlocksNumber.value, inputDescriptionsNumber.value);
+        selector.removeAttribute('hidden');
+        userNameBlock.setAttribute('hidden', 'hidden');
+        desactiveControlsHeader({id: 'header'});
+
       });
 }
 
