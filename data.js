@@ -1,4 +1,8 @@
-// let isLocalStorageEmpty = true;
+let blocksNumber;
+let descriptionsNumber;
+let allowInitialData = false;
+let dataSet;
+let isLocalStorageEmpty = true;
 let editControlsActive = [];
 // const users = {
 //   activeUser: '',

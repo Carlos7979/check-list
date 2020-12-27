@@ -25,6 +25,22 @@ header {
     display: inline-block;
     vertical-align: top; /* Corrige el desfase vertical de bloques inline-block */
     letter-spacing: normal; /* Restituye el efecto de la corrección del espaciado en el inline-block */
+    /* margin-right: -4px; */
+}
+
+.header-subblock {
+    min-width: 350px;
+    /* border: red solid 1px; */
+    display: inline-block;
+    vertical-align: top; /* Corrige el desfase vertical de bloques inline-block */
+}
+
+#header-subblock-2 {
+    padding: 2px;
+    min-width: min-content;
+    position: relative;
+    left: 5%;
+    /* border: red solid 1px; */
 }
 
 h2 {

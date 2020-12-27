@@ -1,9 +1,4 @@
 function  main() {
-  let blocksNumber;
-  let descriptionsNumber;
-  let allowInitialData = false;
-
-  let dataSet;
   
   const storagedData = getData('schedule');
     if(storagedData){
@@ -18,6 +13,5 @@ function  main() {
   inputHeaderActiveDetector(document.getElementById('name'));
   inputHeaderActiveDetector(document.getElementById('blocks-number'));
   inputHeaderActiveDetector(document.getElementById('descriptions-number'));
-
-  blockConstructor(blocksNumber = 5, allowInitialData, dataSet, descriptionsNumber = 12);
+  create(document.getElementById('button-create'));
 }

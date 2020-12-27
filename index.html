@@ -35,20 +35,25 @@
                 </select> -->
             </div>
         </div>
-        <div id="test" class="header-block">
-            <div id="header-inputs-1" class="header-inputs" hidden='hidden'>
-                <input type="text" id="name" class="header-input">
-                <label for="name" class="header-label">introduce un nombre</label>
+        <div class="header-block">
+            <div class="header-subblock">
+                <div id="header-inputs-1" class="header-inputs" hidden='hidden'>
+                    <input type="text" id="name" class="header-input" required>
+                    <label for="name" class="header-label">introduce un nombre</label>
+                </div>
+                <div id="header-inputs-2" hidden='hidden'>
+                    <div class="header-inputs">
+                        <input type="number" id="blocks-number" class="header-input" value="4" min="1" max="10">
+                        <label for="blocks-number" class="header-label">número de módulos</label>
+                    </div>
+                    <div class="header-inputs">
+                        <input type="number" id="descriptions-number" class="header-input" value="10" min="1" max="30">
+                        <label for="descriptions-number" class="header-label">número de elementos</label>
+                    </div>
+                </div>
             </div>
-            <div id="header-inputs-2" hidden='hidden'>
-                <div class="header-inputs">
-                    <input type="number" id="blocks-number" class="header-input" value="4" min="1" max="10">
-                    <label for="blocks-number" class="header-label">número de módulos</label>
-                </div>
-                <div class="header-inputs">
-                    <input type="number" id="descriptions-number" class="header-input" value="10" min="1" max="30">
-                    <label for="descriptions-number" class="header-label">número de elementos</label>
-                </div>
+            <div id="header-subblock-2" class="header-subblock">
+                <button id="button-create" class="header-button" hidden='hidden'>Crear</button>
             </div>
         </div>
     </header>

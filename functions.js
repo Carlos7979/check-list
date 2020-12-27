@@ -1,17 +1,20 @@
 function newSchedule(element) {
     element.addEventListener('click', event => {
         document.getElementById('header-inputs-1').removeAttribute('hidden');
+        document.getElementById('button-create').removeAttribute('hidden');
         document.getElementById('name').focus();
         if(element.id === 'new-schedule') {
             const buttonInitTemplate = document.getElementById('init-template');
             buttonInitTemplate.removeAttribute('disabled');
             buttonInitTemplate.removeAttribute('style');
             document.getElementById('header-inputs-2').removeAttribute('hidden');
+            allowInitialData = false;
         } else {
             const buttonNewSchedule = document.getElementById('new-schedule');
             buttonNewSchedule.removeAttribute('disabled');
             buttonNewSchedule.removeAttribute('style');
             document.getElementById('header-inputs-2').setAttribute('hidden', 'hidden');
+            allowInitialData = true;
         };
         element.setAttribute('style', "color: CadetBlue;");
         element.disabled = 'true';
@@ -28,6 +31,7 @@ function desactiveControlsHeader(target) {
       buttonNewSchedule.removeAttribute('style');
       document.getElementById('header-inputs-1').setAttribute('hidden', 'hidden');
       document.getElementById('header-inputs-2').setAttribute('hidden', 'hidden');
+      document.getElementById('button-create').setAttribute('hidden', 'hidden');
       document.getElementById('name').value = '';
       document.getElementById('blocks-number').value = '4';
       document.getElementById('descriptions-number').value = '10';
@@ -45,6 +49,23 @@ function inputHeaderActiveDetector(element) {
     element.addEventListener("keyup", (event) => {
         if (event.keyCode === 27) desactiveControlsHeader({id: 'header'});
     });
+}
+
+function create(element) {
+    element.addEventListener('click', ()=> {
+        const inputName = document.getElementById('name');
+        const inputBlocksNumber = document.getElementById('blocks-number');
+        const inputDescriptionsNumber = document.getElementById('descriptions-number');
+        if(!inputName.value.trim()) {
+            alert('Debes introducir un nombre');
+            return
+        };
+        const scheduleName = inputName.value;
+        initialDescriptions[0].name = scheduleName;
+        console.log(initialDescriptions[0].name);
+        if(allowInitialData) blockConstructor(allowInitialData, dataSet)
+        else blockConstructor(allowInitialData, dataSet, inputBlocksNumber.value, inputDescriptionsNumber.value);
+      });
 }
 
 function check(element) {
@@ -167,7 +188,7 @@ function deleteDescription(element) {
     input.value = ''; // aquí se se limpia el campo de entrada luego de activar el botón de borrar
 }
   
-function blockConstructor(blocksNumber = 4, allowInitialData, dataToInsert = initialDescriptions, descriptionsNumber = 9) {
+function blockConstructor(allowInitialData, dataToInsert = initialDescriptions, blocksNumber = 4, descriptionsNumber = 10) {
     let n;
     let m;
     allowInitialData ? n = dataToInsert.length - 1 : n = blocksNumber;
