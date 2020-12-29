@@ -18,39 +18,32 @@
             <div id="header-title">
                 <img src="dialog-apply.svg" alt="Check">
                 <h2>Agenda del día</h2>
-                <!-- <label for="agendas">What's for lunch?</label> -->
-                <!-- <select id="agenda-selector" name="agendas">
-                    <option value="pizza">Inicio</option>
-                    <option value="curry">Nombremuylargo</option>
-                    <option value="salad">Salad</option>
-                    <option value="ramen">Ramen</option>
-                    <option value="tacos">Tacos</option>
-                </select> -->
             </div>
             <div id="user-name">
-                <h3 id="name-h"><span id="welcome">Bienvenidos</span></h3>
-                <button id="new-schedule" class="header-button">Nueva agenda</button>
-                <span class="header-text">o</span>
-                <button id="init-template" class="header-button">Iniciar plantilla</button>
-                
-                <!-- <label for="agendas">What's for lunch?</label> -->
-                <!-- <select id="agenda-selector" name="agendas" class="tipo-1">
-                    <option value="pizza">Inicio</option>
-                    <option value="curry">Nombremuylargo</option>
-                    <option value="salad">Salad</option>
-                    <option value="ramen">Ramen</option>
-                    <option value="tacos">Tacos</option>
-                </select> -->
-            </div>
-            <div>
-                <!-- <label for="agendas">What's for lunch?</label> -->
-                <select id="agenda-selector" name="agendas" class="tipo-3" hidden>
-                    <option value="pizza">Inicio</option>
-                    <option value="curry">Nombremuylargo</option>
-                    <option value="salad">Salad</option>
-                    <option value="ramen">Ramen</option>
-                    <option value="tacos">Tacos</option>
-                </select>
+                <div id="header-welcome">
+                    <div id="header-block-users">
+                        <div id="welcome">
+                            <span class="header-text">Bienvenidos</span>
+                        </div>
+                        <div id="header-users" hidden>
+                            <select id="schedule-selector" name="agendas">
+                                <option value="pizza">Inicio</option>
+                                <option value="curry">Nombremuylargo</option>
+                                <option value="salad">Salad</option>
+                                <option value="ramen">Ramen</option>
+                                <option value="tacos">Tacos</option>
+                            </select>
+                            <img id="add-schedule" src="images/list-add.svg" alt="Add symbol">
+                        </div>
+                    </div>
+                    <div id="header-buttons">
+                        <div id="hide-buttons">
+                            <button id="new-schedule" class="header-button">Nueva agenda</button>
+                            <span class="header-text">o</span>
+                            <button id="init-template" class="header-button">Iniciar plantilla</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="header-block">

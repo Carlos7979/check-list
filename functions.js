@@ -45,6 +45,20 @@ function editHeaderControlActiveDetector(element) {
     });
 }
 
+function addSchedule(element) {
+    element.addEventListener('click', event => {
+        // console.log(element);
+        const userButtons = document.getElementById('hide-buttons');
+        if(userButtons.hidden){
+            
+            userButtons.removeAttribute('hidden');
+        } else {
+            userButtons.setAttribute('hidden', 'hidden');
+            desactiveControlsHeader({id: 'header'})
+        }
+      });
+}
+
 function inputHeaderActiveDetector(element) {
     element.addEventListener("keyup", (event) => {
         if (event.keyCode === 27) desactiveControlsHeader({id: 'header'});
@@ -56,19 +70,21 @@ function create(element) {
         const inputName = document.getElementById('name');
         const inputBlocksNumber = document.getElementById('blocks-number');
         const inputDescriptionsNumber = document.getElementById('descriptions-number');
-        const selector = document.getElementById('agenda-selector');
-        const userNameBlock = document.getElementById('user-name');
+        const selector = document.getElementById('header-users');
+        const userButtons = document.getElementById('hide-buttons');
+        const welcome = document.getElementById('welcome');
         if(!inputName.value.trim()) {
             alert('Debes introducir un nombre');
             return
         };
         const scheduleName = inputName.value;
         initialDescriptions[0].name = scheduleName;
-        console.log(initialDescriptions[0].name);
+        // console.log(initialDescriptions[0].name);
         if(allowInitialData) blockConstructor(allowInitialData, dataSet)
         else blockConstructor(allowInitialData, dataSet, inputBlocksNumber.value, inputDescriptionsNumber.value);
         selector.removeAttribute('hidden');
-        userNameBlock.setAttribute('hidden', 'hidden');
+        userButtons.setAttribute('hidden', 'hidden');
+        welcome.setAttribute('hidden', 'hidden');
         desactiveControlsHeader({id: 'header'});
 
       });

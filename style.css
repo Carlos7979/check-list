@@ -19,14 +19,49 @@ header {
     letter-spacing: -1em; /* Corrige el espaciado por defecto ocasionado por el inline-block */
 }
 
-select.tipo-2 {
-    position: relative;
-    left: 0px;
+#header-block-users {
+    display: inline-block;
+    vertical-align: middle;
+    width: 240px;
 }
 
-select.tipo-3 {
-    margin-left: 50px;
-    margin-bottom: 6px;
+#header-buttons {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* #header-welcome {
+    vertical-align: middle;
+} */
+
+#schedule-selector {
+    /* margin-left: 50px; */
+    margin-bottom: 1px;
+    padding-bottom: 1px;
+    vertical-align: bottom;
+}
+
+#add-schedule {
+    /* position: relative;
+    top: 10px; */
+    height: 30px;
+    vertical-align: top;
+    /* border: 1px groove silver;
+    border-radius: 5px; */
+}
+
+#add-schedule:hover {
+    cursor: pointer;
+    /* border: 1px groove silver; */
+    border-radius: 5px;
+    background: linear-gradient(to top, #9aa2eb 0%, cornflowerblue 100%);
+}
+
+#add-schedule:active {
+    position: relative;
+    /* top: 1px; */
+    left: 1px;
+    background: linear-gradient(to top, #d6d2d2 0%, cornflowerblue 100%);
 }
 
 #button-create {
@@ -63,10 +98,29 @@ h2 {
     bottom: 10px;
 }
 
-#name-h {
+#welcome {
     margin: 10px 0 10px 50px;
+    height: 33px;
     width: min-content;
-    display: inline-block;
+    /* display: inline-block; */
+    font-weight: bold;
+    font-size: 167%;
+    min-width: 176px;
+    vertical-align: top;
+}
+
+.header-text {
+    font-weight: bold;
+    font-size: large;
+}
+
+#header-users {
+    /* display: inline-block; */
+    vertical-align: bottom;
+    width: max-content;
+    /* vertical-align: middle; */
+    margin: 10px 0;
+    margin-left: 50px;
 }
 
 #user-name {
@@ -81,11 +135,6 @@ h2 {
 /* #user-name, #name-h, .header-text, .header-label, .header-inputs {
     border: groove 1px gray;
 } */
-
-.header-text {
-    font-weight: bold;
-    font-size: large;
-}
 
 #header-inputs-2 {
     margin-bottom: 4px;

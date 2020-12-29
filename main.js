@@ -9,6 +9,7 @@ function  main() {
   newSchedule(document.getElementById('new-schedule'));
   newSchedule(document.getElementById('init-template'));
   editHeaderControlActiveDetector(document.getElementsByTagName('header')[0]);
+  addSchedule(document.getElementById('add-schedule'));
   
   inputHeaderActiveDetector(document.getElementById('name'));
   inputHeaderActiveDetector(document.getElementById('blocks-number'));
