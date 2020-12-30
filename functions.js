@@ -70,24 +70,37 @@ function create(element) {
         const inputName = document.getElementById('name');
         const inputBlocksNumber = document.getElementById('blocks-number');
         const inputDescriptionsNumber = document.getElementById('descriptions-number');
-        const selector = document.getElementById('header-users');
+        const selectorBlock = document.getElementById('header-users');
+        const selector = document.getElementById('schedule-selector');
         const userButtons = document.getElementById('hide-buttons');
         const welcome = document.getElementById('welcome');
+        const option = document.createElement('option');
         if(!inputName.value.trim()) {
             alert('Debes introducir un nombre');
             return
         };
         const scheduleName = inputName.value;
         initialDescriptions[0].name = scheduleName;
+        option.innerHTML = scheduleName;
+        option.value = scheduleName.toLowerCase();
+        option.selected = "true"
+        selector.append(option);
         // console.log(initialDescriptions[0].name);
         if(allowInitialData) blockConstructor(allowInitialData, dataSet)
         else blockConstructor(allowInitialData, dataSet, inputBlocksNumber.value, inputDescriptionsNumber.value);
-        selector.removeAttribute('hidden');
+        selectorBlock.removeAttribute('hidden');
         userButtons.setAttribute('hidden', 'hidden');
         welcome.setAttribute('hidden', 'hidden');
         desactiveControlsHeader({id: 'header'});
 
       });
+}
+
+function changeSchedule(element) {
+    element.addEventListener('change', event => {
+        const target = event.target;
+        console.log(target.value);
+    })
 }
 
 function check(element) {
