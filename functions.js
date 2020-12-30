@@ -4,31 +4,48 @@ function newSchedule(element) {
         document.getElementById('button-create').setAttribute('style', "visibility: visible;");
         document.getElementById('name').focus();
         if(element.id === 'new-schedule') {
+            if(element.isactive  === 'true') {  
+                desactiveControlsHeader({id: 'header'});
+                element.isactive = 'false';
+                element.removeAttribute('style');
+                return;
+            }
             const buttonInitTemplate = document.getElementById('init-template');
-            buttonInitTemplate.removeAttribute('disabled');
+            // buttonInitTemplate.removeAttribute('disabled');
             buttonInitTemplate.removeAttribute('style');
+            buttonInitTemplate.isactive = 'false';
             document.getElementById('header-inputs-2').removeAttribute('hidden');
-            allowInitialData = false;
+            allowInitialData = 'false';
         } else {
+            if(element.isactive === 'true') {
+                desactiveControlsHeader({id: 'header'});
+                element.isactive = 'false';
+                element.removeAttribute('style');
+                return;
+            }
             const buttonNewSchedule = document.getElementById('new-schedule');
-            buttonNewSchedule.removeAttribute('disabled');
+            // buttonNewSchedule.removeAttribute('disabled');
             buttonNewSchedule.removeAttribute('style');
+            buttonNewSchedule.isactive = 'false';
             document.getElementById('header-inputs-2').setAttribute('hidden', 'hidden');
             allowInitialData = true;
         };
         element.setAttribute('style', "color: CadetBlue;");
-        element.disabled = 'true';
+        element.isactive = "true";
+        // element.disabled = 'true';
       })
 };
 
 function desactiveControlsHeader(target) {
     if (target.tagName === 'DIV' || target.id === 'header') {
       const buttonInitTemplate = document.getElementById('init-template');
-      buttonInitTemplate.removeAttribute('disabled');
+    //   buttonInitTemplate.removeAttribute('disabled');
       buttonInitTemplate.removeAttribute('style');
+      buttonInitTemplate.isactive = 'false';
       const buttonNewSchedule = document.getElementById('new-schedule');
-      buttonNewSchedule.removeAttribute('disabled');
+    //   buttonNewSchedule.removeAttribute('disabled');
       buttonNewSchedule.removeAttribute('style');
+      buttonNewSchedule.isactive = 'false';
       document.getElementById('header-inputs-1').setAttribute('hidden', 'hidden');
       document.getElementById('header-inputs-2').setAttribute('hidden', 'hidden');
       document.getElementById('button-create').setAttribute('style', "visibility: hidden;");

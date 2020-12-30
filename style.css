@@ -137,6 +137,11 @@ h2 {
     border: groove 1px gray;
 } */
 
+
+#header-inputs-1 {
+    margin-top: 4px;
+}
+
 #header-inputs-2 {
     margin-bottom: 4px;
 }
