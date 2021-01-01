@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agenda del día</title>
     <link rel="stylesheet" href="style.css" type="text/css">
     <link rel="icon" type="image/png" href="dialog-apply.svg">
@@ -27,10 +28,7 @@
                         </div>
                         <div id="header-users" hidden>
                             <select id="schedule-selector" name="agendas" title="Cambiar de agenda">
-                                <!-- <option value="" selected disabled hidden>Choose here</option>
-                                <option value="curry">Nombremuylargo</option>
-                                <option value="amaranta">Amaranta</option>
-                                <option value="Bombón">Bombón</option> -->
+
                             </select>
                             <img id="add-schedule" src="images/list-add.svg" alt="Add symbol" title="Nueva agenda">
                         </div>
@@ -58,12 +56,15 @@
                     </div>
                     <div class="header-inputs">
                         <input type="number" id="descriptions-number" class="header-input" value="10" min="1" max="30">
-                        <label for="descriptions-number" class="header-label">número de elementos</label>
+                        <label for="descriptions-number" class="header-label">número de líneas</label>
                     </div>
                 </div>
             </div>
             <div id="header-subblock-2" class="header-subblock">
                 <button id="button-create" class="header-button">Crear</button>
+            </div>
+            <div id="header-subblock-3">
+                <img id="options" src="images/1200px-Gnome-preferences-other.png" title="Opciones" alt="Options">
             </div>
         </div>
     </header>

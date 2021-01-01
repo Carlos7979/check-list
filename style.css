@@ -93,6 +93,39 @@ header {
     /* border: red solid 1px; */
 }
 
+#header-subblock-3 {
+    width: 24%;
+    border-color: brown;
+    display: inline-block;
+    position: relative;
+    left: 5%;
+    text-align: right;
+    padding: 2px;
+    margin: 2px;
+}
+
+#options {
+    vertical-align: middle;
+    height: 40px;
+}
+
+#options:hover {
+    cursor: pointer;
+    /* border: 1px groove silver; */
+    border-radius: 5px;
+    background: linear-gradient(to top, #9aa2eb 0%, cornflowerblue 100%);
+    /* -webkit-transform: rotate(30deg);
+    transform: rotate(30deg); */
+}
+
+#options:active {
+    position: relative;
+    top: 1px;
+    background: linear-gradient(to top, #d6d2d2 0%, cornflowerblue 100%);
+    /* -webkit-transform: rotate(30deg);
+    transform: rotate(30deg); */
+}
+
 h2 {
     display: inline-block;
     position: relative;

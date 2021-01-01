@@ -15,7 +15,7 @@ function newSchedule(element) {
             buttonInitTemplate.removeAttribute('style');
             buttonInitTemplate.isactive = 'false';
             document.getElementById('header-inputs-2').removeAttribute('hidden');
-            allowInitialData = 'false';
+            allowInitialData = false;
         } else {
             if(element.isactive === 'true') {
                 desactiveControlsHeader({id: 'header'});
