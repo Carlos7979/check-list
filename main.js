@@ -11,6 +11,7 @@ function  main() {
   editHeaderControlActiveDetector(document.getElementsByTagName('header')[0]);
   addSchedule(document.getElementById('add-schedule'));
   changeSchedule(document.getElementById('schedule-selector'));
+  scheduleOptions(document.getElementById('options'));
   
   inputHeaderActiveDetector(document.getElementById('name'));
   inputHeaderActiveDetector(document.getElementById('blocks-number'));

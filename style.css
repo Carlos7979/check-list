@@ -78,6 +78,12 @@ header {
     /* margin-right: -4px; */
 }
 
+/* #hedear-block-2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+} */
+
 .header-subblock {
     min-width: 350px;
     /* border: red solid 1px; */
@@ -104,9 +110,26 @@ header {
     margin: 2px;
 }
 
-#options {
+/* #hide-header-subblock-3 {
+    border: brown solid 1px;
+    border-radius: 5px;
+} */
+
+#options, #new-block, #clean-blocks {
     vertical-align: middle;
     height: 40px;
+    margin: 0 10px;
+}
+
+#delete-schedule {
+    vertical-align: middle;
+    height: 20px;
+}
+
+#delete-all-schedules {
+    vertical-align: bottom;
+    height: 30px;
+    margin-right: 20px;
 }
 
 #options:hover {
@@ -194,6 +217,26 @@ h2 {
     width: 122px;
     /* margin-left: 180px; */ /* si el bloque de inputs está debajo de los botones */
 }
+
+/* #header-schedule-options-1 {
+    border-color: chartreuse;
+} */
+
+#header-schedule-options-2 {
+    margin-top: 15px;
+    min-width: 39rem;
+    border-color: chartreuse;
+    text-align: end;
+    padding-right: 25px;
+    box-sizing: border-box;
+}
+
+/* #delete-all {
+    display: inline-block;
+    border-color: chartreuse;
+    width: fit-content;
+    margin-right: 5px;
+} */
 
 #blocks-container {
     /* display: flexbox; */

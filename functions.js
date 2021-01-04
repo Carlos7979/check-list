@@ -66,8 +66,11 @@ function addSchedule(element) {
     element.addEventListener('click', event => {
         // console.log(element);
         const userButtons = document.getElementById('hide-buttons');
+        const buttonsContainer = document.getElementById('header-schedule-options-2');
         if(userButtons.hidden){
-            
+            if(!buttonsContainer.hidden) {
+                buttonsContainer.setAttribute('hidden', 'hidden');
+            }
             userButtons.removeAttribute('hidden');
         } else {
             userButtons.setAttribute('hidden', 'hidden');
@@ -91,23 +94,25 @@ function create(element) {
         const selector = document.getElementById('schedule-selector');
         const userButtons = document.getElementById('hide-buttons');
         const welcome = document.getElementById('welcome');
-        const option = document.createElement('option');
+        const optionSelect = document.createElement('option');
+        const optionsButton = document.getElementById('hide-header-subblock-3');
         if(!inputName.value.trim()) {
             alert('Debes introducir un nombre');
             return
         };
         const scheduleName = inputName.value;
         initialDescriptions[0].name = scheduleName;
-        option.innerHTML = scheduleName;
-        option.value = scheduleName.toLowerCase();
-        option.selected = "true"
-        selector.append(option);
+        optionSelect.innerHTML = scheduleName;
+        optionSelect.value = scheduleName.toLowerCase();
+        optionSelect.selected = "true"
+        selector.append(optionSelect);
         // console.log(initialDescriptions[0].name);
         if(allowInitialData) blockConstructor(allowInitialData, dataSet)
         else blockConstructor(allowInitialData, dataSet, inputBlocksNumber.value, inputDescriptionsNumber.value);
         selectorBlock.removeAttribute('hidden');
         userButtons.setAttribute('hidden', 'hidden');
         welcome.setAttribute('hidden', 'hidden');
+        optionsButton.removeAttribute('hidden');
         desactiveControlsHeader({id: 'header'});
 
       });
@@ -117,6 +122,24 @@ function changeSchedule(element) {
     element.addEventListener('change', event => {
         const target = event.target;
         console.log(target.value);
+    })
+}
+
+function scheduleOptions(element) {
+    element.addEventListener('click', event => {
+
+        const buttonsContainer = document.getElementById('header-schedule-options-2');
+        const userButtons = document.getElementById('hide-buttons');
+        if(buttonsContainer.hidden){
+            if(!userButtons.hidden) {
+                userButtons.setAttribute('hidden', 'hidden');
+                desactiveControlsHeader({id: 'header'});
+            }
+            buttonsContainer.removeAttribute('hidden');
+        } else {
+            buttonsContainer.setAttribute('hidden', 'hidden');
+            // desactiveControlsHeader({id: 'header'})
+        }
     })
 }
 
