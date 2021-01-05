@@ -4,6 +4,7 @@ let allowInitialData = false;
 let dataSet;
 let isLocalStorageEmpty = true;
 let editControlsActive = [];
+let storagedData = [];
 // const users = {
 //   activeUser: '',
 //   list: []

@@ -85,6 +85,29 @@ function inputHeaderActiveDetector(element) {
     });
 }
 
+function setSchedulesToOptions(dataSet) {
+    const welcome = document.getElementById('welcome');
+    const selectorBlock = document.getElementById('header-users');
+    const selector = document.getElementById('schedule-selector');
+
+    dataSet[0].activeSchedule
+    for(let i = 1; i < dataSet.length; i++) {
+        const optionSelect = document.createElement('option');
+        optionSelect.innerHTML = dataSet[i];
+        optionSelect.value = dataSet[i];
+        if(dataSet[0].activeSchedule === dataSet[i]) {
+            optionSelect.selected = "true";
+        }
+        selector.append(optionSelect);
+    }
+    welcome.setAttribute('hidden', 'hidden');
+    selectorBlock.removeAttribute('hidden');
+    const buttonsContainer = document.getElementById('hide-buttons');
+    if(!buttonsContainer.hidden) {
+        buttonsContainer.setAttribute('hidden', 'hidden');
+    }
+}
+
 function create(element) {
     element.addEventListener('click', ()=> {
         const inputName = document.getElementById('name');
@@ -96,14 +119,34 @@ function create(element) {
         const welcome = document.getElementById('welcome');
         const optionSelect = document.createElement('option');
         const optionsButton = document.getElementById('hide-header-subblock-3');
-        if(!inputName.value.trim()) {
+        const scheduleName = inputName.value.trim();
+        if(!scheduleName) {
             alert('Debes introducir un nombre');
-            return
+            return;
         };
-        const scheduleName = inputName.value;
+        if(storagedData){
+            let isValidName = true;
+            storagedData.forEach(element => {
+                console.log(typeof element);
+                if(typeof element !== 'object') {
+                    if(element.toLowerCase() === scheduleName.toLowerCase()) {
+                        alert('Ese nombre de agenda ya existe');
+                        isValidName = false;
+                        return;
+                    };
+                }
+            });
+            if(!isValidName) return
+            storagedData.push(scheduleName);
+            storagedData[0].activeSchedule = scheduleName;
+            saveData('schedules', storagedData);
+          } else {
+            saveData('schedules', [{activeSchedule: scheduleName}, scheduleName]);
+          }
         initialDescriptions[0].name = scheduleName;
         optionSelect.innerHTML = scheduleName;
-        optionSelect.value = scheduleName.toLowerCase();
+        optionSelect.value = scheduleName;
+        // if(optionSelect.value)
         optionSelect.selected = "true"
         selector.append(optionSelect);
         // console.log(initialDescriptions[0].name);
@@ -114,7 +157,6 @@ function create(element) {
         welcome.setAttribute('hidden', 'hidden');
         optionsButton.removeAttribute('hidden');
         desactiveControlsHeader({id: 'header'});
-
       });
 }
 
@@ -218,7 +260,7 @@ function saveData(key, dataSet) {
 };
 
 function getData(key) {
-    JSON.parse(localStorage.getItem(key))
+    return JSON.parse(localStorage.getItem(key))
 }
 
 function deleteData(key) {

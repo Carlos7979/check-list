@@ -1,9 +1,11 @@
 function  main() {
   
-  const storagedData = getData('schedule');
+  storagedData = getData('schedules');
     if(storagedData){
       allowInitialData = true;
-      // console.log('hello');
+      setSchedulesToOptions(storagedData);
+    } else {
+      isLocalStorageEmpty = false;
     }
 
   newSchedule(document.getElementById('new-schedule'));
