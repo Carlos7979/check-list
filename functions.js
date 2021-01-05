@@ -89,6 +89,8 @@ function setSchedulesToOptions(dataSet) {
     const welcome = document.getElementById('welcome');
     const selectorBlock = document.getElementById('header-users');
     const selector = document.getElementById('schedule-selector');
+    const optionsButton = document.getElementById('hide-header-subblock-3');
+    optionsButton.removeAttribute('hidden');
 
     dataSet[0].activeSchedule
     for(let i = 1; i < dataSet.length; i++) {
