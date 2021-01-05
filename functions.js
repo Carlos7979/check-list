@@ -166,6 +166,13 @@ function changeSchedule(element) {
     element.addEventListener('change', event => {
         const target = event.target;
         console.log(target.value);
+        storagedData = getData('schedules');
+        storagedData[0].activeSchedule = target.value;
+        console.log(storagedData);
+        saveData('schedules', storagedData);
+        // if(storagedData[0].activeSchedule === dataSet[i]) {
+        //     optionSelect.selected = "true";
+        // }
     })
 }
 
