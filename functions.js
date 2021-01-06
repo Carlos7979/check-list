@@ -65,7 +65,7 @@ function editHeaderControlActiveDetector(element) {
 function addSchedule(element) {
     element.addEventListener('click', event => {
         // console.log(element);
-        const userButtons = document.getElementById('hide-buttons');
+        const userButtons = document.getElementById('hide-header-buttons');
         const buttonsContainer = document.getElementById('header-schedule-options-2');
         if(userButtons.hidden){
             if(!buttonsContainer.hidden) {
@@ -91,7 +91,7 @@ function setSchedulesToOptions(dataSet) {
     const selector = document.getElementById('schedule-selector');
     const optionsButton = document.getElementById('hide-header-subblock-3');
     optionsButton.removeAttribute('hidden');
-
+    selector.innerHTML = '';
     dataSet[0].activeSchedule
     for(let i = 1; i < dataSet.length; i++) {
         const optionSelect = document.createElement('option');
@@ -104,9 +104,9 @@ function setSchedulesToOptions(dataSet) {
     }
     welcome.setAttribute('hidden', 'hidden');
     selectorBlock.removeAttribute('hidden');
-    const buttonsContainer = document.getElementById('hide-buttons');
-    if(!buttonsContainer.hidden) {
-        buttonsContainer.setAttribute('hidden', 'hidden');
+    const userButtons = document.getElementById('hide-header-buttons');
+    if(!userButtons.hidden) {
+        userButtons.setAttribute('hidden', 'hidden');
     }
 }
 
@@ -115,18 +115,12 @@ function create(element) {
         const inputName = document.getElementById('name');
         const inputBlocksNumber = document.getElementById('blocks-number');
         const inputDescriptionsNumber = document.getElementById('descriptions-number');
-        const selectorBlock = document.getElementById('header-users');
-        const selector = document.getElementById('schedule-selector');
-        const userButtons = document.getElementById('hide-buttons');
-        const welcome = document.getElementById('welcome');
-        const optionSelect = document.createElement('option');
-        const optionsButton = document.getElementById('hide-header-subblock-3');
+        let storagedData = getData('schedules');
         const scheduleName = inputName.value.trim();
         if(!scheduleName) {
             alert('Debes introducir un nombre');
             return;
-        };2
-        const storagedData = getData('schedules');
+        };
         if(storagedData){
             let isValidName = true;
             storagedData.forEach(element => {
@@ -142,23 +136,17 @@ function create(element) {
             storagedData.push(scheduleName);
             storagedData[0].activeSchedule = scheduleName;
             saveData('schedules', storagedData);
-          } else {
+            const blocksContainer = document.getElementById('blocks-container');
+            blocksContainer.innerHTML = '';
+        } else {
             saveData('schedules', [{activeSchedule: scheduleName}, scheduleName]);
-          }
+        }
+        desactiveControlsHeader({id: 'header'});
         initialDescriptions[0].name = scheduleName;
-        optionSelect.innerHTML = scheduleName;
-        optionSelect.value = scheduleName;
-        // if(optionSelect.value)
-        optionSelect.selected = "true"
-        selector.append(optionSelect);
-        // console.log(initialDescriptions[0].name);
+        storagedData = getData('schedules');
+        setSchedulesToOptions(storagedData);
         if(allowInitialData) blockConstructor(allowInitialData, dataSet)
         else blockConstructor(allowInitialData, dataSet, inputBlocksNumber.value, inputDescriptionsNumber.value);
-        selectorBlock.removeAttribute('hidden');
-        userButtons.setAttribute('hidden', 'hidden');
-        welcome.setAttribute('hidden', 'hidden');
-        optionsButton.removeAttribute('hidden');
-        desactiveControlsHeader({id: 'header'});
       });
 }
 
@@ -178,7 +166,7 @@ function scheduleOptions(element) {
     element.addEventListener('click', event => {
 
         const buttonsContainer = document.getElementById('header-schedule-options-2');
-        const userButtons = document.getElementById('hide-buttons');
+        const userButtons = document.getElementById('hide-header-buttons');
         if(buttonsContainer.hidden){
             if(!userButtons.hidden) {
                 userButtons.setAttribute('hidden', 'hidden');
@@ -196,8 +184,17 @@ function deleteAll(element) {
     element.addEventListener('click', event => {
         const deleteAllSchedules = confirm("Borrar todas las agendas \nes una acción que no se puede deshacer");
         if(deleteAllSchedules) {
+            const schedules = getData('schedules');
+            for(let i = 1; i !== schedules.length; i++) {
+                const name = schedules[i];
+                const titles = getData(`${name}-titles`);
+                for(let j = 1; j !== titles.length; j++) {
+                    deleteData(`${name}-${j}`);
+                }
+                deleteData(`${name}-titles`);
+            };
             deleteData('schedules');
-            const userButtons = document.getElementById('hide-buttons');
+            const userButtons = document.getElementById('hide-header-buttons');
             userButtons.removeAttribute('hidden');
             const welcome = document.getElementById('welcome');
             welcome.removeAttribute('hidden');
@@ -209,19 +206,9 @@ function deleteAll(element) {
             buttonsContainer.setAttribute('hidden', 'hidden');
             const optionsButton = document.getElementById('hide-header-subblock-3');
             optionsButton.setAttribute('hidden', 'hidden');
+            const blocksContainer = document.getElementById('blocks-container');
+            blocksContainer.innerHTML = '';
         } else return;
-        // const buttonsContainer = document.getElementById('header-schedule-options-2');
-        // const userButtons = document.getElementById('hide-buttons');
-        // if(buttonsContainer.hidden){
-        //     if(!userButtons.hidden) {
-        //         userButtons.setAttribute('hidden', 'hidden');
-        //         desactiveControlsHeader({id: 'header'});
-        //     }
-        //     buttonsContainer.removeAttribute('hidden');
-        // } else {
-        //     buttonsContainer.setAttribute('hidden', 'hidden');
-        //     // desactiveControlsHeader({id: 'header'})
-        // }
     });
 }
 
@@ -348,9 +335,14 @@ function deleteDescription(element) {
 function blockConstructor(allowInitialData, dataToInsert = initialDescriptions, blocksNumber = 4, descriptionsNumber = 10) {
     let n;
     let m;
+    const name = dataToInsert[0].name
     allowInitialData ? n = dataToInsert.length - 1 : n = blocksNumber;
     allowInitialData ? m = dataToInsert[0].descriptionsInBlock : m = descriptionsNumber;
     const blocksContainer = document.getElementById('blocks-container');
+    const scheduleBlocks = [];
+    // const scheduleDescription = new Descriptor(name, n);
+    // scheduleBlocks.push(scheduleDescription);
+    scheduleBlocks.push(name);
     for(let i = 0; i < n; i++) {
         const block = document.createElement("DIV");
             block.setAttribute("id", `block-${i+1}`);
@@ -363,7 +355,13 @@ function blockConstructor(allowInitialData, dataToInsert = initialDescriptions, 
                         heading.setAttribute("id", `description-${i+1}-t`);
                         heading.setAttribute("class", 'title');
                     title.appendChild(heading);
-                    allowInitialData ? heading.innerHTML = dataToInsert[i + 1][0] : heading.innerHTML = `Título ${i+1}`
+                    let headingText = '';
+                    allowInitialData ? headingText = dataToInsert[i + 1][0] : headingText = `Título ${i+1}`
+                    heading.innerHTML = headingText;
+                    // const headingBlock = new Heading(headingText, i + 1);
+                    // headingBlock.id = i + 1;
+                    // scheduleBlocks[0].idCounter = i + 1;
+                    scheduleBlocks.push(headingText);
                         const input = document.createElement("input");
                         input.setAttribute("id", `input-${i + 1}-t`);
                         input.setAttribute("class", 'title-i');
@@ -399,6 +397,8 @@ function blockConstructor(allowInitialData, dataToInsert = initialDescriptions, 
                     list.setAttribute("class", 'list');
                         const ol = document.createElement("ol");  
                         ol.setAttribute("id", `ol-${i+1}`);
+                        const blockDescriptions = [];
+                        blockDescriptions.push(headingText);
                         for(let j = 0; j < m; j++) {
                         const li = document.createElement("li");
                         li.setAttribute("id", `li-${j+1 +i*m}`);
@@ -410,9 +410,12 @@ function blockConstructor(allowInitialData, dataToInsert = initialDescriptions, 
                             description.setAttribute("id", `description-${j+1 +i*m}`);
                             description.setAttribute("class", 'description');
                         li.appendChild(description);
+                        let descriptionText = '';
                         if(allowInitialData && (dataToInsert[i + 1].length > j + 1)) {
-                            description.innerHTML = dataToInsert[i + 1][j + 1];
+                            descriptionText = dataToInsert[i + 1][j + 1];
+                            description.innerHTML = descriptionText;
                         }
+                        blockDescriptions.push(descriptionText);
                             const input = document.createElement("input");
                             input.setAttribute("id", `input-${j+1 +i*m}`);
                             input.setAttribute("maxlength", '60');
@@ -442,7 +445,8 @@ function blockConstructor(allowInitialData, dataToInsert = initialDescriptions, 
                         li.appendChild(buttonDelete);
                         descriptionInputControls(li);
                         ol.appendChild(li);
-                        }
+                        };
+                        saveData(`${name}-${i + 1}`, blockDescriptions)
                     list.appendChild(ol);
                     check(list);
             block.appendChild(list);
@@ -450,5 +454,6 @@ function blockConstructor(allowInitialData, dataToInsert = initialDescriptions, 
             blocksContainer.appendChild(block);
             // if(allowInitialData) saveData(dataToInsert);
             // deleteData('key');
-    }
+    };
+    saveData(`${name}-titles`, scheduleBlocks);
 };

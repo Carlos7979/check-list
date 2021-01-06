@@ -22,9 +22,32 @@ let storagedData = [];
 //   }
 // };
 
+// {nombre de la agenda, número de bloques, contador de id = 0}
+//         {
+//             id → number,
+//             position → number,
+//             title → string
+//         }
+
+// class Descriptor {
+//   constructor(name, number) {
+//     this.name = name;
+//     this.number = number;
+//     this.idCounter = 0;
+//   }
+// }
+
+// class Heading {
+//   constructor(name, position) {
+//     this.name = name;
+//     this.position = position;
+//     this.id = 0;
+//   }
+// }
+
 const initialDescriptions = [
     {
-      name: 'Carlos',
+      name: '',
       descriptionsInBlock: 9
     },
     [ 'Inicio del día',

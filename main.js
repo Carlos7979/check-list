@@ -5,7 +5,7 @@ function  main() {
       allowInitialData = true;
       setSchedulesToOptions(storagedData);
     } else {
-      const buttonsContainer = document.getElementById('hide-buttons');
+      const buttonsContainer = document.getElementById('hide-header-buttons');
       buttonsContainer.removeAttribute('hidden');
       isLocalStorageEmpty = false;
     }
