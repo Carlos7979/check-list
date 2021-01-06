@@ -5,6 +5,8 @@ function  main() {
       allowInitialData = true;
       setSchedulesToOptions(storagedData);
     } else {
+      const buttonsContainer = document.getElementById('hide-buttons');
+      buttonsContainer.removeAttribute('hidden');
       isLocalStorageEmpty = false;
     }
 
@@ -19,4 +21,5 @@ function  main() {
   inputHeaderActiveDetector(document.getElementById('blocks-number'));
   inputHeaderActiveDetector(document.getElementById('descriptions-number'));
   create(document.getElementById('button-create'));
+  deleteAll(document.getElementById('delete-all-schedules'));
 }

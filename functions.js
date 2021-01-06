@@ -69,7 +69,7 @@ function addSchedule(element) {
         const buttonsContainer = document.getElementById('header-schedule-options-2');
         if(userButtons.hidden){
             if(!buttonsContainer.hidden) {
-                buttonsContainer.setAttribute('hidden', 'hidden');
+                const buttonsContainer = document.getElementById('header-schedule-options-2');
             }
             userButtons.removeAttribute('hidden');
         } else {
@@ -125,11 +125,11 @@ function create(element) {
         if(!scheduleName) {
             alert('Debes introducir un nombre');
             return;
-        };
+        };2
+        const storagedData = getData('schedules');
         if(storagedData){
             let isValidName = true;
             storagedData.forEach(element => {
-                console.log(typeof element);
                 if(typeof element !== 'object') {
                     if(element.toLowerCase() === scheduleName.toLowerCase()) {
                         alert('Ese nombre de agenda ya existe');
@@ -165,10 +165,8 @@ function create(element) {
 function changeSchedule(element) {
     element.addEventListener('change', event => {
         const target = event.target;
-        console.log(target.value);
         storagedData = getData('schedules');
         storagedData[0].activeSchedule = target.value;
-        console.log(storagedData);
         saveData('schedules', storagedData);
         // if(storagedData[0].activeSchedule === dataSet[i]) {
         //     optionSelect.selected = "true";
@@ -191,7 +189,40 @@ function scheduleOptions(element) {
             buttonsContainer.setAttribute('hidden', 'hidden');
             // desactiveControlsHeader({id: 'header'})
         }
-    })
+    });
+}
+
+function deleteAll(element) {
+    element.addEventListener('click', event => {
+        const deleteAllSchedules = confirm("Borrar todas las agendas \nes una acción que no se puede deshacer");
+        if(deleteAllSchedules) {
+            deleteData('schedules');
+            const userButtons = document.getElementById('hide-buttons');
+            userButtons.removeAttribute('hidden');
+            const welcome = document.getElementById('welcome');
+            welcome.removeAttribute('hidden');
+            const selectorBlock = document.getElementById('header-users');
+            const selector = document.getElementById('schedule-selector');
+            selector.innerHTML = '';
+            selectorBlock.setAttribute('hidden', 'hidden');
+            const buttonsContainer = document.getElementById('header-schedule-options-2');
+            buttonsContainer.setAttribute('hidden', 'hidden');
+            const optionsButton = document.getElementById('hide-header-subblock-3');
+            optionsButton.setAttribute('hidden', 'hidden');
+        } else return;
+        // const buttonsContainer = document.getElementById('header-schedule-options-2');
+        // const userButtons = document.getElementById('hide-buttons');
+        // if(buttonsContainer.hidden){
+        //     if(!userButtons.hidden) {
+        //         userButtons.setAttribute('hidden', 'hidden');
+        //         desactiveControlsHeader({id: 'header'});
+        //     }
+        //     buttonsContainer.removeAttribute('hidden');
+        // } else {
+        //     buttonsContainer.setAttribute('hidden', 'hidden');
+        //     // desactiveControlsHeader({id: 'header'})
+        // }
+    });
 }
 
 function check(element) {
