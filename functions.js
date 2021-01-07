@@ -141,24 +141,43 @@ function create(element) {
         } else {
             saveData('schedules', [{activeSchedule: scheduleName}, scheduleName]);
         }
-        desactiveControlsHeader({id: 'header'});
         initialDescriptions[0].name = scheduleName;
         storagedData = getData('schedules');
+        if(allowInitialData) blockConstructor(true, allowInitialData, dataSet)
+        else blockConstructor(true, allowInitialData, dataSet, inputBlocksNumber.value, inputDescriptionsNumber.value);
         setSchedulesToOptions(storagedData);
-        if(allowInitialData) blockConstructor(allowInitialData, dataSet)
-        else blockConstructor(allowInitialData, dataSet, inputBlocksNumber.value, inputDescriptionsNumber.value);
+        desactiveControlsHeader({id: 'header'});
       });
+}
+
+function renderBlocks(name) {
+    if(!name) {
+        name = getData('schedules')[0].activeSchedule;
+    }
+    storagedData = getData('schedules');
+    storagedData[0].activeSchedule = name;
+    const schedule = getData(`${name}-titles`);
+    const dataSet = [{}];
+    if(schedule.length > 1) {
+        let maxLength = 0;
+        for(let i = 1; i !== schedule.length; i ++) {
+            const blocksExample = getData(`${name}-${i}`);
+            dataSet.push(blocksExample);
+            blocksExample.length > maxLength ? maxLength = blocksExample.length : maxLength
+        }
+        dataSet[0] = {name, descriptionsInBlock: maxLength};
+    }
+    const blocksContainer = document.getElementById('blocks-container');
+    blocksContainer.innerHTML = '';
+    blockConstructor(false, true, dataSet);
+    saveData('schedules', storagedData);
 }
 
 function changeSchedule(element) {
     element.addEventListener('change', event => {
         const target = event.target;
-        storagedData = getData('schedules');
-        storagedData[0].activeSchedule = target.value;
-        saveData('schedules', storagedData);
-        // if(storagedData[0].activeSchedule === dataSet[i]) {
-        //     optionSelect.selected = "true";
-        // }
+        const name = target.value;
+        renderBlocks(name);
     })
 }
 
@@ -188,8 +207,10 @@ function deleteAll(element) {
             for(let i = 1; i !== schedules.length; i++) {
                 const name = schedules[i];
                 const titles = getData(`${name}-titles`);
-                for(let j = 1; j !== titles.length; j++) {
-                    deleteData(`${name}-${j}`);
+                if(titles) {
+                    for(let j = 1; j !== titles.length; j++) {
+                        deleteData(`${name}-${j}`);
+                    }
                 }
                 deleteData(`${name}-titles`);
             };
@@ -332,7 +353,7 @@ function deleteDescription(element) {
     input.value = ''; // aquí se se limpia el campo de entrada luego de activar el botón de borrar
 }
   
-function blockConstructor(allowInitialData, dataToInsert = initialDescriptions, blocksNumber = 4, descriptionsNumber = 10) {
+function blockConstructor(isNew, allowInitialData, dataToInsert = initialDescriptions, blocksNumber, descriptionsNumber) {
     let n;
     let m;
     const name = dataToInsert[0].name
@@ -340,9 +361,9 @@ function blockConstructor(allowInitialData, dataToInsert = initialDescriptions, 
     allowInitialData ? m = dataToInsert[0].descriptionsInBlock : m = descriptionsNumber;
     const blocksContainer = document.getElementById('blocks-container');
     const scheduleBlocks = [];
-    // const scheduleDescription = new Descriptor(name, n);
-    // scheduleBlocks.push(scheduleDescription);
-    scheduleBlocks.push(name);
+    if(isNew) {
+        scheduleBlocks.push(name);
+    }
     for(let i = 0; i < n; i++) {
         const block = document.createElement("DIV");
             block.setAttribute("id", `block-${i+1}`);
@@ -358,10 +379,7 @@ function blockConstructor(allowInitialData, dataToInsert = initialDescriptions, 
                     let headingText = '';
                     allowInitialData ? headingText = dataToInsert[i + 1][0] : headingText = `Título ${i+1}`
                     heading.innerHTML = headingText;
-                    // const headingBlock = new Heading(headingText, i + 1);
-                    // headingBlock.id = i + 1;
-                    // scheduleBlocks[0].idCounter = i + 1;
-                    scheduleBlocks.push(headingText);
+                    isNew && scheduleBlocks.push(headingText);
                         const input = document.createElement("input");
                         input.setAttribute("id", `input-${i + 1}-t`);
                         input.setAttribute("class", 'title-i');
@@ -398,7 +416,9 @@ function blockConstructor(allowInitialData, dataToInsert = initialDescriptions, 
                         const ol = document.createElement("ol");  
                         ol.setAttribute("id", `ol-${i+1}`);
                         const blockDescriptions = [];
-                        blockDescriptions.push(headingText);
+                        if(isNew) {
+                            blockDescriptions.push(headingText);
+                        }
                         for(let j = 0; j < m; j++) {
                         const li = document.createElement("li");
                         li.setAttribute("id", `li-${j+1 +i*m}`);
@@ -411,11 +431,14 @@ function blockConstructor(allowInitialData, dataToInsert = initialDescriptions, 
                             description.setAttribute("class", 'description');
                         li.appendChild(description);
                         let descriptionText = '';
+                        let checkText = '';
                         if(allowInitialData && (dataToInsert[i + 1].length > j + 1)) {
-                            descriptionText = dataToInsert[i + 1][j + 1];
+                            descriptionText = dataToInsert[i + 1][j + 1][1];
                             description.innerHTML = descriptionText;
+                            checkText = dataToInsert[i + 1][j + 1][0];
+                            check.innerHTML = checkText;
                         }
-                        blockDescriptions.push(descriptionText);
+                        isNew && blockDescriptions.push([checkText, descriptionText]);
                             const input = document.createElement("input");
                             input.setAttribute("id", `input-${j+1 +i*m}`);
                             input.setAttribute("maxlength", '60');
@@ -446,7 +469,7 @@ function blockConstructor(allowInitialData, dataToInsert = initialDescriptions, 
                         descriptionInputControls(li);
                         ol.appendChild(li);
                         };
-                        saveData(`${name}-${i + 1}`, blockDescriptions)
+                        isNew && saveData(`${name}-${i + 1}`, blockDescriptions)
                     list.appendChild(ol);
                     check(list);
             block.appendChild(list);
@@ -455,5 +478,5 @@ function blockConstructor(allowInitialData, dataToInsert = initialDescriptions, 
             // if(allowInitialData) saveData(dataToInsert);
             // deleteData('key');
     };
-    saveData(`${name}-titles`, scheduleBlocks);
+    isNew && saveData(`${name}-titles`, scheduleBlocks);
 };

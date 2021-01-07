@@ -2,8 +2,9 @@ function  main() {
   
   storagedData = getData('schedules');
     if(storagedData){
-      allowInitialData = true;
+      // allowInitialData = true;
       setSchedulesToOptions(storagedData);
+      renderBlocks();
     } else {
       const buttonsContainer = document.getElementById('hide-header-buttons');
       buttonsContainer.removeAttribute('hidden');
