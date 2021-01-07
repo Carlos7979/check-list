@@ -11,7 +11,6 @@ function newSchedule(element) {
                 return;
             }
             const buttonInitTemplate = document.getElementById('init-template');
-            // buttonInitTemplate.removeAttribute('disabled');
             buttonInitTemplate.removeAttribute('style');
             buttonInitTemplate.isactive = 'false';
             document.getElementById('header-inputs-2').removeAttribute('hidden');
@@ -24,7 +23,6 @@ function newSchedule(element) {
                 return;
             }
             const buttonNewSchedule = document.getElementById('new-schedule');
-            // buttonNewSchedule.removeAttribute('disabled');
             buttonNewSchedule.removeAttribute('style');
             buttonNewSchedule.isactive = 'false';
             document.getElementById('header-inputs-2').setAttribute('hidden', 'hidden');
@@ -32,18 +30,15 @@ function newSchedule(element) {
         };
         element.setAttribute('style', "color: CadetBlue;");
         element.isactive = "true";
-        // element.disabled = 'true';
       })
 };
 
 function desactiveControlsHeader(target) {
     if (target.tagName === 'DIV' || target.id === 'header') {
       const buttonInitTemplate = document.getElementById('init-template');
-    //   buttonInitTemplate.removeAttribute('disabled');
       buttonInitTemplate.removeAttribute('style');
       buttonInitTemplate.isactive = 'false';
       const buttonNewSchedule = document.getElementById('new-schedule');
-    //   buttonNewSchedule.removeAttribute('disabled');
       buttonNewSchedule.removeAttribute('style');
       buttonNewSchedule.isactive = 'false';
       document.getElementById('header-inputs-1').setAttribute('hidden', 'hidden');
@@ -64,12 +59,11 @@ function editHeaderControlActiveDetector(element) {
 
 function addSchedule(element) {
     element.addEventListener('click', event => {
-        // console.log(element);
         const userButtons = document.getElementById('hide-header-buttons');
         const buttonsContainer = document.getElementById('header-schedule-options-2');
         if(userButtons.hidden){
             if(!buttonsContainer.hidden) {
-                const buttonsContainer = document.getElementById('header-schedule-options-2');
+                buttonsContainer.setAttribute('hidden', 'hidden');
             }
             userButtons.removeAttribute('hidden');
         } else {
@@ -143,8 +137,8 @@ function create(element) {
         }
         initialDescriptions[0].name = scheduleName;
         storagedData = getData('schedules');
-        if(allowInitialData) blockConstructor(true, allowInitialData, dataSet)
-        else blockConstructor(true, allowInitialData, dataSet, inputBlocksNumber.value, inputDescriptionsNumber.value);
+        if(allowInitialData) blockConstructor(true, allowInitialData)
+        else blockConstructor(true, false, [{name: scheduleName}], inputBlocksNumber.value, inputDescriptionsNumber.value);
         setSchedulesToOptions(storagedData);
         desactiveControlsHeader({id: 'header'});
       });
@@ -154,7 +148,7 @@ function renderBlocks(name) {
     if(!name) {
         name = getData('schedules')[0].activeSchedule;
     }
-    storagedData = getData('schedules');
+    const storagedData = getData('schedules');
     storagedData[0].activeSchedule = name;
     const schedule = getData(`${name}-titles`);
     const dataSet = [{}];
@@ -183,7 +177,6 @@ function changeSchedule(element) {
 
 function scheduleOptions(element) {
     element.addEventListener('click', event => {
-
         const buttonsContainer = document.getElementById('header-schedule-options-2');
         const userButtons = document.getElementById('hide-header-buttons');
         if(buttonsContainer.hidden){
@@ -194,7 +187,6 @@ function scheduleOptions(element) {
             buttonsContainer.removeAttribute('hidden');
         } else {
             buttonsContainer.setAttribute('hidden', 'hidden');
-            // desactiveControlsHeader({id: 'header'})
         }
     });
 }
@@ -315,12 +307,6 @@ function deleteData(key) {
     localStorage.removeItem(key);
 };
 
-function storageKeys(key) {
-    // const users = getData(key);
-    // users.list[]
-    //TODO
-}
-
 function insert(element) {
     const id = element.getAttribute('id');
     const identifier = id.split('-')[1];
@@ -368,7 +354,6 @@ function blockConstructor(isNew, allowInitialData, dataToInsert = initialDescrip
         const block = document.createElement("DIV");
             block.setAttribute("id", `block-${i+1}`);
             block.setAttribute("class", 'block');
-
                 const title = document.createElement("DIV");  
                     title.setAttribute("id", `title-${i+1}`);
                     title.setAttribute("class", 'title');
@@ -475,8 +460,6 @@ function blockConstructor(isNew, allowInitialData, dataToInsert = initialDescrip
             block.appendChild(list);
             editControlActiveDetector(block);
             blocksContainer.appendChild(block);
-            // if(allowInitialData) saveData(dataToInsert);
-            // deleteData('key');
     };
     isNew && saveData(`${name}-titles`, scheduleBlocks);
 };

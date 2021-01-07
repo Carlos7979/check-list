@@ -1,49 +1,5 @@
-let blocksNumber;
-let descriptionsNumber;
 let allowInitialData = false;
-let dataSet;
-let isLocalStorageEmpty = true;
 let editControlsActive = [];
-let storagedData = [];
-// const users = {
-//   activeUser: '',
-//   list: []
-// };
-
-// class Block {
-//   constructor(name, number){
-//     this.blockTitle = name;
-//     this.blockId = `${name}-${number}`;
-//     this.descriptions = [];
-//   }
-
-//   setDescription(text) {
-//     this.descriptions.push(text)
-//   }
-// };
-
-// {nombre de la agenda, número de bloques, contador de id = 0}
-//         {
-//             id → number,
-//             position → number,
-//             title → string
-//         }
-
-// class Descriptor {
-//   constructor(name, number) {
-//     this.name = name;
-//     this.number = number;
-//     this.idCounter = 0;
-//   }
-// }
-
-// class Heading {
-//   constructor(name, position) {
-//     this.name = name;
-//     this.position = position;
-//     this.id = 0;
-//   }
-// }
 
 const initialDescriptions = [
     {

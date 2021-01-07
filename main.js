@@ -1,14 +1,12 @@
 function  main() {
   
-  storagedData = getData('schedules');
+  const storagedData = getData('schedules');
     if(storagedData){
-      // allowInitialData = true;
       setSchedulesToOptions(storagedData);
       renderBlocks();
     } else {
       const buttonsContainer = document.getElementById('hide-header-buttons');
       buttonsContainer.removeAttribute('hidden');
-      isLocalStorageEmpty = false;
     }
 
   newSchedule(document.getElementById('new-schedule'));

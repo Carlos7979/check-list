@@ -4,6 +4,11 @@
     margin: 0;
 }
 
+/* @font-face {
+    font-family: OpenSans-Bold;
+    src: url('OpenSans-Bold.ttf');
+} */
+
 /* body {
 
 } */
@@ -162,6 +167,7 @@ header {
 }
 
 h2 {
+    /* font-family: OpenSans-Bold; */
     font-size: 24px;
     font-weight: bolder;
     display: inline-block;
@@ -292,6 +298,7 @@ input.title-i {
 ol {
     /* height: 20rem; */
     margin-bottom: 15px;
+    margin-left: 45px;
 }
 
 li {
@@ -333,7 +340,7 @@ li:hover, .title:hover {
     width: 1em;
     display: inline-block;
     border-radius: 5px;
-    margin-left: 1px;
+    margin-left: 2px;
 }
 
 /* .button-edit {
