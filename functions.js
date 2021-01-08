@@ -159,7 +159,7 @@ function renderBlocks(name) {
             dataSet.push(blocksExample);
             blocksExample.length > maxLength ? maxLength = blocksExample.length : maxLength
         }
-        dataSet[0] = {name, descriptionsInBlock: maxLength};
+        dataSet[0] = {name, descriptionsInBlock: maxLength - 1};
     }
     const blocksContainer = document.getElementById('blocks-container');
     blocksContainer.innerHTML = '';
@@ -289,7 +289,7 @@ function descriptionInputControls(element) {
 function editControlActiveDetector(element) {
     element.addEventListener('click', event => {
       const target = event.target;
-      if (target.className === 'block' || target.tagName === 'OL') {
+      if (target.className === 'block' || target.tagName === 'OL' || target.className === 'list') {
         desactiveControls();
       }
     })
@@ -307,34 +307,67 @@ function deleteData(key) {
     localStorage.removeItem(key);
 };
 
+function blockEdit(identifier, isTitle, textToInsert) {
+    const name = getData('schedules')[0].activeSchedule;
+    const titles = getData(`${name}-titles`);
+    let blockArray = [];
+    let indexArray = 0;
+    if(isTitle === 't'){
+        blockArray = getData(`${name}-${identifier}`);
+        blockArray[indexArray] = textToInsert;
+        titles[identifier] = textToInsert;
+        saveData(`${name}-titles`, titles);
+        saveData(`${name}-${identifier}`, blockArray);
+    } else {
+        const titlesLength = titles.length;
+        if(titlesLength > 1) {
+            const firstBlock = getData(`${name}-${1}`);
+            const blocksLength = firstBlock.length - 1;
+            const blockNumber = Math.ceil(identifier/blocksLength);
+            blockArray = getData(`${name}-${blockNumber}`);
+            indexArray = identifier - (blockNumber - 1)*blocksLength;
+            blockArray[indexArray][1] = textToInsert;
+            saveData(`${name}-${blockNumber}`, blockArray);
+        }
+    };
+}
+
 function insert(element) {
-    const id = element.getAttribute('id');
-    const identifier = id.split('-')[1];
-    const isTitle = id.split('-')[2];
+    const [type, identifier, isTitle] = element.getAttribute('id').split('-');
     let inputId = `input-${identifier}`;
-    let description = document.getElementById(`description-${identifier}`);
+    let descriptionId = `description-${identifier}`
+    
     if(isTitle) {
         inputId += `-${isTitle}`;
-        description = document.getElementById(`description-${identifier}-t`);
+        descriptionId += `-${isTitle}`;
     }
-    input = document.getElementById(inputId);
-    description.innerHTML = input.value;
+    const description = document.getElementById(descriptionId);
+    const input = document.getElementById(inputId);
+    //
+    const textToInsert = input.value.trim();
+    description.innerHTML = textToInsert;
+    //
+    blockEdit(identifier, isTitle, textToInsert);
     desactiveControls();
 }
 
 function deleteDescription(element) {
-    const id = element.getAttribute('id');
-    const identifier = id.split('-')[1];
-    const isTitle = id.split('-')[2];
+    const [type, identifier, isTitle] = element.getAttribute('id').split('-');
     let inputId = `input-${identifier}`;
-    let description = document.getElementById(`description-${identifier}`);
+    let descriptionId = `description-${identifier}`
+
     if(isTitle) {
         inputId += `-${isTitle}`;
-        description = document.getElementById(`description-${identifier}-t`);
+        descriptionId += `-${isTitle}`;
     }
-    input = document.getElementById(inputId);
+    const description = document.getElementById(descriptionId);
+    const input = document.getElementById(inputId);
+
     // input.value = ''; // la acción de este comando antes de "desactiveControls()" queda desactivada por dicha función, pero al colocarlo después si funciona
-    isTitle ? description.innerHTML = `Título ${identifier}` : description.innerHTML = '';
+    let textToInsert
+    isTitle ? textToInsert = `Título ${identifier}` : textToInsert = '';
+    description.innerHTML = textToInsert
+    blockEdit(identifier, isTitle, textToInsert);
     desactiveControls();
     input.value = ''; // aquí se se limpia el campo de entrada luego de activar el botón de borrar
 }
