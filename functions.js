@@ -226,9 +226,11 @@ function deleteAll(element) {
 }
 
 function check(element) {
-    const listID = element.getAttribute('id');
-    const checkButton = document.getElementById(listID);
-    checkButton.innerText !== '' ? checkButton.innerText = '' : checkButton.innerText = '✓';
+    const [identifier, isTitle, description, input, type] = elementToModify(element);
+    let textToInsert;
+    element.innerText !== '' ? textToInsert = '' : textToInsert = '✓';
+    element.innerText = textToInsert;
+    blockEdit(identifier, isTitle, textToInsert, type);
 };
 
 function desactiveControls(element) {
@@ -318,7 +320,7 @@ function deleteData(key) {
     localStorage.removeItem(key);
 };
 
-function blockEdit(identifier, isTitle, textToInsert) {
+function blockEdit(identifier, isTitle, textToInsert, type) {
     const name = getData('schedules')[0].activeSchedule;
     const titles = getData(`${name}-titles`);
     let blockArray = [];
@@ -337,7 +339,7 @@ function blockEdit(identifier, isTitle, textToInsert) {
             const blockNumber = Math.ceil(identifier/blocksLength);
             blockArray = getData(`${name}-${blockNumber}`);
             indexArray = identifier - (blockNumber - 1)*blocksLength;
-            blockArray[indexArray][1] = textToInsert;
+            type === 'check' ? blockArray[indexArray][0] = textToInsert : blockArray[indexArray][1] = textToInsert;
             saveData(`${name}-${blockNumber}`, blockArray);
         }
     };
@@ -354,7 +356,7 @@ function elementToModify(element) {
     }
     let description;
     let input;
-    if(type === 'insert' || type === 'delete') {
+    if(type === 'insert' || type === 'delete' || type === 'input') {
         description = document.getElementById(descriptionId);
         input = document.getElementById(inputId);
     }
@@ -423,8 +425,7 @@ function blockConstructor(isNew, allowInitialData, dataToInsert = initialDescrip
                         buttonInsert.setAttribute("class", 'button-edit');
                         buttonInsert.setAttribute("hidden", 'hidden');
                         buttonInsert.innerHTML = 'insertar';
-                        buttonInsert.addEventListener('click', () => {
-                            // insert(buttonInsert);
+                        buttonInsert.addEventListener('click', () => {       
                         });
                     title.appendChild(buttonInsert);
                         const buttonDelete = document.createElement("button");
@@ -432,8 +433,7 @@ function blockConstructor(isNew, allowInitialData, dataToInsert = initialDescrip
                         buttonDelete.setAttribute("class", 'button-delete');
                         buttonDelete.setAttribute("hidden", 'hidden');
                         buttonDelete.innerHTML = 'borrar';
-                        buttonDelete.addEventListener('click', () => {
-                            // deleteDescription(buttonDelete);
+                        buttonDelete.addEventListener('click', () => {     
                         });
                     title.appendChild(buttonDelete);
             block.appendChild(title);
@@ -481,8 +481,7 @@ function blockConstructor(isNew, allowInitialData, dataToInsert = initialDescrip
                             buttonInsert.setAttribute("class", 'button-edit');
                             buttonInsert.setAttribute("hidden", 'hidden');
                             buttonInsert.innerHTML = 'insertar';
-                            buttonInsert.addEventListener('click', () => {
-                                // insert(buttonInsert);
+                            buttonInsert.addEventListener('click', () => {        
                             });
                         li.appendChild(buttonInsert);
                             const buttonDelete = document.createElement("button");
@@ -490,8 +489,7 @@ function blockConstructor(isNew, allowInitialData, dataToInsert = initialDescrip
                             buttonDelete.setAttribute("class", 'button-delete');
                             buttonDelete.setAttribute("hidden", 'hidden');
                             buttonDelete.innerHTML = 'borrar';
-                            buttonDelete.addEventListener('click', () => {
-                                // deleteDescription(buttonDelete);
+                            buttonDelete.addEventListener('click', () => {           
                             });
                         li.appendChild(buttonDelete);
                         descriptionInputControls(li);
@@ -499,7 +497,6 @@ function blockConstructor(isNew, allowInitialData, dataToInsert = initialDescrip
                         };
                         isNew && saveData(`${name}-${i + 1}`, blockDescriptions)
                     list.appendChild(ol);
-                    // check(list);
             block.appendChild(list);
             blockEventDetector(block);
             blocksContainer.appendChild(block);
