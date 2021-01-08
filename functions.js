@@ -226,14 +226,9 @@ function deleteAll(element) {
 }
 
 function check(element) {
-    element.addEventListener('click',  (event) => {
-      const target = event.target;
-      if (target.classList.contains('check')) {
-        const listID = target.getAttribute('id');
-        const checkButton = document.getElementById(listID);
-        checkButton.innerText !== '' ? checkButton.innerText = '' : checkButton.innerText = '✓';
-      }
-    });
+    const listID = element.getAttribute('id');
+    const checkButton = document.getElementById(listID);
+    checkButton.innerText !== '' ? checkButton.innerText = '' : checkButton.innerText = '✓';
 };
 
 function desactiveControls(element) {
@@ -286,11 +281,27 @@ function descriptionInputControls(element) {
     });
 };
 
-function editControlActiveDetector(element) {
+function blockEventDetector(element) {
     element.addEventListener('click', event => {
       const target = event.target;
       if (target.className === 'block' || target.tagName === 'OL' || target.className === 'list') {
         desactiveControls();
+      };
+      if(target.tagName = 'LI') {
+          const type = target.getAttribute('id').split('-')[0];
+            switch (type) {
+                case 'check':
+                    check(target);
+                    break;
+                case 'insert':
+                    insert(target);
+                    break;
+                case 'delete':
+                    deleteDescription(target);
+                    break;
+                default:
+                    break;
+            }
       }
     })
 }
@@ -332,17 +343,26 @@ function blockEdit(identifier, isTitle, textToInsert) {
     };
 }
 
-function insert(element) {
+function elementToModify(element) {
     const [type, identifier, isTitle] = element.getAttribute('id').split('-');
     let inputId = `input-${identifier}`;
     let descriptionId = `description-${identifier}`
-    
+
     if(isTitle) {
         inputId += `-${isTitle}`;
         descriptionId += `-${isTitle}`;
     }
-    const description = document.getElementById(descriptionId);
-    const input = document.getElementById(inputId);
+    let description;
+    let input;
+    if(type === 'insert' || type === 'delete') {
+        description = document.getElementById(descriptionId);
+        input = document.getElementById(inputId);
+    }
+    return [identifier, isTitle, description, input, type]
+}
+
+function insert(element) {
+    const [identifier, isTitle, description, input] = elementToModify(element);
     //
     const textToInsert = input.value.trim();
     description.innerHTML = textToInsert;
@@ -352,19 +372,9 @@ function insert(element) {
 }
 
 function deleteDescription(element) {
-    const [type, identifier, isTitle] = element.getAttribute('id').split('-');
-    let inputId = `input-${identifier}`;
-    let descriptionId = `description-${identifier}`
-
-    if(isTitle) {
-        inputId += `-${isTitle}`;
-        descriptionId += `-${isTitle}`;
-    }
-    const description = document.getElementById(descriptionId);
-    const input = document.getElementById(inputId);
-
+    const [identifier, isTitle, description, input] = elementToModify(element);
     // input.value = ''; // la acción de este comando antes de "desactiveControls()" queda desactivada por dicha función, pero al colocarlo después si funciona
-    let textToInsert
+    let textToInsert;
     isTitle ? textToInsert = `Título ${identifier}` : textToInsert = '';
     description.innerHTML = textToInsert
     blockEdit(identifier, isTitle, textToInsert);
@@ -414,7 +424,7 @@ function blockConstructor(isNew, allowInitialData, dataToInsert = initialDescrip
                         buttonInsert.setAttribute("hidden", 'hidden');
                         buttonInsert.innerHTML = 'insertar';
                         buttonInsert.addEventListener('click', () => {
-                            insert(buttonInsert);
+                            // insert(buttonInsert);
                         });
                     title.appendChild(buttonInsert);
                         const buttonDelete = document.createElement("button");
@@ -423,7 +433,7 @@ function blockConstructor(isNew, allowInitialData, dataToInsert = initialDescrip
                         buttonDelete.setAttribute("hidden", 'hidden');
                         buttonDelete.innerHTML = 'borrar';
                         buttonDelete.addEventListener('click', () => {
-                            deleteDescription(buttonDelete);
+                            // deleteDescription(buttonDelete);
                         });
                     title.appendChild(buttonDelete);
             block.appendChild(title);
@@ -472,7 +482,7 @@ function blockConstructor(isNew, allowInitialData, dataToInsert = initialDescrip
                             buttonInsert.setAttribute("hidden", 'hidden');
                             buttonInsert.innerHTML = 'insertar';
                             buttonInsert.addEventListener('click', () => {
-                                insert(buttonInsert);
+                                // insert(buttonInsert);
                             });
                         li.appendChild(buttonInsert);
                             const buttonDelete = document.createElement("button");
@@ -481,7 +491,7 @@ function blockConstructor(isNew, allowInitialData, dataToInsert = initialDescrip
                             buttonDelete.setAttribute("hidden", 'hidden');
                             buttonDelete.innerHTML = 'borrar';
                             buttonDelete.addEventListener('click', () => {
-                                deleteDescription(buttonDelete);
+                                // deleteDescription(buttonDelete);
                             });
                         li.appendChild(buttonDelete);
                         descriptionInputControls(li);
@@ -489,9 +499,9 @@ function blockConstructor(isNew, allowInitialData, dataToInsert = initialDescrip
                         };
                         isNew && saveData(`${name}-${i + 1}`, blockDescriptions)
                     list.appendChild(ol);
-                    check(list);
+                    // check(list);
             block.appendChild(list);
-            editControlActiveDetector(block);
+            blockEventDetector(block);
             blocksContainer.appendChild(block);
     };
     isNew && saveData(`${name}-titles`, scheduleBlocks);
