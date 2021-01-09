@@ -41,12 +41,12 @@ function setSchedulesToOptions(schedules) {
 };
 
 function renderBlocks(name) {
+    const blocksContainer = document.getElementById('blocks-container');
+    blocksContainer.innerHTML = '';
     if(name) {
         const storagedData = getData('schedules');
         storagedData[0].activeSchedule = name;
         saveData('schedules', storagedData);
-        const blocksContainer = document.getElementById('blocks-container');
-        blocksContainer.innerHTML = '';
     }
     if(!name) {
         name = getData('schedules')[0].activeSchedule;

@@ -146,23 +146,27 @@ function newBlock(element) {
         saveData(`${name}-titles`, titles);
         saveData(`${name}-${titlesLength}`, newBlock);
         renderBlocks();
+        alert(`Un nuevo bloque ha sido añadido \n [Título ${titlesLength}]`);
     });
 };
 
 function cleanBlocks(element) {
     element.addEventListener('click', () => {
-        const [name, titles, titlesLength , maxLength] = maxLengthBlock();
-        // const newTitles = new Array(titlesLength); // * allow reset titles too
-        // newTitles[0] = name; // *
-        for (let i = 0; i < titlesLength - 1; i++) {
-            // newTitles[i + 1] = `Título ${i + 1}`; // *
-            const newBlock = new Array(maxLength).fill(['', '']);
-            // newBlock[0] = `Título ${i + 1}`; // *
-            newBlock[0] = titles[i + 1];
-            saveData(`${name}-${i + 1}`, newBlock);
-        };
-        // saveData(`${name}-titles`, newTitles); // * 
-        renderBlocks(name);
+        const isConfirmed = confirm("Esta acción no se puede deshacer");
+            if(isConfirmed) {
+                const [name, titles, titlesLength , maxLength] = maxLengthBlock();
+                // const newTitles = new Array(titlesLength); // * allow reset titles too
+                // newTitles[0] = name; // *
+                for (let i = 0; i < titlesLength - 1; i++) {
+                    // newTitles[i + 1] = `Título ${i + 1}`; // *
+                    const newBlock = new Array(maxLength).fill(['', '']);
+                    // newBlock[0] = `Título ${i + 1}`; // *
+                    newBlock[0] = titles[i + 1];
+                    saveData(`${name}-${i + 1}`, newBlock);
+                };
+                // saveData(`${name}-titles`, newTitles); // * 
+                renderBlocks();
+            } else return;
     });
 };
 
