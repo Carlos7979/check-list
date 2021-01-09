@@ -9,19 +9,39 @@
     src: url('OpenSans-Bold.ttf');
 } */
 
-/* body {
-
-} */
+body {
+    /* border: black solid 1px; */
+    background-color: whitesmoke;
+}
 
 header {
     margin: 2px;
-    padding: 0;
+    margin-top: 0;
+    padding: 0 1px;
     /* max-width: 79rem; */
     width: max-content;
     border: darkorchid solid 1px;
     border-radius: 5px;
     background-color: cornflowerblue;
-    letter-spacing: -1em; /* Corrige el espaciado por defecto ocasionado por el inline-block */
+    letter-spacing: -1em;
+         /* Corrige el espaciado por defecto ocasionado por el inline-block */
+    position: fixed;
+         /* requiere que blocks-container tenga un padding-top: 112.5px; */
+    top: 0px;
+    margin-left:50%;
+    left: -39.15em;
+    /* position: relative; */
+}
+
+.header-block {
+    min-width: 39rem;
+    /* border: red solid 1px; */
+    display: inline-block;
+    vertical-align: top;
+         /* Corrige el desfase vertical de bloques inline-block */
+    letter-spacing: normal;
+         /* Restituye el efecto de la corrección del espaciado en el inline-block */
+    /* margin-right: -4px; */
 }
 
 #header-block-users {
@@ -58,15 +78,6 @@ header {
 
 #button-create {
     visibility: hidden;
-}
-
-.header-block {
-    min-width: 39rem;
-    /* border: red solid 1px; */
-    display: inline-block;
-    vertical-align: top; /* Corrige el desfase vertical de bloques inline-block */
-    letter-spacing: normal; /* Restituye el efecto de la corrección del espaciado en el inline-block */
-    /* margin-right: -4px; */
 }
 
 /* #hedear-block-2 {
@@ -187,6 +198,10 @@ h2 {
 /* #test {
     position: relative;
     top: 6px;
+    margin: 0 auto;
+    width: 78em;
+    padding: 0 12px;
+    border: black solid 1px;
 } */
 
 /* #user-name, #name-h, .header-text, .header-label, .header-inputs {
@@ -242,8 +257,12 @@ h2 {
     /* display: flexbox; */
     /* border: chocolate 2px solid; */
     /* width: 100%; */
-    padding: 0;
-    margin: 2px;
+    
+    margin: 2px auto;
+        /* para que el efecto de centrado horizonatal del atributo 'auto' surta efecto, hay que ajustar el tamaño del contenedor al ancho de dos bloques */
+    width: 78.3em;
+    padding-top: 112.5px;
+         /* habilatado si header posee position fixed */
 }
 
 .block {
@@ -254,7 +273,8 @@ h2 {
     /* padding-bottom: 1.35em; */
     /* max-height: 20rem; */
     /* min-height: 20rem; */
-    vertical-align: top; /* Corrige el desfase vertical de bloques inline-block */
+    vertical-align: top;
+         /* Corrige el desfase vertical de bloques inline-block */
 }
 
 .title {
