@@ -21,4 +21,7 @@ function  main() {
   inputHeaderActiveDetector(document.getElementById('descriptions-number'));
   create(document.getElementById('button-create'));
   deleteAll(document.getElementById('delete-all-schedules'));
+  newBlock(document.getElementById('new-block'));
+  cleanBlocks(document.getElementById('clean-blocks'));
+  deleteBlock(document.getElementById('delete-schedule'));
 }

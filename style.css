@@ -56,20 +56,6 @@ header {
     border-radius: 5px; */
 }
 
-#add-schedule:hover {
-    cursor: pointer;
-    /* border: 1px groove silver; */
-    border-radius: 5px;
-    background: linear-gradient(to top, #9aa2eb 0%, cornflowerblue 100%);
-}
-
-#add-schedule:active {
-    position: relative;
-    /* top: 1px; */
-    left: 1px;
-    background: linear-gradient(to top, #d6d2d2 0%, cornflowerblue 100%);
-}
-
 #button-create {
     visibility: hidden;
 }
@@ -126,44 +112,38 @@ header {
     margin: 0 10px;
 }
 
+#new-block {
+    height: 35px;
+    padding: 2.5px;
+}
+
 #delete-schedule {
     vertical-align: middle;
     height: 20px;
+    padding: 10px;
 }
 
 #delete-all-schedules {
     vertical-align: bottom;
     height: 30px;
     margin-right: 20px;
+    padding: 5px;
 }
 
-#options:hover {
-    cursor: pointer;
-    /* border: 1px groove silver; */
-    border-radius: 5px;
-    background: linear-gradient(to top, #9aa2eb 0%, cornflowerblue 100%);
-    /* -webkit-transform: rotate(30deg);
-    transform: rotate(30deg); */
-}
-
-#options:active {
-    position: relative;
-    top: 1px;
-    background: linear-gradient(to top, #d6d2d2 0%, cornflowerblue 100%);
-    /* -webkit-transform: rotate(30deg);
-    transform: rotate(30deg); */
-}
-
-#delete-all-schedules:hover {
+.icon-button:hover {
     cursor: pointer;
     border-radius: 5px;
     background: linear-gradient(to top, #9aa2eb 0%, cornflowerblue 100%);
 }
 
-#delete-all-schedules:active {
+.icon-button:active {
     position: relative;
     left: 1px;
     background: linear-gradient(to top, #d6d2d2 0%, cornflowerblue 100%);
+}
+
+#options:active {
+    top: 1px;
 }
 
 h2 {

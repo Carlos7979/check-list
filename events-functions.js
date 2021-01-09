@@ -69,15 +69,15 @@ function create(element) {
         const inputName = document.getElementById('name');
         const inputBlocksNumber = document.getElementById('blocks-number');
         const inputDescriptionsNumber = document.getElementById('descriptions-number');
-        let storagedData = getData('schedules');
+        let schedules = getData('schedules');
         const scheduleName = inputName.value.trim();
         if(!scheduleName) {
             alert('Debes introducir un nombre');
             return;
         };
-        if(storagedData){
+        if(schedules){
             let isValidName = true;
-            storagedData.forEach(element => {
+            schedules.forEach(element => {
                 if(typeof element !== 'object') {
                     if(element.toLowerCase() === scheduleName.toLowerCase()) {
                         alert('Ese nombre de agenda ya existe');
@@ -87,19 +87,19 @@ function create(element) {
                 }
             });
             if(!isValidName) return
-            storagedData.push(scheduleName);
-            storagedData[0].activeSchedule = scheduleName;
-            saveData('schedules', storagedData);
+            schedules.push(scheduleName);
+            schedules[0].activeSchedule = scheduleName;
+            saveData('schedules', schedules);
             const blocksContainer = document.getElementById('blocks-container');
             blocksContainer.innerHTML = '';
         } else {
             saveData('schedules', [{activeSchedule: scheduleName}, scheduleName]);
         }
         initialDescriptions[0].name = scheduleName;
-        storagedData = getData('schedules');
+        schedules = getData('schedules');
         if(allowInitialData) blockConstructor(true, allowInitialData)
         else blockConstructor(true, false, [{name: scheduleName}], inputBlocksNumber.value, inputDescriptionsNumber.value);
-        setSchedulesToOptions(storagedData);
+        setSchedulesToOptions(schedules);
         desactiveControlsHeader({id: 'header'});
       });
 };
@@ -129,35 +129,66 @@ function scheduleOptions(element) {
 };
 
 function deleteAll(element) {
-    element.addEventListener('click', event => {
-        const deleteAllSchedules = confirm("Borrar todas las agendas \nes una acción que no se puede deshacer");
-        if(deleteAllSchedules) {
-            const schedules = getData('schedules');
-            for(let i = 1; i !== schedules.length; i++) {
-                const name = schedules[i];
-                const titles = getData(`${name}-titles`);
-                if(titles) {
-                    for(let j = 1; j !== titles.length; j++) {
-                        deleteData(`${name}-${j}`);
-                    }
-                }
-                deleteData(`${name}-titles`);
-            };
-            deleteData('schedules');
-            const userButtons = document.getElementById('hide-header-buttons');
-            userButtons.removeAttribute('hidden');
-            const welcome = document.getElementById('welcome');
-            welcome.removeAttribute('hidden');
-            const selectorBlock = document.getElementById('header-users');
-            const selector = document.getElementById('schedule-selector');
-            selector.innerHTML = '';
-            selectorBlock.setAttribute('hidden', 'hidden');
-            const buttonsContainer = document.getElementById('header-schedule-options-2');
-            buttonsContainer.setAttribute('hidden', 'hidden');
-            const optionsButton = document.getElementById('hide-header-subblock-3');
-            optionsButton.setAttribute('hidden', 'hidden');
-            const blocksContainer = document.getElementById('blocks-container');
-            blocksContainer.innerHTML = '';
+    element.addEventListener('click', () => {
+        const isConfirmed = confirm("Borrar todas las agendas \nes una acción que no se puede deshacer");
+        if(isConfirmed) {
+            deleteAllSchedules();
         } else return;
+    });
+};
+
+function newBlock(element) {
+    element.addEventListener('click', () => {
+        const [name, titles, titlesLength , maxLength] = maxLengthBlock();
+        const newBlock = new Array(maxLength - 1).fill(['', '']);
+        newBlock[0] = `Título ${titlesLength}`;
+        titles.push(`Título ${titlesLength}`);
+        saveData(`${name}-titles`, titles);
+        saveData(`${name}-${titlesLength}`, newBlock);
+        renderBlocks();
+    });
+};
+
+function cleanBlocks(element) {
+    element.addEventListener('click', () => {
+        const [name, titles, titlesLength , maxLength] = maxLengthBlock();
+        const newTitles = new Array(titlesLength);
+        newTitles[0] = name;
+        for (let i = 0; i < titlesLength - 1; i++) {
+            newTitles[i + 1] = `Título ${i + 1}`;
+            const newBlock = new Array(maxLength).fill(['', '']);
+            newBlock[0] = `Título ${i + 1}`;
+            saveData(`${name}-${i + 1}`, newBlock);
+        };
+        saveData(`${name}-titles`, newTitles);    
+        renderBlocks();
+    });
+};
+
+function deleteBlock(element) {
+    element.addEventListener('click', () => {
+        let schedules = getData('schedules');
+        if(schedules.length === 2) {
+            const isConfirmed = confirm("Borrar esta agenda es una acción que no se puede deshacer");
+            if(isConfirmed) {
+                deleteAllSchedules();
+            } else return;
+        } else {
+            const deleteThisSchedule = confirm("Borrar esta agenda es una acción que no se puede deshacer");
+            if(deleteThisSchedule) {
+                let name = schedules[0].activeSchedule;
+                const titles = getData(`${name}-titles`);
+                for(let i = 1; i !== titles.length; i++) {
+                    deleteData(`${name}-${i}`);
+                };
+                deleteData(`${name}-titles`);
+                const indexToDelete = schedules.findIndex(element => element === name);
+                schedules.splice(indexToDelete, 1);
+                saveData('schedules', schedules);
+                setSchedulesToOptions(schedules);
+                name = getData('schedules')[1];
+                renderBlocks(name);
+            } else return;
+        };
     });
 };

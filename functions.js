@@ -15,19 +15,19 @@ function desactiveControlsHeader(target) {
     }
 };
 
-function setSchedulesToOptions(dataSet) {
+function setSchedulesToOptions(schedules) {
     const welcome = document.getElementById('welcome');
     const selectorBlock = document.getElementById('header-users');
     const selector = document.getElementById('schedule-selector');
     const optionsButton = document.getElementById('hide-header-subblock-3');
     optionsButton.removeAttribute('hidden');
     selector.innerHTML = '';
-    dataSet[0].activeSchedule
-    for(let i = 1; i < dataSet.length; i++) {
+    schedules[0].activeSchedule
+    for(let i = 1; i < schedules.length; i++) {
         const optionSelect = document.createElement('option');
-        optionSelect.innerHTML = dataSet[i];
-        optionSelect.value = dataSet[i];
-        if(dataSet[0].activeSchedule === dataSet[i]) {
+        optionSelect.innerHTML = schedules[i];
+        optionSelect.value = schedules[i];
+        if(schedules[0].activeSchedule === schedules[i]) {
             optionSelect.selected = "true";
         }
         selector.append(optionSelect);
@@ -41,26 +41,29 @@ function setSchedulesToOptions(dataSet) {
 };
 
 function renderBlocks(name) {
+    if(name) {
+        const storagedData = getData('schedules');
+        storagedData[0].activeSchedule = name;
+        saveData('schedules', storagedData);
+        const blocksContainer = document.getElementById('blocks-container');
+        blocksContainer.innerHTML = '';
+    }
     if(!name) {
         name = getData('schedules')[0].activeSchedule;
     }
-    const storagedData = getData('schedules');
-    storagedData[0].activeSchedule = name;
-    const schedule = getData(`${name}-titles`);
+    const titles = getData(`${name}-titles`);
     const dataSet = [{}];
-    if(schedule.length > 1) {
+    if(titles.length > 1) {
         let maxLength = 0;
-        for(let i = 1; i !== schedule.length; i ++) {
+        for(let i = 1; i !== titles.length; i ++) {
             const blocksExample = getData(`${name}-${i}`);
             dataSet.push(blocksExample);
             blocksExample.length > maxLength ? maxLength = blocksExample.length : maxLength
         }
         dataSet[0] = {name, descriptionsInBlock: maxLength - 1};
     }
-    const blocksContainer = document.getElementById('blocks-container');
-    blocksContainer.innerHTML = '';
     blockConstructor(false, true, dataSet);
-    saveData('schedules', storagedData);
+    // console.log(blocksContainer.children.length);
 };
 
 function check(element) {
@@ -157,3 +160,46 @@ function insert(element) {
     blockEdit(identifier, isTitle, textToInsert);
     desactiveControls();
 };
+
+function maxLengthBlock() {
+    const name = getData('schedules')[0].activeSchedule;
+    const titles = getData(`${name}-titles`);
+    const titlesLength = titles.length;
+    let maxLength = 0;
+    if(titlesLength > 1) {
+        for(let i = 1; i !== titlesLength; i ++) {
+            const blocksExample = getData(`${name}-${i}`);
+            blocksExample.length > maxLength ? maxLength = blocksExample.length : maxLength
+        };
+    };
+    return [name, titles, titlesLength , maxLength];
+};
+
+function deleteAllSchedules() {
+    const schedules = getData('schedules');
+    for(let i = 1; i !== schedules.length; i++) {
+        const name = schedules[i];
+        const titles = getData(`${name}-titles`);
+        if(titles) {
+            for(let j = 1; j !== titles.length; j++) {
+                deleteData(`${name}-${j}`);
+            }
+        }
+        deleteData(`${name}-titles`);
+    };
+    deleteData('schedules');
+    const userButtons = document.getElementById('hide-header-buttons');
+    userButtons.removeAttribute('hidden');
+    const welcome = document.getElementById('welcome');
+    welcome.removeAttribute('hidden');
+    const selectorBlock = document.getElementById('header-users');
+    const selector = document.getElementById('schedule-selector');
+    selector.innerHTML = '';
+    selectorBlock.setAttribute('hidden', 'hidden');
+    const buttonsContainer = document.getElementById('header-schedule-options-2');
+    buttonsContainer.setAttribute('hidden', 'hidden');
+    const optionsButton = document.getElementById('hide-header-subblock-3');
+    optionsButton.setAttribute('hidden', 'hidden');
+    const blocksContainer = document.getElementById('blocks-container');
+    blocksContainer.innerHTML = '';
+}
