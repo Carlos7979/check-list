@@ -69,9 +69,12 @@ function renderBlocks(name) {
 function check(element) {
     const [identifier, isTitle, description, input, type] = elementToModify(element);
     let textToInsert;
+    let classToInsert;
     element.innerText !== '' ? textToInsert = '' : textToInsert = '✓';
+    element.innerText !== '' ? classToInsert = 'description' : classToInsert = 'description-checked';
     element.innerText = textToInsert;
     blockEdit(identifier, isTitle, textToInsert, type);
+    description.setAttribute('class', classToInsert);
 };
 
 function desactiveControls(element) {
@@ -144,7 +147,7 @@ function elementToModify(element) {
     }
     let description;
     let input;
-    if(type === 'insert' || type === 'delete' || type === 'input') {
+    if(type === 'insert' || type === 'delete' || type === 'input' || type === 'check') {
         description = document.getElementById(descriptionId);
         input = document.getElementById(inputId);
     }
@@ -176,18 +179,19 @@ function maxLengthBlock() {
 };
 
 function deleteAllSchedules() {
-    const schedules = getData('schedules');
-    for(let i = 1; i !== schedules.length; i++) {
-        const name = schedules[i];
-        const titles = getData(`${name}-titles`);
-        if(titles) {
-            for(let j = 1; j !== titles.length; j++) {
-                deleteData(`${name}-${j}`);
-            }
-        }
-        deleteData(`${name}-titles`);
-    };
-    deleteData('schedules');
+    // const schedules = getData('schedules');
+    // for(let i = 1; i !== schedules.length; i++) {
+    //     const name = schedules[i];
+    //     const titles = getData(`${name}-titles`);
+    //     if(titles) {
+    //         for(let j = 1; j !== titles.length; j++) {
+    //             deleteData(`${name}-${j}`);
+    //         }
+    //     }
+    //     deleteData(`${name}-titles`);
+    // };
+    // deleteData('schedules');
+    localStorage.clear();
     const userButtons = document.getElementById('hide-header-buttons');
     userButtons.removeAttribute('hidden');
     const welcome = document.getElementById('welcome');

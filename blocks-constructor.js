@@ -79,6 +79,9 @@ function blockConstructor(isNew, allowInitialData, dataToInsert = initialDescrip
                             description.innerHTML = descriptionText;
                             checkText = dataToInsert[i + 1][j + 1][0];
                             check.innerHTML = checkText;
+                            if(checkText) {
+                                description.setAttribute("class", 'description-checked');
+                            }
                         }
                         isNew && blockDescriptions.push([checkText, descriptionText]);
                             const input = document.createElement("input");

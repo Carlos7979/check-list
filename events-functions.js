@@ -170,7 +170,7 @@ function cleanBlocks(element) {
     });
 };
 
-function deleteBlock(element) {
+function deleteSchedule(element) {
     element.addEventListener('click', () => {
         let schedules = getData('schedules');
         if(schedules.length === 2) {

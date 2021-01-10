@@ -23,5 +23,5 @@ function  main() {
   deleteAll(document.getElementById('delete-all-schedules'));
   newBlock(document.getElementById('new-block'));
   cleanBlocks(document.getElementById('clean-blocks'));
-  deleteBlock(document.getElementById('delete-schedule'));
+  deleteSchedule(document.getElementById('delete-schedule'));
 }
