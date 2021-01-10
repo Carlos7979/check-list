@@ -140,7 +140,7 @@ function deleteAll(element) {
 function newBlock(element) {
     element.addEventListener('click', () => {
         const [name, titles, titlesLength , maxLength] = maxLengthBlock();
-        const newBlock = new Array(maxLength - 1).fill(['', '']);
+        const newBlock = new Array(maxLength).fill(['', '']);
         newBlock[0] = `Título ${titlesLength}`;
         titles.push(`Título ${titlesLength}`);
         saveData(`${name}-titles`, titles);
