@@ -21,7 +21,7 @@ const initialDescriptions = [
      ['', 'Programación'],
      ['', 'Compras'],
      ['', 'Reuniones'],
-     ['', 'Llamdas'],
+     ['', 'Llamadas'],
      ['', '' ]],
     [ 'Tarde',
      ['', 'Deporte'],
