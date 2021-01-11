@@ -109,6 +109,7 @@ function changeSchedule(element) {
         const target = event.target;
         const name = target.value;
         renderBlocks(name);
+        window.scrollTo(0,0);
     })
 };
 

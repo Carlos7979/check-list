@@ -13,6 +13,10 @@ function blockConstructor(isNew, allowInitialData, dataToInsert = initialDescrip
         const block = document.createElement("DIV");
             block.setAttribute("id", `block-${i+1}`);
             block.setAttribute("class", 'block');
+                const blockAdvancedOptions = document.createElement("DIV");
+                    blockAdvancedOptions.setAttribute("id", `block-advanced-options-${i+1}`);
+                    blockAdvancedOptions.setAttribute("class", `block-advanced-options`);
+            block.appendChild(blockAdvancedOptions);
                 const title = document.createElement("DIV");  
                     title.setAttribute("id", `title-${i+1}`);
                     title.setAttribute("class", 'title');
@@ -52,6 +56,10 @@ function blockConstructor(isNew, allowInitialData, dataToInsert = initialDescrip
                     title.appendChild(buttonDelete);
             block.appendChild(title);
             descriptionInputControls(title);
+                const blockOptions = document.createElement("DIV");
+                    blockOptions.setAttribute("id", `block-options-${i+1}`);
+                    blockOptions.setAttribute("class", `block-options`);
+            block.appendChild(blockOptions);
                 const list = document.createElement("DIV");  
                     list.setAttribute("id", `list-${i+1}`);
                     list.setAttribute("class", 'list');
@@ -68,6 +76,11 @@ function blockConstructor(isNew, allowInitialData, dataToInsert = initialDescrip
                             check.setAttribute("id", `check-${j+1 +i*m}`);
                             check.setAttribute("class", 'check');
                         li.appendChild(check);
+                            const descriptionNumber = document.createElement("SPAN");
+                            descriptionNumber.setAttribute("id", `descriptionNumber-${j+1 +i*m}`);
+                            descriptionNumber.setAttribute("class", 'descriptionNumber');
+                            descriptionNumber.innerHTML = `${j+1}`
+                        li.appendChild(descriptionNumber);
                             const description = document.createElement("DIV");
                             description.setAttribute("id", `description-${j+1 +i*m}`);
                             description.setAttribute("class", 'description');

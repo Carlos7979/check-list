@@ -1,7 +1,7 @@
 function descriptionInputControls(element) {
     element.addEventListener('click',  (event) => {
       const target = event.target;
-      if (target.tagName === 'LI' || target.classList.contains('description') || target.className === 'title') {
+      if (target.tagName === 'LI' || target.tagName === 'SPAN' || target.classList.contains('description') || target.className === 'title') {
         const desID = target.getAttribute('id');
         const identifier = desID.split('-')[1];
         let description = document.getElementById(`description-${identifier}`);
@@ -33,6 +33,26 @@ function descriptionInputControls(element) {
           buttonDelete.setAttribute('hidden', 'hidden');
           description.removeAttribute('hidden');
         };
+      }
+    });
+
+    element.addEventListener('mouseover', event => {
+      const target = event.target;
+      if (target.tagName === 'LI' || target.tagName === 'SPAN' || target.classList.contains('description')) {
+        const desID = target.getAttribute('id');
+        const identifier = desID.split('-')[1];
+        const number = document.getElementById(`descriptionNumber-${identifier}`);
+        number.setAttribute('style', 'color: black;');
+      }
+    });
+
+    element.addEventListener('mouseleave', event => {
+      const target = event.target;
+      if (target.tagName === 'LI' || target.tagName === 'SPAN' || target.classList.contains('description')) {
+        const desID = target.getAttribute('id');
+        const identifier = desID.split('-')[1];
+        const number = document.getElementById(`descriptionNumber-${identifier}`);
+        number.setAttribute('style', 'color: peachpuff;');
       }
     });
 };
