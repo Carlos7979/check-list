@@ -60,7 +60,7 @@ function descriptionInputControls(element) {
 function blockEventDetector(element) {
     element.addEventListener('click', event => {
       const target = event.target;
-      if (target.className === 'block' || target.tagName === 'OL' || target.className === 'list') {
+      if (target.className === 'block' || target.className === 'block-advanced-options' || target.className === 'block-options' || target.tagName === 'OL' || target.className === 'list') {
         desactiveControls();
       };
       if(target.tagName = 'LI') {

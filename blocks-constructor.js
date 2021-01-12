@@ -40,7 +40,7 @@ function blockConstructor(isNew, allowInitialData, dataToInsert = initialDescrip
                     title.appendChild(input);
                         const buttonInsert = document.createElement("button");
                         buttonInsert.setAttribute("id", `insert-${i + 1}-t`);
-                        buttonInsert.setAttribute("class", 'button-edit');
+                        buttonInsert.setAttribute("class", 'button-edit-t');
                         buttonInsert.setAttribute("hidden", 'hidden');
                         buttonInsert.innerHTML = 'insertar';
                         buttonInsert.addEventListener('click', () => {       
@@ -48,7 +48,7 @@ function blockConstructor(isNew, allowInitialData, dataToInsert = initialDescrip
                     title.appendChild(buttonInsert);
                         const buttonDelete = document.createElement("button");
                         buttonDelete.setAttribute("id", `delete-${i + 1}-t`);
-                        buttonDelete.setAttribute("class", 'button-delete');
+                        buttonDelete.setAttribute("class", 'button-delete-t');
                         buttonDelete.setAttribute("hidden", 'hidden');
                         buttonDelete.innerHTML = 'borrar';
                         buttonDelete.addEventListener('click', () => {     
@@ -59,6 +59,17 @@ function blockConstructor(isNew, allowInitialData, dataToInsert = initialDescrip
                 const blockOptions = document.createElement("DIV");
                     blockOptions.setAttribute("id", `block-options-${i+1}`);
                     blockOptions.setAttribute("class", `block-options`);
+                        const checkAll = document.createElement("DIV");
+                        checkAll.setAttribute("id", `checkall-${i+1}`);
+                        checkAll.setAttribute("class", 'checkall');
+                        checkAll.setAttribute("title", 'marcar/desmarcar todo');
+                    blockOptions.appendChild(checkAll);
+                    //     const label = document.createElement("LABEL");
+                    //     label.setAttribute("id", `label-${i+1}`);
+                    //     label.setAttribute("class", 'label');
+                    //     label.setAttribute("for", `checkall-${i+1}`);
+                    //     label.innerHTML = 'marcar/desmarcar todo'
+                    // blockOptions.appendChild(label);
             block.appendChild(blockOptions);
                 const list = document.createElement("DIV");  
                     list.setAttribute("id", `list-${i+1}`);
@@ -99,6 +110,7 @@ function blockConstructor(isNew, allowInitialData, dataToInsert = initialDescrip
                         isNew && blockDescriptions.push([checkText, descriptionText]);
                             const input = document.createElement("input");
                             input.setAttribute("id", `input-${j+1 +i*m}`);
+                            input.setAttribute("class", 'input-description');
                             input.setAttribute("maxlength", '60');
                             input.setAttribute("type", 'hidden');
                             input.addEventListener("keyup", (event) => {
@@ -132,4 +144,5 @@ function blockConstructor(isNew, allowInitialData, dataToInsert = initialDescrip
             blocksContainer.appendChild(block);
     };
     isNew && saveData(`${name}-titles`, scheduleBlocks);
+    // checkall
 };

@@ -288,7 +288,9 @@ h2 {
 }
 
 .block-options {
-    border: brown solid 1px;
+    display: flex;
+    align-items: center;
+    /* border: brown solid 1px; */
     border-radius: 5px;
     height: 1.35em;
     margin: 5px 10px 5px 45px;
@@ -359,7 +361,7 @@ li:hover, .title:hover {
     right: 2em;
 }
 
-.check {
+.check, .checkall {
     margin-right: 10px;
     border: 1px solid black;
     height: 1em;
@@ -369,9 +371,26 @@ li:hover, .title:hover {
     margin-left: 2px;
 }
 
-/* .button-edit {
-    width: 4rem;
+.checkall {
+    border: 2px solid darkgrey;
+    margin-left: 1px;
+}
+
+.checkall:hover {
+    border: 1px solid black;
+    position: relative;
+    left: 1px;
+}
+
+/* .button-edit, .button-delete .input-description {
+    position: relative;
+    right: 4em;
 } */
+
+.input-description, .button-edit, .button-delete {
+    position: relative;
+    right: 2em;
+}
 
 .check:hover {
     background-color: brown;
