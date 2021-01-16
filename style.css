@@ -285,7 +285,26 @@ h2 {
     border-radius: 5px;
     margin: 5px 10px 0 45px;
     padding: 1px;
+    text-align: end;
 }
+
+.icon-button-options {
+    height: 30px;
+    border-radius: 5px;
+}
+
+.icon-button-options:hover {
+    cursor: pointer;
+    border-radius: 5px;
+    background: linear-gradient(to top, #9aa2eb 0%, peachpuff 100%);
+}
+
+.icon-button-options:active {
+    position: relative;
+    right: 1px;
+    background: linear-gradient(to top, #9aa2eb 0%, cornflowerblue 100%);
+}
+
 
 .block-options {
     display: flex;
@@ -297,23 +316,48 @@ h2 {
     padding: 1px;
 }
 
+.titleNumber {
+    position: relative;
+    /* left: 2px; */
+    right: 2em;
+    text-align: right;
+    font-weight: bolder;
+    /* border: solid black 1px; */
+    width: 1.5em;
+    color: peachpuff;
+    padding-right: 10px;
+    /* line-height: 25px;     */
+}
+
 .title {
     /* padding-left: 20px; */
     margin: 12px 10px 12px 45px;
     height: 23px;
     border-radius: 5px;
+    display: flex;
+    align-items: center;
+    /* border: solid black 1px; */
 }
 
-h3.title {
+h3.title-description {
     font-size: 18px;
     font-weight: bolder;
     margin-left: 2px;
-    padding-left: 1px;
+    padding-left: 4px;
     line-height: 25px;
+    position: relative;
+    right: 2em;
 }
 
 input.title-i {
     margin-left: 20px;
+    position: relative;
+    right: 3em;
+}
+
+.button-edit-t {
+    position: relative;
+    right: 3em;
 }
 
 
@@ -341,6 +385,14 @@ li:hover, .title:hover {
     background-color: lightcoral;
     font-weight: bolder;
 }
+
+.titleNumber:hover {
+    color: rgb(129, 123, 123);
+    cursor: default;
+    font-weight: bolder;
+    cursor: url('data:image/x-icon;base64,AAACAAEAICAQAAAAAADoAgAAFgAAACgAAAAgAAAAQAAAAAEABAAAAAAAAAIAAAAAAAAAAAAAEAAAAAAAAAAAAAAAhYWFAPqv6ADgm4sASkpKAJ/l7QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACIAAAAAAAAAAAAAAAAAAAEiIAAAAAAAAAAAAAAAAAAxEiIAAAAAAAAAAAAAAAADMxEgAAAAAAAAAAAAAAAAMzMxAAAAAAAAAAAAAAAAAzMzMAAAAAAAAAAAAAAAADMzMwAAAAAAAAAAAAAAAAMzMzAAAAAAAAAAAAAAAAAzMzMAAAAAAAAAAAAAAAADMzMwAAAAAAAAAAAAAAAABTMzAAAAAAAAAAAAAAAAAFVTMAAAAAAAAAAAAAAAAABFVQAAAAAAAAAAAAAAAAAARAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///////////////////////////////////////////////////////////////////////////////////////P////h////wP///4H///8D///+B////A////gf///wP///4H///+D////B////w////8///////////////w=='), auto;
+}
+
 
 /* input, button { */
     /* max-height: 0.6rem; */

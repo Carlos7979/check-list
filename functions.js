@@ -63,7 +63,6 @@ function renderBlocks(name) {
         dataSet[0] = {name, descriptionsInBlock: maxLength - 1};
     }
     blockConstructor(false, true, dataSet);
-    // console.log(blocksContainer.children.length);
 };
 
 function check(element) {
@@ -76,6 +75,11 @@ function check(element) {
     blockEdit(identifier, isTitle, textToInsert, type);
     description.setAttribute('class', classToInsert);
 };
+
+function checkall(element) {
+    const [identifier, isTitle, description, input, type] = elementToModify(element);
+    blockEdit(identifier, isTitle, false, type);
+}
 
 function desactiveControls(element) {
     if(editControlsActive.length) {
@@ -91,12 +95,18 @@ function desactiveControls(element) {
 function deleteDescription(element) {
     const [identifier, isTitle, description, input] = elementToModify(element);
     // input.value = ''; // la acción de este comando antes de "desactiveControls()" queda desactivada por dicha función, pero al colocarlo después si funciona
-    let textToInsert;
-    isTitle ? textToInsert = `Título ${identifier}` : textToInsert = '';
+    let textToInsert = '';
+    let isertId = `insert-${identifier}`;
+    if(isTitle) {
+        isertId += `-${isTitle}`;
+        textToInsert = `Título ${identifier}`
+    };
     description.innerHTML = textToInsert
     blockEdit(identifier, isTitle, textToInsert);
     desactiveControls();
     input.value = ''; // aquí se se limpia el campo de entrada luego de activar el botón de borrar
+    const buttonInsert = document.getElementById(isertId);
+    buttonInsert.innerText = "insert";
 };
 
 function saveData(key, dataSet) {
@@ -122,6 +132,17 @@ function blockEdit(identifier, isTitle, textToInsert, type) {
         titles[identifier] = textToInsert;
         saveData(`${name}-titles`, titles);
         saveData(`${name}-${identifier}`, blockArray);
+    } else if(type === 'checkall') {
+        const li = document.getElementById(`ol-${identifier}`).children;
+        const liLength = li.length;
+        for(let i = 0; i < liLength; i++) {
+            const description = li[i].children[0];
+            if(description.innerHTML) console.log(description.innerHTML);
+        }
+        // for(const index in li) {
+        //     const description = li[index].children[2];
+        //     if(description.innerHTML) console.log(description.innerHTML);
+        // }
     } else {
         const titlesLength = titles.length;
         if(titlesLength > 1) {
@@ -206,4 +227,4 @@ function deleteAllSchedules() {
     optionsButton.setAttribute('hidden', 'hidden');
     const blocksContainer = document.getElementById('blocks-container');
     blocksContainer.innerHTML = '';
-}
+};
