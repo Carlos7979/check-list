@@ -21,7 +21,7 @@ function descriptionInputControls(element) {
         const buttonDelete = document.getElementById(buttonDeleteId);
 
 
-        desactiveControls(input);
+        disableControls(input);
         let typeInput;
         input.getAttribute('type') === 'hidden' ? typeInput = 'text' : typeInput = 'hidden';
         input.setAttribute('type', typeInput);
@@ -62,13 +62,21 @@ function descriptionInputControls(element) {
         number.setAttribute('style', 'color: peachpuff;');
       }
     });
+
+    element.addEventListener("keyup", (event) => {
+      const target = event.target;
+      if (target.tagName === 'INPUT') {
+        if (event.keyCode === 13) insert(target);
+        if (event.keyCode === 27) disableControls();
+      }
+  })
 };
 
 function blockEventDetector(element) {
     element.addEventListener('click', event => {
       const target = event.target;
       if (target.className === 'block' || target.className === 'block-advanced-options' || target.className === 'block-options' || target.tagName === 'OL' || target.className === 'list') {
-        desactiveControls();
+        disableControls();
       };
       if(target.tagName = 'LI' || target.className === 'block-options') {
           const type = target.getAttribute('id').split('-')[0];
@@ -83,7 +91,7 @@ function blockEventDetector(element) {
                     deleteDescription(target);
                     break;
                 case 'checkall':
-                    checkall(target);
+                    checkAll(target);
                     break;
                 default:
                     break;

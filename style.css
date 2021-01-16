@@ -439,7 +439,7 @@ li:hover, .title:hover {
     right: 4em;
 } */
 
-.input-description, .button-edit, .button-delete {
+.input-description, .button-edit {
     position: relative;
     right: 2em;
 }

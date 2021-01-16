@@ -1,8 +1,8 @@
 function  main() {
   
-  const storagedData = getData('schedules');
-    if(storagedData){
-      setSchedulesToOptions(storagedData);
+  const storedData = getData('schedules');
+    if(storedData){
+      setSchedulesToOptions(storedData);
       renderBlocks();
     } else {
       const buttonsContainer = document.getElementById('hide-header-buttons');

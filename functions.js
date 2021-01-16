@@ -1,4 +1,4 @@
-function desactiveControlsHeader(target) {
+function disableControlsHeader(target) {
     if (target.tagName === 'DIV' || target.id === 'header') {
       const buttonInitTemplate = document.getElementById('init-template');
       buttonInitTemplate.removeAttribute('style');
@@ -44,9 +44,9 @@ function renderBlocks(name) {
     const blocksContainer = document.getElementById('blocks-container');
     blocksContainer.innerHTML = '';
     if(name) {
-        const storagedData = getData('schedules');
-        storagedData[0].activeSchedule = name;
-        saveData('schedules', storagedData);
+        const schedules = getData('schedules');
+        schedules[0].activeSchedule = name;
+        saveData('schedules', schedules);
     }
     if(!name) {
         name = getData('schedules')[0].activeSchedule;
@@ -76,12 +76,12 @@ function check(element) {
     description.setAttribute('class', classToInsert);
 };
 
-function checkall(element) {
+function checkAll(element) {
     const [identifier, isTitle, description, input, type] = elementToModify(element);
     blockEdit(identifier, isTitle, false, type);
 }
 
-function desactiveControls(element) {
+function disableControls(element) {
     if(editControlsActive.length) {
         if(element && (element.id === editControlsActive[3].id)) return;
         editControlsActive[0].removeAttribute('hidden');
@@ -94,18 +94,18 @@ function desactiveControls(element) {
 
 function deleteDescription(element) {
     const [identifier, isTitle, description, input] = elementToModify(element);
-    // input.value = ''; // la acción de este comando antes de "desactiveControls()" queda desactivada por dicha función, pero al colocarlo después si funciona
+    // input.value = ''; // la acción de este comando antes de "disableControls()" queda desactivada por dicha función, pero al colocarlo después si funciona
     let textToInsert = '';
-    let isertId = `insert-${identifier}`;
+    let insertId = `insert-${identifier}`;
     if(isTitle) {
-        isertId += `-${isTitle}`;
+        insertId += `-${isTitle}`;
         textToInsert = `Título ${identifier}`
     };
     description.innerHTML = textToInsert
     blockEdit(identifier, isTitle, textToInsert);
-    desactiveControls();
+    disableControls();
     input.value = ''; // aquí se se limpia el campo de entrada luego de activar el botón de borrar
-    const buttonInsert = document.getElementById(isertId);
+    const buttonInsert = document.getElementById(insertId);
     buttonInsert.innerText = "insert";
 };
 
@@ -182,7 +182,7 @@ function insert(element) {
     description.innerHTML = textToInsert;
     //
     blockEdit(identifier, isTitle, textToInsert);
-    desactiveControls();
+    disableControls();
 };
 
 function maxLengthBlock() {

@@ -5,7 +5,7 @@ function newSchedule(element) {
         document.getElementById('name').focus();
         if(element.id === 'new-schedule') {
             if(element.isactive  === 'true') {  
-                desactiveControlsHeader({id: 'header'});
+                disableControlsHeader({id: 'header'});
                 element.isactive = 'false';
                 element.removeAttribute('style');
                 return;
@@ -17,7 +17,7 @@ function newSchedule(element) {
             allowInitialData = false;
         } else {
             if(element.isactive === 'true') {
-                desactiveControlsHeader({id: 'header'});
+                disableControlsHeader({id: 'header'});
                 element.isactive = 'false';
                 element.removeAttribute('style');
                 return;
@@ -38,7 +38,7 @@ function newSchedule(element) {
 function editHeaderControlActiveDetector(element) {
     element.addEventListener('click', event => {
       const target = event.target;
-      desactiveControlsHeader(target);
+      disableControlsHeader(target);
     });
 };
 
@@ -53,14 +53,14 @@ function addSchedule(element) {
             userButtons.removeAttribute('hidden');
         } else {
             userButtons.setAttribute('hidden', 'hidden');
-            desactiveControlsHeader({id: 'header'})
+            disableControlsHeader({id: 'header'})
         }
       });
 };
 
 function inputHeaderActiveDetector(element) {
     element.addEventListener("keyup", (event) => {
-        if (event.keyCode === 27) desactiveControlsHeader({id: 'header'});
+        if (event.keyCode === 27) disableControlsHeader({id: 'header'});
     });
 };
 
@@ -100,7 +100,8 @@ function create(element) {
         if(allowInitialData) blockConstructor(true, allowInitialData)
         else blockConstructor(true, false, [{name: scheduleName}], inputBlocksNumber.value, inputDescriptionsNumber.value);
         setSchedulesToOptions(schedules);
-        desactiveControlsHeader({id: 'header'});
+        disableControlsHeader({id: 'header'});
+        window.scrollTo(0,0);
       });
 };
 
@@ -120,7 +121,7 @@ function scheduleOptions(element) {
         if(buttonsContainer.hidden){
             if(!userButtons.hidden) {
                 userButtons.setAttribute('hidden', 'hidden');
-                desactiveControlsHeader({id: 'header'});
+                disableControlsHeader({id: 'header'});
             }
             buttonsContainer.removeAttribute('hidden');
         } else {

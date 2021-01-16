@@ -1,4 +1,40 @@
-function blockConstructor(isNew, allowInitialData, dataToInsert = initialDescriptions, blocksNumber, descriptionsNumber) {
+// DIV → id, class, innerHTML, title
+// IMG → id, class, src, alt, title
+// SPAN → id, class, innerHTML
+// H3 → id, class, innerHTML
+// INPUT → id, class, type, maxlength, eventListener
+// BUTTON → id, class, hidden, eventListener, innerHTML
+// OL → id
+// LI → id, class
+
+// elementsCreator(tag, id, ElementClass, innerHTMLText, src, alt, title, type, maxLength, hidden, eventListener)
+
+function elementsCreator(tag, id, ElementClass, innerHTMLText, src, alt, title, type, maxLength, hidden, eventListener) {
+    const newElement = document.createElement(tag.toUpperCase());
+    if(id) newElement.setAttribute('id', id);
+    if(ElementClass) newElement.setAttribute('class', ElementClass);
+    if(src) newElement.setAttribute('src', src);
+    if(alt) newElement.setAttribute('alt', alt);
+    if(title) newElement.setAttribute('title', title);
+    if(type) newElement.setAttribute('type', type);
+    if(maxLength) newElement.setAttribute('maxlength', maxLength);
+    if(hidden) newElement.setAttribute('hidden', hidden);
+    if(innerHTMLText) newElement.innerHTML = innerHTMLText;
+    if(eventListener) newElement.addEventListener(eventListener[0], eventListener[1]);
+    return newElement;
+};
+
+function severalAppends(father, children) {
+    children.forEach(child => {
+        father.appendChild(child);
+    });
+};
+
+function blockConstructor(  isNew,
+                            allowInitialData,
+                            dataToInsert = initialDescriptions,
+                            blocksNumber,
+                            descriptionsNumber) {
     let n;
     let m;
     const name = dataToInsert[0].name
@@ -6,144 +42,60 @@ function blockConstructor(isNew, allowInitialData, dataToInsert = initialDescrip
     allowInitialData ? m = dataToInsert[0].descriptionsInBlock : m = descriptionsNumber;
     const blocksContainer = document.getElementById('blocks-container');
     const scheduleBlocks = [];
-    if(isNew) {
-        scheduleBlocks.push(name);
-    }
+    isNew && scheduleBlocks.push(name);
     for(let i = 0; i < n; i++) {
-        const block = document.createElement("DIV");
-        block.setAttribute("id", `block-${i+1}`);
-        block.setAttribute("class", 'block');
-            const blockAdvancedOptions = document.createElement("DIV");
-            blockAdvancedOptions.setAttribute("id", `block-advanced-options-${i+1}`);
-            blockAdvancedOptions.setAttribute("class", `block-advanced-options`);
-                const optionsBlockButton = document.createElement("IMG");
-                optionsBlockButton.setAttribute("id", `block-button-options-${i+1}`);
-                optionsBlockButton.setAttribute("class", 'icon-button-options');
-                optionsBlockButton.setAttribute("src", 'images/2000px-Gnome-preferences-system.png');
-                optionsBlockButton.setAttribute("alt", 'Block options');
-                optionsBlockButton.setAttribute("title", 'Opciones del bloque');
+        const block = elementsCreator("DIV", `block-${i+1}`, 'block');
+            const blockAdvancedOptions = elementsCreator("DIV", `block-advanced-options-${i+1}`, 'block-advanced-options');
+                const optionsBlockButton = elementsCreator("IMG", `block-button-options-${i+1}`, 'icon-button-options', false, 'images/2000px-Gnome-preferences-system.png', 'Block options', 'Opciones del bloque');
             blockAdvancedOptions.appendChild(optionsBlockButton);    
         block.appendChild(blockAdvancedOptions);
-            const title = document.createElement("DIV");  
-                title.setAttribute("id", `title-${i+1}`);
-                title.setAttribute("class", 'title');
-                    const titleNumber = document.createElement("SPAN");
-                    titleNumber.setAttribute("id", `titleNumber-${i+1}`);
-                    titleNumber.setAttribute("class", 'titleNumber');
-                    titleNumber.innerHTML = `${i+1}`
-                title.appendChild(titleNumber);
-                    const heading = document.createElement("h3");  
-                    heading.setAttribute("id", `description-${i+1}-t`);
-                    heading.setAttribute("class", 'title-description');
-                title.appendChild(heading);
+            const title = elementsCreator("DIV", `title-${i+1}`, 'title');
+                const titleNumber = elementsCreator("SPAN", `titleNumber-${i+1}`, 'titleNumber', `${i+1}`);
                 let headingText = '';
                 allowInitialData ? headingText = dataToInsert[i + 1][0] : headingText = `Título ${i+1}`
-                heading.innerHTML = headingText;
+                const heading =  elementsCreator("h3", `description-${i+1}-t`, 'title-description', headingText);
                 isNew && scheduleBlocks.push(headingText);
-                    const input = document.createElement("input");
-                    input.setAttribute("id", `input-${i + 1}-t`);
-                    input.setAttribute("class", 'title-i');
-                    input.setAttribute("maxlength", '60');
-                    input.setAttribute("type", 'hidden');
-                    input.addEventListener("keyup", (event) => {
-                        if (event.keyCode === 13) insert(input);
-                        if (event.keyCode === 27) desactiveControls();
-                    });
-                title.appendChild(input);
-                    const buttonInsert = document.createElement("button");
-                    buttonInsert.setAttribute("id", `insert-${i + 1}-t`);
-                    buttonInsert.setAttribute("class", 'button-edit-t');
-                    buttonInsert.setAttribute("hidden", 'hidden');
-                    buttonInsert.innerHTML = 'insertar';
-                    buttonInsert.addEventListener('click', () => {       
-                    });
-                title.appendChild(buttonInsert);
-                    const buttonDelete = document.createElement("button");
-                    buttonDelete.setAttribute("id", `delete-${i + 1}-t`);
-                    buttonDelete.setAttribute("class", 'button-edit-t');
-                    buttonDelete.setAttribute("hidden", 'hidden');
-                    buttonDelete.innerHTML = 'borrar';
-                    buttonDelete.addEventListener('click', () => {     
-                    });
-                title.appendChild(buttonDelete);
-                descriptionInputControls(title);
+                const input = elementsCreator("input", `input-${i + 1}-t`, 'title-i', false, false, false, false, 'hidden', '60');
+                const buttonInsert = elementsCreator("button", `insert-${i + 1}-t`, 'button-edit-t', 'insertar', false, false, false, false, false, 'hidden');
+                const buttonDelete = elementsCreator("button", `delete-${i + 1}-t`, 'button-edit-t', 'borrar', false, false, false, false, false, 'hidden');
+                buttonDelete.setAttribute("id", `delete-${i + 1}-t`);
+            severalAppends(title, [titleNumber, heading, input, buttonInsert, buttonDelete]);
+            descriptionInputControls(title);
         block.appendChild(title);
-            const blockOptions = document.createElement("DIV");
-                blockOptions.setAttribute("id", `block-options-${i+1}`);
-                blockOptions.setAttribute("class", `block-options`);
-                    const checkAll = document.createElement("DIV");
-                    checkAll.setAttribute("id", `checkall-${i+1}`);
-                    checkAll.setAttribute("class", 'checkall');
-                    checkAll.setAttribute("title", 'marcar/desmarcar todo');
-                blockOptions.appendChild(checkAll);
-                //     const label = document.createElement("LABEL");
-                //     label.setAttribute("id", `label-${i+1}`);
-                //     label.setAttribute("class", 'label');
-                //     label.setAttribute("for", `checkall-${i+1}`);
-                //     label.innerHTML = 'marcar/desmarcar todo'
-                // blockOptions.appendChild(label);
+            const blockOptions = elementsCreator("DIV", `block-options-${i+1}`, 'block-options');
+                const checkAll = elementsCreator("DIV", `checkall-${i+1}`, 'checkall', false, false, false, 'marcar/desmarcar todo');
+            blockOptions.appendChild(checkAll);
+            //     const label = document.createElement("LABEL");
+            //     label.setAttribute("id", `label-${i+1}`);
+            //     label.setAttribute("class", 'label');
+            //     label.setAttribute("for", `checkall-${i+1}`);
+            //     label.innerHTML = 'marcar/desmarcar todo'
+            // blockOptions.appendChild(label);
         block.appendChild(blockOptions);
-            const list = document.createElement("DIV");  
-            list.setAttribute("id", `list-${i+1}`);
-            list.setAttribute("class", 'list');
-                const ol = document.createElement("ol");  
-                ol.setAttribute("id", `ol-${i+1}`);
+            const list = elementsCreator("DIV", `list-${i+1}`, 'list');  
+                const ol = elementsCreator("ol", `ol-${i+1}`);
                 const blockDescriptions = [];
-                if(isNew) {
-                    blockDescriptions.push(headingText);
-                }
+            isNew && blockDescriptions.push(headingText);
                 for(let j = 0; j < m; j++) {
-                const li = document.createElement("li");
-                li.setAttribute("id", `li-${j+1 +i*m}`);
-                    const check = document.createElement("DIV");
-                    check.setAttribute("id", `check-${j+1 +i*m}`);
-                    check.setAttribute("class", 'check');
-                li.appendChild(check);
-                    const descriptionNumber = document.createElement("SPAN");
-                    descriptionNumber.setAttribute("id", `descriptionNumber-${j+1 +i*m}`);
-                    descriptionNumber.setAttribute("class", 'descriptionNumber');
-                    descriptionNumber.innerHTML = `${j+1}`
-                li.appendChild(descriptionNumber);
-                    const description = document.createElement("DIV");
-                    description.setAttribute("id", `description-${j+1 +i*m}`);
-                    description.setAttribute("class", 'description');
-                li.appendChild(description);
-                let descriptionText = '';
-                let checkText = '';
-                if(allowInitialData && (dataToInsert[i + 1].length > j + 1)) {
-                    descriptionText = dataToInsert[i + 1][j + 1][1];
-                    description.innerHTML = descriptionText;
-                    checkText = dataToInsert[i + 1][j + 1][0];
-                    check.innerHTML = checkText;
-                    if(checkText) {
-                        description.setAttribute("class", 'description-checked');
+                    let descriptionText = '';
+                    let checkText = '';
+                    let descriptionClass = 'description';
+                    if(allowInitialData && (dataToInsert[i + 1].length > j + 1)) {
+                        descriptionText = dataToInsert[i + 1][j + 1][1];
+                        checkText = dataToInsert[i + 1][j + 1][0];
+                        if(checkText) descriptionClass = 'description-checked';
                     }
-                }
-                isNew && blockDescriptions.push([checkText, descriptionText]);
-                    const input = document.createElement("input");
-                    input.setAttribute("id", `input-${j+1 +i*m}`);
-                    input.setAttribute("class", 'input-description');
-                    input.setAttribute("maxlength", '60');
-                    input.setAttribute("type", 'hidden');
-                    input.addEventListener("keyup", (event) => {
-                        if (event.keyCode === 13) insert(input);
-                        if (event.keyCode === 27) desactiveControls();
-                    });
-                li.appendChild(input);
-                    const buttonInsert = document.createElement("button");
-                    buttonInsert.setAttribute("id", `insert-${j+1 +i*m}`);
-                    buttonInsert.setAttribute("class", 'button-edit');
-                    buttonInsert.setAttribute("hidden", 'hidden');
-                    buttonInsert.innerHTML = 'insertar';
-                li.appendChild(buttonInsert);
-                    const buttonDelete = document.createElement("button");
-                    buttonDelete.setAttribute("id", `delete-${j+1 +i*m}`);
-                    buttonDelete.setAttribute("class", 'button-delete');
-                    buttonDelete.setAttribute("hidden", 'hidden');
-                    buttonDelete.innerHTML = 'borrar';
-                li.appendChild(buttonDelete);
-                descriptionInputControls(li);
-                ol.appendChild(li);
+                    const li = elementsCreator("li", `li-${j+1 +i*m}`);
+                        const check = elementsCreator("DIV", `check-${j+1 +i*m}`, 'check', checkText);
+                        const descriptionNumber = elementsCreator("SPAN", `descriptionNumber-${j+1 +i*m}`, 'descriptionNumber', `${j+1}`);
+                        const description = elementsCreator("DIV", `description-${j+1 +i*m}`, descriptionClass, descriptionText);
+                    isNew && blockDescriptions.push([checkText, descriptionText]);
+                        const input = elementsCreator("input", `input-${j+1 +i*m}`, 'input-description', false, false, false, false, 'hidden', '60');
+                        const buttonInsert = elementsCreator("button", `insert-${j+1 +i*m}`, 'button-edit', 'insertar', false, false, false, false, false, 'hidden');
+                        const buttonDelete = elementsCreator("button", `delete-${j+1 +i*m}`, 'button-edit', 'borrar', false, false, false, false, false, 'hidden');
+                    severalAppends(li, [check, descriptionNumber, description, input, buttonInsert, buttonDelete]);
+                    descriptionInputControls(li);
+                    ol.appendChild(li);
                 };
                 isNew && saveData(`${name}-${i + 1}`, blockDescriptions)
             list.appendChild(ol);
