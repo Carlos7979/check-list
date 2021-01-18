@@ -65,21 +65,79 @@ function renderBlocks(name) {
     blockConstructor(false, true, dataSet);
 };
 
+function blockId(identifier, isTitle, type) {
+    const name = getData('schedules')[0].activeSchedule;
+    let blockArray = [];
+    let indexArray = 0;
+    let blockNumber = 0;
+    if(isTitle === 't' || type === 'checkall') {
+        blockArray = getData(`${name}-${identifier}`);
+        blockNumber = identifier;
+    } else {
+        const firstBlock = getData(`${name}-${1}`);
+        const blocksLength = firstBlock.length - 1;
+        blockNumber = Math.ceil(identifier/blocksLength);
+        blockArray = getData(`${name}-${blockNumber}`);
+        indexArray = identifier - (blockNumber - 1)*blocksLength;
+    };
+    return [blockArray, blockNumber, indexArray, name];
+};
+
 function check(element) {
     const [identifier, isTitle, description, input, type] = elementToModify(element);
+    if(!description.innerText) return;
     let textToInsert;
     let classToInsert;
     element.innerText !== '' ? textToInsert = '' : textToInsert = '✓';
     element.innerText !== '' ? classToInsert = 'description' : classToInsert = 'description-checked';
     element.innerText = textToInsert;
-    blockEdit(identifier, isTitle, textToInsert, type);
+    blockSave(identifier, isTitle, textToInsert, type);
     description.setAttribute('class', classToInsert);
+    isCheckAll(identifier, isTitle);
 };
+
+function isCheckAll(identifier, isTitle) {
+    const [blockArray, blockNumber] = blockId(identifier, isTitle);
+    let counterChecks = 0;
+    let counterDescriptions = 0;
+    blockArray.forEach( e => {
+        if(Array.isArray(e) && e[0]) counterChecks++;
+        if(Array.isArray(e) && e[1]) counterDescriptions++;
+    });
+    const checkAll = document.getElementById(`checkall-${blockNumber}`);
+    counterChecks === counterDescriptions ? checkAll.innerHTML = '✓' : checkAll.innerHTML = ''
+}
 
 function checkAll(element) {
     const [identifier, isTitle, description, input, type] = elementToModify(element);
-    blockEdit(identifier, isTitle, false, type);
-}
+    const name = getData('schedules')[0].activeSchedule;
+    let counter = 0;
+    let indexToFill = [];
+    element.innerText ? textToInsert = '' : textToInsert = '✓';
+    const li = document.getElementById(`ol-${identifier}`).children;
+    const liLength = li.length;
+    for(let i = 0; i < liLength; i++) {
+        const description = li[i].children[2];
+        const checkElement = li[i].children[0];
+        const descriptionToStyle = document.getElementById(`description-${checkElement.id.split('-')[1]}`)
+        if(description.innerHTML) counter++;
+        if(description.innerHTML && !checkElement.innerHTML) {
+            const [blockArray, blockNumber, indexArray] = blockId(checkElement.id.split('-')[1]);
+            indexToFill.push(indexArray);
+            descriptionToStyle.setAttribute('class', 'description-checked');
+            checkElement.innerHTML = '✓';
+        } else if(description.innerHTML && element.innerText) {
+            if(checkElement.innerHTML) {
+                descriptionToStyle.setAttribute('class', 'description');
+                checkElement.innerHTML = '';
+
+            }
+        };
+    };
+    if(!counter) return;
+    element.innerText = textToInsert;
+    blockSave(identifier, isTitle, false, type, indexToFill);
+};
 
 function disableControls(element) {
     if(editControlsActive.length) {
@@ -89,7 +147,7 @@ function disableControls(element) {
         editControlsActive[2].setAttribute('hidden', 'hidden');
         editControlsActive[3].setAttribute('type', 'hidden');
         editControlsActive = [];
-    }
+    };
 };
 
 function deleteDescription(element) {
@@ -102,11 +160,14 @@ function deleteDescription(element) {
         textToInsert = `Título ${identifier}`
     };
     description.innerHTML = textToInsert
-    blockEdit(identifier, isTitle, textToInsert);
+    blockSave(identifier, isTitle, textToInsert);
+    const checkElement = document.getElementById(`check-${identifier}`);
+    if(checkElement.innerHTML) check(checkElement);
     disableControls();
     input.value = ''; // aquí se se limpia el campo de entrada luego de activar el botón de borrar
     const buttonInsert = document.getElementById(insertId);
     buttonInsert.innerText = "insert";
+    isCheckAll(identifier, isTitle);
 };
 
 function saveData(key, dataSet) {
@@ -121,24 +182,26 @@ function deleteData(key) {
     localStorage.removeItem(key);
 };
 
-function blockEdit(identifier, isTitle, textToInsert, type) {
-    const name = getData('schedules')[0].activeSchedule;
+function blockSave(identifier, isTitle, textToInsert, type, indexToFill) {
+    const [blockArray, blockNumber, indexArray, name] = blockId(identifier, isTitle, type);
     const titles = getData(`${name}-titles`);
-    let blockArray = [];
-    let indexArray = 0;
     if(isTitle === 't'){
-        blockArray = getData(`${name}-${identifier}`);
         blockArray[indexArray] = textToInsert;
         titles[identifier] = textToInsert;
         saveData(`${name}-titles`, titles);
         saveData(`${name}-${identifier}`, blockArray);
     } else if(type === 'checkall') {
-        const li = document.getElementById(`ol-${identifier}`).children;
-        const liLength = li.length;
-        for(let i = 0; i < liLength; i++) {
-            const description = li[i].children[0];
-            if(description.innerHTML) console.log(description.innerHTML);
-        }
+        if(indexToFill.length) {
+            indexToFill.forEach(e => {
+                blockArray[e][0] = '✓';
+            });
+            saveData(`${name}-${blockNumber}`, blockArray);
+        } else {
+            for(let i = 1; i < blockArray.length; i++) {
+                blockArray[i][0] = '';
+            };
+            saveData(`${name}-${blockNumber}`, blockArray);
+        };
         // for(const index in li) {
         //     const description = li[index].children[2];
         //     if(description.innerHTML) console.log(description.innerHTML);
@@ -146,14 +209,9 @@ function blockEdit(identifier, isTitle, textToInsert, type) {
     } else {
         const titlesLength = titles.length;
         if(titlesLength > 1) {
-            const firstBlock = getData(`${name}-${1}`);
-            const blocksLength = firstBlock.length - 1;
-            const blockNumber = Math.ceil(identifier/blocksLength);
-            blockArray = getData(`${name}-${blockNumber}`);
-            indexArray = identifier - (blockNumber - 1)*blocksLength;
             type === 'check' ? blockArray[indexArray][0] = textToInsert : blockArray[indexArray][1] = textToInsert;
             saveData(`${name}-${blockNumber}`, blockArray);
-        }
+        };
     };
 };
 
@@ -181,8 +239,9 @@ function insert(element) {
     const textToInsert = input.value.trim();
     description.innerHTML = textToInsert;
     //
-    blockEdit(identifier, isTitle, textToInsert);
+    blockSave(identifier, isTitle, textToInsert);
     disableControls();
+    isCheckAll(identifier, isTitle);
 };
 
 function maxLengthBlock() {

@@ -432,6 +432,7 @@ li:hover, .title:hover {
     border: 1px solid black;
     position: relative;
     left: 1px;
+    cursor: default;
 }
 
 /* .button-edit, .button-delete .input-description {

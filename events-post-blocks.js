@@ -78,7 +78,7 @@ function blockEventDetector(element) {
       if (target.className === 'block' || target.className === 'block-advanced-options' || target.className === 'block-options' || target.tagName === 'OL' || target.className === 'list') {
         disableControls();
       };
-      if(target.tagName = 'LI' || target.className === 'block-options') {
+      if(target.tagName = 'LI' || target.className === 'block-options' || target.className === 'block-advanced-options') {
           const type = target.getAttribute('id').split('-')[0];
             switch (type) {
                 case 'check':
@@ -92,6 +92,9 @@ function blockEventDetector(element) {
                     break;
                 case 'checkall':
                     checkAll(target);
+                    break;
+                case 'advanced':
+                    console.log(target);
                     break;
                 default:
                     break;
