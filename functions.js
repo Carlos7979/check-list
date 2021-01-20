@@ -94,6 +94,7 @@ function check(element) {
     blockSave(identifier, isTitle, textToInsert, type);
     description.setAttribute('class', classToInsert);
     isCheckAll(identifier, isTitle);
+    counterDescriptionsChecks(element);
 };
 
 function isCheckAll(identifier, isTitle) {
@@ -105,7 +106,8 @@ function isCheckAll(identifier, isTitle) {
         if(Array.isArray(e) && e[1]) counterDescriptions++;
     });
     const checkAll = document.getElementById(`checkall-${blockNumber}`);
-    counterChecks === counterDescriptions ? checkAll.innerHTML = '✓' : checkAll.innerHTML = ''
+    counterChecks === counterDescriptions ? checkAll.innerHTML = '✓' : checkAll.innerHTML = '';
+    if(!counterDescriptions) checkAll.innerHTML = '';
 }
 
 function checkAll(element) {
@@ -137,6 +139,7 @@ function checkAll(element) {
     if(!counter) return;
     element.innerText = textToInsert;
     blockSave(identifier, isTitle, false, type, indexToFill);
+    counterDescriptionsChecks(element, type);
 };
 
 function disableControls(element) {
@@ -159,15 +162,16 @@ function deleteDescription(element) {
         insertId += `-${isTitle}`;
         textToInsert = `Título ${identifier}`
     };
-    description.innerHTML = textToInsert
-    blockSave(identifier, isTitle, textToInsert);
     const checkElement = document.getElementById(`check-${identifier}`);
     if(checkElement.innerHTML) check(checkElement);
+    description.innerHTML = textToInsert
+    blockSave(identifier, isTitle, textToInsert);
     disableControls();
     input.value = ''; // aquí se se limpia el campo de entrada luego de activar el botón de borrar
     const buttonInsert = document.getElementById(insertId);
     buttonInsert.innerText = "insert";
     isCheckAll(identifier, isTitle);
+    counterDescriptionsChecks(element);
 };
 
 function saveData(key, dataSet) {
@@ -242,6 +246,7 @@ function insert(element) {
     blockSave(identifier, isTitle, textToInsert);
     disableControls();
     isCheckAll(identifier, isTitle);
+    counterDescriptionsChecks(element);
 };
 
 function maxLengthBlock() {
@@ -287,3 +292,35 @@ function deleteAllSchedules() {
     const blocksContainer = document.getElementById('blocks-container');
     blocksContainer.innerHTML = '';
 };
+
+function counterDescriptionsChecks(ol, type, span1, span3, percentage) {
+    let li;
+    const [identifier] = elementToModify(ol);
+    const [blockArray, blockNumber] = blockId(identifier, false, type);
+    if(ol && span1 && span3) {
+        li = ol.children
+    } else {
+        li = document.getElementById(`ol-${blockNumber}`).children;
+        span1 = document.getElementById(`span1-${blockNumber}`);
+        span3 = document.getElementById(`span3-${blockNumber}`);
+        percentage = document.getElementById(`percentage-${blockNumber}`);
+    }
+    let counterDescriptions = 0;
+    let counterChecks = 0;
+    const liLength = li.length;
+    for(let i = 0; i < liLength; i++) {
+        const description = li[i].children[2];
+        const checkElement = li[i].children[0];
+        if(description.innerHTML) counterDescriptions++;
+        if(checkElement.innerHTML) counterChecks++;
+    };
+    span1.innerHTML = counterChecks;
+    span3.innerHTML = counterDescriptions;
+    if(!counterDescriptions) {
+        percentage.innerText = `${counterDescriptions}%`
+    } else {
+        let percentageResult = counterChecks*100/counterDescriptions;
+        if(counterChecks*100 % counterDescriptions) percentageResult = Math.round(percentageResult*100)/100;
+        percentage.innerText = `${percentageResult}%`
+    }
+}

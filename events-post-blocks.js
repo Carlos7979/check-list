@@ -48,6 +48,8 @@ function descriptionInputControls(element) {
       if (target.tagName === 'LI' || target.className === 'descriptionNumber' || target.classList.contains('description')) {
         const desID = target.getAttribute('id');
         const identifier = desID.split('-')[1];
+        const description = document.getElementById(`description-${identifier}`);
+        // if(!description.innerHTML) return;
         const number = document.getElementById(`descriptionNumber-${identifier}`);
         number.setAttribute('style', 'color: black;');
       }

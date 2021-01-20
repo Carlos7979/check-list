@@ -268,7 +268,7 @@ h2 {
 }
 
 .block {
-    min-width: 39rem;
+    width: 39rem;
     border: darkorchid solid 1px;
     background: peachpuff;
     display: inline-block;
@@ -422,6 +422,11 @@ li:hover, .title:hover {
     border-radius: 5px;
     margin-left: 2px;
 }
+.checkallcontainer {
+    margin-right: 10px;
+    width: 1.2em;
+    /* border: 1px solid red; */
+}
 
 .checkall {
     border: 2px solid darkgrey;
@@ -433,6 +438,35 @@ li:hover, .title:hover {
     position: relative;
     left: 1px;
     cursor: default;
+}
+
+.checkcounter {
+    /* border: 1px solid black; */
+    width: 70px;
+    height: 1em;
+    font-size: 0.8em;
+    /* width: 1em; */
+}
+
+.span1, .span2, .span3 {
+    display: inline-block;
+    min-width: 20px;
+    vertical-align: middle;
+    /* border: 1px solid red; */
+}
+ .span1 {
+     text-align: end;
+     padding-right: 4px;
+ }
+.emptyspace {
+    width: 26em;
+    /* border: 1px solid black; */
+}
+
+.percentage {
+    /* border: 1px solid black; */
+    width: 70px;
+    text-align: end;
 }
 
 /* .button-edit, .button-delete .input-description {
