@@ -9,17 +9,18 @@
 
 // elementsCreator(tag, id, ElementClass, innerHTMLText, src, alt, title, type, maxLength, hidden, eventListener)
 
-function elementsCreator(tag, id, ElementClass, innerHTMLText, src, alt, title, type, maxLength, hidden, eventListener) {
+function elementsCreator(tag, id, ElementClass, innerHTMLText, src, alt, title, type, maxLength, hidden, style, eventListener) {
     const newElement = document.createElement(tag.toUpperCase());
     if(id) newElement.setAttribute('id', id);
     if(ElementClass) newElement.setAttribute('class', ElementClass);
+    if(innerHTMLText) newElement.innerHTML = innerHTMLText;
     if(src) newElement.setAttribute('src', src);
     if(alt) newElement.setAttribute('alt', alt);
     if(title) newElement.setAttribute('title', title);
     if(type) newElement.setAttribute('type', type);
     if(maxLength) newElement.setAttribute('maxlength', maxLength);
     if(hidden) newElement.setAttribute('hidden', hidden);
-    if(innerHTMLText) newElement.innerHTML = innerHTMLText;
+    if(style) newElement.setAttribute('style', `${style[0]}: ${style[1]};`);
     if(eventListener) newElement.addEventListener(eventListener[0], eventListener[1]);
     return newElement;
 };
@@ -88,18 +89,22 @@ function blockConstructor(  isNew,
                     let descriptionText = '';
                     let checkText = '';
                     let descriptionClass = 'description';
+                    let visibility = 'hidden';
                     if(allowInitialData && (dataToInsert[i + 1].length > j + 1)) {
                         descriptionText = dataToInsert[i + 1][j + 1][1];
                         checkText = dataToInsert[i + 1][j + 1][0];
-                        if(descriptionText) counterDescriptions++
+                        if(descriptionText) {
+                            counterDescriptions++;
+                            visibility = 'visible';
+                        }
                         if(checkText) {
                             descriptionClass = 'description-checked';
                             counterChecks++;
                         }
                     };
                     const li = elementsCreator("li", `li-${j+1 +i*m}`);
-                        const check = elementsCreator("DIV", `check-${j+1 +i*m}`, 'check', checkText);
-                        const descriptionNumber = elementsCreator("SPAN", `descriptionNumber-${j+1 +i*m}`, 'descriptionNumber', `${j+1}`);
+                        const check = elementsCreator("DIV", `check-${j+1 +i*m}`, 'check', checkText, false, false, false, false, false, false, ['visibility', visibility]);
+                        const descriptionNumber = elementsCreator("SPAN", `descriptionNumber-${j+1 +i*m}`, 'descriptionNumber', `${j+1}`); // delete innerText (`${j+1}`) in order to recount only non empty descriptions
                         const description = elementsCreator("DIV", `description-${j+1 +i*m}`, descriptionClass, descriptionText);
                     isNew && blockDescriptions.push([checkText, descriptionText]);
                         const input = elementsCreator("input", `input-${j+1 +i*m}`, 'input-description', false, false, false, false, 'hidden', '60');
@@ -114,7 +119,7 @@ function blockConstructor(  isNew,
             list.appendChild(ol);
         severalAppends(block, [blockAdvancedOptions, title, blockOptions, list]);
         blockEventDetector(block);
-        counterDescriptionsChecks(ol, false, span1, span3, percentage);
+        counterDescriptionsChecks(ol, false, span1, span3, percentage, blockOptions, checkAll);
         blocksContainer.appendChild(block);
     };
     isNew && saveData(`${name}-titles`, scheduleBlocks);

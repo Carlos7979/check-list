@@ -164,6 +164,7 @@ function deleteDescription(element) {
     };
     const checkElement = document.getElementById(`check-${identifier}`);
     if(checkElement.innerHTML) check(checkElement);
+    checkElement.setAttribute('style', "visibility: hidden;");
     description.innerHTML = textToInsert
     blockSave(identifier, isTitle, textToInsert);
     disableControls();
@@ -206,10 +207,6 @@ function blockSave(identifier, isTitle, textToInsert, type, indexToFill) {
             };
             saveData(`${name}-${blockNumber}`, blockArray);
         };
-        // for(const index in li) {
-        //     const description = li[index].children[2];
-        //     if(description.innerHTML) console.log(description.innerHTML);
-        // }
     } else {
         const titlesLength = titles.length;
         if(titlesLength > 1) {
@@ -293,7 +290,7 @@ function deleteAllSchedules() {
     blocksContainer.innerHTML = '';
 };
 
-function counterDescriptionsChecks(ol, type, span1, span3, percentage) {
+function counterDescriptionsChecks(ol, type, span1, span3, percentage, blockOptions, checkAll) {
     let li;
     const [identifier] = elementToModify(ol);
     const [blockArray, blockNumber] = blockId(identifier, false, type);
@@ -304,6 +301,8 @@ function counterDescriptionsChecks(ol, type, span1, span3, percentage) {
         span1 = document.getElementById(`span1-${blockNumber}`);
         span3 = document.getElementById(`span3-${blockNumber}`);
         percentage = document.getElementById(`percentage-${blockNumber}`);
+        blockOptions = document.getElementById(`block-options-${blockNumber}`);
+        checkAll = document.getElementById(`checkall-${blockNumber}`);
     }
     let counterDescriptions = 0;
     let counterChecks = 0;
@@ -311,16 +310,33 @@ function counterDescriptionsChecks(ol, type, span1, span3, percentage) {
     for(let i = 0; i < liLength; i++) {
         const description = li[i].children[2];
         const checkElement = li[i].children[0];
-        if(description.innerHTML) counterDescriptions++;
+        const descriptionNumber = li[i].children[1];
+        if(description.innerHTML) {
+            counterDescriptions++;
+            checkElement.removeAttribute('style');
+            // descriptionNumber.innerHTML = ++counterDescriptions; // active this, "else" inside two lines after this, around line 107 in block-constructor, and disable counterDescriptions++ two lines before this
+        } else {
+            // descriptionNumber.innerHTML = '';
+        }
         if(checkElement.innerHTML) counterChecks++;
     };
     span1.innerHTML = counterChecks;
     span3.innerHTML = counterDescriptions;
     if(!counterDescriptions) {
         percentage.innerText = `${counterDescriptions}%`
+        blockOptions.setAttribute('style', "color: darkgrey;");
     } else {
         let percentageResult = counterChecks*100/counterDescriptions;
         if(counterChecks*100 % counterDescriptions) percentageResult = Math.round(percentageResult*100)/100;
-        percentage.innerText = `${percentageResult}%`
+        percentage.innerText = `${percentageResult}%`;
+        percentage.removeAttribute('style');
+        checkAll.removeAttribute('style');
+        // blockOptions.setAttribute('style', "color: ForestGreen;");
+        blockOptions.removeAttribute('style');
+        if(percentageResult === 100) {
+            blockOptions.setAttribute('style', "color: ForestGreen;");
+            percentage.setAttribute('style', "font-weight: bold; color: black;");
+            checkAll.setAttribute('style', "border-color: ForestGreen;");
+        };
     }
 }

@@ -1,7 +1,7 @@
 function descriptionInputControls(element) {
     element.addEventListener('click',  (event) => {
       const target = event.target;
-      if (target.tagName === 'LI' || target.className === 'titleNumber' ||  target.className === 'descriptionNumber' || target.classList.contains('description') || target.className === 'title'  || target.className === 'title-description') {
+      if (target.tagName === 'LI' || target.className === 'titleNumber' ||  target.className === 'descriptionNumber' || target.classList.contains('description') || target.classList.contains('description-checked') || target.className === 'title'  || target.className === 'title-description') {
         const desID = target.getAttribute('id');
         const identifier = desID.split('-')[1];
         let descriptionId = `description-${identifier}`
