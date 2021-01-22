@@ -375,7 +375,7 @@ li {
          /*this attribute hides list-style */
     align-items: center;
     margin: 2px 0;
-    padding: 1px 0;
+    /* padding: 1px 0; */
     margin-right: 10px;
     border: darkgrey 0.5px groove;
     border-radius: 5px;
@@ -402,7 +402,11 @@ li:hover, .title:hover {
     bottom: 5px; */
 /* } */
 
-.description {
+.description, .description-checked {
+    /* border: 1px solid black; */
+    box-sizing: border-box;
+    padding-top: 2px;
+    height: 1.35em;
     position: relative;
     right: 2em;
     overflow: hidden;
@@ -413,8 +417,6 @@ li:hover, .title:hover {
 .description-checked {
     color: rgb(129, 123, 123);
     font-weight: bold;
-    position: relative;
-    right: 2em;
 }
 
 .check, .checkall {
@@ -426,6 +428,7 @@ li:hover, .title:hover {
     border-radius: 5px;
     margin-left: 2px;
 }
+
 .checkallcontainer {
     margin-right: 10px;
     width: 1.3em;
