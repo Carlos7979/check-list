@@ -1,5 +1,5 @@
 * {
-    /* border: darkgrey 0.5px groove; */
+    border: darkgrey 0.5px groove;
     /* padding: 2px; */
     margin: 0;
 }
@@ -81,15 +81,22 @@ header {
     visibility: hidden;
 }
 
-/* #hedear-block-2 {
+/* #header-block-2 {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
 } */
 
+.options-header {
+    display: inline-block;
+    vertical-align: top;
+    border-color: red;
+    width: 85%
+}
+
 .header-subblock {
     min-width: 350px;
-    /* border: red solid 1px; */
+    border: orange solid 1px;
     display: inline-block;
     vertical-align: top; /* Corrige el desfase vertical de bloques inline-block */
 }
@@ -97,18 +104,20 @@ header {
 #header-subblock-2 {
     padding: 2px;
     min-width: min-content;
-    position: relative;
-    left: 5%;
+    border-color: chartreuse;
+    /* position: relative;
+    left: 5%; */
     /* border: red solid 1px; */
+    margin-left: 10%;
 }
 
 #header-subblock-3 {
-    width: 24%;
+    width: 50px;
     border-color: brown;
     display: inline-block;
-    position: relative;
-    left: 5%;
-    text-align: right;
+    /* position: relative;
+    left: 5%; */
+    /* text-align: right; */
     padding: 2px;
     margin: 2px;
 }
@@ -234,9 +243,11 @@ h2 {
     /* margin-left: 180px; */ /* si el bloque de inputs está debajo de los botones */
 }
 
-/* #header-schedule-options-1 {
+#header-schedule-options-1 {
     border-color: chartreuse;
-} */
+    display: flex;
+    justify-content: space-between;
+}
 
 #header-schedule-options-2 {
     margin-top: 15px;
@@ -244,7 +255,7 @@ h2 {
     /* border: solid 1px; */
     border-color: chartreuse;
     text-align: end;
-    padding-right: 15px;
+    /* padding-right: 15px; */
     box-sizing: border-box;
 }
 

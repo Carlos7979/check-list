@@ -1,0 +1,6 @@
+div, label {
+    border: 2px solid black;
+    /* height: 10px; */
+    width: 100px;
+    cursor: pointer;
+}
