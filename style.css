@@ -1,5 +1,5 @@
 * {
-    border: darkgrey 0.5px groove;
+    /* border: darkgrey 0.5px groove; */
     /* padding: 2px; */
     margin: 0;
 }
@@ -45,10 +45,17 @@ header {
     /* margin-right: -4px; */
 }
 
-#header-block-users {
+#welcome-container {
     display: inline-block;
     vertical-align: middle;
-    width: 240px;
+}
+
+.header-block-users-welcome {
+    width: 200px;
+}
+
+.header-block-users {
+    width: 280px;
 }
 
 #header-buttons {
@@ -77,6 +84,11 @@ header {
     border-radius: 5px; */
 }
 
+#add-schedule:active {
+    position: relative;
+    left: 1px;
+}
+
 #button-create {
     visibility: hidden;
 }
@@ -87,11 +99,72 @@ header {
     justify-content: space-evenly;
 } */
 
-.options-header {
-    display: inline-block;
+#header-schedule-options-1 {
+    border-color: chartreuse;
+    display: flex;
+    justify-content: space-between;
+}
+
+#options-header {
+    /* display: inline-block; */
     vertical-align: top;
     border-color: red;
     width: 85%
+}
+
+#import-export-buttons {
+    padding-left: 20px;
+    padding-top: 10px;
+    box-sizing: border-box;
+}
+
+/* #import-export-buttons-syle {
+    
+} */
+
+#import {
+    /* height: max-content; */
+    display: inline-block;
+
+}
+
+/* #import-container {
+    width: min-content;
+} */
+
+#import-label {
+    padding: 3px 5px;
+    box-sizing: border-box;
+    border: 1px solid rgb(36, 35, 35);
+    border-radius: 5px;
+    background-color: rgb(187, 119, 250);
+    color: rgb(36, 35, 35);
+    user-select: none;
+}
+
+#import-label:hover {
+    /* border: 1px solid blueviolet; */
+    box-shadow: 0px 0px 1px 1px silver;
+    color: black;
+}
+
+#import-label:active {
+    background: linear-gradient(to bottom right, darkgrey 0%, rgb(187, 119, 250) 100%);;
+    padding-left: 6px;
+    padding-right: 4px;
+}
+
+#import-selected {
+    display: inline-block;
+    max-width: 11em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+#import-selected:hover {
+    cursor: default;
+    font-weight: bold;
 }
 
 .header-subblock {
@@ -122,21 +195,43 @@ header {
     margin: 2px;
 }
 
-/* #hide-header-subblock-3 {
-    border: brown solid 1px;
+#hide-header-subblock-3 {
+    /* border: brown solid 1px; */
+    border-color: brown;
     border-radius: 5px;
-} */
+    text-align: left;
+}
 
-#options, #new-block, #clean-blocks {
+#header-schedule-options-2 {
+    margin-top: 15px;
+    min-width: 39rem;
+    /* border: solid 1px; */
+    border-color: chartreuse;
+    text-align: end;
+    /* padding-right: 15px; */
+    box-sizing: border-box;
+}
+
+#options, #new-block, #clean-blocks, #import-export {
     vertical-align: middle;
     height: 40px;
-    margin: 0 10px;
+    /* margin: 0 10px; */
+}
+
+#options {
+    position: relative;
+    right: 10px;
 }
 
 #new-block {
     height: 35px;
     padding: 2.5px;
 }
+
+/* #new-block:hover {
+    -webkit-transform: rotate(36deg);
+    transform: rotate(36deg);
+} */
 
 #delete-schedule {
     vertical-align: middle;
@@ -147,8 +242,16 @@ header {
 #delete-all-schedules {
     vertical-align: bottom;
     height: 30px;
-    margin-right: 20px;
-    padding: 10px 5px 0 5px;
+    /* margin-right: 20px; */
+    /* padding: 10px 5px 0 5px; */
+    padding-top: 10px;
+}
+
+.icon-button {
+    display: inline-block;
+    vertical-align: middle;
+    height: 40px;
+    margin: 0 10px;
 }
 
 .icon-button:hover {
@@ -158,9 +261,12 @@ header {
 }
 
 .icon-button:active {
+    background: linear-gradient(to top, #d6d2d2 0%, cornflowerblue 100%);
+}
+
+.icon-button-image:active {
     position: relative;
     left: 1px;
-    background: linear-gradient(to top, #d6d2d2 0%, cornflowerblue 100%);
 }
 
 #options:active {
@@ -241,22 +347,6 @@ h2 {
 .header-input {
     width: 122px;
     /* margin-left: 180px; */ /* si el bloque de inputs está debajo de los botones */
-}
-
-#header-schedule-options-1 {
-    border-color: chartreuse;
-    display: flex;
-    justify-content: space-between;
-}
-
-#header-schedule-options-2 {
-    margin-top: 15px;
-    min-width: 39rem;
-    /* border: solid 1px; */
-    border-color: chartreuse;
-    text-align: end;
-    /* padding-right: 15px; */
-    box-sizing: border-box;
 }
 
 /* #delete-all {

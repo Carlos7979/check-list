@@ -26,7 +26,7 @@
             </div>
             <div id="user-name">
                 <div id="header-welcome">
-                    <div id="header-block-users">
+                    <div class="header-block-users-welcome" id="welcome-container">
                         <div id="welcome">
                             <span class="header-text">Bienvenidos</span>
                         </div>
@@ -40,8 +40,9 @@
                     <div id="header-buttons">
                         <div id="hide-header-buttons" hidden>
                             <button id="new-schedule" class="header-button" isactive="false">Nueva agenda</button>
-                            <span class="header-text">o</span>
+                            <!-- <span class="header-text">o</span> -->
                             <button id="init-template" class="header-button" isactive="false">Iniciar plantilla</button>
+                            <button id='import-button-1' class="header-button" isactive="false">Importar</button>
                         </div>
                     </div>
                 </div>
@@ -50,25 +51,46 @@
         <div class="header-block">
             <div id="header-block-2">
                 <div id="header-schedule-options-1">
-                    <div class="options-header">
-                        <div class="header-subblock">
-                            <div id="header-inputs-1" class="header-inputs" hidden='hidden'>
-                                <input type="text" id="name" class="header-input" maxlength="14" required>
-                                <label for="name" class="header-label">introduce un nombre</label>
+                    <div id="options-header">
+                        <div id="options-header-1" hidden>
+                            <div class="header-subblock">
+                                <div id="header-inputs-1" class="header-inputs" hidden='hidden'>
+                                    <input type="text" id="name" class="header-input" maxlength="14" required>
+                                    <label for="name" class="header-label">introduce un nombre</label>
+                                </div>
+                                <div id="header-inputs-2" hidden='hidden'>
+                                    <div class="header-inputs">
+                                        <input type="number" id="blocks-number" class="header-input" value="4" min="1" max="10">
+                                        <label for="blocks-number" class="header-label">número de módulos</label>
+                                    </div>
+                                    <div class="header-inputs">
+                                        <input type="number" id="descriptions-number" class="header-input" value="10" min="1" max="30">
+                                        <label for="descriptions-number" class="header-label">número de líneas</label>
+                                    </div>
+                                </div>
                             </div>
-                            <div id="header-inputs-2" hidden='hidden'>
-                                <div class="header-inputs">
-                                    <input type="number" id="blocks-number" class="header-input" value="4" min="1" max="10">
-                                    <label for="blocks-number" class="header-label">número de módulos</label>
-                                </div>
-                                <div class="header-inputs">
-                                    <input type="number" id="descriptions-number" class="header-input" value="10" min="1" max="30">
-                                    <label for="descriptions-number" class="header-label">número de líneas</label>
-                                </div>
+                            <div id="header-subblock-2" class="header-subblock">
+                                <button id="button-create" class="header-button">Crear</button>
                             </div>
                         </div>
-                        <div id="header-subblock-2" class="header-subblock">
-                            <button id="button-create" class="header-button">Crear</button>
+                        <div id="options-header-2" hidden>
+                            <div id="import-export-container">
+                                <div id="import-export-buttons" hidden>
+                                    <div id="import-export-buttons-syle">
+                                        <button id='import-button-2' class="header-button" isactive="false">Importar</button>
+                                        <button id='export-button' class="header-button" isactive="false">Exportar</button>
+                                        <div id="import" hidden>
+                                            <div id="import-container">
+                                                <input type='file' id='file-input' hidden>
+                                                <label id="import-label" for="file-input">Buscar archivo</label>
+                                                <span id="import-selected"></span>
+                                                <button id='load-file' class="header-button" hidden>Cargar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
                         </div>
                     </div>
                     <div id="header-subblock-3">
@@ -81,10 +103,21 @@
                     </div>
                 </div>
                 <div id="header-schedule-options-2" hidden>
-                    <img id="delete-all-schedules" class="icon-button" src="images/1024px-Gnome-edit-delete.png" alt="Delete all schedules" title="Eliminar todas las agendas">
-                    <img id="new-block" class="icon-button" src="images/aptdaemon-add.svg" alt="New block" title="Nuevo bloque">
-                    <img id="clean-blocks" class="icon-button" src="images/edit-clear.svg" alt="Clean blocks" title="Vaciar todos los bloques">
-                    <img id="delete-schedule" class="icon-button" src="images/x-red.png" alt="Delete schedule" title="Eliminar esta agenda">
+                    <div class="icon-button">
+                        <img id="delete-all-schedules" class="icon-button-image" src="images/1024px-Gnome-edit-delete.png" alt="Delete all schedules" title="Eliminar todas las agendas">
+                    </div>
+                    <div class="icon-button">
+                        <img id="import-export" class="icon-button-image" src="images/transferencia.png" alt="Import export schedules" title="Importar/exportar agendas">
+                    </div>
+                    <div class="icon-button">
+                        <img id="new-block" class="icon-button-image" src="images/aptdaemon-add.svg" alt="New block" title="Nuevo bloque">
+                    </div>
+                    <div class="icon-button">
+                        <img id="clean-blocks" class="icon-button-image" src="images/edit-clear.svg" alt="Clean blocks" title="Vaciar todos los bloques">
+                    </div>
+                    <div class="icon-button">
+                        <img id="delete-schedule" class="icon-button-image" src="images/x-red.png" alt="Delete schedule" title="Eliminar esta agenda">
+                    </div>
                 </div>
             </div>
         </div>

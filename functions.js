@@ -6,17 +6,65 @@ function disableControlsHeader(target) {
       const buttonNewSchedule = document.getElementById('new-schedule');
       buttonNewSchedule.removeAttribute('style');
       buttonNewSchedule.isactive = 'false';
+      const buttonImportSchedule = document.getElementById('import-button-1');
+      buttonImportSchedule.removeAttribute('style');
+      buttonImportSchedule.isactive = 'false';
+      const buttonImportSchedule2 = document.getElementById('import-button-2');
+      buttonImportSchedule2.removeAttribute('style');
+      buttonImportSchedule2.isactive = 'false';
+      document.getElementById('options-header-1').setAttribute('hidden', 'hidden');
+      document.getElementById('options-header-2').setAttribute('hidden', 'hidden');
       document.getElementById('header-inputs-1').setAttribute('hidden', 'hidden');
       document.getElementById('header-inputs-2').setAttribute('hidden', 'hidden');
       document.getElementById('button-create').setAttribute('style', "visibility: hidden;");
       document.getElementById('name').value = '';
       document.getElementById('blocks-number').value = '4';
       document.getElementById('descriptions-number').value = '10';
-    }
+      document.getElementById('file-input').value = '';
+      document.getElementById('import-selected').innerHTML = '';
+      document.getElementById('load-file').setAttribute('hidden', 'hidden');
+      document.getElementById('import-container').setAttribute('hidden', 'hidden');
+    };
 };
 
+function receivedText(e) {
+    const lines = e.target.result;
+    const imported = JSON.parse(lines);
+    const storedData = JSON.parse(imported['schedules']);
+    for (const key in imported) {
+        saveData(key, JSON.parse(imported[key]));
+    };
+    setSchedulesToOptions(storedData);
+    renderBlocks();
+    window.scrollTo(0,0);
+  };
+
+// function loadFile() {
+//     if (typeof window.FileReader !== 'function') {
+//       alert("The file API isn't supported on this browser yet.");
+//       return;
+//     };
+//     const input = document.getElementById('file-input');
+//     if (!input) {
+//       alert("Couldn't find the file-input element.");
+//     } else if (!input.files) {
+//       alert("This browser doesn't seem to support the `files` property of file inputs.");
+//     } else if (!input.files[0]) {
+//       alert("Please select a file before clicking 'Load'");
+//     } else {
+//       const file = input.files[0];
+//       const fr = new FileReader();
+//       fr.onload = receivedText;
+//       fr.readAsText(file);
+//       input.value = null;
+//     disableControlsHeader({id: 'header'});
+//     };
+//   };
+
 function setSchedulesToOptions(schedules) {
+    const welcomeContainer = document.getElementById('welcome-container');
     const welcome = document.getElementById('welcome');
+    const importButton = document.getElementById('import-button-1');
     const selectorBlock = document.getElementById('header-users');
     const selector = document.getElementById('schedule-selector');
     const optionsButton = document.getElementById('hide-header-subblock-3');
@@ -29,15 +77,17 @@ function setSchedulesToOptions(schedules) {
         optionSelect.value = schedules[i];
         if(schedules[0].activeSchedule === schedules[i]) {
             optionSelect.selected = "true";
-        }
+        };
         selector.append(optionSelect);
-    }
+    };
     welcome.setAttribute('hidden', 'hidden');
+    welcomeContainer.setAttribute('class', 'header-block-users');
+    importButton.setAttribute('hidden', 'hidden');
     selectorBlock.removeAttribute('hidden');
     const userButtons = document.getElementById('hide-header-buttons');
     if(!userButtons.hidden) {
         userButtons.setAttribute('hidden', 'hidden');
-    }
+    };
 };
 
 function renderBlocks(name) {
@@ -50,7 +100,7 @@ function renderBlocks(name) {
     }
     if(!name) {
         name = getData('schedules')[0].activeSchedule;
-    }
+    };
     const titles = getData(`${name}-titles`);
     const dataSet = [{}];
     if(titles.length > 1) {
@@ -59,9 +109,9 @@ function renderBlocks(name) {
             const blocksExample = getData(`${name}-${i}`);
             dataSet.push(blocksExample);
             blocksExample.length > maxLength ? maxLength = blocksExample.length : maxLength
-        }
+        };
         dataSet[0] = {name, descriptionsInBlock: maxLength - 1};
-    }
+    };
     blockConstructor(false, true, dataSet);
 };
 
@@ -288,6 +338,10 @@ function deleteAllSchedules() {
     optionsButton.setAttribute('hidden', 'hidden');
     const blocksContainer = document.getElementById('blocks-container');
     blocksContainer.innerHTML = '';
+    const importButton = document.getElementById('import-button-1');
+    importButton.removeAttribute('hidden');
+    const welcomeContainer = document.getElementById('welcome-container');
+    welcomeContainer.setAttribute('class', 'header-block-users-welcome');
 };
 
 function counterDescriptionsChecks(ol, type, span1, span3, percentage, blockOptions, checkAll) {
