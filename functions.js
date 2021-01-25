@@ -22,8 +22,9 @@ function disableControlsHeader(target) {
       document.getElementById('descriptions-number').value = '10';
       document.getElementById('file-input').value = '';
       document.getElementById('import-selected').innerHTML = '';
-      document.getElementById('load-file').setAttribute('hidden', 'hidden');
+      document.getElementById('import-selected-container').setAttribute('hidden', 'hidden');
       document.getElementById('import-container').setAttribute('hidden', 'hidden');
+      document.getElementById('import-export-container').setAttribute('hidden', 'hidden');
     };
 };
 

@@ -118,27 +118,30 @@ header {
     box-sizing: border-box;
 }
 
-/* #import-export-buttons-syle {
-    
-} */
+#import-export-buttons-style {
+    height: 30px;
+    border-color: orchid;
+}
 
 #import {
     /* height: max-content; */
     display: inline-block;
-
+    margin-top: 20px;
 }
 
 /* #import-container {
     width: min-content;
 } */
 
-#import-label {
+#import-label, #load-file {
     padding: 3px 5px;
     box-sizing: border-box;
     border: 1px solid rgb(36, 35, 35);
     border-radius: 5px;
-    background-color: rgb(187, 119, 250);
-    color: rgb(36, 35, 35);
+    /* background-color: rgb(187, 119, 250); */
+    background-color: #4CAF50;
+    /* color: rgb(36, 35, 35); */
+    color: whitesmoke;
     user-select: none;
 }
 
@@ -149,27 +152,63 @@ header {
 }
 
 #import-label:active {
-    background: linear-gradient(to bottom right, darkgrey 0%, rgb(187, 119, 250) 100%);;
+    background: linear-gradient(to bottom right, darkgrey 0%, #4CAF50 100%);;
     padding-left: 6px;
     padding-right: 4px;
 }
 
+#import-selected-container {
+    border: 1px solid;
+    border-radius: 5px;
+    box-sizing: border-box;
+    padding: 3px;
+    background-color: silver;
+    cursor: default;
+}
+
+/* #import-selected-style {
+    display: flex;
+} */
+
 #import-selected {
     display: inline-block;
-    max-width: 11em;
+    max-width: 17em;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    /* border: 1px solid blueviolet; */
+    /* border-color: blueviolet; */
+    vertical-align: middle;
+    padding: 2px;
+    padding-bottom: 4px;
+    font-weight: bold;
 }
 
 #import-selected:hover {
     cursor: default;
-    font-weight: bold;
+    /* font-weight: bold; */
+}
+
+#load-file {
+    padding: 1px 3px;
+}
+
+#load-file:hover {
+    /* border: 1px solid blueviolet; */
+    box-shadow: 0px 0px 1px 1px rgb(112, 109, 109);
+    color: black;
+}
+
+#load-file:active {
+    background: linear-gradient(to bottom right, darkgrey 0%, #4CAF50 100%);;
+    padding-left: 4px;
+    padding-right: 2px;
 }
 
 .header-subblock {
     min-width: 350px;
-    border: orange solid 1px;
+    /* border: orange solid 1px; */
+    border-color: orange;
     display: inline-block;
     vertical-align: top; /* Corrige el desfase vertical de bloques inline-block */
 }

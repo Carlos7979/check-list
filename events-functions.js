@@ -55,6 +55,7 @@ function newSchedule(element) {
                 element.removeAttribute('style');
                 return;
             };
+            if(element.id === 'import-button-2') document.getElementById('header-schedule-options-2').setAttribute('hidden', 'hidden');
             buttonExportSchedule.setAttribute('hidden', 'hidden');
             buttonNewSchedule.removeAttribute('style');
             buttonNewSchedule.isactive = 'false';
@@ -65,6 +66,10 @@ function newSchedule(element) {
             document.getElementById('header-inputs-2').setAttribute('hidden', 'hidden');
             importContainer.removeAttribute('hidden');
             document.getElementById('options-header-2').removeAttribute('hidden');
+            if(element.id === 'import-button-1') {
+                document.getElementById('import-export-buttons').removeAttribute('hidden');
+                document.getElementById('import').removeAttribute('hidden');
+            }
             allowInitialData = true;
         };
         element.setAttribute('style', "color: CadetBlue;");
@@ -166,9 +171,9 @@ function scheduleOptions(element) {
         const buttonsImportExport = document.getElementById('import-container');
         buttonsImportExport.setAttribute('hidden', 'hidden');
         if(buttonsContainer.hidden){
+            disableControlsHeader({id: 'header'});
             if(!userButtons.hidden) {
                 userButtons.setAttribute('hidden', 'hidden');
-                disableControlsHeader({id: 'header'});
             };
             buttonsContainer.removeAttribute('hidden');
         } else {
@@ -207,10 +212,12 @@ function importListener(element) {
     element.addEventListener('change', () => {
         const input = document.getElementById('file-input');
         const span = document.getElementById('import-selected');
-        const button = document.getElementById('load-file');
+        // const button = document.getElementById('load-file');
+        const container = document.getElementById('import-selected-container');
         span.innerHTML = input.files[0].name;
         span.setAttribute('title', input.files[0].name);
-        button.removeAttribute('hidden');
+        // button.removeAttribute('hidden');
+        container.removeAttribute('hidden');
     });
 };
 
@@ -219,10 +226,12 @@ function importExportButtons(element) {
         const buttons = document.getElementById('import-export-buttons');
         const optionsHeader2 = document.getElementById('options-header-2');
         const buttonExportSchedule = document.getElementById('export-button');
+        const importExportContainer = document.getElementById('import-export-container');
         if(buttons.hidden || optionsHeader2.hidden) {
             buttons.removeAttribute('hidden');
             optionsHeader2.removeAttribute('hidden');
             buttonExportSchedule.removeAttribute('hidden');
+            importExportContainer.removeAttribute('hidden');
         } else {
             disableControlsHeader({id: 'header'});
         };
