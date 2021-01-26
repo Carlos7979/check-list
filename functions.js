@@ -393,5 +393,11 @@ function counterDescriptionsChecks(ol, type, span1, span3, percentage, blockOpti
             percentage.setAttribute('style', "font-weight: bold; color: black;");
             checkAll.setAttribute('style', "border-color: ForestGreen;");
         };
-    }
+    };
+};
+
+function toggleBlockOptions(element) {
+    const [identifier, isTitle, description, input] = elementToModify(element);
+    const optionsIconsContainer = document.getElementById(`optionsIconsContainer-${identifier}`);
+    optionsIconsContainer.hidden ? optionsIconsContainer.removeAttribute('hidden') : optionsIconsContainer.setAttribute('hidden', 'hidden');
 }

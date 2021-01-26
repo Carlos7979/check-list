@@ -96,7 +96,7 @@ function blockEventDetector(element) {
                     checkAll(target);
                     break;
                 case 'advanced':
-                    console.log(target);
+                    toggleBlockOptions(target);
                     break;
                 default:
                     break;

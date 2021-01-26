@@ -426,6 +426,34 @@ h2 {
     margin: 5px 10px 0 45px;
     padding: 1px;
     text-align: end;
+    display: flex;
+    justify-content: space-between;
+}
+
+.blockAdvancedPrimaryContainer {
+    border-color: blueviolet;
+    display: inline-block;
+    height: 32px;
+    width: 90%;
+}
+
+.optionsIconsContainer {
+    border-color: red;
+    /* border: solid 1px; */
+    /* background-color: whitesmoke; */
+    border-radius: 5px;
+    height: 100%;
+    text-align: left;
+}
+
+.block-advanced-icons-containers {
+    /* background-color: whitesmoke; */
+    height: 30px;
+    width: 30px;
+    /* border: solid 1px; */
+    border-radius: 5px;
+    display: inline-block;
+    margin-right: 5%;
 }
 
 .icon-button-options {
@@ -433,16 +461,29 @@ h2 {
     border-radius: 5px;
 }
 
-.icon-button-options:hover {
+.icon-button-options:hover, .block-advanced-icons-containers:hover {
     cursor: pointer;
     border-radius: 5px;
     background: linear-gradient(to top, #9aa2eb 0%, peachpuff 100%);
 }
 
-.icon-button-options:active {
+.icon-button-options:active, .block-advanced-icons-containers:active {
     position: relative;
     right: 1px;
     background: linear-gradient(to top, #9aa2eb 0%, cornflowerblue 100%);
+}
+
+.block-advanced-icons-containers:active {
+    left: 1px;
+}
+
+.config-button-block, .icon-button-block, .copy-button-block {
+    height: 30px;
+}
+
+.config-button-block:hover {
+    -webkit-transform: rotate(36deg);
+    transform: rotate(36deg);
 }
 
 
@@ -563,7 +604,7 @@ li:hover, .title:hover {
     margin-right: 10px;
     border: 1px solid black;
     height: 1em;
-    width: 1em;
+    min-width: 1em;
     display: inline-block;
     border-radius: 5px;
     margin-left: 2px;
