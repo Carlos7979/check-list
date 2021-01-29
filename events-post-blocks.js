@@ -98,6 +98,9 @@ function blockEventDetector(element) {
                 case 'advanced':
                     toggleBlockOptions(target);
                     break;
+                case 'config':
+                    toggleBlockConfig(target);
+                    break;
                 default:
                     break;
             }

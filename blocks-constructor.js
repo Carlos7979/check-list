@@ -80,7 +80,10 @@ function blockConstructor(  isNew,
                             const deleteBlock = elementsCreator('img', `deleteBlock-${i+1}`, 'icon-button-block', false, {src: 'images/window-close.svg', alt: 'Block delete', title: 'Eliminar bloque'});
                         deleteBlockContainer.appendChild(deleteBlock);
                     severalAppends(optionsIconsContainer, [configContainer, moveContainer, copyBlockContainer, cleanBlockContainer, deleteBlockContainer]);
-                severalAppends(blockAdvancedPrimaryContainer, [optionsIconsContainer]);
+                    const configManageContainer = elementsCreator('div', `configManageContainer-${i +1}`, 'optionsIconsContainer', false, {hidden: 'hidden'});
+                        const testShowConfigBlock = elementsCreator('div', `testConfig-${i +1}`, 'testConfig', 'No implementado');
+                    severalAppends(configManageContainer, [testShowConfigBlock])
+                severalAppends(blockAdvancedPrimaryContainer, [optionsIconsContainer, configManageContainer]);
                 const optionsBlockButton = elementsCreator("IMG", `advanced-${i+1}`, 'icon-button-options', false, {src: 'images/2000px-Gnome-preferences-system.png', alt: 'Block options', title: 'Opciones del bloque'});
             severalAppends(blockAdvancedOptions, [blockAdvancedPrimaryContainer, optionsBlockButton]);
             const title = elementsCreator("DIV", `title-${i+1}`, 'title');

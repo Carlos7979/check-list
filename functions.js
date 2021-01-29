@@ -398,6 +398,21 @@ function counterDescriptionsChecks(ol, type, span1, span3, percentage, blockOpti
 
 function toggleBlockOptions(element) {
     const [identifier, isTitle, description, input] = elementToModify(element);
+    disableBlockOptionsManagement(identifier);
     const optionsIconsContainer = document.getElementById(`optionsIconsContainer-${identifier}`);
     optionsIconsContainer.hidden ? optionsIconsContainer.removeAttribute('hidden') : optionsIconsContainer.setAttribute('hidden', 'hidden');
+};
+
+function disableBlockOptionsManagement(identifier) {
+    const configManageContainer = document.getElementById(`configManageContainer-${identifier}`);
+    if(!configManageContainer.hidden) configManageContainer.setAttribute('hidden', 'hidden');
 }
+
+function toggleBlockConfig(element) {
+    const [identifier, isTitle, description, input] = elementToModify(element);
+    const optionsIconsContainer = document.getElementById(`optionsIconsContainer-${identifier}`);
+    const configManageContainer = document.getElementById(`configManageContainer-${identifier}`);
+    optionsIconsContainer.setAttribute('hidden', 'hidden');
+    configManageContainer.removeAttribute('hidden');
+    setTimeout(() => {disableBlockOptionsManagement(identifier)}, 2000);
+};
