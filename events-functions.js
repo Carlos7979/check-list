@@ -1,6 +1,6 @@
 function newSchedule(element) {
     element.addEventListener('click', () => {
-        if(!(element.id === 'import-button-2')) {
+        if(!(element.id === 'import-button-1' || element.id === 'import-button-2' || element.id === 'export-button')) {
             document.getElementById('options-header-1').removeAttribute('hidden');        
             document.getElementById('header-inputs-1').removeAttribute('hidden');
             document.getElementById('button-create').setAttribute('style', "visibility: visible;");
@@ -9,7 +9,9 @@ function newSchedule(element) {
         const buttonNewSchedule = document.getElementById('new-schedule');
         const buttonInitTemplate = document.getElementById('init-template');
         const importContainer = document.getElementById('import-container');
-        const buttonImportSchedule = document.getElementById('import-button-1');
+        const exportContainer = document.getElementById('export-container');
+        const buttonImportSchedule1 = document.getElementById('import-button-1');
+        const buttonImportSchedule2 = document.getElementById('import-button-2');
         const buttonExportSchedule = document.getElementById('export-button');
         if(element.id === 'new-schedule') {
             if(element.isactive  === 'true') {  
@@ -20,8 +22,8 @@ function newSchedule(element) {
             };
             buttonInitTemplate.removeAttribute('style');
             buttonInitTemplate.isactive = 'false';
-            buttonImportSchedule.removeAttribute('style');
-            buttonImportSchedule.isactive = 'false';
+            buttonImportSchedule1.removeAttribute('style');
+            buttonImportSchedule1.isactive = 'false';
             document.getElementById('header-inputs-2').removeAttribute('hidden');
             importContainer.setAttribute('hidden', 'hidden');
             document.getElementById('options-header-2').setAttribute('hidden', 'hidden');
@@ -35,41 +37,54 @@ function newSchedule(element) {
             };
             buttonNewSchedule.removeAttribute('style');
             buttonNewSchedule.isactive = 'false';
-            buttonImportSchedule.removeAttribute('style');
-            buttonImportSchedule.isactive = 'false';
+            buttonImportSchedule1.removeAttribute('style');
+            buttonImportSchedule1.isactive = 'false';
             document.getElementById('header-inputs-2').setAttribute('hidden', 'hidden');
             importContainer.setAttribute('hidden', 'hidden');
             document.getElementById('options-header-2').setAttribute('hidden', 'hidden');
             allowInitialData = true;
         } else {
             if(element.isactive  === 'true') {  
-                if(element.id === 'import-button-2') {
-                    importContainer.setAttribute('hidden', 'hidden');
-                    element.isactive = 'false';
-                    element.removeAttribute('style');
-                    buttonExportSchedule.removeAttribute('hidden');
-                    return;
-                };
-                disableControlsHeader({id: 'header'});
                 element.isactive = 'false';
                 element.removeAttribute('style');
+                if(element.id === 'import-button-2' || element.id === 'import-button-1') {
+                    importContainer.setAttribute('hidden', 'hidden');
+                    buttonExportSchedule.removeAttribute('hidden');
+                    return;
+                } else {
+                    exportContainer.setAttribute('hidden', 'hidden');
+                };
+                
+                // element.isactive = 'false';
+                // element.removeAttribute('style');
                 return;
             };
-            if(element.id === 'import-button-2') document.getElementById('header-schedule-options-2').setAttribute('hidden', 'hidden');
-            buttonExportSchedule.setAttribute('hidden', 'hidden');
-            buttonNewSchedule.removeAttribute('style');
-            buttonNewSchedule.isactive = 'false';
-            buttonInitTemplate.removeAttribute('style');
-            buttonInitTemplate.isactive = 'false';
-            document.getElementById('options-header-1').setAttribute('hidden', 'hidden');
-            document.getElementById('header-inputs-1').setAttribute('hidden', 'hidden');
-            document.getElementById('header-inputs-2').setAttribute('hidden', 'hidden');
-            importContainer.removeAttribute('hidden');
             document.getElementById('options-header-2').removeAttribute('hidden');
+            if(element.id === 'import-button-2' || element.id === 'export-button' || element.id === 'export-button') document.getElementById('header-schedule-options-2').setAttribute('hidden', 'hidden');
+            if(element.id === 'import-button-2') {
+                importContainer.removeAttribute('hidden');
+                exportContainer.setAttribute('hidden', 'hidden');
+                buttonExportSchedule.isactive = 'false';
+                buttonExportSchedule.removeAttribute('style');
+            };
+            if(element.id === 'export-button') {
+                exportContainer.removeAttribute('hidden');
+                importContainer.setAttribute('hidden', 'hidden');
+                buttonImportSchedule2.isactive = 'false';
+                buttonImportSchedule2.removeAttribute('style');
+            };
             if(element.id === 'import-button-1') {
+                document.getElementById('options-header-1').setAttribute('hidden', 'hidden');
+                document.getElementById('header-inputs-1').setAttribute('hidden', 'hidden');
+                document.getElementById('header-inputs-2').setAttribute('hidden', 'hidden');
                 document.getElementById('import-export-buttons').removeAttribute('hidden');
-                document.getElementById('import').removeAttribute('hidden');
-            }
+                document.getElementById('import-options').removeAttribute('hidden');
+                importContainer.removeAttribute('hidden')
+                buttonNewSchedule.removeAttribute('style');
+                buttonNewSchedule.isactive = 'false';
+                buttonInitTemplate.removeAttribute('style');
+                buttonInitTemplate.isactive = 'false';
+            };
             allowInitialData = true;
         };
         element.setAttribute('style', "color: CadetBlue;");
@@ -134,7 +149,7 @@ function create(element) {
                         isValidName = false;
                         return;
                     };
-                }
+                };
             });
             if(!isValidName) return
             schedules.push(scheduleName);
@@ -240,8 +255,26 @@ function importExportButtons(element) {
 
 function exportSchedules(element) {
     element.addEventListener('click', () => {
-    const data = localStorage, fileName = "mis-agendas.json";
-
+    let data = {}, fileName = "";
+    const schedules = getData('schedules');
+    if(element.id === 'export-this' || schedules.length === 2) {
+        data = {};
+        const name = schedules[0].activeSchedule;
+        const titles = getData(`${name}-titles`);
+        fileName = `${name}-agenda.json`;
+        data['schedules'] = JSON.stringify([{activeSchedule: name}, name]);
+        for(let i = 0; i < titles.length; i++) {
+            if(i === 0) {
+                data[`${name}-titles`] = JSON.stringify(titles);
+            } else {
+                data[`${name}-${i}`] = JSON.stringify(getData(`${name}-${i}`));
+            };
+        };
+    } else {
+        data = localStorage;
+        fileName = "mis-agendas.json"
+    };
+    const buttonExportSchedule = document.getElementById('export-button'); 
     const a = document.createElement("a");
     document.getElementById('import-export-buttons').appendChild(a);
     a.style = "display: none";
@@ -252,10 +285,10 @@ function exportSchedules(element) {
         a.href = url;
         a.download = fileName;
         a.click();
-        console.log(1);
-        console.log(window.URL);
         window.URL.revokeObjectURL(url);
         disableControlsHeader({id: 'header'});
+        buttonExportSchedule.isactive = 'false';
+        buttonExportSchedule.removeAttribute('style');
         a.parentNode.removeChild(a);
     });
 }

@@ -13,7 +13,9 @@ function  main() {
   newSchedule(document.getElementById('init-template'));
   newSchedule(document.getElementById('import-button-1'));
   newSchedule(document.getElementById('import-button-2'));
-  exportSchedules(document.getElementById('export-button'));
+  newSchedule(document.getElementById('export-button'));
+  exportSchedules(document.getElementById('export-all'));
+  exportSchedules(document.getElementById('export-this'));
   editHeaderControlActiveDetector(document.getElementsByTagName('header')[0]);
   addSchedule(document.getElementById('add-schedule'));
   changeSchedule(document.getElementById('schedule-selector'));

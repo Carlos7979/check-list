@@ -12,6 +12,9 @@ function disableControlsHeader(target) {
       const buttonImportSchedule2 = document.getElementById('import-button-2');
       buttonImportSchedule2.removeAttribute('style');
       buttonImportSchedule2.isactive = 'false';
+      const buttonExportSchedule = document.getElementById('export-button');
+      buttonExportSchedule.removeAttribute('style');
+      buttonExportSchedule.isactive = 'false';
       document.getElementById('options-header-1').setAttribute('hidden', 'hidden');
       document.getElementById('options-header-2').setAttribute('hidden', 'hidden');
       document.getElementById('header-inputs-1').setAttribute('hidden', 'hidden');
@@ -24,19 +27,79 @@ function disableControlsHeader(target) {
       document.getElementById('import-selected').innerHTML = '';
       document.getElementById('import-selected-container').setAttribute('hidden', 'hidden');
       document.getElementById('import-container').setAttribute('hidden', 'hidden');
+      document.getElementById('export-container').setAttribute('hidden', 'hidden');
       document.getElementById('import-export-container').setAttribute('hidden', 'hidden');
     };
 };
 
 function receivedText(e) {
     const lines = e.target.result;
-    const imported = JSON.parse(lines);
-    const storedData = JSON.parse(imported['schedules']);
-    for (const key in imported) {
-        saveData(key, JSON.parse(imported[key]));
+    let imported;
+    try {
+        imported = JSON.parse(lines);
+    } catch (error) {
+        alert('El archivo seleccionado no parece contener agendas de esta aplicación');
+        return;
     };
-    setSchedulesToOptions(storedData);
-    renderBlocks();
+    let importedSchedules = imported['schedules'];
+    const schedules = getData('schedules');
+    let name;
+    if(!schedules) {
+        if(importedSchedules) {
+            importedSchedules = JSON.parse(importedSchedules);
+            for (const key in imported) {
+                saveData(key, JSON.parse(imported[key]));
+            };
+            setSchedulesToOptions(importedSchedules);
+        } else {
+            alert('El archivo seleccionado no parece contener agendas de esta aplicación');
+            return;
+        };
+    } else {
+        if(importedSchedules) {
+            importedSchedules = JSON.parse(importedSchedules);
+            name = importedSchedules[0].activeSchedule;
+            // const keys = Object.keys(imported);
+            // keys.forEach(element => {
+            //     const parts = element.split("-");
+            //     if(parts[parts.length - 1] === 'titles') {
+            //         parts.pop();
+            //         name = parts.join('-');
+            //     };
+            // });
+            importedSchedules.forEach(importedSchedule => {
+                if(typeof importedSchedule !== 'object') {
+                    const nameExists = schedules.find(schedule => {
+                        if(typeof schedule !== 'object') {
+                            return schedule.toLowerCase() === importedSchedule.toLowerCase()
+                        };
+                    });
+                    const scheduleTitles = `${importedSchedule}-titles`;
+                    if(!nameExists) {
+                        schedules.push(importedSchedule);                        
+                    } else {
+                        const oldTitles = getData(scheduleTitles);
+                        for(let i = 1; i !== oldTitles.length; i++) {
+                            deleteData(`${importedSchedule}-${i}`);
+                        };
+                        deleteData(scheduleTitles);
+                    };
+                    const titles = JSON.parse(imported[scheduleTitles]);
+                    saveData(scheduleTitles, titles);
+                    for(let i = 1; i !== titles.length; i++) {
+                       saveData(`${importedSchedule}-${i}`, JSON.parse(imported[`${importedSchedule}-${i}`]));
+                    };
+                };
+            });
+            schedules[0].activeSchedule = name;
+            saveData('schedules', schedules);
+            setSchedulesToOptions(schedules);
+        } else {
+            alert('El archivo seleccionado no parece contener agendas de esta aplicación');
+            return;
+        };
+    };
+    renderBlocks(name);
     window.scrollTo(0,0);
   };
 
@@ -71,7 +134,6 @@ function setSchedulesToOptions(schedules) {
     const optionsButton = document.getElementById('hide-header-subblock-3');
     optionsButton.removeAttribute('hidden');
     selector.innerHTML = '';
-    schedules[0].activeSchedule
     for(let i = 1; i < schedules.length; i++) {
         const optionSelect = document.createElement('option');
         optionSelect.innerHTML = schedules[i];
