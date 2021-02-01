@@ -459,7 +459,8 @@ function counterDescriptionsChecks(ol, type, span1, span3, percentage, blockOpti
 };
 
 function toggleBlockOptions(identifier) {
-    if(blockOptionsContainerActive) disableBlockOptionsManagement(identifier, blockOptionsContainerActive);
+    const type = blockOptionsContainerActive[identifier];
+    if(type) disableBlockOptionsManagement(identifier, type);
     const optionsIconsContainer = document.getElementById(`optionsIconsContainer-${identifier}`);
     optionsIconsContainer.hidden ? optionsIconsContainer.removeAttribute('hidden') : optionsIconsContainer.setAttribute('hidden', 'hidden');
 };
@@ -467,7 +468,7 @@ function toggleBlockOptions(identifier) {
 function disableBlockOptionsManagement(identifier, type) {
     const manageContainer = document.getElementById(`${type}ManageContainer-${identifier}`);
     manageContainer.setAttribute('hidden', 'hidden');
-    blockOptionsContainerActive = '';
+    blockOptionsContainerActive[identifier] = '';
 }
 
 function toggleBlockOptionsContainers(type, identifier) {
@@ -476,6 +477,6 @@ function toggleBlockOptionsContainers(type, identifier) {
 
     const manageContainer = document.getElementById(`${type}ManageContainer-${identifier}`);
     manageContainer.removeAttribute('hidden');
-    blockOptionsContainerActive = type;
+    blockOptionsContainerActive[identifier] = type;
     setTimeout(() => {disableBlockOptionsManagement(identifier, type)}, 2000);
 };

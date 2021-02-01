@@ -1,6 +1,6 @@
 let allowInitialData = false;
 let editControlsActive = [];
-let blockOptionsContainerActive = '';
+let blockOptionsContainerActive = [];
 
 const initialDescriptions = [
     {
