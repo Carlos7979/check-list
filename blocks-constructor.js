@@ -81,9 +81,21 @@ function blockConstructor(  isNew,
                         deleteBlockContainer.appendChild(deleteBlock);
                     severalAppends(optionsIconsContainer, [configContainer, moveContainer, copyBlockContainer, cleanBlockContainer, deleteBlockContainer]);
                     const configManageContainer = elementsCreator('div', `configManageContainer-${i +1}`, 'optionsIconsContainer', false, {hidden: 'hidden'});
-                        const testShowConfigBlock = elementsCreator('div', `testConfig-${i +1}`, 'testConfig', 'No implementado');
-                    severalAppends(configManageContainer, [testShowConfigBlock])
-                severalAppends(blockAdvancedPrimaryContainer, [optionsIconsContainer, configManageContainer]);
+                        const testShowConfigBlock = elementsCreator('div', `testConfig-${i +1}`, 'testConfig', 'Configurar bloque aún no implementado');
+                    severalAppends(configManageContainer, [testShowConfigBlock]);
+                    const moveManageContainer = elementsCreator('div', `moveManageContainer-${i +1}`, 'optionsIconsContainer', false, {hidden: 'hidden'});
+                        const testShowMoveBlock = elementsCreator('div', `testMove-${i +1}`, 'testMove', 'Mover bloque aún no implementado');
+                    severalAppends(moveManageContainer, [testShowMoveBlock]);
+                    const copyManageContainer = elementsCreator('div', `copyManageContainer-${i +1}`, 'optionsIconsContainer', false, {hidden: 'hidden'});
+                        const testShowCopyBlock = elementsCreator('div', `testCopy-${i +1}`, 'testCopy', 'Copiar bloque aún no implementado');
+                    severalAppends(copyManageContainer, [testShowCopyBlock]);
+                    const cleanManageContainer = elementsCreator('div', `cleanManageContainer-${i +1}`, 'optionsIconsContainer', false, {hidden: 'hidden'});
+                        const testShowCleanBlock = elementsCreator('div', `testClean-${i +1}`, 'testClean', 'Limpiar bloque aún no implementado');
+                    severalAppends(cleanManageContainer, [testShowCleanBlock]);
+                    const deleteBlockManageContainer = elementsCreator('div', `deleteBlockManageContainer-${i +1}`, 'optionsIconsContainer', false, {hidden: 'hidden'});
+                        const testShowDeleteBlockBlock = elementsCreator('div', `testDeleteBlock-${i +1}`, 'testDeleteBlock', 'Borrar bloque aún no implementado');
+                    severalAppends(deleteBlockManageContainer, [testShowDeleteBlockBlock]);
+                severalAppends(blockAdvancedPrimaryContainer, [optionsIconsContainer, configManageContainer, moveManageContainer, copyManageContainer, cleanManageContainer, deleteBlockManageContainer]);
                 const optionsBlockButton = elementsCreator("IMG", `advanced-${i+1}`, 'icon-button-options', false, {src: 'images/2000px-Gnome-preferences-system.png', alt: 'Block options', title: 'Opciones del bloque'});
             severalAppends(blockAdvancedOptions, [blockAdvancedPrimaryContainer, optionsBlockButton]);
             const title = elementsCreator("DIV", `title-${i+1}`, 'title');

@@ -81,7 +81,7 @@ function blockEventDetector(element) {
         disableControls();
       };
       if(target.tagName = 'LI' || target.className === 'block-options' || target.className === 'block-advanced-options') {
-          const type = target.getAttribute('id').split('-')[0];
+          const [type, identifier] = target.getAttribute('id').split('-');
             switch (type) {
                 case 'check':
                     check(target);
@@ -96,10 +96,22 @@ function blockEventDetector(element) {
                     checkAll(target);
                     break;
                 case 'advanced':
-                    toggleBlockOptions(target);
+                    toggleBlockOptions(identifier);
                     break;
                 case 'config':
-                    toggleBlockConfig(target);
+                    toggleBlockOptionsContainers(type, identifier);
+                    break;
+                case 'move':
+                    toggleBlockOptionsContainers(type, identifier);
+                    break;
+                case 'copy':
+                    toggleBlockOptionsContainers(type, identifier);
+                    break;
+                case 'clean':
+                    toggleBlockOptionsContainers(type, identifier);
+                    break;
+                case 'deleteBlock':
+                    toggleBlockOptionsContainers(type, identifier);
                     break;
                 default:
                     break;

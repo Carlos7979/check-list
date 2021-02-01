@@ -4,6 +4,22 @@
     margin: 0;
 }
 
+@media print{
+    header, .block-advanced-options, .block-options *{
+      display: none !important;
+    }
+
+    #blocks-container {
+        padding-top: 0  !important;
+             /* habilitado si "header" posee position fixed */
+    }
+
+    .check, .checkall {
+        color: hsla(0, 0%, 0%, 0) !important;
+    }
+
+}
+
 /* @font-face {
     font-family: OpenSans-Bold;
     src: url('OpenSans-Bold.ttf');
@@ -73,6 +89,9 @@ header {
     padding-bottom: 1px;
     vertical-align: bottom;
     width: 155px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 #add-schedule {
@@ -433,7 +452,7 @@ h2 {
         /* para que el efecto de centrado horizonatal del atributo 'auto' surta efecto, hay que ajustar el tamaño del contenedor al ancho de dos bloques */
     width: 78.3em;
     padding-top: 112.5px;
-         /* habilatado si header posee position fixed */
+         /* habilitado si "header" posee position fixed */
 }
 
 .block {

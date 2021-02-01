@@ -458,23 +458,24 @@ function counterDescriptionsChecks(ol, type, span1, span3, percentage, blockOpti
     };
 };
 
-function toggleBlockOptions(element) {
-    const [identifier, isTitle, description, input] = elementToModify(element);
-    disableBlockOptionsManagement(identifier);
+function toggleBlockOptions(identifier) {
+    if(blockOptionsContainerActive) disableBlockOptionsManagement(identifier, blockOptionsContainerActive);
     const optionsIconsContainer = document.getElementById(`optionsIconsContainer-${identifier}`);
     optionsIconsContainer.hidden ? optionsIconsContainer.removeAttribute('hidden') : optionsIconsContainer.setAttribute('hidden', 'hidden');
 };
 
-function disableBlockOptionsManagement(identifier) {
-    const configManageContainer = document.getElementById(`configManageContainer-${identifier}`);
-    if(!configManageContainer.hidden) configManageContainer.setAttribute('hidden', 'hidden');
+function disableBlockOptionsManagement(identifier, type) {
+    const manageContainer = document.getElementById(`${type}ManageContainer-${identifier}`);
+    manageContainer.setAttribute('hidden', 'hidden');
+    blockOptionsContainerActive = '';
 }
 
-function toggleBlockConfig(element) {
-    const [identifier, isTitle, description, input] = elementToModify(element);
+function toggleBlockOptionsContainers(type, identifier) {
     const optionsIconsContainer = document.getElementById(`optionsIconsContainer-${identifier}`);
-    const configManageContainer = document.getElementById(`configManageContainer-${identifier}`);
     optionsIconsContainer.setAttribute('hidden', 'hidden');
-    configManageContainer.removeAttribute('hidden');
-    setTimeout(() => {disableBlockOptionsManagement(identifier)}, 2000);
+
+    const manageContainer = document.getElementById(`${type}ManageContainer-${identifier}`);
+    manageContainer.removeAttribute('hidden');
+    blockOptionsContainerActive = type;
+    setTimeout(() => {disableBlockOptionsManagement(identifier, type)}, 2000);
 };
