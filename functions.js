@@ -1,34 +1,42 @@
 function disableControlsHeader(target) {
     if (target.tagName === 'DIV' || target.id === 'header') {
-      const buttonInitTemplate = document.getElementById('init-template');
-      buttonInitTemplate.removeAttribute('style');
-      buttonInitTemplate.isactive = 'false';
-      const buttonNewSchedule = document.getElementById('new-schedule');
-      buttonNewSchedule.removeAttribute('style');
-      buttonNewSchedule.isactive = 'false';
-      const buttonImportSchedule = document.getElementById('import-button-1');
-      buttonImportSchedule.removeAttribute('style');
-      buttonImportSchedule.isactive = 'false';
-      const buttonImportSchedule2 = document.getElementById('import-button-2');
-      buttonImportSchedule2.removeAttribute('style');
-      buttonImportSchedule2.isactive = 'false';
-      const buttonExportSchedule = document.getElementById('export-button');
-      buttonExportSchedule.removeAttribute('style');
-      buttonExportSchedule.isactive = 'false';
-      document.getElementById('options-header-1').setAttribute('hidden', 'hidden');
-      document.getElementById('options-header-2').setAttribute('hidden', 'hidden');
-      document.getElementById('header-inputs-1').setAttribute('hidden', 'hidden');
-      document.getElementById('header-inputs-2').setAttribute('hidden', 'hidden');
-      document.getElementById('button-create').setAttribute('style', "visibility: hidden;");
-      document.getElementById('name').value = '';
-      document.getElementById('blocks-number').value = '4';
-      document.getElementById('descriptions-number').value = '10';
-      document.getElementById('file-input').value = '';
-      document.getElementById('import-selected').innerHTML = '';
-      document.getElementById('import-selected-container').setAttribute('hidden', 'hidden');
-      document.getElementById('import-container').setAttribute('hidden', 'hidden');
-      document.getElementById('export-container').setAttribute('hidden', 'hidden');
-      document.getElementById('import-export-container').setAttribute('hidden', 'hidden');
+        const newScheduleOptions = document.getElementById('options-header-1');
+        if(!newScheduleOptions.hidden) {
+            newScheduleOptions.setAttribute('hidden', 'hidden');
+            const buttonInitTemplate = document.getElementById('init-template');
+            buttonInitTemplate.removeAttribute('style');
+            buttonInitTemplate.isactive = 'false';
+            const buttonNewSchedule = document.getElementById('new-schedule');
+            buttonNewSchedule.removeAttribute('style');
+            buttonNewSchedule.isactive = 'false';
+            const buttonImportSchedule = document.getElementById('import-button-1');
+            buttonImportSchedule.removeAttribute('style');
+            buttonImportSchedule.isactive = 'false';
+            document.getElementById('header-inputs-1').setAttribute('hidden', 'hidden');
+            document.getElementById('header-inputs-2').setAttribute('hidden', 'hidden');
+            document.getElementById('button-create').setAttribute('style', "visibility: hidden;");
+            document.getElementById('name').value = '';
+            document.getElementById('blocks-number').value = '4';
+            document.getElementById('descriptions-number').value = '10';
+            return;
+        };
+        const importExportOptions = document.getElementById('options-header-2');
+        if(!importExportOptions.hidden) {
+            importExportOptions.setAttribute('hidden', 'hidden');
+            const buttonImportSchedule2 = document.getElementById('import-button-2');
+            buttonImportSchedule2.removeAttribute('style');
+            buttonImportSchedule2.isactive = 'false';
+            const buttonExportSchedule = document.getElementById('export-button');
+            buttonExportSchedule.removeAttribute('style');
+            buttonExportSchedule.isactive = 'false';
+            
+            document.getElementById('file-input').value = '';
+            document.getElementById('import-selected').innerHTML = '';
+            document.getElementById('import-selected-container').setAttribute('hidden', 'hidden');
+            document.getElementById('import-container').setAttribute('hidden', 'hidden');
+            document.getElementById('export-container').setAttribute('hidden', 'hidden');
+            document.getElementById('import-export-container').setAttribute('hidden', 'hidden');
+        };
     };
 };
 
@@ -469,7 +477,7 @@ function disableBlockOptionsManagement(identifier, type) {
     const manageContainer = document.getElementById(`${type}ManageContainer-${identifier}`);
     manageContainer.setAttribute('hidden', 'hidden');
     blockOptionsContainerActive[identifier] = '';
-}
+};
 
 function toggleBlockOptionsContainers(type, identifier) {
     const optionsIconsContainer = document.getElementById(`optionsIconsContainer-${identifier}`);

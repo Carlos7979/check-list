@@ -118,7 +118,7 @@ function addSchedule(element) {
         } else {
             userButtons.setAttribute('hidden', 'hidden');
             optionsHeader.setAttribute('hidden', 'hidden');
-            disableControlsHeader({id: 'header'})
+            disableControlsHeader({id: 'header'});
         }
       });
 };
