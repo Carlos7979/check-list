@@ -9,9 +9,6 @@ function disableControlsHeader(target) {
             const buttonNewSchedule = document.getElementById('new-schedule');
             buttonNewSchedule.removeAttribute('style');
             buttonNewSchedule.isactive = 'false';
-            const buttonImportSchedule = document.getElementById('import-button-1');
-            buttonImportSchedule.removeAttribute('style');
-            buttonImportSchedule.isactive = 'false';
             document.getElementById('header-inputs-1').setAttribute('hidden', 'hidden');
             document.getElementById('header-inputs-2').setAttribute('hidden', 'hidden');
             document.getElementById('button-create').setAttribute('style', "visibility: hidden;");
@@ -22,6 +19,10 @@ function disableControlsHeader(target) {
         };
         const importExportOptions = document.getElementById('options-header-2');
         if(!importExportOptions.hidden) {
+            const buttonImportSchedule = document.getElementById('import-button-1');
+            buttonImportSchedule.removeAttribute('style');
+            buttonImportSchedule.isactive = 'false';
+            
             importExportOptions.setAttribute('hidden', 'hidden');
             const buttonImportSchedule2 = document.getElementById('import-button-2');
             buttonImportSchedule2.removeAttribute('style');
