@@ -29,6 +29,7 @@ function  main() {
   importListener(document.getElementById('file-input'));
   loadFiles(document.getElementById('load-file'));
   deleteAll(document.getElementById('delete-all-schedules'));
+  advancedOptions(document.getElementById('advanced-options'));
   importExportButtons(document.getElementById('import-export'));
   newBlock(document.getElementById('new-block'));
   cleanBlocks(document.getElementById('clean-blocks'));

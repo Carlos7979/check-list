@@ -334,6 +334,17 @@ header {
     padding-top: 10px;
 }
 
+#advanced-options {
+    height: 30px;
+    /* vertical-align: bottom; */
+    padding: 5px 0;
+}
+
+#advanced-options:hover {
+    -webkit-transform: rotate(36deg);
+    transform: rotate(36deg);
+}
+
 .icon-button {
     display: inline-block;
     vertical-align: middle;

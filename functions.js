@@ -1,4 +1,4 @@
-function disableControlsHeader(target) {
+function disableControlsHeader(target, conatinerIdentifier) {
     if (target.tagName === 'DIV' || target.id === 'header') {
         const newScheduleOptions = document.getElementById('options-header-1');
         if(!newScheduleOptions.hidden) {
@@ -15,10 +15,10 @@ function disableControlsHeader(target) {
             document.getElementById('name').value = '';
             document.getElementById('blocks-number').value = '4';
             document.getElementById('descriptions-number').value = '10';
-            return;
+            // return;
         };
         const importExportOptions = document.getElementById('options-header-2');
-        if(!importExportOptions.hidden) {
+        if(!importExportOptions.hidden && conatinerIdentifier !== '2') {
             const buttonImportSchedule = document.getElementById('import-button-1');
             buttonImportSchedule.removeAttribute('style');
             buttonImportSchedule.isactive = 'false';
@@ -37,6 +37,12 @@ function disableControlsHeader(target) {
             document.getElementById('import-container').setAttribute('hidden', 'hidden');
             document.getElementById('export-container').setAttribute('hidden', 'hidden');
             document.getElementById('import-export-container').setAttribute('hidden', 'hidden');
+            // return;
+        };
+
+        const advancedOptionsContainer = document.getElementById('options-header-3');
+        if(!advancedOptionsContainer.hidden  && conatinerIdentifier !== '3') {
+            advancedOptionsContainer.setAttribute('hidden', 'hidden');
         };
     };
 };
