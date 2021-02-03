@@ -67,8 +67,15 @@ function descriptionInputControls(element) {
 
     element.addEventListener("keyup", (event) => {
       const target = event.target;
+      let [identifier, isTitle] = elementToModify(target);
+      const [blockArray, blockNumber, indexArray, name, blocksLength] = blockId(identifier, isTitle);
       if (target.tagName === 'INPUT') {
-        if (event.keyCode === 13) insert(target);
+        if (event.keyCode === 13) {
+          insert(target);
+          if(!isTitle && (indexArray !== blocksLength)) {
+            document.getElementById(`li-${++identifier}`).click();
+          };
+        }
         if (event.keyCode === 27) disableControls();
       }
   })

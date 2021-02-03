@@ -192,17 +192,17 @@ function blockId(identifier, isTitle, type) {
     let blockArray = [];
     let indexArray = 0;
     let blockNumber = 0;
+    const firstBlock = getData(`${name}-${1}`);
+    const blocksLength = firstBlock.length - 1;
     if(isTitle === 't' || type === 'checkall') {
         blockArray = getData(`${name}-${identifier}`);
         blockNumber = identifier;
     } else {
-        const firstBlock = getData(`${name}-${1}`);
-        const blocksLength = firstBlock.length - 1;
         blockNumber = Math.ceil(identifier/blocksLength);
         blockArray = getData(`${name}-${blockNumber}`);
         indexArray = identifier - (blockNumber - 1)*blocksLength;
     };
-    return [blockArray, blockNumber, indexArray, name];
+    return [blockArray, blockNumber, indexArray, name, blocksLength];
 };
 
 function check(element) {
