@@ -1,7 +1,8 @@
 let allowInitialData = false;
 let editControlsActive = []; // allow identify descriptions id controls
 let blockOptionsContainerActive = []; // allow identify what type of option container is active and its identifier block number
-let headerControlsActive = [];
+let headerControlsActive = []; // not used yet
+// let descriptionNumberVisibility = [];
 
 const initialDescriptions = [
     {

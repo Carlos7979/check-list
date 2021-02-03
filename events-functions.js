@@ -176,6 +176,7 @@ function changeSchedule(element) {
         const name = target.value;
         renderBlocks(name);
         window.scrollTo(0,0);
+        blockOptionsContainerActive = [];
     })
 };
 

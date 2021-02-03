@@ -60,7 +60,7 @@ function blockConstructor(  isNew,
     const scheduleBlocks = [];
     isNew && scheduleBlocks.push(name);
     for(let i = 0; i < n; i++) {
-        const block = elementsCreator("DIV", `block-${i+1}`, 'block');
+        const block = elementsCreator("DIV", `block-${i+1}`, 'block', false, {counter: 'hidden'});
             const blockAdvancedOptions = elementsCreator("DIV", `block-advanced-options-${i+1}`, 'block-advanced-options');
                 const blockAdvancedPrimaryContainer = elementsCreator("div", `blockAdvancedPrimaryContainer-${i+1}`, 'blockAdvancedPrimaryContainer');
                     const optionsIconsContainer = elementsCreator("div", `optionsIconsContainer-${i+1}`, 'optionsIconsContainer', false, {hidden: 'hidden'});
@@ -109,7 +109,7 @@ function blockConstructor(  isNew,
                 const buttonDelete = elementsCreator("button", `delete-${i + 1}-t`, 'button-edit-t', 'borrar', {hidden: 'hidden'});
             severalAppends(title, [titleNumber, heading, input, buttonInsert, buttonDelete]);
             descriptionInputControls(title);
-            const blockOptions = elementsCreator("DIV", `block-options-${i+1}`, 'block-options');
+            const blockCounter = elementsCreator("DIV", `block-counter-${i+1}`, 'block-counter');
                 const checkAllContainer = elementsCreator("DIV", `checkallcontainer-${i+1}`, 'checkallcontainer');
                     const checkAll = elementsCreator("DIV", `checkall-${i+1}`, 'checkall', false, {title: 'marcar/desmarcar todo'});
                 checkAllContainer.appendChild(checkAll);
@@ -120,14 +120,14 @@ function blockConstructor(  isNew,
                 severalAppends(checksCounterContainer, [span1, span2, span3]);
                 const emptySpace = elementsCreator("div", `emptyspace-${i+1}`, 'emptyspace');
                 const percentage = elementsCreator("div", `percentage-${i+1}`, 'percentage');
-            // blockOptions.appendChild(checkAll);
-            severalAppends(blockOptions, [checkAllContainer, checksCounterContainer, emptySpace, percentage]);
+            // blockCounter.appendChild(checkAll);
+            severalAppends(blockCounter, [checkAllContainer, checksCounterContainer, emptySpace, percentage]);
             //     const label = document.createElement("LABEL");
             //     label.setAttribute("id", `label-${i+1}`);
             //     label.setAttribute("class", 'label');
             //     label.setAttribute("for", `checkall-${i+1}`);
             //     label.innerHTML = 'marcar/desmarcar todo'
-            // blockOptions.appendChild(label);
+            // blockCounter.appendChild(label);
             const list = elementsCreator("DIV", `list-${i+1}`, 'list');  
                 const ol = elementsCreator("ol", `ol-${i+1}`);
                 const blockDescriptions = [];
@@ -153,7 +153,7 @@ function blockConstructor(  isNew,
                     };
                     const li = elementsCreator("li", `li-${j+1 +i*m}`);
                         const check = elementsCreator("DIV", `check-${j+1 +i*m}`, 'check', checkText, {style: {visibility}});
-                        const descriptionNumber = elementsCreator("SPAN", `descriptionNumber-${j+1 +i*m}`, 'descriptionNumber', `${j+1}`); // delete innerText (`${j+1}`) in order to recount only non empty descriptions
+                        const descriptionNumber = elementsCreator("SPAN", `descriptionNumber-${j+1 +i*m}`, 'descriptionNumber', `${j+1}`); // delete innerText (`${j+1}`) in order to recount only non empty descriptions; , {style: {color: 'black'}} in order to do visible this element
                         const description = elementsCreator("DIV", `description-${j+1 +i*m}`, descriptionClass, descriptionText);
                     isNew && blockDescriptions.push([checkText, descriptionText]);
                         const input = elementsCreator("input", `input-${j+1 +i*m}`, 'input-description', false, {type: 'hidden', maxLength: '60'});
@@ -161,14 +161,14 @@ function blockConstructor(  isNew,
                         const buttonDelete = elementsCreator("button", `delete-${j+1 +i*m}`, 'button-edit', 'borrar', {hidden: 'hidden'});
                     severalAppends(li, [check, descriptionNumber, description, input, buttonInsert, buttonDelete]);
                     descriptionInputControls(li);
-                    ol.appendChild(li);
+                ol.appendChild(li);
                 };
                 isNew && saveData(`${name}-${i + 1}`, blockDescriptions);
                 if(counterChecks === counterDescriptions && counterDescriptions) checkAll.innerHTML = '✓';
             list.appendChild(ol);
-        severalAppends(block, [blockAdvancedOptions, title, blockOptions, list]);
+        severalAppends(block, [blockAdvancedOptions, title, blockCounter, list]);
         blockEventDetector(block);
-        counterDescriptionsChecks(ol, false, span1, span3, percentage, blockOptions, checkAll);
+        counterDescriptionsChecks(ol, false, span1, span3, percentage, blockCounter, checkAll);
         blocksContainer.appendChild(block);
     };
     isNew && saveData(`${name}-titles`, scheduleBlocks);

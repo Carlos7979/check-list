@@ -1,7 +1,8 @@
 function descriptionInputControls(element) {
-    element.addEventListener('click',  (event) => {
-      const target = event.target;
-      if (target.tagName === 'LI' || target.className === 'titleNumber' ||  target.className === 'descriptionNumber' || target.classList.contains('description') || target.classList.contains('description-checked') || target.className === 'title'  || target.className === 'title-description') {
+  
+  element.addEventListener('click',  (event) => {
+    const target = event.target;
+    if (target.tagName === 'LI' || target.className === 'titleNumber' ||  target.className === 'descriptionNumber' || target.classList.contains('description') || target.classList.contains('description-checked') || target.className === 'title'  || target.className === 'title-description') {
         const desID = target.getAttribute('id');
         const identifier = desID.split('-')[1];
         let descriptionId = `description-${identifier}`
@@ -14,13 +15,13 @@ function descriptionInputControls(element) {
           buttonInsertId += `-t`;
           buttonDeleteId += `-t`;
         };
-
+        
         const description = document.getElementById(descriptionId);
         const input = document.getElementById(inputId);
         const buttonInsert = document.getElementById(buttonInsertId);
         const buttonDelete = document.getElementById(buttonDeleteId);
-
-
+        
+        
         disableControls(input);
         let typeInput;
         input.getAttribute('type') === 'hidden' ? typeInput = 'text' : typeInput = 'hidden';
@@ -43,31 +44,44 @@ function descriptionInputControls(element) {
       }
     });
 
+    let [identifier, isTitle] = elementToModify(element);    
+    
     element.addEventListener('mouseover', event => {
       const target = event.target;
-      if (target.tagName === 'LI' || target.className === 'descriptionNumber' || target.classList.contains('description')) {
-        const desID = target.getAttribute('id');
-        const identifier = desID.split('-')[1];
-        const description = document.getElementById(`description-${identifier}`);
-        // if(!description.innerHTML) return;
-        const number = document.getElementById(`descriptionNumber-${identifier}`);
-        number.setAttribute('style', 'color: black;');
-      }
+      const [blockArray, blockNumber, indexArray, name, blocksLength] = blockId(identifier, isTitle);
+      const block = document.getElementById(`block-${blockNumber}`);
+      block.counter = block.getAttribute('counter');
+      // descriptionNumberVisibility[blockNumber];
+      if(block.counter === 'hidden') {
+        if (target.tagName === 'LI' || target.className === 'descriptionNumber' || target.classList.contains('description')) {
+          const desID = target.getAttribute('id');
+          const identifier = desID.split('-')[1];
+          // const description = document.getElementById(`description-${identifier}`);
+          // if(!description.innerHTML) return;
+          const number = document.getElementById(`descriptionNumber-${identifier}`);
+          number.setAttribute('style', 'color: black;');
+        };
+      };
     });
 
     element.addEventListener('mouseleave', event => {
       const target = event.target;
-      if (target.tagName === 'LI' || target.className === 'descriptionNumber' || target.classList.contains('description')) {
-        const desID = target.getAttribute('id');
-        const identifier = desID.split('-')[1];
-        const number = document.getElementById(`descriptionNumber-${identifier}`);
-        number.setAttribute('style', 'color: peachpuff;');
-      }
+      const [blockArray, blockNumber, indexArray, name, blocksLength] = blockId(identifier, isTitle);
+      const block = document.getElementById(`block-${blockNumber}`);
+      block.counter = block.getAttribute('counter');
+      if(block.counter === 'hidden') {
+        if (target.tagName === 'LI' || target.className === 'descriptionNumber' || target.classList.contains('description')) {
+          const desID = target.getAttribute('id');
+          const identifier = desID.split('-')[1];
+          const number = document.getElementById(`descriptionNumber-${identifier}`);
+          number.setAttribute('style', 'color: peachpuff;');
+        }
+      };
     });
 
     element.addEventListener("keyup", (event) => {
       const target = event.target;
-      let [identifier, isTitle] = elementToModify(target);
+      // let [identifier, isTitle] = elementToModify(target);
       const [blockArray, blockNumber, indexArray, name, blocksLength] = blockId(identifier, isTitle);
       if (target.tagName === 'INPUT') {
         if (event.keyCode === 13) {
@@ -84,10 +98,10 @@ function descriptionInputControls(element) {
 function blockEventDetector(element) {
     element.addEventListener('click', event => {
       const target = event.target;
-      if (target.className === 'block' || target.className === 'block-advanced-options' || target.className === 'block-options' || target.tagName === 'OL' || target.className === 'list') {
+      if (target.className === 'block' || target.className === 'block-advanced-options' || target.className === 'block-counter' || target.tagName === 'OL' || target.className === 'list') {
         disableControls();
       };
-      if(target.tagName = 'LI' || target.className === 'block-options' || target.className === 'block-advanced-options') {
+      if(target.tagName = 'LI' || target.className === 'block-counter' || target.className === 'block-advanced-options') {
           const [type, identifier] = target.getAttribute('id').split('-');
             switch (type) {
                 case 'check':

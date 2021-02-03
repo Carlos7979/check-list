@@ -1,11 +1,11 @@
 * {
-    /* border: darkgrey 0.5px groove; */
+    border: darkgrey 0.5px groove;
     /* padding: 2px; */
     margin: 0;
 }
 
 @media print{
-    header, .block-advanced-options, .block-options *{
+    header, .block-advanced-options, .block-counter *{
       display: none !important;
     }
 
@@ -535,7 +535,7 @@ h2 {
 }
 
 
-.block-options {
+.block-counter {
     display: flex;
     align-items: center;
     /* border: brown solid 1px; */

@@ -427,9 +427,9 @@ function counterDescriptionsChecks(ol, type, span1, span3, percentage, blockOpti
         span1 = document.getElementById(`span1-${blockNumber}`);
         span3 = document.getElementById(`span3-${blockNumber}`);
         percentage = document.getElementById(`percentage-${blockNumber}`);
-        blockOptions = document.getElementById(`block-options-${blockNumber}`);
+        blockOptions = document.getElementById(`block-counter-${blockNumber}`);
         checkAll = document.getElementById(`checkall-${blockNumber}`);
-    }
+    };
     let counterDescriptions = 0;
     let counterChecks = 0;
     const liLength = li.length;
@@ -487,5 +487,5 @@ function toggleBlockOptionsContainers(type, identifier) {
     const manageContainer = document.getElementById(`${type}ManageContainer-${identifier}`);
     manageContainer.removeAttribute('hidden');
     blockOptionsContainerActive[identifier] = type;
-    setTimeout(() => {disableBlockOptionsManagement(identifier, type)}, 2000);
+    setTimeout(() => {disableBlockOptionsManagement(identifier, type)}, 3000);
 };
