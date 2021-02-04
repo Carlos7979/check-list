@@ -105,14 +105,14 @@ function addSchedule(element) {
     element.addEventListener('click', () => {
         const userButtons = document.getElementById('hide-header-buttons');
         const buttonsOptionsContainer = document.getElementById('header-schedule-options-2');
-        // const buttonsImportExport = document.getElementById('import-export-buttons');
+        const buttonsImportExport = document.getElementById('import-export-buttons');
         // const optionsHeader2 = document.getElementById('options-header-2');
         const optionsHeader = document.getElementById('options-header-1');
         disableControlsHeader({id: 'header'}, '1');
         if(userButtons.hidden){
             if(!buttonsOptionsContainer.hidden || !buttonsImportExport.hidden) {
                 buttonsOptionsContainer.setAttribute('hidden', 'hidden');
-                // buttonsImportExport.setAttribute('hidden', 'hidden');
+                buttonsImportExport.setAttribute('hidden', 'hidden');
                 // optionsHeader2.setAttribute('hidden', 'hidden');
             }
             userButtons.removeAttribute('hidden');

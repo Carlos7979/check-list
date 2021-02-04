@@ -98,11 +98,13 @@ function descriptionInputControls(element) {
 function blockEventDetector(element) {
     element.addEventListener('click', event => {
       const target = event.target;
+      if(target.tagName === 'OPTION') return;
+      const [type, identifier] = target.getAttribute('id').split('-');
       if (target.className === 'block' || target.className === 'block-advanced-options' || target.className === 'block-counter' || target.tagName === 'OL' || target.className === 'list') {
         disableControls();
+        disableBlockOptionsManagement(identifier);
       };
       if(target.tagName = 'LI' || target.className === 'block-counter' || target.className === 'block-advanced-options') {
-          const [type, identifier] = target.getAttribute('id').split('-');
             switch (type) {
                 case 'check':
                     check(target);
@@ -125,6 +127,9 @@ function blockEventDetector(element) {
                 case 'move':
                     toggleBlockOptionsContainers(type, identifier);
                     break;
+                // case 'moveSelector':
+                //     console.log(type, identifier);
+                //     break;
                 case 'copy':
                     toggleBlockOptionsContainers(type, identifier);
                     break;
@@ -136,7 +141,17 @@ function blockEventDetector(element) {
                     break;
                 default:
                     break;
-            }
+            };
+      };
+    });
+
+    element.addEventListener('change', event => {
+      const target = event.target;
+      if(target.className === 'moveSelector') {
+        const position = Number(target.value);
+        const actual = Number(target.getAttribute('actual'));
+        sortBlocks(actual, position);
+        // renderBlocks();
       }
     });
 };

@@ -475,12 +475,14 @@ function counterDescriptionsChecks(ol, type, span1, span3, percentage, blockOpti
 
 function toggleBlockOptions(identifier) {
     const type = blockOptionsContainerActive[identifier];
-    if(type) disableBlockOptionsManagement(identifier, type);
+    if(type) disableBlockOptionsManagement(identifier);
     const optionsIconsContainer = document.getElementById(`optionsIconsContainer-${identifier}`);
     optionsIconsContainer.hidden ? optionsIconsContainer.removeAttribute('hidden') : optionsIconsContainer.setAttribute('hidden', 'hidden');
 };
 
-function disableBlockOptionsManagement(identifier, type) {
+function disableBlockOptionsManagement(identifier) {
+    const type = blockOptionsContainerActive[identifier];
+    if(!type) return;
     const manageContainer = document.getElementById(`${type}ManageContainer-${identifier}`);
     manageContainer.setAttribute('hidden', 'hidden');
     blockOptionsContainerActive[identifier] = '';
@@ -493,5 +495,38 @@ function toggleBlockOptionsContainers(type, identifier) {
     const manageContainer = document.getElementById(`${type}ManageContainer-${identifier}`);
     manageContainer.removeAttribute('hidden');
     blockOptionsContainerActive[identifier] = type;
-    setTimeout(() => {disableBlockOptionsManagement(identifier, type)}, 3000);
+    // setTimeout(() => {disableBlockOptionsManagement(identifier)}, 3000);
+};
+
+function sortBlocks(actual, position) {
+    let maxIndex, minIndex;
+    const ArraysContainer = [];
+    if(actual > position) {
+        maxIndex = actual;
+        minIndex = position;
+    } else {
+        maxIndex = position;
+        minIndex = actual;
+    };
+    const name = getData('schedules')[0].activeSchedule;
+    const titles = getData(`${name}-titles`);
+    const titlesLength = titles.length;
+    const IndexOrder = [];
+    for(let i = 0; i < titlesLength; i++) {
+        IndexOrder.push(i);
+    };
+    const actualTitle = titles.splice(actual, 1);
+    const actualIndex = IndexOrder.splice(actual, 1);
+    titles.splice(position, 0, actualTitle[0]);
+    IndexOrder.splice(position, 0, actualIndex[0]);
+    const newIndexOrder = IndexOrder.slice(minIndex, maxIndex + 1);
+    for(let i = 0; i < newIndexOrder.length; i++) {
+        ArraysContainer.push(getData(`${name}-${newIndexOrder[i]}`));
+    };
+    for(let i = 0; i < newIndexOrder.length; i++) {
+        saveData(`${name}-${minIndex + i}`, ArraysContainer[i]);
+    };
+    saveData(`${name}-titles`, titles);
+
+    renderBlocks(name);
 };

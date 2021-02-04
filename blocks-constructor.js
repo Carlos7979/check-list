@@ -61,7 +61,7 @@ function blockConstructor(  isNew,
     isNew && scheduleBlocks.push(name);
     for(let i = 0; i < n; i++) {
         const block = elementsCreator("DIV", `block-${i+1}`, 'block', false, {counter: 'hidden'});
-            const blockAdvancedOptions = elementsCreator("DIV", `block-advanced-options-${i+1}`, 'block-advanced-options');
+            const blockAdvancedOptions = elementsCreator("DIV", `blockAdvancedOptions-${i+1}`, 'block-advanced-options');
                 const blockAdvancedPrimaryContainer = elementsCreator("div", `blockAdvancedPrimaryContainer-${i+1}`, 'blockAdvancedPrimaryContainer');
                     const optionsIconsContainer = elementsCreator("div", `optionsIconsContainer-${i+1}`, 'optionsIconsContainer', false, {hidden: 'hidden'});
                         const configContainer = elementsCreator('div', `configContainer-${i +1}`, 'block-advanced-icons-containers');
@@ -84,8 +84,18 @@ function blockConstructor(  isNew,
                         const testShowConfigBlock = elementsCreator('div', `testConfig-${i +1}`, 'testConfig', 'Configurar bloque aún no implementado');
                     severalAppends(configManageContainer, [testShowConfigBlock]);
                     const moveManageContainer = elementsCreator('div', `moveManageContainer-${i +1}`, 'optionsIconsContainer', false, {hidden: 'hidden'});
-                        const testShowMoveBlock = elementsCreator('div', `testMove-${i +1}`, 'testMove', 'Mover bloque aún no implementado');
-                    severalAppends(moveManageContainer, [testShowMoveBlock]);
+                        const moveSelector = elementsCreator('select', `moveSelector-${i+1}`, 'moveSelector', false, {name: 'moveBlock', title: 'Mover bloque', actual: i+1});
+                        const moveArray = new Array(n).fill('');
+                        moveArray.forEach((element, index, array) => {
+                            const attributes = {value: `${index + 1}`};
+                            if(index === i) {
+                                attributes.selected = 'true';
+                            };
+                            array[index] = elementsCreator('option', false, false, `${index + 1}`, attributes);
+                        });
+                        severalAppends(moveSelector, moveArray);
+                        const labelMoveBlock = elementsCreator('label', `labelMove-${i +1}`, 'labelMove', 'Cambiar de posición este bloque', {for: `moveSelector-${i+1}`});
+                    severalAppends(moveManageContainer, [moveSelector, labelMoveBlock]);
                     const copyManageContainer = elementsCreator('div', `copyManageContainer-${i +1}`, 'optionsIconsContainer', false, {hidden: 'hidden'});
                         const testShowCopyBlock = elementsCreator('div', `testCopy-${i +1}`, 'testCopy', 'Copiar bloque aún no implementado');
                     severalAppends(copyManageContainer, [testShowCopyBlock]);

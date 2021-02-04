@@ -1,5 +1,5 @@
 * {
-    border: darkgrey 0.5px groove;
+    /* border: darkgrey 0.5px groove; */
     /* padding: 2px; */
     margin: 0;
 }
@@ -543,6 +543,10 @@ h2 {
 .config-button-block:hover {
     -webkit-transform: rotate(36deg);
     transform: rotate(36deg);
+}
+
+.labelMove {
+    margin: 0 5px;
 }
 
 
