@@ -476,24 +476,30 @@ function counterDescriptionsChecks(ol, type, span1, span3, percentage, blockOpti
 function toggleBlockOptions(identifier) {
     const type = blockOptionsContainerActive[identifier];
     if(type) disableBlockOptionsManagement(identifier);
-    const optionsIconsContainer = document.getElementById(`optionsIconsContainer-${identifier}`);
-    optionsIconsContainer.hidden ? optionsIconsContainer.removeAttribute('hidden') : optionsIconsContainer.setAttribute('hidden', 'hidden');
+    const hideOptionsIconsContainer = document.getElementById(`hideOptionsIconsContainer-${identifier}`);
+    hideOptionsIconsContainer.hidden ? hideOptionsIconsContainer.removeAttribute('hidden') : hideOptionsIconsContainer.setAttribute('hidden', 'hidden');
 };
 
 function disableBlockOptionsManagement(identifier) {
     const type = blockOptionsContainerActive[identifier];
     if(!type) return;
-    const manageContainer = document.getElementById(`${type}ManageContainer-${identifier}`);
-    manageContainer.setAttribute('hidden', 'hidden');
+    const hideManageContainer = document.getElementById(`${type}HideManageContainer-${identifier}`);
+    hideManageContainer.setAttribute('hidden', 'hidden');
     blockOptionsContainerActive[identifier] = '';
+    if(type === 'copy') {
+        const selector = document.getElementById(`${type}Selector-${identifier}`);
+        const buttonContainer = document.getElementById(`${type}ButtonContainer-${identifier}`);
+        buttonContainer.setAttribute('hidden', 'hidden');
+        selector.value = identifier;
+    };
 };
 
 function toggleBlockOptionsContainers(type, identifier) {
-    const optionsIconsContainer = document.getElementById(`optionsIconsContainer-${identifier}`);
-    optionsIconsContainer.setAttribute('hidden', 'hidden');
+    const hideOptionsIconsContainer = document.getElementById(`hideOptionsIconsContainer-${identifier}`);
+    hideOptionsIconsContainer.setAttribute('hidden', 'hidden');
 
-    const manageContainer = document.getElementById(`${type}ManageContainer-${identifier}`);
-    manageContainer.removeAttribute('hidden');
+    const hideManageContainer = document.getElementById(`${type}HideManageContainer-${identifier}`);
+    hideManageContainer.removeAttribute('hidden');
     blockOptionsContainerActive[identifier] = type;
     // setTimeout(() => {disableBlockOptionsManagement(identifier)}, 3000);
 };
@@ -530,3 +536,16 @@ function sortBlocks(actual, position) {
 
     renderBlocks(name);
 };
+
+function blockSelector(type, title, i, n) {
+    const selector = elementsCreator('select', `${type}Selector-${i+1}`, `${type}Selector`, false, {name: `${type}Block`, title, actual: i+1});
+    const arrayOptions = new Array(n).fill('');
+    arrayOptions.forEach((element, index, array) => {
+        const attributes = {value: `${index + 1}`};
+        if(index === i) {
+            attributes.selected = 'true';
+        };
+        array[index] = elementsCreator('option', false, false, `${index + 1}`, attributes);
+    });
+    return [selector, arrayOptions];
+}

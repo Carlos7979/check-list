@@ -166,6 +166,7 @@ header {
     /* color: rgb(36, 35, 35); */
     color: whitesmoke;
     user-select: none;
+    /* cursor: default; */ /* a label don't require this property*/
 }
 
 #import-label:hover {
@@ -238,6 +239,7 @@ header {
     /* color: rgb(36, 35, 35); */
     color: rgb(223, 217, 217);
     user-select: none;
+    cursor: default;
 }
 
 .button-darkgray:hover {
@@ -251,6 +253,29 @@ header {
     padding-left: 6px;
     padding-right: 4px;
     color: black;
+}
+
+.button-darkgreen {
+    padding: 3px 5px;
+    box-sizing: border-box;
+    border: 1px solid rgb(36, 35, 35);
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: whitesmoke;
+    user-select: none;
+    cursor: default;
+}
+
+.button-darkgreen:hover {
+    /* border: 1px solid blueviolet; */
+    box-shadow: 0px 0px 1px 1px silver;
+    color: black;
+}
+
+.button-darkgreen:active {
+    background: linear-gradient(to bottom right, darkgrey 0%, #4CAF50 100%);;
+    padding-left: 6px;
+    padding-right: 4px;
 }
 
 .header-subblock {
@@ -496,7 +521,7 @@ h2 {
     width: 90%;
 }
 
-.optionsIconsContainer {
+.hideOptionsIconsContainer {
     border-color: red;
     /* border: solid 1px; */
     /* background-color: whitesmoke; */
@@ -545,7 +570,17 @@ h2 {
     transform: rotate(36deg);
 }
 
-.labelMove {
+.manageContainer {
+    border-color: yellow;
+    height: max-content;
+    margin-top: 4px;    
+}
+
+.labelMove, .labelCopy {
+    margin: 0 5px;
+}
+
+.copyButtonContainer {
     margin: 0 5px;
 }
 

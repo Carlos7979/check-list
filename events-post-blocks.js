@@ -44,10 +44,9 @@ function descriptionInputControls(element) {
       }
     });
 
-    let [identifier, isTitle] = elementToModify(element);    
-    
     element.addEventListener('mouseover', event => {
       const target = event.target;
+      const [identifier, isTitle] = elementToModify(target);
       const [blockArray, blockNumber, indexArray, name, blocksLength] = blockId(identifier, isTitle);
       const block = document.getElementById(`block-${blockNumber}`);
       block.counter = block.getAttribute('counter');
@@ -66,6 +65,7 @@ function descriptionInputControls(element) {
 
     element.addEventListener('mouseleave', event => {
       const target = event.target;
+      const [identifier, isTitle] = elementToModify(target);
       const [blockArray, blockNumber, indexArray, name, blocksLength] = blockId(identifier, isTitle);
       const block = document.getElementById(`block-${blockNumber}`);
       block.counter = block.getAttribute('counter');
@@ -81,7 +81,7 @@ function descriptionInputControls(element) {
 
     element.addEventListener("keyup", (event) => {
       const target = event.target;
-      // let [identifier, isTitle] = elementToModify(target);
+      let [identifier, isTitle] = elementToModify(target);
       const [blockArray, blockNumber, indexArray, name, blocksLength] = blockId(identifier, isTitle);
       if (target.tagName === 'INPUT') {
         if (event.keyCode === 13) {
@@ -151,7 +151,13 @@ function blockEventDetector(element) {
         const position = Number(target.value);
         const actual = Number(target.getAttribute('actual'));
         sortBlocks(actual, position);
-        // renderBlocks();
-      }
+      };
+      if(target.className === 'copySelector') {
+        const position = Number(target.value);
+        const actual = Number(target.getAttribute('actual'));
+        const copyButtonContainer = document.getElementById(`copyButtonContainer-${actual}`);
+        position !== actual ? copyButtonContainer.removeAttribute('hidden') : copyButtonContainer.setAttribute('hidden', 'hidden');
+
+      };
     });
 };
