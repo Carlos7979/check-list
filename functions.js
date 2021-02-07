@@ -410,8 +410,8 @@ function deleteAllSchedules() {
     const selector = document.getElementById('schedule-selector');
     selector.innerHTML = '';
     selectorBlock.setAttribute('hidden', 'hidden');
-    const buttonsContainer = document.getElementById('header-schedule-options-2');
-    buttonsContainer.setAttribute('hidden', 'hidden');
+    // const buttonsContainer = document.getElementById('header-schedule-options-2');
+    // buttonsContainer.setAttribute('hidden', 'hidden');
     const optionsButton = document.getElementById('hide-header-subblock-3');
     optionsButton.setAttribute('hidden', 'hidden');
     const blocksContainer = document.getElementById('blocks-container');
@@ -420,6 +420,7 @@ function deleteAllSchedules() {
     importButton.removeAttribute('hidden');
     const welcomeContainer = document.getElementById('welcome-container');
     welcomeContainer.setAttribute('class', 'header-block-users-welcome');
+    disableControlsHeader({id: 'header'});
 };
 
 function counterDescriptionsChecks(ol, type, span1, span3, percentage, blockOptions, checkAll) {
@@ -485,20 +486,28 @@ function disableBlockOptionsManagement(identifier) {
     if(!type) return;
     const hideManageContainer = document.getElementById(`${type}HideManageContainer-${identifier}`);
     hideManageContainer.setAttribute('hidden', 'hidden');
+    if(type === 'confirm') hideManageContainer.removeAttribute('action');
     blockOptionsContainerActive[identifier] = '';
     if(type === 'copy') {
         const selector = document.getElementById(`${type}Selector-${identifier}`);
         const buttonContainer = document.getElementById(`${type}ButtonContainer-${identifier}`);
         buttonContainer.setAttribute('hidden', 'hidden');
         selector.value = identifier;
+        const copyButton = document.getElementById(`copyButton-${identifier}`);
+        copyButton.removeAttribute('position');
+    };
+    if(type === 'confirm') {
+        const confirmText = document.getElementById(`${type}Text-${identifier}`);
+        confirmText.innerHTML = '';
     };
 };
 
-function toggleBlockOptionsContainers(type, identifier) {
+function showBlockOptionsContainers(type, identifier, action) {
     const hideOptionsIconsContainer = document.getElementById(`hideOptionsIconsContainer-${identifier}`);
     hideOptionsIconsContainer.setAttribute('hidden', 'hidden');
 
     const hideManageContainer = document.getElementById(`${type}HideManageContainer-${identifier}`);
+    if(type === 'confirm' && action) hideManageContainer.setAttribute('action', action);
     hideManageContainer.removeAttribute('hidden');
     blockOptionsContainerActive[identifier] = type;
     // setTimeout(() => {disableBlockOptionsManagement(identifier)}, 3000);
@@ -548,4 +557,42 @@ function blockSelector(type, title, i, n) {
         array[index] = elementsCreator('option', false, false, `${index + 1}`, attributes);
     });
     return [selector, arrayOptions];
-}
+};
+
+function copyBlock(type, identifier) {
+    const name = getData('schedules')[0].activeSchedule;
+    const copyButton = document.getElementById(`${type}-${identifier}`);
+    const position = Number(copyButton.getAttribute('position'));
+    const titles = getData(`${name}-titles`);
+    const actualTitle = titles[identifier];
+    const arrayToCopy = getData(`${name}-${position}`);
+    arrayToCopy[0] = actualTitle;
+    for(let i = 1; i < arrayToCopy.length; i++) {
+        if(arrayToCopy[i][0]) arrayToCopy[i][0] = '';
+    };
+    blockToCopy[identifier] = [name, arrayToCopy];
+    const confirmText = document.getElementById(`confirmText-${identifier}`);
+    confirmText.innerHTML = 'Se reemplazará el contenido de este bloque';
+    disableBlockOptionsManagement(identifier);
+    showBlockOptionsContainers('confirm', identifier, 'copy');
+    // const copyConfirm = await confirmActionBlock(identifier, 'Se reemplazará el contenido de este bloque');
+};
+
+function confirmActionBlock(type, identifier) {
+    const hideManageContainer = document.getElementById(`confirmHideManageContainer-${identifier}`);
+    const action = hideManageContainer.getAttribute('action');
+    if(type === 'confirmAcceptButton') {
+        if(action === 'copy') {
+            const name = blockToCopy[identifier][0];
+            saveData(`${name}-${identifier}`, blockToCopy[identifier][1]);
+            renderBlocks(name);
+            blockToCopy[identifier] = '';
+        };
+    };
+    if(type === 'confirmCancelButton') {
+        if(action === 'copy') {
+            blockToCopy[identifier] = '';
+        };
+    };   
+    disableBlockOptionsManagement(identifier);
+};

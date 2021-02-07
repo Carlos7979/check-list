@@ -278,6 +278,77 @@ header {
     padding-right: 4px;
 }
 
+.button-darkgreen-confirm-block {
+    padding: 1px 3px;
+    box-sizing: border-box;
+    border: 1px solid rgb(36, 35, 35);
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: whitesmoke;
+    user-select: none;
+    cursor: default;
+    font-size: 0.9em;
+}
+
+.button-darkgreen-confirm-block:hover {
+    /* border: 1px solid blueviolet; */
+    box-shadow: 0px 0px 1px 1px silver;
+    color: black;
+}
+
+.button-darkgreen-confirm-block:active {
+    background: linear-gradient(to bottom right, darkgrey 0%, #4CAF50 100%);;
+    padding-left: 4px;
+    padding-right: 2px;
+}
+
+.button-darkred {
+    padding: 3px 5px;
+    box-sizing: border-box;
+    border: 1px solid rgb(36, 35, 35);
+    border-radius: 5px;
+    background-color: #af4c54;
+    color: whitesmoke;
+    user-select: none;
+    cursor: default;
+}
+
+.button-darkred:hover {
+    /* border: 1px solid blueviolet; */
+    box-shadow: 0px 0px 1px 1px silver;
+    color: black;
+}
+
+.button-darkred:active {
+    background: linear-gradient(to bottom right, darkgrey 0%, #af4c54 100%);;
+    padding-left: 6px;
+    padding-right: 4px;
+}
+
+.button-darkred-confirm-block {
+    padding: 1px 3px;
+    box-sizing: border-box;
+    border: 1px solid rgb(36, 35, 35);
+    border-radius: 5px;
+    background-color: #af4c54;
+    color: whitesmoke;
+    user-select: none;
+    cursor: default;
+    font-size: 0.9em;
+}
+
+.button-darkred-confirm-block:hover {
+    /* border: 1px solid blueviolet; */
+    box-shadow: 0px 0px 1px 1px silver;
+    color: black;
+}
+
+.button-darkred-confirm-block:active {
+    background: linear-gradient(to bottom right, darkgrey 0%, #af4c54 100%);;
+    padding-left: 4px;
+    padding-right: 2px;
+}
+
 .header-subblock {
     min-width: 350px;
     /* border: orange solid 1px; */
@@ -582,6 +653,15 @@ h2 {
 
 .copyButtonContainer {
     margin: 0 5px;
+}
+
+/* .confirmText {
+    font-size: 0.9em;
+    font-weight: bold;
+} */
+
+.confirmButtonContainer {
+    margin-left: 5px;
 }
 
 

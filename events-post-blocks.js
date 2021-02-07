@@ -122,22 +122,31 @@ function blockEventDetector(element) {
                     toggleBlockOptions(identifier);
                     break;
                 case 'config':
-                    toggleBlockOptionsContainers(type, identifier);
+                    showBlockOptionsContainers(type, identifier);
                     break;
                 case 'move':
-                    toggleBlockOptionsContainers(type, identifier);
+                    showBlockOptionsContainers(type, identifier);
                     break;
                 // case 'moveSelector':
                 //     console.log(type, identifier);
                 //     break;
                 case 'copy':
-                    toggleBlockOptionsContainers(type, identifier);
+                    showBlockOptionsContainers(type, identifier);
+                    break;
+                case 'copyButton':
+                    copyBlock(type, identifier);
                     break;
                 case 'clean':
-                    toggleBlockOptionsContainers(type, identifier);
+                    showBlockOptionsContainers(type, identifier);
                     break;
                 case 'deleteBlock':
-                    toggleBlockOptionsContainers(type, identifier);
+                    showBlockOptionsContainers(type, identifier);
+                    break;
+                case 'confirmAcceptButton':
+                    confirmActionBlock(type, identifier);
+                    break;
+                case 'confirmCancelButton':
+                    confirmActionBlock(type, identifier);
                     break;
                 default:
                     break;
@@ -156,8 +165,14 @@ function blockEventDetector(element) {
         const position = Number(target.value);
         const actual = Number(target.getAttribute('actual'));
         const copyButtonContainer = document.getElementById(`copyButtonContainer-${actual}`);
-        position !== actual ? copyButtonContainer.removeAttribute('hidden') : copyButtonContainer.setAttribute('hidden', 'hidden');
-
+        const copyButton = document.getElementById(`copyButton-${actual}`);
+        if(position !== actual) {
+          copyButtonContainer.removeAttribute('hidden');
+          copyButton.setAttribute('position', position);
+        } else {
+          copyButtonContainer.setAttribute('hidden', 'hidden');
+          copyButton.removeAttribute('position');
+        };
       };
     });
 };
