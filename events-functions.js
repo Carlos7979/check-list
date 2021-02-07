@@ -323,6 +323,12 @@ function advancedOptions(element) {
 function newBlock(element) {
     element.addEventListener('click', () => {
         const [name, titles, titlesLength , maxLength] = maxLengthBlock();
+        const blocksNumber = document.getElementById('blocks-number');
+        const max = blocksNumber.getAttribute('max');
+        if(titlesLength === max + 1) {
+            alert(`Ya has alcanzado el máximo número de bloques [${max}]`);
+            return;
+        }
         const newBlock = new Array(maxLength).fill(['', '']);
         newBlock[0] = `Título ${titlesLength}`;
         titles.push(`Título ${titlesLength}`);

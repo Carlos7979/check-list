@@ -191,6 +191,9 @@ function renderBlocks(name) {
         dataSet[0] = {name, descriptionsInBlock: maxLength - 1};
     };
     blockConstructor(false, true, dataSet);
+    editControlsActive = [];
+    blockOptionsContainerActive = [];
+    blockToCopy = [];
 };
 
 function blockId(identifier, isTitle, type) {
