@@ -243,7 +243,8 @@ function isCheckAll(identifier, isTitle) {
 
 function checkAll(element) {
     const [identifier, isTitle, description, input, type] = elementToModify(element);
-    const name = getData('schedules')[0].activeSchedule;
+    
+    // const name = getData('schedules')[0].activeSchedule;
     let counter = 0;
     let indexToFill = [];
     element.innerText ? textToInsert = '' : textToInsert = '✓';
@@ -263,13 +264,13 @@ function checkAll(element) {
             if(checkElement.innerHTML) {
                 descriptionToStyle.setAttribute('class', 'description');
                 checkElement.innerHTML = '';
-
-            }
+            };
         };
     };
     if(!counter) return;
     element.innerText = textToInsert;
-    blockSave(identifier, isTitle, false, type, indexToFill);
+    blockSave(identifier, false, false, type, indexToFill);
+    console.log(type);
     counterDescriptionsChecks(element, type);
 };
 
@@ -503,14 +504,56 @@ function disableBlockOptionsManagement(identifier) {
         const confirmText = document.getElementById(`${type}Text-${identifier}`);
         confirmText.innerHTML = '';
     };
+    if(type === 'clean') {
+        const cleanText = document.getElementById(`${type}Text-${identifier}`);
+        const cleanButton = document.getElementById(`${type}Button-${identifier}`);
+        const sortButton = document.getElementById(`sortButton-${identifier}`);
+        cleanText.setAttribute('hidden', 'hidden');
+        cleanButton.setAttribute('hidden', 'hidden');
+        sortButton.setAttribute('hidden', 'hidden');
+    };
 };
 
-function showBlockOptionsContainers(type, identifier, action) {
+function showBlockOptionsContainers(type, identifier, action, text) {
     const hideOptionsIconsContainer = document.getElementById(`hideOptionsIconsContainer-${identifier}`);
     hideOptionsIconsContainer.setAttribute('hidden', 'hidden');
 
     const hideManageContainer = document.getElementById(`${type}HideManageContainer-${identifier}`);
-    if(type === 'confirm' && action) hideManageContainer.setAttribute('action', action);
+    if(type === 'confirm' && action) {
+        hideManageContainer.setAttribute('action', action);
+        const confirmText = document.getElementById(`${type}Text-${identifier}`);
+        confirmText.innerHTML = text;
+    };
+    if(type === 'clean') {
+        const name = getData('schedules')[0].activeSchedule;
+        const arrayToClean = getData(`${name}-${identifier}`);
+        const cleanText = document.getElementById(`${type}Text-${identifier}`);
+        const cleanButton = document.getElementById(`${type}Button-${identifier}`);
+        const sortButton = document.getElementById(`sortButton-${identifier}`);
+        let counterChecks = 0;
+        let counterDescriptions = 0;
+        let someToSort = false;
+        arrayToClean.forEach(element => {
+            if(element instanceof Array) {
+                if(element[0]) ++counterChecks;
+                if(element[1]) ++counterDescriptions;
+            };
+        });
+        for(let i = counterDescriptions + 1; i < arrayToClean.length; i++) {
+            if(arrayToClean[i][1]) {
+                // sortButton.removeAttribute('hidden');
+                someToSort = true;
+                break;
+            };
+        };
+        if(counterChecks || someToSort) cleanText.setAttribute('hidden', 'hidden');
+        if(!counterChecks && !someToSort) {
+            cleanText.removeAttribute('hidden');
+            setTimeout(() => {disableBlockOptionsManagement(identifier)}, 3000);
+        };
+        if(counterChecks) cleanButton.removeAttribute('hidden');
+        if(someToSort) sortButton.removeAttribute('hidden');
+    }
     hideManageContainer.removeAttribute('hidden');
     blockOptionsContainerActive[identifier] = type;
     // setTimeout(() => {disableBlockOptionsManagement(identifier)}, 3000);
@@ -574,10 +617,8 @@ function copyBlock(type, identifier) {
         if(arrayToCopy[i][0]) arrayToCopy[i][0] = '';
     };
     blockToCopy[identifier] = [name, arrayToCopy];
-    const confirmText = document.getElementById(`confirmText-${identifier}`);
-    confirmText.innerHTML = 'Se reemplazará el contenido de este bloque';
     disableBlockOptionsManagement(identifier);
-    showBlockOptionsContainers('confirm', identifier, 'copy');
+    showBlockOptionsContainers('confirm', identifier, 'copy', 'Se reemplazará el contenido de este bloque');
     // const copyConfirm = await confirmActionBlock(identifier, 'Se reemplazará el contenido de este bloque');
 };
 
@@ -591,11 +632,104 @@ function confirmActionBlock(type, identifier) {
             renderBlocks(name);
             blockToCopy[identifier] = '';
         };
+        if(action === 'deleteBlock') {
+            const name = getData('schedules')[0].activeSchedule;
+            const titles = getData(`${name}-titles`);
+            // const actualTitle = titles[identifier];
+            if(titles.length === 2) {
+                const updateArray = getData(`${name}-1`);
+                
+                if(titles[1] !== 'Título 1'){
+                    titles[1] = 'Título 1';
+                    updateArray[0] = titles[1];
+                    saveData(`${name}-titles`, titles);
+                };
+                for(let i = 1; i < updateArray.length; i++) {
+                    updateArray[i] = ['', ''];
+                };
+                saveData(`${name}-1`, updateArray);
+            };
+            if(titles.length > 2) {
+                titles.splice(identifier, 1);
+                for(let i = Number(identifier); i < titles.length; i++) {
+                    const isTitleFormat = titles[i].split(' ');
+                    if(isTitleFormat.length === 2) {
+                        if(isTitleFormat[0] === 'Título' && Number(isTitleFormat[1]) === i + 1) {
+                            titles[i] = `${isTitleFormat[0]} ${i}`;
+                        };
+                    };
+                    const updateArray = getData(`${name}-${i + 1}`);
+                    updateArray[0] = titles[i];
+                    saveData(`${name}-${i}`, updateArray);
+                };
+                deleteData(`${name}-${titles.length}`);
+                saveData(`${name}-titles`, titles);
+            };
+            renderBlocks(name);
+        };
     };
     if(type === 'confirmCancelButton') {
         if(action === 'copy') {
             blockToCopy[identifier] = '';
         };
     };   
+    disableBlockOptionsManagement(identifier);
+};
+
+function cleanDescriptions(identifier) {
+    const name = getData('schedules')[0].activeSchedule;
+    const arrayToClean = getData(`${name}-${identifier}`);
+    const li = document.getElementById(`ol-${identifier}`).children;
+    arrayToClean.forEach((element, index, array) => {
+        if(element instanceof Array) {
+            if(element[0]) {
+                array[index] = ['', ''];
+                const checkElement = li[index - 1].children[0];
+                const description = li[index - 1].children[2];
+                checkElement.innerHTML = '';
+                checkElement.setAttribute('style', "visibility: hidden;");
+                description.innerHTML = '';
+                description.value = '';
+            };
+        };
+    });
+    saveData(`${name}-${identifier}`, arrayToClean);
+    sortDescriptions(identifier);
+    // disableBlockOptionsManagement(identifier);
+};
+
+function sortDescriptions(identifier) {
+    const li = document.getElementById(`ol-${identifier}`).children;
+    const name = getData('schedules')[0].activeSchedule;
+    const arrayToSort = getData(`${name}-${identifier}`);
+    const arraySorted = new Array(arrayToSort.length).fill(['', '']);
+    arraySorted[0] = arrayToSort[0];
+    let counter = 0;
+    arrayToSort.forEach((element) => {
+        if(element instanceof Array) {
+            if(element[1]) {
+                arraySorted[++counter] = [element[0], element[1]];
+            };
+        };
+    });
+    arraySorted.forEach((element, index) => {
+        if(element instanceof Array) {
+            let classToInsert = 'description';
+            const checkElement = li[index - 1].children[0];
+            const description = li[index - 1].children[2];
+            checkElement.innerHTML = element[0];
+            if(element[0]) {
+                classToInsert = 'description-checked'
+            };
+            description.innerHTML = element[1];
+            if(!element[1]) {
+                checkElement.setAttribute('style', "visibility: hidden;");
+            } else {
+                checkElement.removeAttribute('style');
+            }
+            description.setAttribute('class', classToInsert);
+        };
+    });
+    saveData(`${name}-${identifier}`, arraySorted);
     disableBlockOptionsManagement(identifier);
 };

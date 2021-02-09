@@ -140,13 +140,19 @@ function blockEventDetector(element) {
                     showBlockOptionsContainers(type, identifier);
                     break;
                 case 'deleteBlock':
-                    showBlockOptionsContainers(type, identifier);
+                    showBlockOptionsContainers('confirm', identifier, type, '¿Eliminar este bloque?');
                     break;
                 case 'confirmAcceptButton':
                     confirmActionBlock(type, identifier);
                     break;
                 case 'confirmCancelButton':
                     confirmActionBlock(type, identifier);
+                    break;
+                case 'cleanButton':
+                    cleanDescriptions(identifier);
+                    break;
+                case 'sortButton':
+                    sortDescriptions(identifier);
                     break;
                 default:
                     break;
