@@ -1,6 +1,6 @@
 function newSchedule(element) {
     element.addEventListener('click', () => {
-        if(!(element.id === 'import-button-1' || element.id === 'import-button-2' || element.id === 'export-button')) {
+        if (!(element.id === 'import-button-1' || element.id === 'import-button-2' || element.id === 'export-button')) {
             document.getElementById('options-header-1').removeAttribute('hidden');        
             document.getElementById('header-inputs-1').removeAttribute('hidden');
             document.getElementById('button-create').setAttribute('style', "visibility: visible;");
@@ -13,13 +13,13 @@ function newSchedule(element) {
         const buttonImportSchedule1 = document.getElementById('import-button-1');
         const buttonImportSchedule2 = document.getElementById('import-button-2');
         const buttonExportSchedule = document.getElementById('export-button');
-        if(element.id === 'new-schedule') {
-            if(element.isactive  === 'true') {  
+        if (element.id === 'new-schedule') {
+            if (element.isactive  === 'true') {  
                 disableControlsHeader({id: 'header'});
                 element.isactive = 'false';
                 element.removeAttribute('style');
                 return;
-            };
+            }
             buttonInitTemplate.removeAttribute('style');
             buttonInitTemplate.isactive = 'false';
             buttonImportSchedule1.removeAttribute('style');
@@ -28,13 +28,13 @@ function newSchedule(element) {
             importContainer.setAttribute('hidden', 'hidden');
             document.getElementById('options-header-2').setAttribute('hidden', 'hidden');
             allowInitialData = false;
-        } else if(element.id === 'init-template') {
-            if(element.isactive === 'true') {
+        } else if (element.id === 'init-template') {
+            if (element.isactive === 'true') {
                 disableControlsHeader({id: 'header'});
                 element.isactive = 'false';
                 element.removeAttribute('style');
                 return;
-            };
+            }
             buttonNewSchedule.removeAttribute('style');
             buttonNewSchedule.isactive = 'false';
             buttonImportSchedule1.removeAttribute('style');
@@ -44,36 +44,36 @@ function newSchedule(element) {
             document.getElementById('options-header-2').setAttribute('hidden', 'hidden');
             allowInitialData = true;
         } else {
-            if(element.isactive  === 'true') {  
+            if (element.isactive  === 'true') {  
                 element.isactive = 'false';
                 element.removeAttribute('style');
-                if(element.id === 'import-button-2' || element.id === 'import-button-1') {
+                if (element.id === 'import-button-2' || element.id === 'import-button-1') {
                     importContainer.setAttribute('hidden', 'hidden');
                     buttonExportSchedule.removeAttribute('hidden');
                     return;
                 } else {
                     exportContainer.setAttribute('hidden', 'hidden');
-                };
+                }
                 
                 // element.isactive = 'false';
                 // element.removeAttribute('style');
                 return;
-            };
+            }
             document.getElementById('options-header-2').removeAttribute('hidden');
-            if(element.id === 'import-button-2' || element.id === 'export-button') document.getElementById('header-schedule-options-2').setAttribute('hidden', 'hidden');
-            if(element.id === 'import-button-2') {
+            if (element.id === 'import-button-2' || element.id === 'export-button') document.getElementById('header-schedule-options-2').setAttribute('hidden', 'hidden');
+            if (element.id === 'import-button-2') {
                 importContainer.removeAttribute('hidden');
                 exportContainer.setAttribute('hidden', 'hidden');
                 buttonExportSchedule.isactive = 'false';
                 buttonExportSchedule.removeAttribute('style');
-            };
-            if(element.id === 'export-button') {
+            }
+            if (element.id === 'export-button') {
                 exportContainer.removeAttribute('hidden');
                 importContainer.setAttribute('hidden', 'hidden');
                 buttonImportSchedule2.isactive = 'false';
                 buttonImportSchedule2.removeAttribute('style');
-            };
-            if(element.id === 'import-button-1') {
+            }
+            if (element.id === 'import-button-1') {
                 document.getElementById('options-header-1').setAttribute('hidden', 'hidden');
                 document.getElementById('header-inputs-1').setAttribute('hidden', 'hidden');
                 document.getElementById('header-inputs-2').setAttribute('hidden', 'hidden');
@@ -84,13 +84,13 @@ function newSchedule(element) {
                 buttonNewSchedule.isactive = 'false';
                 buttonInitTemplate.removeAttribute('style');
                 buttonInitTemplate.isactive = 'false';
-            };
+            }
             allowInitialData = true;
-        };
+        }
         element.setAttribute('style', "color: CadetBlue;");
         element.isactive = "true";
       })
-};
+}
 
 
 
@@ -99,7 +99,7 @@ function editHeaderControlActiveDetector(element) {
       const target = event.target;
       disableControlsHeader(target);
     });
-};
+}
 
 function addSchedule(element) {
     element.addEventListener('click', () => {
@@ -109,8 +109,8 @@ function addSchedule(element) {
         // const optionsHeader2 = document.getElementById('options-header-2');
         const optionsHeader = document.getElementById('options-header-1');
         disableControlsHeader({id: 'header'}, '1');
-        if(userButtons.hidden){
-            if(!buttonsOptionsContainer.hidden || !buttonsImportExport.hidden) {
+        if (userButtons.hidden){
+            if (!buttonsOptionsContainer.hidden || !buttonsImportExport.hidden) {
                 buttonsOptionsContainer.setAttribute('hidden', 'hidden');
                 buttonsImportExport.setAttribute('hidden', 'hidden');
                 // optionsHeader2.setAttribute('hidden', 'hidden');
@@ -122,13 +122,13 @@ function addSchedule(element) {
             disableControlsHeader({id: 'header'});
         }
       });
-};
+}
 
 function inputHeaderActiveDetector(element) {
     element.addEventListener("keyup", (event) => {
         if (event.keyCode === 27) disableControlsHeader({id: 'header'});
     });
-};
+}
 
 function create(element) {
     element.addEventListener('click', () => {
@@ -137,22 +137,22 @@ function create(element) {
         const inputDescriptionsNumber = document.getElementById('descriptions-number');
         let schedules = getData('schedules');
         const scheduleName = inputName.value.trim();
-        if(!scheduleName) {
+        if (!scheduleName) {
             alert('Debes introducir un nombre');
             return;
-        };
-        if(schedules){
+        }
+        if (schedules){
             let isValidName = true;
             schedules.forEach(element => {
-                if(typeof element !== 'object') {
-                    if(element.toLowerCase() === scheduleName.toLowerCase()) {
+                if (typeof element !== 'object') {
+                    if (element.toLowerCase() === scheduleName.toLowerCase()) {
                         alert('Ese nombre de agenda ya existe');
                         isValidName = false;
                         return;
-                    };
-                };
+                    }
+                }
             });
-            if(!isValidName) return
+            if (!isValidName) return
             schedules.push(scheduleName);
             schedules[0].activeSchedule = scheduleName;
             saveData('schedules', schedules);
@@ -163,13 +163,13 @@ function create(element) {
         }
         initialDescriptions[0].name = scheduleName;
         schedules = getData('schedules');
-        if(allowInitialData) blockConstructor(true, allowInitialData)
+        if (allowInitialData) blockConstructor(true, allowInitialData)
         else blockConstructor(true, false, [{name: scheduleName}], inputBlocksNumber.value, inputDescriptionsNumber.value);
         setSchedulesToOptions(schedules);
         disableControlsHeader({id: 'header'});
         window.scrollTo(0,0);
       });
-};
+}
 
 function changeSchedule(element) {
     element.addEventListener('change', event => {
@@ -179,7 +179,7 @@ function changeSchedule(element) {
         window.scrollTo(0,0);
         blockOptionsContainerActive = [];
     })
-};
+}
 
 function scheduleOptions(element) {
     element.addEventListener('click', () => {
@@ -187,18 +187,18 @@ function scheduleOptions(element) {
         const userButtons = document.getElementById('hide-header-buttons');
         const buttonsImportExport = document.getElementById('import-container');
         buttonsImportExport.setAttribute('hidden', 'hidden');
-        if(buttonsContainer.hidden){
+        if (buttonsContainer.hidden){
             disableControlsHeader({id: 'header'});
-            if(!userButtons.hidden) {
+            if (!userButtons.hidden) {
                 userButtons.setAttribute('hidden', 'hidden');
-            };
+            }
             buttonsContainer.removeAttribute('hidden');
         } else {
             buttonsContainer.setAttribute('hidden', 'hidden');
             disableControlsHeader({id: 'header'});
-        };
+        }
     });
-};
+}
 
 function loadFiles(element) {
     element.addEventListener('click', () => {
@@ -206,7 +206,7 @@ function loadFiles(element) {
         if (typeof window.FileReader !== 'function') {
             alert("The file API isn't supported on this browser yet.");
             return;
-          };
+          }
           const input = document.getElementById('file-input');
           if (!input) {
             alert("Couldn't find the file-input element.");
@@ -221,9 +221,9 @@ function loadFiles(element) {
             fr.readAsText(file);
             input.value = null;
           disableControlsHeader({id: 'header'});
-        };
+        }
     });
-};
+}
 
 function importListener(element) {
     element.addEventListener('change', () => {
@@ -236,7 +236,7 @@ function importListener(element) {
         // button.removeAttribute('hidden');
         container.removeAttribute('hidden');
     });
-};
+}
 
 function importExportButtons(element) {
     element.addEventListener('click', () => {
@@ -245,38 +245,38 @@ function importExportButtons(element) {
         const optionsHeader2 = document.getElementById('options-header-2');
         const buttonExportSchedule = document.getElementById('export-button');
         const importExportContainer = document.getElementById('import-export-container');
-        if(buttons.hidden || optionsHeader2.hidden) {
+        if (buttons.hidden || optionsHeader2.hidden) {
             buttons.removeAttribute('hidden');
             optionsHeader2.removeAttribute('hidden');
             buttonExportSchedule.removeAttribute('hidden');
             importExportContainer.removeAttribute('hidden');
         } else {
             disableControlsHeader({id: 'header'});
-        };
+        }
     });
-};
+}
 
 function exportSchedules(element) {
     element.addEventListener('click', () => {
     let data = {}, fileName = "";
     const schedules = getData('schedules');
-    if(element.id === 'export-this' || schedules.length === 2) {
-        data = {};
+    if (element.id === 'export-this' || schedules.length === 2) {
+        data = {}
         const name = schedules[0].activeSchedule;
         const titles = getData(`${name}-titles`);
         fileName = `${name}-agenda.json`;
         data['schedules'] = JSON.stringify([{activeSchedule: name}, name]);
-        for(let i = 0; i < titles.length; i++) {
-            if(i === 0) {
+        for (let i = 0; i < titles.length; i++) {
+            if (i === 0) {
                 data[`${name}-titles`] = JSON.stringify(titles);
             } else {
                 data[`${name}-${i}`] = JSON.stringify(getData(`${name}-${i}`));
-            };
-        };
+            }
+        }
     } else {
         data = localStorage;
         fileName = "mis-agendas.json"
-    };
+    }
     const buttonExportSchedule = document.getElementById('export-button'); 
     const a = document.createElement("a");
     document.getElementById('import-export-buttons').appendChild(a);
@@ -299,24 +299,24 @@ function exportSchedules(element) {
 function deleteAll(element) {
     element.addEventListener('click', () => {
         const isConfirmed = confirm("Borrar todas las agendas \nes una acción que no se puede deshacer");
-        if(isConfirmed) {
+        if (isConfirmed) {
             deleteAllSchedules();
         } else {
             disableControlsHeader({id: 'header'});
             return;
-        };
+        }
     });
-};
+}
 
 function advancedOptions(element) {
     element.addEventListener('click', () => {
         disableControlsHeader({id: 'header'}, '3');
         const optionsHeader3 = document.getElementById('options-header-3');
-        if(optionsHeader3.hidden) {
+        if (optionsHeader3.hidden) {
             optionsHeader3.removeAttribute('hidden');
         } else {
             disableControlsHeader({id: 'header'});
-        };
+        }
     });
 }
 
@@ -325,7 +325,7 @@ function newBlock(element) {
         const [name, titles, titlesLength , maxLength] = maxLengthBlock();
         const blocksNumber = document.getElementById('blocks-number');
         const max = blocksNumber.getAttribute('max');
-        if(titlesLength === max + 1) {
+        if (titlesLength === max + 1) {
             alert(`Ya has alcanzado el máximo número de bloques [${max}]`);
             return;
         }
@@ -337,12 +337,12 @@ function newBlock(element) {
         renderBlocks();
         alert(`Un nuevo bloque ha sido añadido \n [Título ${titlesLength}]`);
     });
-};
+}
 
 function cleanBlocks(element) {
     element.addEventListener('click', () => {
         const isConfirmed = confirm("Esta acción no se puede deshacer");
-            if(isConfirmed) {
+            if (isConfirmed) {
                 const [name, titles, titlesLength , maxLength] = maxLengthBlock();
                 // const newTitles = new Array(titlesLength); // * allow reset titles too
                 // newTitles[0] = name; // *
@@ -352,29 +352,29 @@ function cleanBlocks(element) {
                     // newBlock[0] = `Título ${i + 1}`; // *
                     newBlock[0] = titles[i + 1];
                     saveData(`${name}-${i + 1}`, newBlock);
-                };
+                }
                 // saveData(`${name}-titles`, newTitles); // * 
                 renderBlocks();
             } else return;
     });
-};
+}
 
 function deleteSchedule(element) {
     element.addEventListener('click', () => {
         let schedules = getData('schedules');
-        if(schedules.length === 2) {
+        if (schedules.length === 2) {
             const isConfirmed = confirm("Borrar esta agenda es una acción que no se puede deshacer");
-            if(isConfirmed) {
+            if (isConfirmed) {
                 deleteAllSchedules();
             } else return;
         } else {
             const deleteThisSchedule = confirm("Borrar esta agenda es una acción que no se puede deshacer");
-            if(deleteThisSchedule) {
+            if (deleteThisSchedule) {
                 let name = schedules[0].activeSchedule;
                 const titles = getData(`${name}-titles`);
-                for(let i = 1; i !== titles.length; i++) {
+                for (let i = 1; i !== titles.length; i++) {
                     deleteData(`${name}-${i}`);
-                };
+                }
                 deleteData(`${name}-titles`);
                 const indexToDelete = schedules.findIndex(element => element === name);
                 schedules.splice(indexToDelete, 1);
@@ -383,6 +383,6 @@ function deleteSchedule(element) {
                 name = getData('schedules')[1];
                 renderBlocks(name);
             } else return;
-        };
+        }
     });
-};
+}

@@ -1,14 +1,3 @@
-// DIV → id, class, innerHTML, title
-// IMG → id, class, src, alt, title
-// SPAN → id, class, innerHTML
-// H3 → id, class, innerHTML
-// INPUT → id, class, type, maxlength, eventListener
-// BUTTON → id, class, hidden, eventListener, innerHTML
-// OL → id
-// LI → id, class
-
-// elementsCreator(tag, id, ElementClass, innerHTMLText, src, alt, title, type, maxLength, hidden, eventListener)
-
 function elementsCreator(tag, id, ElementClass, innerHTMLText, attributes, eventListener) {
   const newElement = document.createElement(tag.toUpperCase());
   if (id) newElement.setAttribute('id', id);
@@ -29,13 +18,6 @@ function elementsCreator(tag, id, ElementClass, innerHTMLText, attributes, event
       }
     }
   }
-  // if(src) newElement.setAttribute('src', src);
-  // if(alt) newElement.setAttribute('alt', alt);
-  // if(title) newElement.setAttribute('title', title);
-  // if(type) newElement.setAttribute('type', type);
-  // if(maxLength) newElement.setAttribute('maxlength', maxLength);
-  // if(hidden) newElement.setAttribute('hidden', hidden);
-  // if(style) newElement.setAttribute('style', `${style[0]}: ${style[1]};`);
   if (eventListener) newElement.addEventListener(eventListener[0], eventListener[1]);
   return newElement;
 }
@@ -62,7 +44,9 @@ function blockConstructor(
   const scheduleBlocks = [];
   isNew && scheduleBlocks.push(name);
   for (let i = 0; i < n; i++) {
+    // level 1
     const block = elementsCreator('DIV', `block-${i + 1}`, 'block', false, {counter: 'hidden'});
+    // open level 2 blockAdvancedOptions
     const blockAdvancedOptions = elementsCreator(
       'DIV',
       `blockAdvancedOptions-${i + 1}`,
@@ -141,7 +125,14 @@ function blockConstructor(
       cleanContainer,
       deleteContainer,
     ]);
-    // severalAppends(hideOptionsIconsContainer, [configContainer, moveContainer, copyContainer, cleanContainer, deleteContainer]);
+    // Add configContainer when it be implemented
+    // severalAppends(hideOptionsIconsContainer, [
+    //   configContainer,
+    //   moveContainer,
+    //   copyContainer,
+    //   cleanContainer,
+    //   deleteContainer
+    // ]);
     const configHideManageContainer = elementsCreator(
       'div',
       `configHideManageContainer-${i + 1}`,
@@ -342,6 +333,7 @@ function blockConstructor(
         title: 'Opciones del bloque',
       }
     );
+    // close level 2 blockAdvancedOptions
     severalAppends(blockAdvancedOptions, [blockAdvancedPrimaryContainer, optionsBlockButton]);
     const title = elementsCreator('DIV', `title-${i + 1}`, 'title');
     const titleNumber = elementsCreator('SPAN', `titleNumber-${i + 1}`, 'titleNumber', `${i + 1}`);

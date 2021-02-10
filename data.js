@@ -1,7 +1,10 @@
 let allowInitialData = false;
-let editControlsActive = []; // allow identify descriptions id controls
-let blockOptionsContainerActive = []; // allow identify what type of option container is active and its identifier block number
-let headerControlsActive = []; // not used yet
+let editControlsActive = [];
+// editControlsActive allow identify descriptions id controls
+let blockOptionsContainerActive = [];
+// blockOptionsContainerActive allow identify what type of option container is active and its identifier block number
+let headerControlsActive = [];
+// headerControlsActive not used yet
 // let descriptionNumberVisibility = [];
 let blockToCopy = [];
 
@@ -48,3 +51,4 @@ const initialDescriptions = [
      ['', ''],
      ['', '' ]]
   ];
+  

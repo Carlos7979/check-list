@@ -1,7 +1,7 @@
 function  main() {
   
   const storedData = getData('schedules');
-    if(storedData){
+    if (storedData){
       setSchedulesToOptions(storedData);
       renderBlocks();
     } else {
