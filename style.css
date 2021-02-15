@@ -39,13 +39,13 @@ header {
     border: darkorchid solid 1px;
     border-radius: 5px;
     background-color: cornflowerblue;
-    letter-spacing: -1em;
+    letter-spacing: -1rem;
          /* Corrige el espaciado por defecto ocasionado por el inline-block */
     position: fixed;
          /* requiere que blocks-container tenga un padding-top: 112.5px; */
     top: 0px;
     margin-left:50%;
-    left: -39.15em;
+    left: -39.15rem;
     z-index: 1;
     /* position: relative; */
 }
@@ -196,7 +196,7 @@ header {
 
 #import-selected {
     display: inline-block;
-    max-width: 17em;
+    max-width: 17rem;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -287,7 +287,7 @@ header {
     color: rgb(44, 43, 43);
     user-select: none;
     cursor: default;
-    font-size: 0.9em;
+    font-size: 0.9rem;
 }
 
 .button-darkgreen-confirm-block:hover {
@@ -335,7 +335,7 @@ header {
     color: whitesmoke;
     user-select: none;
     cursor: default;
-    font-size: 0.9em;
+    font-size: 0.9rem;
 }
 
 .button-darkred-confirm-block:hover {
@@ -510,7 +510,7 @@ h2 {
     position: relative;
     top: 6px;
     margin: 0 auto;
-    width: 78em;
+    width: 78rem;
     padding: 0 12px;
     border: black solid 1px;
 } */
@@ -558,7 +558,7 @@ h2 {
     
     margin: 2px auto;
         /* para que el efecto de centrado horizonatal del atributo 'auto' surta efecto, hay que ajustar el tamaño del contenedor al ancho de dos bloques */
-    width: 78.3em;
+    width: 78.3rem;
     padding-top: 112.5px;
          /* habilitado si "header" posee position fixed */
 }
@@ -568,7 +568,7 @@ h2 {
     border: darkorchid solid 1px;
     background: peachpuff;
     display: inline-block;
-    /* padding-bottom: 1.35em; */
+    /* padding-bottom: 1.35rem; */
     /* max-height: 20rem; */
     /* min-height: 20rem; */
     vertical-align: top;
@@ -577,7 +577,7 @@ h2 {
 
 .block-advanced-options {
     /* border: brown solid 1px; */
-    height: 2em;
+    height: 2rem;
     border-radius: 5px;
     margin: 5px 10px 0 45px;
     padding: 1px;
@@ -657,7 +657,7 @@ h2 {
 }
 
 /* .confirmText {
-    font-size: 0.9em;
+    font-size: 0.9rem;
     font-weight: bold;
 } */
 
@@ -675,7 +675,7 @@ h2 {
     align-items: center;
     /* border: brown solid 1px; */
     border-radius: 5px;
-    height: 1.35em;
+    height: 1.35rem;
     margin: 5px 10px 5px 45px;
     padding: 1px;
     /* color: darkgreen; */
@@ -684,11 +684,11 @@ h2 {
 .titleNumber {
     position: relative;
     /* left: 2px; */
-    right: 2em;
+    right: 2rem;
     text-align: right;
     font-weight: bolder;
     /* border: solid black 1px; */
-    width: 1.5em;
+    width: 1.5rem;
     color: peachpuff;
     padding-right: 10px;
     /* line-height: 25px;     */
@@ -711,18 +711,18 @@ h3.title-description {
     padding-left: 4px;
     line-height: 25px;
     position: relative;
-    right: 2em;
+    right: 2rem;
 }
 
 input.title-i {
     margin-left: 20px;
     position: relative;
-    right: 3em;
+    right: 3rem;
 }
 
 .button-edit-t {
     position: relative;
-    right: 3em;
+    right: 3rem;
 }
 
 
@@ -734,7 +734,7 @@ ol {
 }
 
 li {
-    height: 1.35em;
+    height: 1.35rem;
     display: flex;
          /*this attribute hides list-style */
     align-items: center;
@@ -770,9 +770,9 @@ li:hover, .title:hover {
     /* border: 1px solid black; */
     box-sizing: border-box;
     padding-top: 2px;
-    height: 1.35em;
+    height: 1.35rem;
     position: relative;
-    right: 2em;
+    right: 2rem;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -786,8 +786,8 @@ li:hover, .title:hover {
 .check, .checkall {
     margin-right: 10px;
     border: 1px solid black;
-    height: 1em;
-    min-width: 1em;
+    height: 1rem;
+    min-width: 1rem;
     display: inline-block;
     border-radius: 5px;
     margin-left: 2px;
@@ -795,8 +795,8 @@ li:hover, .title:hover {
 
 .checkallcontainer {
     margin-right: 10px;
-    width: 1.3em;
-    height: 1.3em;
+    width: 1.3rem;
+    height: 1.3rem;
     /* display: flex; */
     /* align-items: center; */
     /* border: 1px solid red; */
@@ -818,9 +818,9 @@ li:hover, .title:hover {
 .checkcounter {
     /* border: 1px solid black; */
     width: 70px;
-    height: 1em;
-    font-size: 0.8em;
-    /* width: 1em; */
+    height: 1rem;
+    font-size: 0.8rem;
+    /* width: 1rem; */
 }
 
 .span1, .span2, .span3 {
@@ -834,7 +834,7 @@ li:hover, .title:hover {
      padding-right: 4px;
  }
 .emptyspace {
-    width: 26em;
+    width: 26rem;
     /* border: 1px solid black; */
 }
 
@@ -846,12 +846,12 @@ li:hover, .title:hover {
 
 /* .button-edit, .button-delete .input-description {
     position: relative;
-    right: 4em;
+    right: 4rem;
 } */
 
 .input-description, .button-edit {
     position: relative;
-    right: 2em;
+    right: 2rem;
 }
 
 .check:hover {
@@ -867,10 +867,10 @@ li:hover, .title:hover {
 
 .descriptionNumber {
     position: relative;
-    right: 4em;
+    right: 4rem;
     text-align: right;
     /* border: solid black 1px; */
-    width: 1.5em;
+    width: 1.5rem;
     color: peachpuff;
     padding-right: 9px;
     /* line-height: 25px;     */
