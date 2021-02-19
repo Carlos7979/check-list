@@ -180,7 +180,6 @@ function renderBlocks(name) {
         name = getData('schedules')[0].activeSchedule;
     }
     const titles = getData(`${name}-titles`);
-    // let config = getData(`${name}-config`);
     const titlesLength = titles.length;
     const dataSet = [{}];
     if (titlesLength > 1) {
@@ -190,11 +189,7 @@ function renderBlocks(name) {
             dataSet.push(blocksSample);
             blocksSample.length > maxLength ? maxLength = blocksSample.length : maxLength
         }
-        // if (!config) {
-        //     config = new Array(titlesLength).fill([]);
-        // }
-        // saveData(`${name}-config`);
-        dataSet[0] = {name, config: 'TODO', descriptionsInBlock: maxLength - 1};
+        dataSet[0] = {name, descriptionsInBlock: maxLength - 1};
     }
     blockConstructor(false, true, dataSet);
     editControlsActive = [];
@@ -422,8 +417,8 @@ function deleteAllSchedules() {
     const selector = document.getElementById('schedule-selector');
     selector.innerHTML = '';
     selectorBlock.setAttribute('hidden', 'hidden');
-    // const buttonsContainer = document.getElementById('header-schedule-options-2');
-    // buttonsContainer.setAttribute('hidden', 'hidden');
+    const buttonsContainer = document.getElementById('header-schedule-options-2');
+    buttonsContainer.setAttribute('hidden', 'hidden');
     const optionsButton = document.getElementById('hide-header-subblock-3');
     optionsButton.setAttribute('hidden', 'hidden');
     const blocksContainer = document.getElementById('blocks-container');
