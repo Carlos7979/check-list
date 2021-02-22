@@ -1,21 +1,91 @@
+@font-face {
+    font-family: 'DejaVu Serif';
+    src: url('fonts/DejaVuSerif.ttf');
+}
+
+@font-face {
+    font-family: "DejaVu Serif";
+    src: url("fonts/DejaVuSerif-Bold.ttf");
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: "DejaVu Serif";
+    src: url("fonts/DejaVuSerif-Italic.ttf");
+    font-style: italic;
+}
+@font-face {
+    font-family: "DejaVu Serif";
+    src: url("fonts/DejaVuSerif-BoldItalic.ttf");
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'DejaVu Sans';
+    src: url('fonts/DejaVuSans.ttf');
+}
+
+@font-face {
+    font-family: "DejaVu Sans";
+    src: url("fonts/DejaVuSans-Bold.ttf");
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: "DejaVu Sans";
+    src: url("fonts/DejaVuSans-Oblique.ttf");
+    font-style: italic;
+}
+@font-face {
+    font-family: "DejaVu Sans";
+    src: url("fonts/DejaVuSans-BoldOblique.ttf");
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'DejaVu Sans Mono';
+    src: url('fonts/DejaVuSansMono.ttf');
+}
+
+@font-face {
+    font-family: "DejaVu Sans Mono";
+    src: url("fonts/DejaVuSansMono-Bold.ttf");
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: "DejaVu Sans Mono";
+    src: url("fonts/DejaVuSansMono-Oblique.ttf");
+    font-style: italic;
+}
+@font-face {
+    font-family: "DejaVu Sans Mono";
+    src: url("fonts/DejaVuSansMono-BoldOblique.ttf");
+    font-weight: bold;
+    font-style: italic;
+}
+
 * {
     /* border: darkgrey 0.5px groove; */
     /* padding: 2px; */
     margin: 0;
+    font-family: 'DejaVu Sans';
 }
 
 @media print{
     header, .block-advanced-options, .block-counter *{
-      display: none !important;
+      display: none !important
     }
 
     #blocks-container {
-        padding-top: 0  !important;
+        padding-top: 0  !important
              /* habilitado si "header" posee position fixed */
     }
 
     .check, .checkall {
-        color: hsla(0, 0%, 0%, 0) !important;
+        color: hsla(0, 0%, 0%, 0) !important
     }
 
 }
@@ -28,14 +98,18 @@
 body {
     /* border: black solid 1px; */
     background-color: whitesmoke;
+    /* display: flex; */
+    /* flex-wrap: wrap; */
+    /* justify-content: center; */
 }
 
 header {
-    margin: 2px;
-    margin-top: 0;
+    box-sizing: border-box;
+    /* margin: auto; */
+    /* margin-top: 0; */
     padding: 0 1px;
     /* max-width: 79rem; */
-    width: max-content;
+    width: 97vw;
     border: darkorchid solid 1px;
     border-radius: 5px;
     background-color: cornflowerblue;
@@ -43,16 +117,26 @@ header {
          /* Corrige el espaciado por defecto ocasionado por el inline-block */
     position: fixed;
          /* requiere que blocks-container tenga un padding-top: 112.5px; */
-    top: 0px;
-    margin-left:50%;
-    left: -39.15rem;
+    top: 1px;
+    /* margin-left:50%;
+    left: -39.15rem; */
     z-index: 1;
     /* position: relative; */
+    /* max-width: 97vw; */
+    /* min-width: 37.8rem; */
+    left: 1vw;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .header-block {
-    min-width: 39rem;
+    /* width: 49.8%; */
+    width: 48vw;
+    /* max-width: 99.6%; */
+    min-width: 490px;
+    height: 7.5rem;
     /* border: red solid 1px; */
+    border-color: red;
     display: inline-block;
     vertical-align: top;
          /* Corrige el desfase vertical de bloques inline-block */
@@ -67,21 +151,36 @@ header {
 }
 
 .header-block-users-welcome {
-    width: 200px;
+    width: calc(8.5rem + 6.5vw);
+    border-color: bisque;
 }
 
 .header-block-users {
-    width: 280px;
+    /* width: 280px; */
+    width: calc(13rem + 7vw);
+    border-color: yellow;
 }
 
 #header-buttons {
     display: inline-block;
-    vertical-align: middle;
+    margin-left: calc(5px + 0.2vw);
 }
 
-/* #header-welcome {
+#style-header-buttons {
+    /* display: flex;
+    flex-wrap: wrap; */
     vertical-align: middle;
-} */
+    border-color: green;
+    /* width: calc(12.5rem + 10vw); */
+}
+
+#header-welcome {
+    /* vertical-align: middle;
+    min-width: calc(350px + 1.5vw); */
+    border-color: black;
+    overflow: visible;
+    white-space: nowrap;
+}
 
 #schedule-selector {
     /* margin-left: 50px; */
@@ -167,6 +266,8 @@ header {
     color: whitesmoke;
     user-select: none;
     /* cursor: default; */ /* a label don't require this property*/
+    font-size: calc(0.75rem + 0.4vw);
+    /* font-family: 'DejaVu Sans Mono'; */
 }
 
 #import-label:hover {
@@ -240,6 +341,7 @@ header {
     color: rgb(223, 217, 217);
     user-select: none;
     cursor: default;
+    font-size: calc(0.75rem + 0.4vw);
 }
 
 .button-darkgray:hover {
@@ -264,6 +366,7 @@ header {
     color: whitesmoke;
     user-select: none;
     cursor: default;
+    font-size: calc(0.75rem + 0.4vw);
 }
 
 .button-darkgreen:hover {
@@ -388,7 +491,7 @@ header {
 
 #header-schedule-options-2 {
     margin-top: 15px;
-    min-width: 39rem;
+    min-width: 30rem;
     /* border: solid 1px; */
     border-color: chartreuse;
     text-align: end;
@@ -469,8 +572,9 @@ header {
 }
 
 h2 {
-    /* font-family: OpenSans-Bold; */
-    font-size: 24px;
+    font-family: 'DejaVu Serif';
+    /* font-size: 24px; */
+    font-size: calc(12px + 1.2vw);
     font-weight: bolder;
     display: inline-block;
     position: relative;
@@ -490,7 +594,8 @@ h2 {
 
 .header-text {
     font-weight: bold;
-    font-size: large;
+    /* font-size: large; */
+    font-size: calc(12px + 0.7vw);
 }
 
 #header-users {
@@ -530,7 +635,8 @@ h2 {
 
 .header-button, .header-label {
     /* background-color: cornflowerblue; */
-    font-size: medium;
+    /* font-size: medium; */
+    font-size: calc(12px + 0.2vw);
     font-weight: bold;
     color: black;
 }
@@ -552,19 +658,21 @@ h2 {
 } */
 
 #blocks-container {
-    /* display: flexbox; */
+    display: flex;
+    flex-wrap: wrap;
     /* border: chocolate 2px solid; */
     /* width: 100%; */
     
     margin: 2px auto;
         /* para que el efecto de centrado horizonatal del atributo 'auto' surta efecto, hay que ajustar el tamaño del contenedor al ancho de dos bloques */
-    width: 78.3rem;
-    padding-top: 112.5px;
+    max-width: 78.3rem;
+    padding-top: 7.5rem;
          /* habilitado si "header" posee position fixed */
 }
 
 .block {
     width: 39rem;
+    min-width: 37.5rem;
     border: darkorchid solid 1px;
     background: peachpuff;
     display: inline-block;
@@ -817,7 +925,7 @@ li:hover, .title:hover {
 
 .checkcounter {
     /* border: 1px solid black; */
-    width: 70px;
+    width: 4.4rem;
     height: 1rem;
     font-size: 0.8rem;
     /* width: 1rem; */
@@ -825,7 +933,8 @@ li:hover, .title:hover {
 
 .span1, .span2, .span3 {
     display: inline-block;
-    min-width: 20px;
+    min-width: 1.25rem;
+        /* 1.25rem equivalent to 20px */
     vertical-align: middle;
     /* border: 1px solid red; */
 }
@@ -881,3 +990,34 @@ li:hover, .title:hover {
     color: black;
     cursor: default;
 } */
+
+@media  only screen and (max-width: calc(72.4rem)) {
+    /* header {
+        width: 49.8%;
+        min-width: 37.8rem;
+    } */
+
+    .header-block {
+        width: 100%;
+    }
+
+    #blocks-container {
+        padding-top: calc(15rem + 2px);
+             /* habilitado si "header" posee position fixed */
+    }
+}
+
+@media  only screen and (max-width: 480px) {
+
+    /* .header-block {
+        width: 100%;
+    }
+
+    #blocks-container {
+        padding-top: calc(15rem + 2px);
+    } */
+
+    .descriptionNumber {
+        color: black !important;
+    }
+}
