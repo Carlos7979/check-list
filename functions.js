@@ -300,6 +300,7 @@ function deleteDescription(element) {
     if (checkElement.innerHTML) check(checkElement);
     checkElement.setAttribute('style', "visibility: hidden;");
     description.innerHTML = textToInsert
+    description.setAttribute('title', textToInsert);
     blockSave(identifier, isTitle, textToInsert);
     disableControls();
     // aquí se se limpia el campo de entrada luego de activar el botón de borrar:
@@ -374,6 +375,7 @@ function insert(element) {
     //
     const textToInsert = input.value.trim();
     description.innerHTML = textToInsert;
+    description.setAttribute('title', textToInsert);
     //
     blockSave(identifier, isTitle, textToInsert);
     disableControls();

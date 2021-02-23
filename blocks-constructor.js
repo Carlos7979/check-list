@@ -343,7 +343,8 @@ function blockConstructor(
       'h3',
       `description-${i + 1}-t`,
       'title-description',
-      headingText
+      headingText,
+      {title: headingText}
     );
     isNew && scheduleBlocks.push(headingText);
     const input = elementsCreator('input', `input-${i + 1}-t`, 'title-i', false, {
@@ -429,7 +430,8 @@ function blockConstructor(
         'DIV',
         `description-${j + 1 + i * m}`,
         descriptionClass,
-        descriptionText
+        descriptionText,
+        {title: descriptionText}
       );
       isNew && blockDescriptions.push([checkText, descriptionText]);
       const input = elementsCreator('input', `input-${j + 1 + i * m}`, 'input-description', false, {

@@ -90,11 +90,6 @@
 
 }
 
-/* @font-face {
-    font-family: OpenSans-Bold;
-    src: url('OpenSans-Bold.ttf');
-} */
-
 body {
     /* border: black solid 1px; */
     background-color: whitesmoke;
@@ -636,7 +631,7 @@ h2 {
 .header-button, .header-label {
     /* background-color: cornflowerblue; */
     /* font-size: medium; */
-    font-size: calc(12px + 0.2vw);
+    font-size: calc(11px + 0.2vw);
     font-weight: bold;
     color: black;
 }
@@ -657,22 +652,28 @@ h2 {
     margin-right: 5px;
 } */
 
+/* Blocks section */
+
 #blocks-container {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     /* border: chocolate 2px solid; */
     /* width: 100%; */
     
     margin: 2px auto;
         /* para que el efecto de centrado horizonatal del atributo 'auto' surta efecto, hay que ajustar el tamaño del contenedor al ancho de dos bloques */
-    max-width: 78.3rem;
-    padding-top: 7.5rem;
+    /* max-width: 78.3rem; */
+    width: calc(97vw + 4px);
+    padding-top: calc(7.5rem + 2px);
          /* habilitado si "header" posee position fixed */
+    position: relative;
+    left: 2px;
 }
 
 .block {
-    width: 39rem;
-    min-width: 37.5rem;
+    width: 48.3vw;
+    min-width: 26rem;
     border: darkorchid solid 1px;
     background: peachpuff;
     display: inline-block;
@@ -813,7 +814,7 @@ h2 {
 }
 
 h3.title-description {
-    font-size: 18px;
+    font-size: calc(16px + 0.2vw);
     font-weight: bolder;
     margin-left: 2px;
     padding-left: 4px;
@@ -831,6 +832,7 @@ input.title-i {
 .button-edit-t {
     position: relative;
     right: 3rem;
+    font-size: calc(0.8rem + 0.2vw);
 }
 
 
@@ -884,6 +886,7 @@ li:hover, .title:hover {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    font-size: calc(0.8rem + 0.2vw);
 }
 
 .description-checked {
@@ -925,7 +928,7 @@ li:hover, .title:hover {
 
 .checkcounter {
     /* border: 1px solid black; */
-    width: 4.4rem;
+    min-width: 4.4rem;
     height: 1rem;
     font-size: 0.8rem;
     /* width: 1rem; */
@@ -943,7 +946,7 @@ li:hover, .title:hover {
      padding-right: 4px;
  }
 .emptyspace {
-    width: 26rem;
+    width: 30vw;
     /* border: 1px solid black; */
 }
 
@@ -951,6 +954,7 @@ li:hover, .title:hover {
     /* border: 1px solid black; */
     width: 70px;
     text-align: end;
+    font-size: calc(0.8rem + 0.2vw);
 }
 
 /* .button-edit, .button-delete .input-description {
@@ -961,6 +965,7 @@ li:hover, .title:hover {
 .input-description, .button-edit {
     position: relative;
     right: 2rem;
+    font-size: calc(0.8rem + 0.2vw);
 }
 
 .check:hover {
