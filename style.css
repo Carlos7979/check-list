@@ -224,12 +224,6 @@ header {
     justify-content: space-evenly;
 } */
 
-/* #options-header-1 {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-} */
-
 #header-schedule-options-1 {
     border-color: chartreuse;
     display: flex;
@@ -245,6 +239,12 @@ header {
     border-color: red;
     width: 85%;
     flex-shrink: 4;
+    flex-wrap: nowrap;
+}
+
+#options-header-1-flex {
+    display: flex;
+    flex-wrap: nowrap;
 }
 
 #import-export-buttons {
