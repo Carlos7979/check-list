@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agenda del día</title>
-    <link rel="stylesheet" href="reset.css" type="text/css">
+    <!-- <link rel="stylesheet" href="reset.css" type="text/css"> -->
+    <link rel="stylesheet" href="normalize.css" type="text/css">
+    <link rel="stylesheet" href="select.css" type="text/css">
     <link rel="stylesheet" href="style.css" type="text/css">
     <link rel="icon" type="image/png" href="dialog-apply.svg">
     <script src="data.js"></script>
@@ -19,7 +21,7 @@
 </head>
 <body>
     <header id="header">
-        <div class="header-block">
+        <div class="header-block" id="header-block-1" >
             <div id="header-title">
                 <img src="dialog-apply.svg" alt="Check">
                 <h2>Agenda del día</h2>
@@ -50,8 +52,8 @@
                 </div>
             </div>
         </div>
-        <div class="header-block">
-            <div id="header-block-2">
+        <div class="header-block" id="header-block-2">
+            
                 <div id="header-schedule-options-1">
                     <div id="options-header">
                         <div id="options-header-1" hidden>
@@ -143,7 +145,7 @@
                         <img id="delete-schedule" class="icon-button-image" src="images/x-red.png" alt="Delete schedule" title="Eliminar esta agenda">
                     </div>
                 </div>
-            </div>
+            
         </div>
     </header>
     <div id="blocks-container"></div>
