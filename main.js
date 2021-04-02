@@ -20,6 +20,7 @@ function  main() {
   addSchedule(document.getElementById('add-schedule'));
   changeSchedule(document.getElementById('schedule-selector'));
   scheduleOptions(document.getElementById('options'));
+  scheduleOptions(document.getElementById('options-2'));
   
   inputHeaderActiveDetector(document.getElementById('name'));
   inputHeaderActiveDetector(document.getElementById('blocks-number'));
@@ -30,8 +31,13 @@ function  main() {
   loadFiles(document.getElementById('load-file'));
   deleteAll(document.getElementById('delete-all-schedules'));
   advancedOptions(document.getElementById('advanced-options'));
+  advancedOptions(document.getElementById('advanced-options-2'));
   importExportButtons(document.getElementById('import-export'));
+  importExportButtons(document.getElementById('import-export-2'));
   newBlock(document.getElementById('new-block'));
+  newBlock(document.getElementById('new-block-2'));
   cleanBlocks(document.getElementById('clean-blocks'));
+  cleanBlocks(document.getElementById('clean-blocks-2'));
   deleteSchedule(document.getElementById('delete-schedule'));
+  deleteSchedule(document.getElementById('delete-schedule-2'));
 }

@@ -60,7 +60,10 @@ function newSchedule(element) {
                 return;
             }
             document.getElementById('options-header-2').removeAttribute('hidden');
-            if (element.id === 'import-button-2' || element.id === 'export-button') document.getElementById('header-schedule-options-2').setAttribute('hidden', 'hidden');
+            if (element.id === 'import-button-2' || element.id === 'export-button') {
+                document.getElementById('header-schedule-options-2').setAttribute('hidden', 'hidden');
+                document.getElementById('header-schedule-options-3').setAttribute('hidden', 'hidden');
+            }
             if (element.id === 'import-button-2') {
                 importContainer.removeAttribute('hidden');
                 exportContainer.setAttribute('hidden', 'hidden');
@@ -105,6 +108,7 @@ function addSchedule(element) {
     element.addEventListener('click', () => {
         const userButtons = document.getElementById('hide-header-buttons');
         const buttonsOptionsContainer = document.getElementById('header-schedule-options-2');
+        const buttonsOptionsContainer2 = document.getElementById('header-schedule-options-3');
         const buttonsImportExport = document.getElementById('import-export-buttons');
         // const optionsHeader2 = document.getElementById('options-header-2');
         const optionsHeader = document.getElementById('options-header-1');
@@ -112,6 +116,7 @@ function addSchedule(element) {
         if (userButtons.hidden){
             if (!buttonsOptionsContainer.hidden || !buttonsImportExport.hidden) {
                 buttonsOptionsContainer.setAttribute('hidden', 'hidden');
+                buttonsOptionsContainer2.setAttribute('hidden', 'hidden');
                 buttonsImportExport.setAttribute('hidden', 'hidden');
                 // optionsHeader2.setAttribute('hidden', 'hidden');
             }
@@ -184,6 +189,7 @@ function changeSchedule(element) {
 function scheduleOptions(element) {
     element.addEventListener('click', () => {
         const buttonsContainer = document.getElementById('header-schedule-options-2');
+        const buttonsContainer2 = document.getElementById('header-schedule-options-3');
         const userButtons = document.getElementById('hide-header-buttons');
         const buttonsImportExport = document.getElementById('import-container');
         buttonsImportExport.setAttribute('hidden', 'hidden');
@@ -193,8 +199,10 @@ function scheduleOptions(element) {
                 userButtons.setAttribute('hidden', 'hidden');
             }
             buttonsContainer.removeAttribute('hidden');
+            buttonsContainer2.removeAttribute('hidden');
         } else {
             buttonsContainer.setAttribute('hidden', 'hidden');
+            buttonsContainer2.setAttribute('hidden', 'hidden');
             disableControlsHeader({id: 'header'});
         }
     });

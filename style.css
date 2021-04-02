@@ -124,6 +124,15 @@ header {
     /* flex-wrap: wrap; */
 }
 
+.header-title-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+#header-subblock-4 {
+    display: none;
+}
+
 .header-block {
     /* width: 49.8%; */
     width: 48vw;
@@ -142,6 +151,20 @@ header {
 
 #header-welcome {
     display: flex;
+    justify-content: space-between;
+    /* align-items: flex-start; */
+    /* vertical-align: middle;
+    min-width: calc(350px + 1.5vw); */
+    border-color: black;
+    overflow: visible;
+    white-space: nowrap;
+    align-items: center;
+}
+
+#header-welcome-1 {
+    display: flex;
+    justify-content: space-between;
+    /* align-items: flex-start; */
     /* vertical-align: middle;
     min-width: calc(350px + 1.5vw); */
     border-color: black;
@@ -517,7 +540,18 @@ header {
     box-sizing: border-box;
 }
 
-#options, #new-block, #clean-blocks, #import-export {
+#header-schedule-options-3-container {
+    display: none;
+}
+
+#header-schedule-options-3 {
+    min-width: 30rem;
+    border-color: black;
+    text-align: end;
+    box-sizing: border-box;
+}
+
+#options, #new-block, #new-block-2 #clean-blocks, #clean-blocks-2, #import-export, #import-export-2 {
     vertical-align: middle;
     height: 40px;
     /* margin: 0 10px; */
@@ -528,17 +562,17 @@ header {
     right: 10px;
 }
 
-#new-block {
+#new-block, #new-block-2 {
     height: 35px;
     padding: 2.5px;
 }
 
-/* #new-block:hover {
+/* #new-block:hover, #new-block:hover {
     -webkit-transform: rotate(36deg);
     transform: rotate(36deg);
 } */
 
-#delete-schedule {
+#delete-schedule, #delete-schedule-2 {
     vertical-align: middle;
     height: 20px;
     padding: 10px;
@@ -552,13 +586,13 @@ header {
     padding-top: 10px;
 }
 
-#advanced-options {
+#advanced-options, #advanced-options-2 {
     height: 30px;
     /* vertical-align: bottom; */
     padding: 5px 0;
 }
 
-#advanced-options:hover {
+#advanced-options:hover, #advanced-options-2:hover {
     -webkit-transform: rotate(36deg);
     transform: rotate(36deg);
 }
@@ -1031,12 +1065,38 @@ li:hover, .title:hover {
         width: 100%;
     }
 
+    #header-block-2 {
+    height: min-content;
+}
+
+    #header-subblock-3 {
+        display: none;
+    }
+
+    #header-subblock-4 {
+        display: inline;
+        position: relative;
+        top: 5px;
+    }
+
+    #header-schedule-options-2 {
+        display: none;
+    }
+
+    #header-schedule-options-3-container {
+        display: inline-flex;
+    }
+
+    #import-export-buttons-style {
+        height: min-content;
+    }
+
     /* #header-block-1 {
         min-width: 0;
     } */
 
     #blocks-container {
-        padding-top: calc(15rem + 2px);
+        padding-top: calc(7.5rem + 2px);
              /* habilitado si "header" posee position fixed */
     }
 }

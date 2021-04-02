@@ -148,6 +148,8 @@ function setSchedulesToOptions(schedules) {
     const selector = document.getElementById('schedule-selector');
     const optionsButton = document.getElementById('hide-header-subblock-3');
     optionsButton.removeAttribute('hidden');
+    const optionsButton2 = document.getElementById('hide-header-subblock-4');
+    optionsButton2.removeAttribute('hidden');
     selector.innerHTML = '';
     for (let i = 1; i < schedules.length; i++) {
         const optionSelect = document.createElement('option');
@@ -421,8 +423,12 @@ function deleteAllSchedules() {
     selectorBlock.setAttribute('hidden', 'hidden');
     const buttonsContainer = document.getElementById('header-schedule-options-2');
     buttonsContainer.setAttribute('hidden', 'hidden');
+    const buttonsContainer2 = document.getElementById('header-schedule-options-3');
+    buttonsContainer2.setAttribute('hidden', 'hidden');
     const optionsButton = document.getElementById('hide-header-subblock-3');
     optionsButton.setAttribute('hidden', 'hidden');
+    const optionsButton2 = document.getElementById('hide-header-subblock-4');
+    optionsButton2.setAttribute('hidden', 'hidden');
     const blocksContainer = document.getElementById('blocks-container');
     blocksContainer.innerHTML = '';
     const importButton = document.getElementById('import-button-1');
