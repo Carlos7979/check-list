@@ -970,15 +970,16 @@ li:hover, .title:hover {
      padding-right: 4px;
  }
 .emptyspace {
-    width: 30vw;
+    width: 80%;
     /* border: 1px solid black; */
 }
 
 .percentage {
     /* border: 1px solid black; */
-    width: 70px;
+    width: 75px;
     text-align: end;
     font-size: calc(0.8rem + 0.2vw);
+    padding-right: 5px;
 }
 
 /* .button-edit, .button-delete .input-description {
@@ -1037,6 +1038,11 @@ li:hover, .title:hover {
     #blocks-container {
         padding-top: calc(15rem + 2px);
              /* habilitado si "header" posee position fixed */
+    }
+}
+@media only screen and (max-width: 857px) {
+    .block {
+        width: 100%;
     }
 }
 
