@@ -9,6 +9,32 @@ function  main() {
       buttonsContainer.removeAttribute('hidden');
     }
 
+  // temporal code for view inner width
+ //   
+  const innerWidth = document.getElementById('innerWidth');
+  innerWidth.innerHTML = `${window.innerWidth} px`;
+  window.onresize = reportWindowSize
+  function reportWindowSize() {
+      innerWidth.innerHTML = `${window.innerWidth} px`;
+  }
+//
+// end of temporal code for view inner width
+
+  const so = document.getElementById('so');
+  so.innerHTML = `${detectOS()}`;
+  function detectOS() {
+    const platform = navigator.platform.toLowerCase(),
+        iosPlatforms = ['iphone', 'ipad', 'ipod', 'ipod touch'];
+
+    if (platform.includes('mac')) return 'MacOS';
+    if (iosPlatforms.includes(platform)) return 'iOS';
+    if (platform.includes('win')) return 'Windows';
+    if (/android/.test(navigator.userAgent.toLowerCase())) return 'Android';
+    if (/linux/.test(platform)) return 'Linux';
+
+    return 'unknown';
+}
+
   newSchedule(document.getElementById('new-schedule'));
   newSchedule(document.getElementById('init-template'));
   newSchedule(document.getElementById('import-button-1'));
