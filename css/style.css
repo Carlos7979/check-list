@@ -68,7 +68,7 @@
 }
 
 * {
-    border: darkgrey 0.5px groove;
+    /* border: darkgrey 0.5px groove; */
     /* padding: 2px; */
     margin: 0;
     font-family: 'DejaVu Sans';
@@ -126,7 +126,7 @@ body {
     display: flex;
     align-items: flex-start;
     justify-content: center;
-    visibility: hidden;
+    /* visibility: hidden; */
 }
 
 .overlay-container {
@@ -267,9 +267,9 @@ header {
     visibility: hidden;
 }
 
-/* #header-block-1 {
-    min-width: 600px;
-} */
+#header-block-1 {
+    min-height: 7.5rem;
+}
 
 /* #header-block-2 {
     display: flex;
@@ -293,6 +293,7 @@ header {
     width: 85%;
     flex-shrink: 4;
     flex-wrap: nowrap;
+    margin-bottom: 5px;
 }
 
 #options-header-1-flex {
@@ -581,7 +582,19 @@ header {
     box-sizing: border-box;
 }
 
-#options, #new-block, #new-block-2 #clean-blocks, #clean-blocks-2, #import-export, #import-export-2 {
+#header-schedule-options-4 {
+    background-color: whitesmoke;
+}
+
+#close-schedule-options {
+    cursor: pointer;
+}
+
+.option-icon-container .icon-button {
+    width: 50px;
+}
+
+.regular-icon {
     vertical-align: middle;
     height: 40px;
     /* margin: 0 10px; */
@@ -602,7 +615,7 @@ header {
     transform: rotate(36deg);
 } */
 
-#delete-schedule, #delete-schedule-2 {
+.delete-schedule {
     vertical-align: middle;
     height: 20px;
     padding: 10px;
@@ -616,13 +629,13 @@ header {
     padding-top: 10px;
 }
 
-#advanced-options, #advanced-options-2 {
+.advanced-options {
     height: 30px;
     /* vertical-align: bottom; */
     padding: 5px 0;
 }
 
-#advanced-options:hover, #advanced-options-2:hover {
+.advanced-options:hover {
     -webkit-transform: rotate(36deg);
     transform: rotate(36deg);
 }
@@ -1165,7 +1178,7 @@ li:hover, .title:hover {
     }
 }
 
-@media  only screen and (max-width: 540px) {
+@media  only screen and (max-width: 565px) {
     #style-header-buttons {
         display: flex;
         flex-direction: column;

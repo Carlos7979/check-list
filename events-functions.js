@@ -208,6 +208,13 @@ function scheduleOptions(element) {
     });
 }
 
+function closeScheduleOptions(element) {
+    element.addEventListener('click', () => {
+        const overlay = document.getElementById('overlay');
+        overlay.setAttribute('style', 'visibility: hidden');
+    })
+}
+
 function loadFiles(element) {
     element.addEventListener('click', () => {
         // loadFile();
