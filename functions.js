@@ -746,3 +746,9 @@ function sortDescriptions(identifier) {
     saveData(`${name}-${identifier}`, arraySorted);
     disableBlockOptionsManagement(identifier);
 }
+
+function passSeveralElementsInFunction(func, object) {
+    for (const iterator of object) {
+        func(iterator);
+    }
+}

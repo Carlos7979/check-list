@@ -57,14 +57,9 @@ function  main() {
   importListener(document.getElementById('file-input'));
   loadFiles(document.getElementById('load-file'));
   deleteAll(document.getElementById('delete-all-schedules'));
-  advancedOptions(document.getElementById('advanced-options'));
-  advancedOptions(document.getElementById('advanced-options-2'));
-  importExportButtons(document.getElementById('import-export'));
-  importExportButtons(document.getElementById('import-export-2'));
-  newBlock(document.getElementById('new-block'));
-  newBlock(document.getElementById('new-block-2'));
-  cleanBlocks(document.getElementById('clean-blocks'));
-  cleanBlocks(document.getElementById('clean-blocks-2'));
-  deleteSchedule(document.getElementById('delete-schedule'));
-  deleteSchedule(document.getElementById('delete-schedule-2'));
+  passSeveralElementsInFunction(advancedOptions, document.getElementsByClassName('advanced-options'));
+  passSeveralElementsInFunction(importExportButtons, document.getElementsByClassName('import-export'));
+  passSeveralElementsInFunction(newBlock, document.getElementsByClassName('new-block'));
+  passSeveralElementsInFunction(cleanBlocks, document.getElementsByClassName('clean-blocks'));
+  passSeveralElementsInFunction(deleteSchedule, document.getElementsByClassName('delete-schedule'));
 }

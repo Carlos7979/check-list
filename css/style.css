@@ -68,7 +68,7 @@
 }
 
 * {
-    border: darkgrey 0.5px groove;
+    /* border: darkgrey 0.5px groove; */
     /* padding: 2px; */
     margin: 0;
     font-family: 'DejaVu Sans';
@@ -126,7 +126,7 @@ body {
     display: flex;
     align-items: flex-start;
     justify-content: center;
-    /* visibility: hidden; */
+    visibility: hidden;
 }
 
 .overlay-container {
