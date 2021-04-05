@@ -63,6 +63,8 @@ function newSchedule(element) {
             if (element.id === 'import-button-2' || element.id === 'export-button') {
                 document.getElementById('header-schedule-options-2').setAttribute('hidden', 'hidden');
                 document.getElementById('header-schedule-options-3').setAttribute('hidden', 'hidden');
+                document.getElementById('header-schedule-options-4').setAttribute('hidden', 'hidden');
+                // document.getElementById('header-schedule-options-5').setAttribute('hidden', 'hidden');
             }
             if (element.id === 'import-button-2') {
                 importContainer.removeAttribute('hidden');
@@ -107,16 +109,20 @@ function editHeaderControlActiveDetector(element) {
 function addSchedule(element) {
     element.addEventListener('click', () => {
         const userButtons = document.getElementById('hide-header-buttons');
-        const buttonsOptionsContainer = document.getElementById('header-schedule-options-2');
-        const buttonsOptionsContainer2 = document.getElementById('header-schedule-options-3');
+        const buttonsOptionsContainer2 = document.getElementById('header-schedule-options-2');
+        const buttonsOptionsContainer3 = document.getElementById('header-schedule-options-3');
+        const buttonsOptionsContainer4 = document.getElementById('header-schedule-options-4');
+        // const buttonsOptionsContainer5 = document.getElementById('header-schedule-options-5');
         const buttonsImportExport = document.getElementById('import-export-buttons');
         // const optionsHeader2 = document.getElementById('options-header-2');
         const optionsHeader = document.getElementById('options-header-1');
         disableControlsHeader({id: 'header'}, '1');
         if (userButtons.hidden){
             if (!buttonsOptionsContainer.hidden || !buttonsImportExport.hidden) {
-                buttonsOptionsContainer.setAttribute('hidden', 'hidden');
                 buttonsOptionsContainer2.setAttribute('hidden', 'hidden');
+                buttonsOptionsContainer3.setAttribute('hidden', 'hidden');
+                buttonsOptionsContainer4.setAttribute('hidden', 'hidden');
+                // buttonsOptionsContainer5.setAttribute('hidden', 'hidden');
                 buttonsImportExport.setAttribute('hidden', 'hidden');
                 // optionsHeader2.setAttribute('hidden', 'hidden');
             }
@@ -188,21 +194,27 @@ function changeSchedule(element) {
 
 function scheduleOptions(element) {
     element.addEventListener('click', () => {
-        const buttonsContainer = document.getElementById('header-schedule-options-2');
-        const buttonsContainer2 = document.getElementById('header-schedule-options-3');
+        const buttonsContainer2 = document.getElementById('header-schedule-options-2');
+        const buttonsContainer3 = document.getElementById('header-schedule-options-3');
+        const buttonsContainer4 = document.getElementById('header-schedule-options-4');
+        // const buttonsContainer5 = document.getElementById('header-schedule-options-5');
         const userButtons = document.getElementById('hide-header-buttons');
         const buttonsImportExport = document.getElementById('import-container');
         buttonsImportExport.setAttribute('hidden', 'hidden');
-        if (buttonsContainer.hidden){
+        if (buttonsContainer2.hidden){
             disableControlsHeader({id: 'header'});
             if (!userButtons.hidden) {
                 userButtons.setAttribute('hidden', 'hidden');
             }
-            buttonsContainer.removeAttribute('hidden');
             buttonsContainer2.removeAttribute('hidden');
+            buttonsContainer3.removeAttribute('hidden');
+            buttonsContainer4.removeAttribute('hidden');
+            // buttonsContainer5.removeAttribute('hidden');
         } else {
-            buttonsContainer.setAttribute('hidden', 'hidden');
             buttonsContainer2.setAttribute('hidden', 'hidden');
+            buttonsContainer3.setAttribute('hidden', 'hidden');
+            buttonsContainer4.setAttribute('hidden', 'hidden');
+            // buttonsContainer5.setAttribute('hidden', 'hidden');
             disableControlsHeader({id: 'header'});
         }
     });
@@ -265,6 +277,10 @@ function importExportButtons(element) {
             optionsHeader2.removeAttribute('hidden');
             buttonExportSchedule.removeAttribute('hidden');
             importExportContainer.removeAttribute('hidden');
+            if(element.id === 'import-export-3') {
+                const buttonsContainer4 = document.getElementById('header-schedule-options-4');
+                buttonsContainer4.setAttribute('hidden', 'hidden');
+            }
         } else {
             disableControlsHeader({id: 'header'});
         }
@@ -329,6 +345,10 @@ function advancedOptions(element) {
         const optionsHeader3 = document.getElementById('options-header-3');
         if (optionsHeader3.hidden) {
             optionsHeader3.removeAttribute('hidden');
+            if(element.id === 'advanced-options-3') {
+                const buttonsContainer4 = document.getElementById('header-schedule-options-4');
+                buttonsContainer4.setAttribute('hidden', 'hidden');
+            }
         } else {
             disableControlsHeader({id: 'header'});
         }
@@ -344,6 +364,10 @@ function newBlock(element) {
             alert(`Ya has alcanzado el máximo número de bloques [${max}]`);
             return;
         }
+        if(element.id === 'new-block-3') {
+            const buttonsContainer4 = document.getElementById('header-schedule-options-4');
+            buttonsContainer4.setAttribute('hidden', 'hidden');
+        }
         const newBlock = new Array(maxLength).fill(['', '']);
         newBlock[0] = `Título ${titlesLength}`;
         titles.push(`Título ${titlesLength}`);
@@ -358,6 +382,10 @@ function cleanBlocks(element) {
     element.addEventListener('click', () => {
         const isConfirmed = confirm("Esta acción no se puede deshacer");
             if (isConfirmed) {
+                if(element.id === 'clean-blocks-3') {
+                    const buttonsContainer4 = document.getElementById('header-schedule-options-4');
+                    buttonsContainer4.setAttribute('hidden', 'hidden');
+                }
                 const [name, titles, titlesLength , maxLength] = maxLengthBlock();
                 // const newTitles = new Array(titlesLength); // * allow reset titles too
                 // newTitles[0] = name; // *
@@ -397,6 +425,10 @@ function deleteSchedule(element) {
                 setSchedulesToOptions(schedules);
                 name = getData('schedules')[1];
                 renderBlocks(name);
+                if(element.id === 'delete-schedule-3') {
+                    const buttonsContainer4 = document.getElementById('header-schedule-options-4');
+                    buttonsContainer4.setAttribute('hidden', 'hidden');
+                }
             } else return;
         }
     });

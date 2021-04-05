@@ -421,10 +421,14 @@ function deleteAllSchedules() {
     const selector = document.getElementById('schedule-selector');
     selector.innerHTML = '';
     selectorBlock.setAttribute('hidden', 'hidden');
-    const buttonsContainer = document.getElementById('header-schedule-options-2');
-    buttonsContainer.setAttribute('hidden', 'hidden');
-    const buttonsContainer2 = document.getElementById('header-schedule-options-3');
+    const buttonsContainer2 = document.getElementById('header-schedule-options-2');
     buttonsContainer2.setAttribute('hidden', 'hidden');
+    const buttonsContainer3 = document.getElementById('header-schedule-options-3');
+    buttonsContainer3.setAttribute('hidden', 'hidden');
+    const buttonsContainer4 = document.getElementById('header-schedule-options-4');
+    buttonsContainer4.setAttribute('hidden', 'hidden');
+    // const buttonsContainer5 = document.getElementById('header-schedule-options-5');
+    // buttonsContainer5.setAttribute('hidden', 'hidden');
     const optionsButton = document.getElementById('hide-header-subblock-3');
     optionsButton.setAttribute('hidden', 'hidden');
     const optionsButton2 = document.getElementById('hide-header-subblock-4');
