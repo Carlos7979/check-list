@@ -118,7 +118,7 @@ function addSchedule(element) {
         const optionsHeader = document.getElementById('options-header-1');
         disableControlsHeader({id: 'header'}, '1');
         if (userButtons.hidden){
-            if (!buttonsOptionsContainer.hidden || !buttonsImportExport.hidden) {
+            if (!buttonsOptionsContainer2.hidden || !buttonsImportExport.hidden) {
                 buttonsOptionsContainer2.setAttribute('hidden', 'hidden');
                 buttonsOptionsContainer3.setAttribute('hidden', 'hidden');
                 buttonsOptionsContainer4.setAttribute('hidden', 'hidden');
