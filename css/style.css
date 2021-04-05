@@ -1212,3 +1212,46 @@ li:hover, .title:hover {
         left: 50%;
     }
 }
+
+@media  only screen and (max-width: 440px) {
+    /* header {
+        max-width: 99vw;
+    } */
+ 
+    #options-header-1-flex {
+        flex-direction: column;
+    }
+
+    #header-subblock-2 {
+        order: -1;
+    }
+
+    #header-users {
+        margin-left: 5px;
+    }
+
+    .header-block-users {
+        width: calc(10rem + 7vw);
+    }
+
+    .icon-button {
+        margin: 0 0;
+    }
+
+    .block {
+        min-width: 80vw;
+    }
+
+    .header-subblock {
+        min-width: calc(279px + 1vw);
+    }
+
+    #import-container {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    #innerWidth, #so {
+        left: 60%;
+    }
+}
