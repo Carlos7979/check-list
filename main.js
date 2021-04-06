@@ -3,9 +3,8 @@ function  main() {
   const osElement = document.getElementById('os');
   osElement.innerHTML = os;
 
-  if (!(os === 'Linux' || os === 'MacOS' || 'Windows')) {
+  if (!(os === 'Linux' || os === 'MacOS' || os === 'Windows')) {
     isTouchScreen = true;
-    alert(os, isTouchScreen);
   }
 
   touchScreen(isTouchScreen);
