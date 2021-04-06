@@ -7,6 +7,7 @@ let headerControlsActive = [];
 // headerControlsActive not used yet
 // let descriptionNumberVisibility = [];
 let blockToCopy = [];
+let isTouchScreen = false;
 
 const initialDescriptions = [
     {

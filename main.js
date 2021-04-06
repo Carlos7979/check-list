@@ -1,39 +1,33 @@
 function  main() {
-  
-  const storedData = getData('schedules');
-    if (storedData){
-      setSchedulesToOptions(storedData);
-      renderBlocks();
-    } else {
-      const buttonsContainer = document.getElementById('hide-header-buttons');
-      buttonsContainer.removeAttribute('hidden');
-    }
+  const os = detectOS();
+  const osElement = document.getElementById('os');
+  osElement.innerHTML = os;
 
-  // temporal code for view inner width
- //   
+  if (!(os === 'Linux' || os === 'MacOS' || 'Windows')) {
+    isTouchScreen = true;
+  }
+
+  touchScreen(isTouchScreen);
+    
+  const storedData = getData('schedules');
+  if (storedData){
+    setSchedulesToOptions(storedData);
+    renderBlocks();
+  } else {
+    const buttonsContainer = document.getElementById('hide-header-buttons');
+    buttonsContainer.removeAttribute('hidden');
+  }
+
+    // temporal code for view inner width
+  //   
   const innerWidth = document.getElementById('innerWidth');
   innerWidth.innerHTML = `${window.innerWidth} px`;
   window.onresize = reportWindowSize
   function reportWindowSize() {
       innerWidth.innerHTML = `${window.innerWidth} px`;
   }
-//
-// end of temporal code for view inner width
-
-  const so = document.getElementById('so');
-  so.innerHTML = `${detectOS()}`;
-  function detectOS() {
-    const platform = navigator.platform.toLowerCase(),
-        iosPlatforms = ['iphone', 'ipad', 'ipod', 'ipod touch'];
-
-    if (platform.includes('mac')) return 'MacOS';
-    if (iosPlatforms.includes(platform)) return 'iOS';
-    if (platform.includes('win')) return 'Windows';
-    if (/android/.test(navigator.userAgent.toLowerCase())) return 'Android';
-    if (/linux/.test(platform)) return 'Linux';
-
-    return 'unknown';
-}
+  //
+  // end of temporal code for view inner width
 
   newSchedule(document.getElementById('new-schedule'));
   newSchedule(document.getElementById('init-template'));
@@ -57,6 +51,7 @@ function  main() {
   importListener(document.getElementById('file-input'));
   loadFiles(document.getElementById('load-file'));
   deleteAll(document.getElementById('delete-all-schedules'));
+  toggleTouchScreen(document.getElementById('toggle-touchscreen'));
   passSeveralElementsInFunction(advancedOptions, document.getElementsByClassName('advanced-options'));
   passSeveralElementsInFunction(importExportButtons, document.getElementsByClassName('import-export'));
   passSeveralElementsInFunction(newBlock, document.getElementsByClassName('new-block'));

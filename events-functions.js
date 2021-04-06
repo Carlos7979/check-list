@@ -433,3 +433,14 @@ function deleteSchedule(element) {
         }
     });
 }
+
+function toggleTouchScreen(element) {
+    element.addEventListener('click', () => {
+        if(isTouchScreen) {
+            isTouchScreen = false;
+        } else {
+            isTouchScreen = true;
+        }
+        touchScreen(isTouchScreen);
+    });
+}

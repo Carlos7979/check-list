@@ -756,3 +756,41 @@ function passSeveralElementsInFunction(func, object) {
         func(iterator);
     }
 }
+
+function detectOS() {
+    const platform = navigator.platform.toLowerCase(),
+        iosPlatforms = ['iphone', 'ipad', 'ipod', 'ipod touch'];
+  
+    if (platform.includes('mac')) return 'MacOS';
+    if (iosPlatforms.includes(platform)) return 'iOS';
+    if (platform.includes('win')) return 'Windows';
+    if (/android/.test(navigator.userAgent.toLowerCase())) return 'Android';
+    if (/linux/.test(platform)) return 'Linux';
+  
+    return 'unknown';
+  }
+
+function touchScreen(isTouchScreen) {
+    const buttonsOptionsContainer2 = document.getElementById('header-schedule-options-2');
+    const buttonsOptionsContainer3 = document.getElementById('header-schedule-options-3'); 
+    const buttonsOptionsContainer4 = document.getElementById('header-schedule-options-4');
+    const toggleTouchscreenButton = document.getElementById('toggle-touchscreen');
+    if(!buttonsOptionsContainer2.hidden) {
+        buttonsOptionsContainer2.setAttribute('hidden', 'hidden');
+        buttonsOptionsContainer3.setAttribute('hidden', 'hidden');
+        buttonsOptionsContainer4.setAttribute('hidden', 'hidden');
+    }
+    if(isTouchScreen) {
+        buttonsOptionsContainer2.setAttribute('style', 'visibility: hidden');
+        buttonsOptionsContainer3.setAttribute('style', 'visibility: hidden');
+        buttonsOptionsContainer4.removeAttribute('style');
+        toggleTouchscreenButton.src = "images/cursor.png";
+        toggleTouchscreenButton.title = "PC monitor";
+      } else {
+        buttonsOptionsContainer2.removeAttribute('style');
+        buttonsOptionsContainer3.removeAttribute('style');
+        buttonsOptionsContainer4.setAttribute('style', 'visibility: hidden');
+        toggleTouchscreenButton.src = "images/index-finger.png";
+        toggleTouchscreenButton.title = "Pantalla táctil";
+      }
+}

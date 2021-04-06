@@ -74,7 +74,7 @@
     font-family: 'DejaVu Sans';
 }
 
-#innerWidth, #so {
+#innerWidth, #os {
     border-radius: 3px;
     border: black solid 1px;
     visibility: visible;
@@ -87,7 +87,7 @@
     z-index: 9;
 }
 
-#so {
+#os {
     top: 30px;
 }
 
@@ -673,7 +673,7 @@ header {
     padding: 10px;
 }
 
-#delete-all-schedules {
+.advanced-option-icon {
     vertical-align: bottom;
     height: 30px;
     /* margin-right: 20px; */
