@@ -16,6 +16,8 @@ function  main() {
   } else {
     const buttonsContainer = document.getElementById('hide-header-buttons');
     buttonsContainer.removeAttribute('hidden');
+    const headerButtons = document.getElementById('header-buttons');
+    headerButtons.setAttribute('class', "header-buttons-welcome");
   }
 
     // temporal code for view inner width

@@ -171,14 +171,14 @@ header {
 
 .header-block {
     /* width: 49.8%; */
-    width: 48vw;
+    width: 48.5vw;
     /* max-width: 99.6%; */
     /* min-width: 490px; */
     /* height: 7.5rem; */
     /* border: red solid 1px; */
     border-color: red;
     display: inline-block;
-    vertical-align: top;
+    /* vertical-align: top; */
          /* Corrige el desfase vertical de bloques inline-block */
     letter-spacing: normal;
          /* Restituye el efecto de la corrección del espaciado en el inline-block */
@@ -218,10 +218,12 @@ header {
     border-color: yellow;
 }
 
-#header-buttons {
-    /* display: inline-block; */
+/* #header-buttons {
     margin-left: calc(5px + 8vw);
-    /* min-width: 400px; */
+} */
+
+.header-buttons-welcome {
+    margin-left: calc(5px + 8vw);
 }
 
 #style-header-buttons {
@@ -230,6 +232,7 @@ header {
     vertical-align: middle;
     border-color: green;
     /* width: calc(12.5rem + 10vw); */
+    margin-left: 5px;
 }
 
 #schedule-selector {
@@ -288,12 +291,13 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    vertical-align: top;
+    /* vertical-align: top; */
     border-color: red;
-    width: 85%;
+    /* width: 85%; */
     flex-shrink: 4;
     flex-wrap: nowrap;
     margin-bottom: 5px;
+    padding-left: 5px;
 }
 
 #options-header-1-flex {
@@ -1159,7 +1163,7 @@ li:hover, .title:hover {
     cursor: default;
 } */
 
-@media  only screen and (max-width: calc(71rem)) {
+@media  only screen and (max-width: 1200px) {
     header {
         flex-wrap: wrap;
     }
@@ -1188,6 +1192,10 @@ li:hover, .title:hover {
 
     #header-schedule-options-3-container {
         display: inline-flex;
+    }
+
+    #header-welcome-1 {
+        flex-wrap: wrap;
     }
 
     /* #header-schedule-options-4-container {
@@ -1236,6 +1244,11 @@ li:hover, .title:hover {
         align-self: flex-end;
         justify-content: flex-end;
     }
+
+    /* .header-button {
+        margin: 5px 0;
+        font-size: calc(11px + 0.4vw);
+    } */
 }
 
 @media  only screen and (max-width: 624px) {
@@ -1246,12 +1259,22 @@ li:hover, .title:hover {
     }
 
     .header-button {
-        margin: 2px;
+        margin: 5px 0;
+        font-size: calc(13px + 0.5vw);
     }
 
     #header-welcome-1 {
         width: 100%;
         justify-content: flex-start;
+    }
+
+    #welcome {
+        margin-left: 5vw;
+        min-width: min-content;
+    }
+
+    .icon-button {
+        margin: 0;
     }
 }
 
@@ -1263,6 +1286,10 @@ li:hover, .title:hover {
 
     #blocks-container {
         padding-top: calc(15rem + 2px);
+    } */
+
+    /* #header-buttons {
+        margin-left: 4vw;
     } */
 
     .descriptionNumber {
@@ -1278,11 +1305,6 @@ li:hover, .title:hover {
     /* header {
         max-width: 99vw;
     } */
-
-    #welcome {
-        margin-left: 5vw;
-        min-width: none;
-    }
  
     #options-header-1-flex {
         flex-direction: column;
@@ -1297,11 +1319,7 @@ li:hover, .title:hover {
     }
 
     .header-block-users {
-        width: calc(10rem + 7vw);
-    }
-
-    .icon-button {
-        margin: 0 0;
+        width: calc(10rem + 10vw);
     }
 
     .block {
@@ -1312,9 +1330,9 @@ li:hover, .title:hover {
         min-width: calc(279px + 1vw);
     }
 
-    #header-buttons {
-        margin-left: calc(5px + 4vw);
-    }
+    /* #header-buttons {
+        margin-left: 50px;
+    } */
 
     #import-container {
         display: flex;
@@ -1324,6 +1342,10 @@ li:hover, .title:hover {
     #innerWidth, #os {
         left: 60%;
     }
+
+    #options-header {
+        width: 100%;
+    }
 }
 
 @media  only screen and (max-width: 350px) {
@@ -1332,9 +1354,9 @@ li:hover, .title:hover {
         min-width: none;
     } */
 
-    #header-buttons {
+    /* #header-buttons {
         margin-left: 9px;
-    }
+    } */
 
     #header-welcome-1 {
         /* flex-direction: column;

@@ -172,6 +172,11 @@ function setSchedulesToOptions(schedules) {
 
 function renderBlocks(name) {
     const blocksContainer = document.getElementById('blocks-container');
+    const headerButtons = document.getElementById('header-buttons');
+    const headerButtonsClass = headerButtons.getAttribute('class');
+    if(headerButtonsClass === 'header-buttons-welcome') {
+        headerButtons.removeAttribute('class');
+    }
     blocksContainer.innerHTML = '';
     if (name) {
         const schedules = getData('schedules');
@@ -439,6 +444,8 @@ function deleteAllSchedules() {
     importButton.removeAttribute('hidden');
     const welcomeContainer = document.getElementById('welcome-container');
     welcomeContainer.setAttribute('class', 'header-block-users-welcome');
+    const headerButtons = document.getElementById('header-buttons');
+    headerButtons.setAttribute('class', "header-buttons-welcome");
     disableControlsHeader({id: 'header'});
 }
 
