@@ -193,7 +193,9 @@ function changeSchedule(element) {
 }
 
 function scheduleOptions(element) {
-    element.addEventListener('click', () => {
+    element.addEventListener('click', event => {
+        const target = event.target
+        if(target.className === 'option-icon-container' || target.tagName === 'LABEL') return;
         const buttonsContainer2 = document.getElementById('header-schedule-options-2');
         const buttonsContainer3 = document.getElementById('header-schedule-options-3');
         const buttonsContainer4 = document.getElementById('header-schedule-options-4');
@@ -220,12 +222,12 @@ function scheduleOptions(element) {
     });
 }
 
-function closeScheduleOptions(element) {
-    element.addEventListener('click', () => {
-        const overlay = document.getElementById('overlay');
-        overlay.setAttribute('style', 'visibility: hidden');
-    })
-}
+// function closeScheduleOptions(element) {
+//     element.addEventListener('click', () => {
+//         const overlay = document.getElementById('overlay');
+//         overlay.setAttribute('style', 'visibility: hidden');
+//     })
+// }
 
 function loadFiles(element) {
     element.addEventListener('click', () => {

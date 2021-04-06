@@ -781,8 +781,8 @@ function touchScreen(isTouchScreen) {
         buttonsOptionsContainer4.setAttribute('hidden', 'hidden');
     }
     if(isTouchScreen) {
-        buttonsOptionsContainer2.setAttribute('style', 'visibility: hidden');
-        buttonsOptionsContainer3.setAttribute('style', 'visibility: hidden');
+        buttonsOptionsContainer2.setAttribute('style', 'display: none');
+        buttonsOptionsContainer3.setAttribute('style', 'display: none');
         buttonsOptionsContainer4.removeAttribute('style');
         toggleTouchscreenButton.src = "images/cursor.png";
         toggleTouchscreenButton.title = "PC monitor";
