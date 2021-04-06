@@ -193,41 +193,19 @@ function changeSchedule(element) {
 }
 
 function scheduleOptions(element) {
-    element.addEventListener('click', event => {
-        const target = event.target
-        if(target.className === 'option-icon-container' || target.tagName === 'LABEL') return;
-        const buttonsContainer2 = document.getElementById('header-schedule-options-2');
-        const buttonsContainer3 = document.getElementById('header-schedule-options-3');
-        const buttonsContainer4 = document.getElementById('header-schedule-options-4');
-        // const buttonsContainer5 = document.getElementById('header-schedule-options-5');
-        const userButtons = document.getElementById('hide-header-buttons');
-        const buttonsImportExport = document.getElementById('import-container');
-        buttonsImportExport.setAttribute('hidden', 'hidden');
-        if (buttonsContainer2.hidden){
-            disableControlsHeader({id: 'header'});
-            if (!userButtons.hidden) {
-                userButtons.setAttribute('hidden', 'hidden');
-            }
-            buttonsContainer2.removeAttribute('hidden');
-            buttonsContainer3.removeAttribute('hidden');
-            buttonsContainer4.removeAttribute('hidden');
-            // buttonsContainer5.removeAttribute('hidden');
-        } else {
-            buttonsContainer2.setAttribute('hidden', 'hidden');
-            buttonsContainer3.setAttribute('hidden', 'hidden');
-            buttonsContainer4.setAttribute('hidden', 'hidden');
-            // buttonsContainer5.setAttribute('hidden', 'hidden');
-            disableControlsHeader({id: 'header'});
-        }
+    element.addEventListener('click', () => {
+        toggleScheduleOptions();
     });
 }
 
-// function closeScheduleOptions(element) {
-//     element.addEventListener('click', () => {
-//         const overlay = document.getElementById('overlay');
-//         overlay.setAttribute('style', 'visibility: hidden');
-//     })
-// }
+function closeScheduleOptions(element) {
+    element.addEventListener('click', event => {
+        const target = event.target;
+        if (target.id === 'overlay-options-container-4') {
+            toggleScheduleOptions();
+        }
+    })
+}
 
 function loadFiles(element) {
     element.addEventListener('click', () => {
@@ -279,7 +257,7 @@ function importExportButtons(element) {
             optionsHeader2.removeAttribute('hidden');
             buttonExportSchedule.removeAttribute('hidden');
             importExportContainer.removeAttribute('hidden');
-            if(element.id === 'import-export-3') {
+            if (element.id === 'import-export-3') {
                 const buttonsContainer4 = document.getElementById('header-schedule-options-4');
                 buttonsContainer4.setAttribute('hidden', 'hidden');
             }
@@ -347,7 +325,7 @@ function advancedOptions(element) {
         const optionsHeader3 = document.getElementById('options-header-3');
         if (optionsHeader3.hidden) {
             optionsHeader3.removeAttribute('hidden');
-            if(element.id === 'advanced-options-3') {
+            if (element.id === 'advanced-options-3') {
                 const buttonsContainer4 = document.getElementById('header-schedule-options-4');
                 buttonsContainer4.setAttribute('hidden', 'hidden');
             }
@@ -366,7 +344,7 @@ function newBlock(element) {
             alert(`Ya has alcanzado el máximo número de bloques [${max}]`);
             return;
         }
-        if(element.id === 'new-block-3') {
+        if (element.id === 'new-block-3') {
             const buttonsContainer4 = document.getElementById('header-schedule-options-4');
             buttonsContainer4.setAttribute('hidden', 'hidden');
         }
@@ -384,7 +362,7 @@ function cleanBlocks(element) {
     element.addEventListener('click', () => {
         const isConfirmed = confirm("Esta acción no se puede deshacer");
             if (isConfirmed) {
-                if(element.id === 'clean-blocks-3') {
+                if (element.id === 'clean-blocks-3') {
                     const buttonsContainer4 = document.getElementById('header-schedule-options-4');
                     buttonsContainer4.setAttribute('hidden', 'hidden');
                 }
@@ -427,7 +405,7 @@ function deleteSchedule(element) {
                 setSchedulesToOptions(schedules);
                 name = getData('schedules')[1];
                 renderBlocks(name);
-                if(element.id === 'delete-schedule-3') {
+                if (element.id === 'delete-schedule-3') {
                     const buttonsContainer4 = document.getElementById('header-schedule-options-4');
                     buttonsContainer4.setAttribute('hidden', 'hidden');
                 }
@@ -438,7 +416,7 @@ function deleteSchedule(element) {
 
 function toggleTouchScreen(element) {
     element.addEventListener('click', () => {
-        if(isTouchScreen) {
+        if (isTouchScreen) {
             isTouchScreen = false;
         } else {
             isTouchScreen = true;

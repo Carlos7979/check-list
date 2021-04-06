@@ -41,8 +41,7 @@ function  main() {
   changeSchedule(document.getElementById('schedule-selector'));
   scheduleOptions(document.getElementById('options'));
   scheduleOptions(document.getElementById('options-2'));
-  scheduleOptions(document.getElementById('overlay-options-container-4'));
-  // closeScheduleOptions(document.getElementById('close-schedule-options'));
+  closeScheduleOptions(document.getElementById('overlay-options-container-4'));
   
   inputHeaderActiveDetector(document.getElementById('name'));
   inputHeaderActiveDetector(document.getElementById('blocks-number'));

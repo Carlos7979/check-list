@@ -794,3 +794,29 @@ function touchScreen(isTouchScreen) {
         toggleTouchscreenButton.title = "Pantalla táctil";
       }
 }
+
+function toggleScheduleOptions() {
+    const buttonsContainer2 = document.getElementById('header-schedule-options-2');
+    const buttonsContainer3 = document.getElementById('header-schedule-options-3');
+    const buttonsContainer4 = document.getElementById('header-schedule-options-4');
+    // const buttonsContainer5 = document.getElementById('header-schedule-options-5');
+    const userButtons = document.getElementById('hide-header-buttons');
+    const buttonsImportExport = document.getElementById('import-container');
+    buttonsImportExport.setAttribute('hidden', 'hidden');
+    if (buttonsContainer2.hidden){
+        disableControlsHeader({id: 'header'});
+        if (!userButtons.hidden) {
+            userButtons.setAttribute('hidden', 'hidden');
+        }
+        buttonsContainer2.removeAttribute('hidden');
+        buttonsContainer3.removeAttribute('hidden');
+        buttonsContainer4.removeAttribute('hidden');
+        // buttonsContainer5.removeAttribute('hidden');
+    } else {
+        buttonsContainer2.setAttribute('hidden', 'hidden');
+        buttonsContainer3.setAttribute('hidden', 'hidden');
+        buttonsContainer4.setAttribute('hidden', 'hidden');
+        // buttonsContainer5.setAttribute('hidden', 'hidden');
+        disableControlsHeader({id: 'header'});
+    }
+}
