@@ -1269,7 +1269,7 @@ li:hover, .title:hover {
         color: black !important;
     }
 
-    #innerWidth, #so {
+    #innerWidth, #os {
         left: 50%;
     }
 }
@@ -1321,7 +1321,7 @@ li:hover, .title:hover {
         flex-wrap: wrap;
     }
 
-    #innerWidth, #so {
+    #innerWidth, #os {
         left: 60%;
     }
 }

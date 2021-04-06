@@ -442,5 +442,6 @@ function toggleTouchScreen(element) {
             isTouchScreen = true;
         }
         touchScreen(isTouchScreen);
+        disableControlsHeader({id: 'header'});
     });
 }

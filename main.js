@@ -5,10 +5,11 @@ function  main() {
 
   if (!(os === 'Linux' || os === 'MacOS' || 'Windows')) {
     isTouchScreen = true;
+    alert(os, isTouchScreen);
   }
 
   touchScreen(isTouchScreen);
-    
+
   const storedData = getData('schedules');
   if (storedData){
     setSchedulesToOptions(storedData);
