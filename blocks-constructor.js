@@ -64,6 +64,12 @@ function blockConstructor(
       false,
       {hidden: 'hidden'}
     );
+    const flexOptionsIconsContainer = elementsCreator(
+      'div',
+      `flexOptionsIconsContainer-${i + 1}`,
+      'flexOptionsIconsContainer'
+    );
+    hideOptionsIconsContainer.appendChild(flexOptionsIconsContainer);
     const configContainer = elementsCreator(
       'div',
       `configContainer-${i + 1}`,
@@ -119,7 +125,7 @@ function blockConstructor(
       title: 'Eliminar bloque',
     });
     deleteContainer.appendChild(deleteBlock);
-    severalAppends(hideOptionsIconsContainer, [
+    severalAppends(flexOptionsIconsContainer, [
       moveContainer,
       copyContainer,
       cleanContainer,

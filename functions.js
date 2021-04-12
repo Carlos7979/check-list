@@ -782,6 +782,8 @@ function touchScreen(isTouchScreen) {
     const buttonsOptionsContainer3 = document.getElementById('header-schedule-options-3'); 
     const buttonsOptionsContainer4 = document.getElementById('header-schedule-options-4');
     const toggleTouchscreenButton = document.getElementById('toggle-touchscreen');
+    const blockAdvancedOptions = document.querySelectorAll('.flexOptionsIconsContainer');
+    // console.log(blockAdvancedOptions);
     if(!buttonsOptionsContainer2.hidden) {
         buttonsOptionsContainer2.setAttribute('hidden', 'hidden');
         buttonsOptionsContainer3.setAttribute('hidden', 'hidden');
@@ -793,12 +795,24 @@ function touchScreen(isTouchScreen) {
         buttonsOptionsContainer4.removeAttribute('style');
         toggleTouchscreenButton.src = "images/cursor.png";
         toggleTouchscreenButton.title = "PC monitor";
+        blockAdvancedOptions.forEach(element => {
+            console.log(element);
+            element.setAttribute('class', 'flexOptionsIconsContainer touchscreen-block-icon');
+            console.log(element);
+        });
+        // TODO schedule options
+        // TODO advanced schedules options
       } else {
         buttonsOptionsContainer2.removeAttribute('style');
         buttonsOptionsContainer3.removeAttribute('style');
         buttonsOptionsContainer4.setAttribute('style', 'visibility: hidden');
         toggleTouchscreenButton.src = "images/index-finger.png";
         toggleTouchscreenButton.title = "Pantalla táctil";
+        blockAdvancedOptions.forEach(element => {
+            console.log(element);
+            element.setAttribute('class', 'flexOptionsIconsContainer');
+            console.log(element);
+        });
       }
 }
 

@@ -889,6 +889,20 @@ h2 {
     text-align: left;
 }
 
+.flexOptionsIconsContainer.touchscreen-block-icon {
+    display: flex;
+    /* justify-content: space-around; */
+    flex-direction: column;
+    background: whitesmoke;
+    width: max-content;
+    position: relative;
+    z-index: 1;
+    padding-right: 10px;
+    /* align-items: flex-start; */
+    border: solid 1px black;
+    border-radius: 5px;
+}
+
 .block-advanced-icons-containers {
     /* background-color: whitesmoke; */
     height: 30px;
@@ -899,12 +913,17 @@ h2 {
     margin-right: 5%;
 }
 
+.touchscreen-block-icon .block-advanced-icons-containers {
+    margin: 5px 0;
+    margin-right: 5%;
+}
+
 .icon-button-options {
     height: 30px;
     border-radius: 5px;
 }
 
-.icon-button-options:hover, .block-advanced-icons-containers:hover {
+.icon-button-options:hover, .touchscreen-block-icon:not(:hover) +  .block-advanced-icons-containers:hover {
     cursor: pointer;
     border-radius: 5px;
     background: linear-gradient(to top, #9aa2eb 0%, peachpuff 100%);

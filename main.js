@@ -7,8 +7,6 @@ function  main() {
     isTouchScreen = true;
   }
 
-  touchScreen(isTouchScreen);
-
   const storedData = getData('schedules');
   if (storedData){
     setSchedulesToOptions(storedData);
@@ -19,6 +17,8 @@ function  main() {
     const headerButtons = document.getElementById('header-buttons');
     headerButtons.setAttribute('class', "header-buttons-welcome");
   }
+
+  touchScreen(isTouchScreen);
 
     // temporal code for view inner width
   //   
