@@ -151,7 +151,7 @@ header {
     top: 1px;
     /* margin-left:50%;
     left: -39.15rem; */
-    z-index: 1;
+    z-index: 2;
     /* position: relative; */
     /* max-width: 97vw; */
     /* min-width: 37.8rem; */
@@ -471,6 +471,8 @@ header {
     user-select: none;
     cursor: default;
     font-size: 0.9rem;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .button-darkgreen-confirm-block:hover {
@@ -643,10 +645,6 @@ header {
         /* cornflowerblue rgba(100, 149, 237, 1); */
 }
 
-.touchscreen-icon {
-    background: linear-gradient(to top, #9aa2eb 0%, whitesmoke 100%);
-}
-
 #close-schedule-options {
     cursor: pointer;
 }
@@ -696,7 +694,7 @@ header {
     padding: 5px 0;
 }
 
-.advanced-options:hover {
+.touchscreen-icon:not(:hover) + .advanced-options:hover {
     -webkit-transform: rotate(36deg);
     transform: rotate(36deg);
 }
@@ -708,7 +706,7 @@ header {
     margin: 0 10px;
 }
 
-.icon-button:hover {
+.touchscreen-icon:not(:hover) + .icon-button:hover {
     cursor: pointer;
     border-radius: 5px;
     background: linear-gradient(to top, #9aa2eb 0%, cornflowerblue 100%);
@@ -722,6 +720,17 @@ header {
     position: relative;
     left: 1px;
 }
+
+.touchscreen-icon {
+    background: linear-gradient(to top, #9aa2eb 0%, whitesmoke 100%);
+    display: flex;
+    justify-content: center;
+}
+
+/* .touchscreen-icon:hover {
+    transform: none;
+} */
+
 
 #options:active {
     top: 1px;
@@ -923,7 +932,11 @@ h2 {
 .manageContainer {
     border-color: yellow;
     height: max-content;
-    margin-top: 4px;  
+    margin-top: 4px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
 }
 
 .labelMove, .labelCopy {
@@ -940,11 +953,13 @@ h2 {
 } */
 
 .confirmButtonContainer {
-    margin-left: 5px;
+    margin: 5px;
+    margin-top: 0;
 }
 
 .cleanButtonContainer, .sortButtonContainer {
-    margin-right: 20px;
+    /* margin-right: 20px; */
+    margin: 4px;
 }
 
 
@@ -1354,6 +1369,12 @@ li:hover, .title:hover {
 
     #options-header {
         width: 100%;
+    }
+
+    .manageContainer {
+        background-color: whitesmoke;
+        border-radius: 5px;
+        border: solid 1px black;
     }
 }
 

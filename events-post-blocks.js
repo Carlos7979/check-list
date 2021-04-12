@@ -100,7 +100,12 @@ function blockEventDetector(element) {
       const target = event.target;
       if (target.tagName === 'OPTION') return;
       const [type, identifier] = target.getAttribute('id').split('-');
-      if (target.className === 'block' || target.className === 'block-advanced-options' || target.className === 'block-counter' || target.tagName === 'OL' || target.className === 'list') {
+      if (target.className === 'block' || 
+          target.className === 'block-advanced-options' || 
+          target.className === 'block-counter' || 
+          target.tagName === 'OL' || 
+          target.className === 'list' || 
+          target.className === 'manageContainer') {
         disableControls();
         disableBlockOptionsManagement(identifier);
       }
