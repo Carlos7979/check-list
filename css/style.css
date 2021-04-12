@@ -171,7 +171,7 @@ header {
 
 .header-block {
     /* width: 49.8%; */
-    width: 48.5vw;
+    /* width: 48.5vw; */
     /* max-width: 99.6%; */
     /* min-width: 490px; */
     /* height: 7.5rem; */
@@ -183,6 +183,15 @@ header {
     letter-spacing: normal;
          /* Restituye el efecto de la corrección del espaciado en el inline-block */
     /* margin-right: -4px; */
+}
+
+#header-block-1 {
+    min-width: 48.5vw;
+    min-height: 7.5rem;
+}
+
+#header-block-2 {
+    flex-grow: 1;
 }
 
 #header-welcome {
@@ -268,10 +277,6 @@ header {
 
 #button-create {
     visibility: hidden;
-}
-
-#header-block-1 {
-    min-height: 7.5rem;
 }
 
 /* #header-block-2 {
@@ -548,7 +553,7 @@ header {
 }
 
 #header-subblock-3 {
-    width: 50px;
+    max-width: 50px;
     border-color: brown;
     display: inline-block;
     /* position: relative;
@@ -1298,6 +1303,10 @@ li:hover, .title:hover {
 
     #innerWidth, #os {
         left: 50%;
+    }
+
+    .header-subblock {
+        min-width: calc(330px + 1vw);
     }
 }
 
