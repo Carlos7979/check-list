@@ -278,7 +278,6 @@ function checkAll(element) {
     if (!counter) return;
     element.innerText = textToInsert;
     blockSave(identifier, false, false, type, indexToFill);
-    console.log(type);
     counterDescriptionsChecks(element, type);
 }
 
@@ -710,15 +709,19 @@ function cleanDescriptions(identifier) {
                 array[index] = ['', ''];
                 const checkElement = li[index - 1].children[0];
                 const description = li[index - 1].children[2];
+                const input = li[index - 1].children[3];
                 checkElement.innerHTML = '';
                 checkElement.setAttribute('style', "visibility: hidden;");
                 description.innerHTML = '';
-                description.value = '';
+                input.value = '';
             }
         }
     });
     saveData(`${name}-${identifier}`, arrayToClean);
     sortDescriptions(identifier);
+    isCheckAll(identifier, 't');
+    const ol = document.getElementById(`ol-${identifier}`);
+    counterDescriptionsChecks(ol, 'checkall');
     // disableBlockOptionsManagement(identifier);
 }
 
@@ -741,11 +744,14 @@ function sortDescriptions(identifier) {
             let classToInsert = 'description';
             const checkElement = li[index - 1].children[0];
             const description = li[index - 1].children[2];
+            const input = li[index - 1].children[3];
+            
             checkElement.innerHTML = element[0];
             if (element[0]) {
                 classToInsert = 'description-checked'
             }
             description.innerHTML = element[1];
+            input.value = element[1];
             if (!element[1]) {
                 checkElement.setAttribute('style', "visibility: hidden;");
             } else {
@@ -796,9 +802,7 @@ function touchScreen(isTouchScreen) {
         toggleTouchscreenButton.src = "images/cursor.png";
         toggleTouchscreenButton.title = "PC monitor";
         blockAdvancedOptions.forEach(element => {
-            console.log(element);
             element.setAttribute('class', 'flexOptionsIconsContainer touchscreen-block-icon');
-            console.log(element);
         });
         // TODO schedule options
         // TODO advanced schedules options
@@ -809,9 +813,7 @@ function touchScreen(isTouchScreen) {
         toggleTouchscreenButton.src = "images/index-finger.png";
         toggleTouchscreenButton.title = "Pantalla táctil";
         blockAdvancedOptions.forEach(element => {
-            console.log(element);
             element.setAttribute('class', 'flexOptionsIconsContainer');
-            console.log(element);
         });
       }
 }
