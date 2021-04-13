@@ -45,7 +45,7 @@ function blockConstructor(
   isNew && scheduleBlocks.push(name);
   for (let i = 0; i < n; i++) {
     // level 1
-    const block = elementsCreator('DIV', `block-${i + 1}`, 'block', false, {counter: 'hidden'});
+    const block = elementsCreator('DIV', `block-${i + 1}`, 'block', null, {counter: 'hidden'});
     // open level 2 blockAdvancedOptions
     const blockAdvancedOptions = elementsCreator(
       'DIV',
@@ -61,7 +61,7 @@ function blockConstructor(
       'div',
       `hideOptionsIconsContainer-${i + 1}`,
       'hideOptionsIconsContainer',
-      false,
+      null,
       {hidden: 'hidden'}
     );
     const flexOptionsIconsContainer = elementsCreator(
@@ -75,7 +75,7 @@ function blockConstructor(
       `configContainer-${i + 1}`,
       'block-advanced-icons-containers'
     );
-    const config = elementsCreator('img', `config-${i + 1}`, 'config-button-block', false, {
+    const config = elementsCreator('img', `config-${i + 1}`, 'config-button-block', null, {
       src: 'images/preferences-system.png',
       alt: 'Block config',
       title: 'Configuraciones del bloque',
@@ -86,7 +86,7 @@ function blockConstructor(
       `moveContainer-${i + 1}`,
       'block-advanced-icons-containers'
     );
-    const move = elementsCreator('img', `move-${i + 1}`, 'icon-button-block', false, {
+    const move = elementsCreator('img', `move-${i + 1}`, 'icon-button-block', null, {
       src: 'images/transferencia-datos.png',
       alt: 'Block move',
       title: 'Mover bloque',
@@ -97,7 +97,7 @@ function blockConstructor(
       `copyContainer-${i + 1}`,
       'block-advanced-icons-containers'
     );
-    const copy = elementsCreator('img', `copy-${i + 1}`, 'copy-button-block', false, {
+    const copy = elementsCreator('img', `copy-${i + 1}`, 'copy-button-block', null, {
       src: 'images/copy-and-paste.png',
       alt: 'Block copy',
       title: 'Copiar bloque',
@@ -108,7 +108,7 @@ function blockConstructor(
       `cleanContainer-${i + 1}`,
       'block-advanced-icons-containers'
     );
-    const clean = elementsCreator('img', `clean-${i + 1}`, 'icon-button-block', false, {
+    const clean = elementsCreator('img', `clean-${i + 1}`, 'icon-button-block', null, {
       src: 'images/edit-clear.svg',
       alt: 'Block clean',
       title: 'Limpiar bloque',
@@ -119,7 +119,7 @@ function blockConstructor(
       `deleteContainer-${i + 1}`,
       'block-advanced-icons-containers'
     );
-    const deleteBlock = elementsCreator('img', `deleteBlock-${i + 1}`, 'icon-button-block', false, {
+    const deleteBlock = elementsCreator('img', `deleteBlock-${i + 1}`, 'icon-button-block', null, {
       src: 'images/window-close.svg',
       alt: 'Block delete',
       title: 'Eliminar bloque',
@@ -143,7 +143,7 @@ function blockConstructor(
       'div',
       `configHideManageContainer-${i + 1}`,
       'hideOptionsIconsContainer',
-      false,
+      null,
       {hidden: 'hidden'}
     );
     const configManageContainer = elementsCreator(
@@ -163,7 +163,7 @@ function blockConstructor(
       'div',
       `moveHideManageContainer-${i + 1}`,
       'hideOptionsIconsContainer',
-      false,
+      null,
       {hidden: 'hidden'}
     );
     const moveManageContainer = elementsCreator(
@@ -186,7 +186,7 @@ function blockConstructor(
       'div',
       `copyHideManageContainer-${i + 1}`,
       'hideOptionsIconsContainer',
-      false,
+      null,
       {hidden: 'hidden'}
     );
     const copyManageContainer = elementsCreator(
@@ -207,7 +207,7 @@ function blockConstructor(
       'span',
       `copyButtonContainer-${i + 1}`,
       'copyButtonContainer',
-      false,
+      null,
       {hidden: 'hidden'}
     );
     const copyButton = elementsCreator('span', `copyButton-${i + 1}`, 'button-darkgreen', 'Copiar');
@@ -218,7 +218,7 @@ function blockConstructor(
       'div',
       `cleanHideManageContainer-${i + 1}`,
       'hideOptionsIconsContainer',
-      false,
+      null,
       {hidden: 'hidden'}
     );
     const cleanManageContainer = elementsCreator(
@@ -236,27 +236,29 @@ function blockConstructor(
     const cleanButtonContainer = elementsCreator(
       'span',
       `cleanButtonContainer-${i + 1}`,
-      'cleanButtonContainer'
+      'cleanButtonContainer',
+      null,
+      {hidden: 'hidden'}
     );
     const cleanButton = elementsCreator(
       'span',
       `cleanButton-${i + 1}`,
       'button-darkgreen-confirm-block',
-      'Limpiar actividades realizadas',
-      {hidden: 'hidden'}
+      'Limpiar actividades realizadas'
     );
     cleanButtonContainer.appendChild(cleanButton);
     const sortButtonContainer = elementsCreator(
       'span',
       `sortButtonContainer-${i + 1}`,
-      'sortButtonContainer'
+      'sortButtonContainer',
+      null,
+      {hidden: 'hidden'}
     );
     const sortButton = elementsCreator(
       'span',
       `sortButton-${i + 1}`,
       'button-darkgreen-confirm-block',
-      'Desplazar espacios vacíos',
-      {hidden: 'hidden'}
+      'Desplazar espacios vacíos'
     );
     sortButtonContainer.appendChild(sortButton);
     severalAppends(cleanManageContainer, [cleanText, cleanButtonContainer, sortButtonContainer]);
@@ -265,7 +267,7 @@ function blockConstructor(
       'div',
       `deleteBlockHideManageContainer-${i + 1}`,
       'hideOptionsIconsContainer',
-      false,
+      null,
       {hidden: 'hidden'}
     );
     const deleteManageContainer = elementsCreator(
@@ -280,7 +282,7 @@ function blockConstructor(
       'div',
       `confirmHideManageContainer-${i + 1}`,
       'hideOptionsIconsContainer',
-      false,
+      null,
       {hidden: 'hidden'}
     );
     const confirmManageContainer = elementsCreator(
@@ -332,7 +334,7 @@ function blockConstructor(
       'IMG',
       `advanced-${i + 1}`,
       'icon-button-options',
-      false,
+      null,
       {
         src: 'images/2000px-Gnome-preferences-system.png',
         alt: 'Block options',
@@ -353,7 +355,7 @@ function blockConstructor(
       {title: headingText}
     );
     isNew && scheduleBlocks.push(headingText);
-    const input = elementsCreator('input', `input-${i + 1}-t`, 'title-i', false, {
+    const input = elementsCreator('input', `input-${i + 1}-t`, 'title-i', null, {
       type: 'hidden',
       maxLength: '60',
     });
@@ -375,7 +377,7 @@ function blockConstructor(
       `checkallcontainer-${i + 1}`,
       'checkallcontainer'
     );
-    const checkAll = elementsCreator('DIV', `checkall-${i + 1}`, 'checkall', false, {
+    const checkAll = elementsCreator('DIV', `checkall-${i + 1}`, 'checkall', null, {
       title: 'marcar/desmarcar todo',
     });
     checkAllContainer.appendChild(checkAll);
@@ -440,7 +442,7 @@ function blockConstructor(
         {title: descriptionText}
       );
       isNew && blockDescriptions.push([checkText, descriptionText]);
-      const input = elementsCreator('input', `input-${j + 1 + i * m}`, 'input-description', false, {
+      const input = elementsCreator('input', `input-${j + 1 + i * m}`, 'input-description', null, {
         type: 'hidden',
         maxLength: '60',
       });

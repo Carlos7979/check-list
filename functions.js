@@ -529,11 +529,11 @@ function disableBlockOptionsManagement(identifier) {
     }
     if (type === 'clean') {
         const cleanText = document.getElementById(`${type}Text-${identifier}`);
-        const cleanButton = document.getElementById(`${type}Button-${identifier}`);
-        const sortButton = document.getElementById(`sortButton-${identifier}`);
+        const cleanButtonContainer = document.getElementById(`${type}ButtonContainer-${identifier}`);
+        const sortButtonContainer = document.getElementById(`sortButtonContainer-${identifier}`);
         cleanText.setAttribute('hidden', 'hidden');
-        cleanButton.setAttribute('hidden', 'hidden');
-        sortButton.setAttribute('hidden', 'hidden');
+        cleanButtonContainer.setAttribute('hidden', 'hidden');
+        sortButtonContainer.setAttribute('hidden', 'hidden');
     }
 }
 
@@ -551,8 +551,8 @@ function showBlockOptionsContainers(type, identifier, action, text) {
         const name = getData('schedules')[0].activeSchedule;
         const arrayToClean = getData(`${name}-${identifier}`);
         const cleanText = document.getElementById(`${type}Text-${identifier}`);
-        const cleanButton = document.getElementById(`${type}Button-${identifier}`);
-        const sortButton = document.getElementById(`sortButton-${identifier}`);
+        const cleanButtonContainer = document.getElementById(`${type}ButtonContainer-${identifier}`);
+        const sortButtonContainer = document.getElementById(`sortButtonContainer-${identifier}`);
         let counterChecks = 0;
         let counterDescriptions = 0;
         let someToSort = false;
@@ -564,7 +564,7 @@ function showBlockOptionsContainers(type, identifier, action, text) {
         });
         for (let i = counterDescriptions + 1; i < arrayToClean.length; i++) {
             if (arrayToClean[i][1]) {
-                // sortButton.removeAttribute('hidden');
+                // sortButtonContainer.removeAttribute('hidden');
                 someToSort = true;
                 break;
             }
@@ -574,8 +574,8 @@ function showBlockOptionsContainers(type, identifier, action, text) {
             cleanText.removeAttribute('hidden');
             setTimeout(() => {disableBlockOptionsManagement(identifier)}, 3000);
         }
-        if (counterChecks) cleanButton.removeAttribute('hidden');
-        if (someToSort) sortButton.removeAttribute('hidden');
+        if (counterChecks) cleanButtonContainer.removeAttribute('hidden');
+        if (someToSort) sortButtonContainer.removeAttribute('hidden');
     }
     hideManageContainer.removeAttribute('hidden');
     blockOptionsContainerActive[identifier] = type;
