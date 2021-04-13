@@ -1173,6 +1173,10 @@ li:hover, .title:hover {
     font-size: calc(0.8rem + 0.2vw);
 }
 
+.input-description {
+    width: 50%;
+}
+
 .check:hover {
     background-color: brown;
     cursor: default;
@@ -1315,6 +1319,16 @@ li:hover, .title:hover {
     .icon-button {
         margin: 0;
     }
+
+    .button-edit {
+        position: static;
+    }
+
+    .input-description {
+        width: 60%;
+        right: 0;
+        margin-left: -7%;
+    }
 }
 
 @media  only screen and (max-width: 480px) {
@@ -1341,6 +1355,10 @@ li:hover, .title:hover {
 
     .header-subblock {
         min-width: calc(330px + 1vw);
+    }
+
+    .input-description {
+        margin-left: -8%;
     }
 }
 
@@ -1395,6 +1413,10 @@ li:hover, .title:hover {
         border-radius: 5px;
         border: solid 1px black;
     }
+
+    .input-description {
+        margin-left: -10%;
+    }
 }
 
 @media  only screen and (max-width: 350px) {
@@ -1411,6 +1433,10 @@ li:hover, .title:hover {
         /* flex-direction: column;
         align-items: flex-start; */
         flex-wrap: wrap;
+    }
+
+    .input-description {
+        margin-left: -12%;
     }
 }
 
