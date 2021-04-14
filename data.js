@@ -10,46 +10,53 @@ let blockToCopy = [];
 let isTouchScreen = false;
 
 const initialDescriptions = [
-    {
-      name: '',
-      descriptionsInBlock: 9
-    },
-    [ 'Inicio del día',
-      ['', 'Baño'],
-     ['', 'Desayuno'],
-     ['', 'Noticias'],
-     ['', ''],
-     ['', ''],
-     ['', ''],
-     ['', ''],
-     ['', ''],
-     ['', '' ]],
-    [ 'Actividades',
-     ['', 'Trabajo'],
-     ['', 'Programación'],
-     ['', 'Compras'],
-     ['', 'Reuniones'],
-     ['', 'Llamadas'],
-     ['', '' ]],
-    [ 'Tarde',
-     ['', 'Deporte'],
-     ['', 'Matemáticas'],
-     ['', ''],
-     ['', ''],
-     ['', ''],
-     ['', ''],
-     ['', ''],
-     ['', ''],
-     ['', '' ]],
-    [ 'Final del día',
-     ['', 'Lectura'],
-     ['', 'Inglés'],
-     ['', 'Guitarra'],
-     ['', ''],
-     ['', ''],
-     ['', ''],
-     ['', ''],
-     ['', ''],
-     ['', '' ]]
-  ];
-  
+	{
+		name: '',
+		descriptionsInBlock: 9
+	},
+	[
+		'Inicio del día',
+		['', 'Baño'],
+		['', 'Desayuno'],
+		['', 'Noticias'],
+		['', ''],
+		['', ''],
+		['', ''],
+		['', ''],
+		['', ''],
+		['', '']
+	],
+	[
+		'Actividades',
+		['', 'Trabajo'],
+		['', 'Programación'],
+		['', 'Compras'],
+		['', 'Reuniones'],
+		['', 'Llamadas'],
+		['', '']
+	],
+	[
+		'Tarde',
+		['', 'Deporte'],
+		['', 'Matemáticas'],
+		['', ''],
+		['', ''],
+		['', ''],
+		['', ''],
+		['', ''],
+		['', ''],
+		['', '']
+	],
+	[
+		'Final del día',
+		['', 'Lectura'],
+		['', 'Inglés'],
+		['', 'Guitarra'],
+		['', ''],
+		['', ''],
+		['', ''],
+		['', ''],
+		['', ''],
+		['', '']
+	]
+];

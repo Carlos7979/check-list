@@ -1,86 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agenda del día</title>
-    <!-- <link rel="stylesheet" href="css/reset.css" type="text/css"> -->
-    <link rel="stylesheet" href="css/normalize.css" type="text/css">
-    <link rel="stylesheet" href="css/select.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
-    <link rel="icon" type="image/png" href="images/dialog-apply.svg">
-    <script src="data.js"></script>
-    <script src="functions.js"></script>
-    <script src="events-post-blocks.js"></script>
-    <script src="blocks-constructor.js"></script>
-    <script src="events-functions.js"></script>
-    <script src="main.js"></script>
-    <script>
-        window.addEventListener('load', main);
-    </script>
-</head>
-<body>
-    <span id="innerWidth"></span>
-    <span id="os"></span>
-    <header id="header">
-        <div class="header-block" id="header-block-1" >
-            <div class="header-title-container">
-                <div id="header-title">
-                    <img src="images/dialog-apply.svg" alt="Check">
-                    <h2>Agenda del día</h2>
-                </div>
-                <div id="header-subblock-4">
-                    <div id="hide-header-subblock-4" hidden>
-                        <img id="options-2" class="icon-button options" src="images/1200px-Gnome-preferences-other.png" title="Opciones de la agenda" alt="Options">
-                    </div>
-                </div>
-            </div>
-            <div id="user-name">
-                <div id="header-welcome">
-                    <div id="header-welcome-1">
-                        <div class="header-block-users-welcome" id="welcome-container">
-                            <!-- <div class="left-flex-margin"></div> -->
-                            <div id="welcome">
-                                <span class="header-text">Bienvenidos</span>
-                            </div>
-                            <div id="header-users" hidden>
-                                <select id="schedule-selector" name="agendas" title="Cambiar de agenda">
-                                </select>
-                                <img id="add-schedule" class="icon-button" src="images/list-add.svg" alt="Add symbol" title="Nueva agenda">
-                            </div>
-                        </div>
-                        <div id="header-buttons">
-                            <div id="hide-header-buttons" hidden>
-                                <div id="style-header-buttons">
-                                    <button id="new-schedule" class="header-button" isactive="false">Nueva agenda</button>
-                                    <!-- <span class="header-text">o</span> -->
-                                    <button id="init-template" class="header-button" isactive="false">Iniciar plantilla</button>
-                                    <button id='import-button-1' class="header-button" isactive="false">Importar</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="header-schedule-options-3-container">
-                        <div id="header-schedule-options-3" hidden>
-                            <div  class="icon-button">
-                                <img id="advanced-options-2" class="icon-button-image advanced-options" src="images/preferences-system.png" alt="Advanced options" title="Opciones avanzadas">
-                            </div>
-                        
-                            <div class="icon-button">
-                                <img id="import-export-2" class="icon-button-image regular-icon import-export" src="images/transferencia.png" alt="Import export schedules" title="Importar/exportar agendas">
-                            </div>
-                            <div class="icon-button">
-                                <img id="new-block-2" class="icon-button-image regular-icon new-block" src="images/aptdaemon-add.svg" alt="New block" title="Nuevo bloque">
-                            </div>
-                            <div class="icon-button">
-                                <img id="clean-blocks-2" class="icon-button-image regular-icon clean-blocks" src="images/edit-clear.svg" alt="Clean blocks" title="Vaciar todos los bloques">
-                            </div>
-                            <div class="icon-button">
-                                <img id="delete-schedule-2" class="icon-button-image delete-schedule" src="images/x-red.png" alt="Delete schedule" title="Eliminar esta agenda">
-                            </div>
-                        </div>
-                    </div>
-                    <!-- <div id="header-schedule-options-5-container">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Agenda del día</title>
+		<link rel="stylesheet" href="css/normalize.css" type="text/css" />
+		<link rel="stylesheet" href="css/style.css" type="text/css" />
+		<link rel="icon" type="image/png" href="images/dialog-apply.svg" />
+		<script src="data.js"></script>
+		<script src="functions.js"></script>
+		<script src="events-post-blocks.js"></script>
+		<script src="blocks-constructor.js"></script>
+		<script src="events-functions.js"></script>
+		<script src="main.js"></script>
+		<script>
+			window.addEventListener('load', main);
+		</script>
+	</head>
+	<body>
+		<span id="innerWidth"></span>
+		<span id="os"></span>
+		<header id="header">
+			<div class="header-block" id="header-block-1">
+				<div class="header-title-container">
+					<div id="header-title">
+						<img src="images/dialog-apply.svg" alt="Check" />
+						<h2>Agenda del día</h2>
+					</div>
+					<div id="header-subblock-4">
+						<div id="hide-header-subblock-4" hidden>
+							<img
+								id="options-2"
+								class="icon-button options"
+								src="images/1200px-Gnome-preferences-other.png"
+								title="Opciones de la agenda"
+								alt="Options"
+							/>
+						</div>
+					</div>
+				</div>
+				<div id="user-name">
+					<div id="header-welcome">
+						<div id="header-welcome-1">
+							<div
+								class="header-block-users-welcome"
+								id="welcome-container"
+							>
+								<!-- <div class="left-flex-margin"></div> -->
+								<div id="welcome">
+									<span class="header-text">Bienvenidos</span>
+								</div>
+								<div id="header-users" hidden>
+									<select
+										id="schedule-selector"
+										name="agendas"
+										title="Cambiar de agenda"
+									></select>
+									<img
+										id="add-schedule"
+										class="icon-button"
+										src="images/list-add.svg"
+										alt="Add symbol"
+										title="Nueva agenda"
+									/>
+								</div>
+							</div>
+							<div id="header-buttons">
+								<div id="hide-header-buttons" hidden>
+									<div id="style-header-buttons">
+										<button
+											id="new-schedule"
+											class="header-button"
+											isactive="false"
+										>
+											Nueva agenda
+										</button>
+										<!-- <span class="header-text">o</span> -->
+										<button
+											id="init-template"
+											class="header-button"
+											isactive="false"
+										>
+											Iniciar plantilla
+										</button>
+										<button
+											id="import-button-1"
+											class="header-button"
+											isactive="false"
+										>
+											Importar
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div id="header-schedule-options-3-container">
+							<div id="header-schedule-options-3" hidden>
+								<div class="icon-button">
+									<img
+										id="advanced-options-2"
+										class="icon-button-image advanced-options"
+										src="images/preferences-system.png"
+										alt="Advanced options"
+										title="Opciones avanzadas"
+									/>
+								</div>
+
+								<div class="icon-button">
+									<img
+										id="import-export-2"
+										class="icon-button-image regular-icon import-export"
+										src="images/transferencia.png"
+										alt="Import export schedules"
+										title="Importar/exportar agendas"
+									/>
+								</div>
+								<div class="icon-button">
+									<img
+										id="new-block-2"
+										class="icon-button-image regular-icon new-block"
+										src="images/aptdaemon-add.svg"
+										alt="New block"
+										title="Nuevo bloque"
+									/>
+								</div>
+								<div class="icon-button">
+									<img
+										id="clean-blocks-2"
+										class="icon-button-image regular-icon clean-blocks"
+										src="images/edit-clear.svg"
+										alt="Clean blocks"
+										title="Vaciar todos los bloques"
+									/>
+								</div>
+								<div class="icon-button">
+									<img
+										id="delete-schedule-2"
+										class="icon-button-image delete-schedule"
+										src="images/x-red.png"
+										alt="Delete schedule"
+										title="Eliminar esta agenda"
+									/>
+								</div>
+							</div>
+						</div>
+						<!-- <div id="header-schedule-options-5-container">
                         <div id="header-schedule-options-5" hidden>
                             <div id="flex-options-container-5">
                                 <div class="option-icon-container">
@@ -116,153 +180,327 @@
                             </div>
                         </div>
                     </div> -->
-                </div>
-            </div>
-        </div>
-        <div class="header-block" id="header-block-2">
-            <div id="header-schedule-options-1">
-                <div id="options-header">
-                    <div id="options-header-1" hidden>
-                        <div id="options-header-1-flex">
-                            <div class="header-subblock">
-                                <div id="header-inputs-1" class="header-inputs" hidden='hidden'>
-                                    <input type="text" id="name" class="header-input" maxlength="20" required>
-                                    <label for="name" class="header-label">introduce un nombre</label>
-                                </div>
-                                <div id="header-inputs-2" hidden='hidden'>
-                                    <div class="header-inputs">
-                                        <input type="number" id="blocks-number" class="header-input" value="4" min="1" max="20">
-                                        <label for="blocks-number" class="header-label">número de módulos</label>
-                                    </div>
-                                    <div class="header-inputs">
-                                        <input type="number" id="descriptions-number" class="header-input" value="10" min="1" max="30">
-                                        <label for="descriptions-number" class="header-label">número de líneas</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="header-subblock-2" class="header-subblock">
-                                <button id="button-create" class="header-button">Crear</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="options-header-2" hidden>
-                        <div id="import-export-containers">
-                            <div id="import-export-buttons" hidden>
-                                <div id="import-export-buttons-style">
-                                    <div id="import-export-container" hidden>
-                                        <button id='import-button-2' class="header-button" isactive="false">Importar</button>
-                                        <button id='export-button' class="header-button" isactive="false">Exportar</button>
-                                    </div>
-                                    <div id="import-options" hidden>
-                                        <div id="import-container">
-                                            <input type='file' id='file-input' hidden>
-                                            <label id="import-label" for="file-input">Buscar archivo</label>
-                                            <span id="import-selected-container" hidden>
-                                                <span id="import-selected-style">
-                                                    <span id="import-selected"></span>
-                                                    <span id='load-file'>Cargar</span>
-                                                </span>
-                                            </span>
-                                        </div>
-                                        <div id="export-container" hidden>
-                                            <span id="export-all" class="button-darkgray">Todas las agendas</span>
-                                            <span id="export-this" class="button-darkgray">Esta agenda</span>
-                                            <!-- <span id="import-selected-container" hidden>
+					</div>
+				</div>
+			</div>
+			<div class="header-block" id="header-block-2">
+				<div id="header-schedule-options-1">
+					<div id="options-header">
+						<div id="options-header-1" hidden>
+							<div id="options-header-1-flex">
+								<div class="header-subblock">
+									<div
+										id="header-inputs-1"
+										class="header-inputs"
+										hidden="hidden"
+									>
+										<input
+											type="text"
+											id="name"
+											class="header-input"
+											maxlength="20"
+											required
+										/>
+										<label for="name" class="header-label"
+											>introduce un nombre</label
+										>
+									</div>
+									<div id="header-inputs-2" hidden="hidden">
+										<div class="header-inputs">
+											<input
+												type="number"
+												id="blocks-number"
+												class="header-input"
+												value="4"
+												min="1"
+												max="20"
+											/>
+											<label
+												for="blocks-number"
+												class="header-label"
+												>número de módulos</label
+											>
+										</div>
+										<div class="header-inputs">
+											<input
+												type="number"
+												id="descriptions-number"
+												class="header-input"
+												value="10"
+												min="1"
+												max="30"
+											/>
+											<label
+												for="descriptions-number"
+												class="header-label"
+												>número de líneas</label
+											>
+										</div>
+									</div>
+								</div>
+								<div
+									id="header-subblock-2"
+									class="header-subblock"
+								>
+									<button
+										id="button-create"
+										class="header-button"
+									>
+										Crear
+									</button>
+								</div>
+							</div>
+						</div>
+						<div id="options-header-2" hidden>
+							<div id="import-export-containers">
+								<div id="import-export-buttons" hidden>
+									<div id="import-export-buttons-style">
+										<div
+											id="import-export-container"
+											hidden
+										>
+											<button
+												id="import-button-2"
+												class="header-button"
+												isactive="false"
+											>
+												Importar
+											</button>
+											<button
+												id="export-button"
+												class="header-button"
+												isactive="false"
+											>
+												Exportar
+											</button>
+										</div>
+										<div id="import-options" hidden>
+											<div id="import-container">
+												<input
+													type="file"
+													id="file-input"
+													hidden
+												/>
+												<label
+													id="import-label"
+													for="file-input"
+													>Buscar archivo</label
+												>
+												<span
+													id="import-selected-container"
+													hidden
+												>
+													<span
+														id="import-selected-style"
+													>
+														<span
+															id="import-selected"
+														></span>
+														<span id="load-file"
+															>Cargar</span
+														>
+													</span>
+												</span>
+											</div>
+											<div id="export-container" hidden>
+												<span
+													id="export-all"
+													class="button-darkgray"
+													>Todas las agendas</span
+												>
+												<span
+													id="export-this"
+													class="button-darkgray"
+													>Esta agenda</span
+												>
+												<!-- <span id="import-selected-container" hidden>
                                                 <span id="import-selected-style">
                                                     <span id="import-selected"></span>
                                                     <span id='load-file'>Cargar</span>
                                                 </span>
                                             </span> -->
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                        </div>
-                    </div>
-                    <div id="options-header-3" hidden>
-                        <div class="icon-button">
-                            <img id="delete-all-schedules" class="icon-button-image advanced-option-icon" src="images/1024px-Gnome-edit-delete.png" alt="Delete all schedules" title="Eliminar todas las agendas">
-                        </div>
-                        <div class="icon-button">
-                            <img id="toggle-touchscreen" class="icon-button-image advanced-option-icon" src="" alt="Toggle touchscreen" title="">
-                        </div>
-                    </div>
-                </div>
-                <div id="header-subblock-3">
-                    <div id="hide-header-subblock-3" hidden>
-                        <!-- <div id="delete-all">
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div id="options-header-3" hidden>
+							<div class="icon-button">
+								<img
+									id="delete-all-schedules"
+									class="icon-button-image advanced-option-icon"
+									src="images/1024px-Gnome-edit-delete.png"
+									alt="Delete all schedules"
+									title="Eliminar todas las agendas"
+								/>
+							</div>
+							<div class="icon-button">
+								<img
+									id="toggle-touchscreen"
+									class="icon-button-image advanced-option-icon"
+									src=""
+									alt="Toggle touchscreen"
+									title=""
+								/>
+							</div>
+						</div>
+					</div>
+					<div id="header-subblock-3">
+						<div id="hide-header-subblock-3" hidden>
+							<!-- <div id="delete-all">
                             <img id="delete-all-schedules" src="images/1024px-Gnome-edit-delete.png" alt="Delete all schedules" title="Eliminar todas las agendas">
                         </div> -->
-                        <img id="options" class="icon-button options" src="images/1200px-Gnome-preferences-other.png" title="Opciones de la agenda" alt="Options">
-                    </div>
-                </div>
-            </div>
-            <div id="header-schedule-options-2" hidden>
-                <div id="header-schedule-options-2-container">
-                    <div  class="icon-button">
-                        <img id="advanced-options" class="icon-button-image advanced-options" src="images/preferences-system.png" alt="Advanced options" title="Opciones avanzadas">
-                    </div>
-                
-                    <div class="icon-button">
-                        <img id="import-export" class="icon-button-image regular-icon import-export" src="images/transferencia.png" alt="Import export schedules" title="Importar/exportar agendas">
-                    </div>
-                    <div class="icon-button">
-                        <img id="new-block" class="icon-button-image regular-icon new-block" src="images/aptdaemon-add.svg" alt="New block" title="Nuevo bloque">
-                    </div>
-                    <div class="icon-button">
-                        <img id="clean-blocks" class="icon-button-image regular-icon clean-blocks" src="images/edit-clear.svg" alt="Clean blocks" title="Vaciar todos los bloques">
-                    </div>
-                    <div class="icon-button">
-                        <img id="delete-schedule" class="icon-button-image delete-schedule" src="images/x-red.png" alt="Delete schedule" title="Eliminar esta agenda">
-                    </div>
-                </div>
-            </div>
-            <div id="header-schedule-options-4-container">
-                <div id="header-schedule-options-4" hidden>
-                    <div id="overlay-options-container-4">
-                        <div id="flex-options-container-4">
-                            <div class="option-icon-container">
-                                <label for="advanced-options-3">Opciones avanzadas</label>
-                                <div  class="icon-button touchscreen-icon">
-                                    <img id="advanced-options-3" class="icon-button-image advanced-options touchscreen-icon" src="images/preferences-system.png" alt="Advanced options" title="Opciones avanzadas">
-                                </div>
-                            </div>
-                            <div class="option-icon-container">
-                                <label for="import-export-3">Importar/expotar agendas</label>
-                                <div class="icon-button touchscreen-icon">
-                                    <img id="import-export-3" class="icon-button-image regular-icon import-export touchscreen-icon" src="images/transferencia.png" alt="Import export schedules" title="Importar/exportar agendas">
-                                </div>
-                            </div>
-                            <div class="option-icon-container">
-                                <label for="new-block-3">Nuevo bloque</label>
-                                <div class="icon-button touchscreen-icon">
-                                    <img id="new-block-3" class="icon-button-image regular-icon new-block touchscreen-icon" src="images/aptdaemon-add.svg" alt="New block" title="Nuevo bloque">
-                                </div>
-                            </div>
-                            <div class="option-icon-container">
-                                <label for="clean-blocks-3">Vaciar todos los bloques</label>
-                                <div class="icon-button touchscreen-icon">
-                                    <img id="clean-blocks-3" class="icon-button-image regular-icon clean-blocks touchscreen-icon" src="images/edit-clear.svg" alt="Clean blocks" title="Vaciar todos los bloques">
-                                </div>
-                            </div>
-                            <div class="option-icon-container">
-                                <label for="delete-schedule-3">Eliminar esta agenda</label>
-                                <div class="icon-button touchscreen-icon">
-                                    <img id="delete-schedule-3" class="icon-button-image delete-schedule touchscreen-icon" src="images/x-red.png" alt="Delete schedule" title="Eliminar esta agenda">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-    <div id="overlay" class="overlay">
-        <div class="overlay-container">
-            <img id="close-schedule-options" src="images/window-close.svg" alt="Close schedule options" title="Cerrar opciones">
-        </div>
-        <!-- <div id="header-schedule-options-4">
+							<img
+								id="options"
+								class="icon-button options"
+								src="images/1200px-Gnome-preferences-other.png"
+								title="Opciones de la agenda"
+								alt="Options"
+							/>
+						</div>
+					</div>
+				</div>
+				<div id="header-schedule-options-2" hidden>
+					<div id="header-schedule-options-2-container">
+						<div class="icon-button">
+							<img
+								id="advanced-options"
+								class="icon-button-image advanced-options"
+								src="images/preferences-system.png"
+								alt="Advanced options"
+								title="Opciones avanzadas"
+							/>
+						</div>
+
+						<div class="icon-button">
+							<img
+								id="import-export"
+								class="icon-button-image regular-icon import-export"
+								src="images/transferencia.png"
+								alt="Import export schedules"
+								title="Importar/exportar agendas"
+							/>
+						</div>
+						<div class="icon-button">
+							<img
+								id="new-block"
+								class="icon-button-image regular-icon new-block"
+								src="images/aptdaemon-add.svg"
+								alt="New block"
+								title="Nuevo bloque"
+							/>
+						</div>
+						<div class="icon-button">
+							<img
+								id="clean-blocks"
+								class="icon-button-image regular-icon clean-blocks"
+								src="images/edit-clear.svg"
+								alt="Clean blocks"
+								title="Vaciar todos los bloques"
+							/>
+						</div>
+						<div class="icon-button">
+							<img
+								id="delete-schedule"
+								class="icon-button-image delete-schedule"
+								src="images/x-red.png"
+								alt="Delete schedule"
+								title="Eliminar esta agenda"
+							/>
+						</div>
+					</div>
+				</div>
+				<div id="header-schedule-options-4-container">
+					<div id="header-schedule-options-4" hidden>
+						<div id="overlay-options-container-4">
+							<div id="flex-options-container-4">
+								<div class="option-icon-container">
+									<label for="advanced-options-3"
+										>Opciones avanzadas</label
+									>
+									<div class="icon-button touchscreen-icon">
+										<img
+											id="advanced-options-3"
+											class="icon-button-image advanced-options touchscreen-icon"
+											src="images/preferences-system.png"
+											alt="Advanced options"
+											title="Opciones avanzadas"
+										/>
+									</div>
+								</div>
+								<div class="option-icon-container">
+									<label for="import-export-3"
+										>Importar/expotar agendas</label
+									>
+									<div class="icon-button touchscreen-icon">
+										<img
+											id="import-export-3"
+											class="icon-button-image regular-icon import-export touchscreen-icon"
+											src="images/transferencia.png"
+											alt="Import export schedules"
+											title="Importar/exportar agendas"
+										/>
+									</div>
+								</div>
+								<div class="option-icon-container">
+									<label for="new-block-3"
+										>Nuevo bloque</label
+									>
+									<div class="icon-button touchscreen-icon">
+										<img
+											id="new-block-3"
+											class="icon-button-image regular-icon new-block touchscreen-icon"
+											src="images/aptdaemon-add.svg"
+											alt="New block"
+											title="Nuevo bloque"
+										/>
+									</div>
+								</div>
+								<div class="option-icon-container">
+									<label for="clean-blocks-3"
+										>Vaciar todos los bloques</label
+									>
+									<div class="icon-button touchscreen-icon">
+										<img
+											id="clean-blocks-3"
+											class="icon-button-image regular-icon clean-blocks touchscreen-icon"
+											src="images/edit-clear.svg"
+											alt="Clean blocks"
+											title="Vaciar todos los bloques"
+										/>
+									</div>
+								</div>
+								<div class="option-icon-container">
+									<label for="delete-schedule-3"
+										>Eliminar esta agenda</label
+									>
+									<div class="icon-button touchscreen-icon">
+										<img
+											id="delete-schedule-3"
+											class="icon-button-image delete-schedule touchscreen-icon"
+											src="images/x-red.png"
+											alt="Delete schedule"
+											title="Eliminar esta agenda"
+										/>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</header>
+		<div id="overlay" class="overlay">
+			<div class="overlay-container">
+				<img
+					id="close-schedule-options"
+					src="images/window-close.svg"
+					alt="Close schedule options"
+					title="Cerrar opciones"
+				/>
+			</div>
+			<!-- <div id="header-schedule-options-4">
             <div class="option-icon-container">
                 <div  class="icon-button">
                     <img id="advanced-options-3" class="icon-button-image advanced-options" src="images/preferences-system.png" alt="Advanced options" title="Opciones avanzadas">
@@ -298,7 +536,7 @@
                 <label for="delete-schedule-3">Eliminar esta agenda</label>
             </div>
         </div> -->
-    </div>
-    <div id="blocks-container"></div>
-</body>
+		</div>
+		<div id="blocks-container"></div>
+	</body>
 </html>
