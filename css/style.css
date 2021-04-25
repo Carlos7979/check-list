@@ -75,7 +75,9 @@
 }
 
 #innerWidth,
-#os {
+#os, 
+#checkcounter,
+#percentage {
 	border-radius: 3px;
 	border: black solid 1px;
 	visibility: visible;
@@ -90,6 +92,16 @@
 
 #os {
 	top: 30px;
+}
+
+#checkcounter {
+	top: 50px;
+}
+
+#percentage {
+	display: inline;
+	top: 50px;
+	left: 395px;
 }
 
 @media print {

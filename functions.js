@@ -238,6 +238,7 @@ function renderBlocks(name) {
 	editControlsActive = [];
 	blockOptionsContainerActive = [];
 	blockToCopy = [];
+	totalCounterDescriptionsChecks();
 }
 
 function blockId(identifier, isTitle, type) {
@@ -274,6 +275,7 @@ function check(element) {
 	description.setAttribute('class', classToInsert);
 	isCheckAll(identifier, isTitle);
 	counterDescriptionsChecks(element);
+	totalCounterDescriptionsChecks();
 }
 
 function isCheckAll(identifier, isTitle) {
@@ -327,6 +329,7 @@ function checkAll(element) {
 	element.innerText = textToInsert;
 	blockSave(identifier, false, false, type, indexToFill);
 	counterDescriptionsChecks(element, type);
+	totalCounterDescriptionsChecks();
 }
 
 function disableControls(element) {
@@ -363,6 +366,7 @@ function deleteDescription(element) {
 	buttonInsert.innerText = 'insert';
 	isCheckAll(identifier, isTitle);
 	counterDescriptionsChecks(element);
+	totalCounterDescriptionsChecks();
 }
 
 function saveData(key, dataSet) {
@@ -446,6 +450,7 @@ function insert(element) {
 	disableControls();
 	isCheckAll(identifier, isTitle);
 	counterDescriptionsChecks(element);
+	totalCounterDescriptionsChecks();
 }
 
 function maxLengthBlock() {
@@ -515,13 +520,43 @@ function deleteAllSchedules() {
 	disableControlsHeader({ id: 'header' });
 }
 
+function counterPanelStyle(counterDescriptions, counterChecks, span1, span3, percentage, blockCounterPanel, checkAll) {
+	span1.innerHTML = counterChecks;
+	span3.innerHTML = counterDescriptions;
+	percentage.removeAttribute('style');
+		if (checkAll) {
+			checkAll.removeAttribute('style');
+		}
+	if (!counterDescriptions) {
+		percentage.innerText = `${counterDescriptions}%`;
+		blockCounterPanel.setAttribute('style', 'color: darkgrey;');
+	} else {
+		let percentageResult = (counterChecks * 100) / counterDescriptions;
+		// if ((counterChecks * 100) % counterDescriptions)
+		percentageResult = Math.round(percentageResult * 100) / 100;
+		percentage.innerText = `${percentageResult}%`;
+		// blockCounterPanel.setAttribute('style', "color: ForestGreen;");
+		blockCounterPanel.removeAttribute('style');
+		if (percentageResult === 100) {
+			blockCounterPanel.setAttribute('style', 'color: ForestGreen;');
+			percentage.setAttribute(
+				'style',
+				'font-weight: bold; color: black;'
+			);
+			if (checkAll) {
+				checkAll.setAttribute('style', 'border-color: ForestGreen;');
+			}
+		}
+	}
+}
+
 function counterDescriptionsChecks(
 	ol,
 	type,
 	span1,
 	span3,
 	percentage,
-	blockOptions,
+	blockCounterPanel,
 	checkAll
 ) {
 	let li;
@@ -534,7 +569,7 @@ function counterDescriptionsChecks(
 		span1 = document.getElementById(`span1-${blockNumber}`);
 		span3 = document.getElementById(`span3-${blockNumber}`);
 		percentage = document.getElementById(`percentage-${blockNumber}`);
-		blockOptions = document.getElementById(`block-counter-${blockNumber}`);
+		blockCounterPanel = document.getElementById(`block-counter-${blockNumber}`);
 		checkAll = document.getElementById(`checkall-${blockNumber}`);
 	}
 	let counterDescriptions = 0;
@@ -553,29 +588,25 @@ function counterDescriptionsChecks(
 		}
 		if (checkElement.innerHTML) counterChecks++;
 	}
-	span1.innerHTML = counterChecks;
-	span3.innerHTML = counterDescriptions;
-	if (!counterDescriptions) {
-		percentage.innerText = `${counterDescriptions}%`;
-		blockOptions.setAttribute('style', 'color: darkgrey;');
-	} else {
-		let percentageResult = (counterChecks * 100) / counterDescriptions;
-		if ((counterChecks * 100) % counterDescriptions)
-			percentageResult = Math.round(percentageResult * 100) / 100;
-		percentage.innerText = `${percentageResult}%`;
-		percentage.removeAttribute('style');
-		checkAll.removeAttribute('style');
-		// blockOptions.setAttribute('style', "color: ForestGreen;");
-		blockOptions.removeAttribute('style');
-		if (percentageResult === 100) {
-			blockOptions.setAttribute('style', 'color: ForestGreen;');
-			percentage.setAttribute(
-				'style',
-				'font-weight: bold; color: black;'
-			);
-			checkAll.setAttribute('style', 'border-color: ForestGreen;');
-		}
+	counterPanelStyle(counterDescriptions, counterChecks, span1, span3, percentage, blockCounterPanel, checkAll);
+}
+
+function totalCounterDescriptionsChecks() {
+	const blocksContainer = document.getElementById('blocks-container');
+	const blocksNumber = blocksContainer.childElementCount
+	const percentage = document.getElementById(`percentage`);
+	const blockCounterPanel = document.getElementById(`block-counter-panel`);
+	const span1 = document.getElementById(`span1`);
+	const span3 = document.getElementById(`span3`);
+	let counterDescriptions = 0;
+	let counterChecks = 0;
+	for (let i = 0; i < blocksNumber; i++) {
+		const span1 = document.getElementById(`span1-${i + 1}`);
+		const span3 = document.getElementById(`span3-${i + 1}`);
+		counterChecks = counterChecks + Number(span1.innerHTML);
+		counterDescriptions = counterDescriptions + Number(span3.innerHTML);
 	}
+	counterPanelStyle(counterDescriptions, counterChecks, span1, span3, percentage, blockCounterPanel);
 }
 
 function toggleBlockOptions(identifier) {
@@ -850,6 +881,7 @@ function cleanDescriptions(identifier) {
 	isCheckAll(identifier, 't');
 	const ol = document.getElementById(`ol-${identifier}`);
 	counterDescriptionsChecks(ol, 'checkall');
+	totalCounterDescriptionsChecks();
 	// disableBlockOptionsManagement(identifier);
 }
 
